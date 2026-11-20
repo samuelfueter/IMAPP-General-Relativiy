@@ -1,0 +1,211 @@
+% =====================================================================
+\chapter{Cosmology and the FLRW metric}\label{ch:cosmology}
+% =====================================================================
+
+We want to build an \emph{average} metric for the Universe as a whole, on scales much larger than galaxies and clusters of galaxies.
+
+\section{The cosmological principle}
+
+The fundamental assumptions of standard cosmology are:
+\begin{enumerate}
+\item \textbf{Copernican principle:} we do not occupy a special place; the Universe looks the same at any spatial point: it is \textbf{homogeneous}.
+\item The Universe looks the same in all directions, no matter in which direction we are looking: it is \textbf{isotropic}.
+\end{enumerate}
+Combining (1) and (2) we have the \textbf{cosmological principle}:
+\begin{keyresult}[Cosmological principle]
+The Universe is homogeneous and isotropic (on large scales).
+\end{keyresult}
+These statements refer to \emph{space}, not to space-time: the Universe is ``spatially'' homogeneous and isotropic, but it can evolve in time. (Isotropy around every point implies homogeneity; observationally, isotropy is strongly supported by the cosmic microwave background, which is isotropic to one part in $10^5$.)
+
+\textbf{Goal:} constrain the metric to incorporate the cosmological principle, and describe an expanding Universe. The result is the Friedmann--Lemaître--Robertson--Walker (FLRW) metric.
+
+\section{Construction of the FLRW metric}
+
+\subsection{Isotropy}
+Isotropy is, more or less, a spherical symmetry around every point. Start with ``isotropic'' coordinates, which we denote by $(ct,x,y,z)$, and impose that:
+\begin{enumerate}[nosep]
+\item the symmetry has its origin at $x=y=z=0$;
+\item the 3D line element $\dd l^2$ only depends on time and on the distance from the origin:
+\begin{equation}
+  \dd l^2=g\big(t,\sqrt{x^2+y^2+z^2}\big)\,\dd x^i\dd x^i ,
+\end{equation}
+where $\sqrt{x^2+y^2+z^2}$ is \emph{not} the proper distance from the origin, just a coordinate distance.
+\end{enumerate}
+Let us switch to ``spherical'' coordinates $(t,r,\theta,\phi)$, with $x=r\sin\theta\cos\phi$, $y=r\sin\theta\sin\phi$, $z=r\cos\theta$. In these coordinates
+\begin{equation}
+  \dd l^2=g(t,r)\big(\dd r^2+r^2\dd\theta^2+r^2\sin^2\theta\,\dd\phi^2\big).
+\end{equation}
+Let us include $t$. For $\dd t\neq0$ we demand $\dd s^2$ to be invariant under $\theta\to-\theta$ and $\phi\to-\phi$ (isotropy); since $g_{\mu\nu}$ is a $(0,2)$ tensor, exactly as for Schwarzschild this implies $g_{t\theta}=g_{t\phi}=0$. The line element reads
+\[
+  \dd s^2=f(t,r)c^2\dd t^2-g(t,r)\dd r^2+h(t,r)\,\dd t\,\dd r-g(t,r)r^2\big(\dd\theta^2+\sin^2\theta\,\dd\phi^2\big),
+\]
+where $f,g,h$ are unknown functions.
+
+\paragraph{The cross term $h(t,r)\,\dd t\,\dd r$} is a weird (``annoying'') term, but it can be eliminated through an appropriate coordinate transformation. \emph{Why?} Consider the example $\dd s^2=A\,\dd t^2-B\,\dd r^2+2C\,\dd r\,\dd t$ (with $A,B,C$ functions of $t,r$), and introduce a new time $T(t,r)\equiv t+\psi(r)$. Then $\dd T=\dd t+\psi'\dd r$ and
+\[
+  A\,\dd T^2=A\,\dd t^2+2A\psi'\,\dd t\,\dd r+A\psi'^2\dd r^2\ \Longrightarrow\
+  A\,\dd t^2+2C\,\dd t\,\dd r=A\,\dd T^2+2(C-A\psi')\,\dd t\,\dd r-A\psi'^2\dd r^2 .
+\]
+Choosing $\psi$ such that $\frac{\dd\psi}{\dd r}=\frac CA$ (if $A,C$ depend on $t$, one uses a slightly more general $T(t,r)$ with an integrating factor), the cross term disappears. Basically, we can choose $C=0$, i.e.\ $h(t,r)=0$ (see e.g.\ Hobson, Efstathiou \& Lasenby for the general proof). We are left with
+\begin{equation}
+  \dd s^2=f(t,r)c^2\dd t^2-g(t,r)\big[\dd r^2+r^2\dd\theta^2+r^2\sin^2\theta\,\dd\phi^2\big].
+\end{equation}
+
+\subsection{Homogeneity}
+\paragraph{The spatial part.} Consider three objects (e.g.\ galaxies) forming a triangle in space, on the hypersurface $t=0$, and look at the same three objects at a later time, e.g.\ on the hypersurface $t=1$ (\cref{fig:triangles}).
+\begin{itemize}
+\item \textbf{Isotropy} imposes that the two triangles must be \emph{similar}: an expansion which stretches one direction more than another (anisotropic expansion) is not permitted, as it would single out a preferred direction.
+\item \textbf{Homogeneity} imposes that the magnification factor must be the same in a different patch of space.
+\end{itemize}
+Hence the time dependence of $g$ must factorise into a universal, position-independent factor:
+\begin{equation}
+  g(t,r)=a^2(t)\,h(r),\qquad a^2(t)>0
+\end{equation}
+($h$ here is a new function, not the same as before).
+
+\begin{figure}[ht]
+\centering
+\begin{tikzpicture}[scale=0.95,>=Stealth]
+  % hypersurface t=0
+  \draw[thick,fill=green!6] (0,0) -- (5,0) -- (6,1.2) -- (1,1.2) -- cycle;
+  \node[right] at (6.0,0.6) {\small $t=0$};
+  \coordinate (A) at (2.0,0.35); \coordinate (B) at (3.3,0.4); \coordinate (C) at (2.6,0.95);
+  \draw[thick,blue!70!black] (A) -- (B) -- (C) -- cycle;
+  \foreach \p in {A,B,C} \fill (\p) circle (1.5pt);
+  % hypersurface t=1
+  \draw[thick,fill=green!6] (0,2.6) -- (5,2.6) -- (6,3.8) -- (1,3.8) -- cycle;
+  \node[right] at (6.0,3.2) {\small $t=1$};
+  \coordinate (A1) at (1.6,2.8); \coordinate (B1) at (3.8,2.88); \coordinate (C1) at (2.6,3.7);
+  \draw[thick,blue!70!black] (A1) -- (B1) -- (C1) -- cycle;
+  \foreach \p in {A1,B1,C1} \fill (\p) circle (1.5pt);
+  \foreach \p/\q in {A/A1,B/B1,C/C1} \draw[gray,dashed,->] (\p) -- (\q);
+  \draw[->,thick] (-0.6,0.6) -- (-0.6,3.2) node[above] {$t$};
+  % not permitted
+  \begin{scope}[shift={(7.8,1.4)}]
+    \draw[thick,red!70!black] (0,0) -- (3.0,0) -- (0.6,0.5) -- cycle;
+    \node[red!70!black,font=\small,align=center] at (1.5,-0.7) {anisotropic expansion:\\ not permitted};
+    \draw[red!70!black,thick] (0.4,-0.2) -- (2.6,0.7) (0.4,0.7) -- (2.6,-0.2);
+  \end{scope}
+\end{tikzpicture}
+\caption{Isotropy and homogeneity. Three galaxies form a triangle on the hypersurface $t=0$; at a later time ($t=1$) isotropy imposes that the triangle be \emph{similar} to the original one (a uniform magnification), and homogeneity that the magnification be the same everywhere. A stretched (anisotropic) triangle is not permitted.}
+\label{fig:triangles}
+\end{figure}
+
+\paragraph{The $\dd t^2$ part.} Homogeneity implies that any ``static'' observer (one at fixed spatial coordinates) must measure the same time. If $f$ depended on $r$, two observers at different radii $r_1,r_2$ would measure different proper times between the same two hypersurfaces $t_1,t_2$, which would distinguish the two locations: the space would be inhomogeneous. Hence $f$ can only depend on $t$, $f=f(t)$. We can then perform a coordinate transformation (called ``\emph{synchronisation}'')
+\[
+  \dd t\ \to\ \dd t'=\sqrt{f(t)}\,\dd t,
+\]
+after which $g_{00}=1$, and (dropping the primes)
+\begin{equation}
+  \dd s^2=c^2\dd t^2-a^2(t)\,h(r)\big[\dd r^2+r^2\dd\theta^2+r^2\sin^2\theta\,\dd\phi^2\big].
+\end{equation}
+Next we perform a coordinate transformation to remove $h(r)$ from the angular part: $r\to\tilde r(r)$ with $\tilde r^2=h(r)r^2$. Then
+\begin{equation}
+  \dd s^2=c^2\dd t^2-a^2(t)\,g(\tilde r)\,\dd\tilde r^2-a^2(t)\,\tilde r^2\big[\dd\theta^2+\sin^2\theta\,\dd\phi^2\big],
+\end{equation}
+for some new function $g(\tilde r)$; $\tilde r$ still has a radius interpretation (the spheres $\tilde r=$ const have area $4\pi a^2\tilde r^2$). We drop the tilde in the following.
+
+\subsection{Constant spatial curvature}
+Ignoring $a^2(t)$ (i.e.\ at fixed $t$), homogeneity implies that the \textbf{scalar curvature $R_3$ of 3-space must be constant} (it is a scalar, and all points are equivalent).
+
+The spatial part, $\dd l^2=g(r)\dd r^2+r^2\dd\Omega^2$, has the same generic form as the Schwarzschild spatial metric, so we can recycle the results of \cref{ch:schwarzschild}: setting $A=$ const in the static spherically symmetric metric (so that $\dd s^2=\dd t^2-\dd l^2$), the 4D Ricci scalar computed from \eqref{eq:ricci-static} is $R=R^t{}_t+R^r{}_r+2R^\theta{}_\theta=-\big[\frac{2B'}{rB^2}+\frac{2(B-1)}{r^2B}\big]$, and for such a product metric it equals minus the scalar curvature of the (positive-definite) 3-metric. With $B\to g$:
+\begin{equation}
+  R_3=\frac{2g'}{rg^2}+\frac{2(g-1)}{r^2g}\overset{!}{=}6k,\qquad k\in\R ,
+\end{equation}
+(the normalisation $6k$ is chosen for later convenience; for a 3-sphere of radius $a_0$, $R_3=6/a_0^2$). Solving: set $y\equiv1/g$, so that $g'/g^2=-y'$:
+\[
+  -\frac{2y'}{r}+\frac{2(1-y)}{r^2}=6k\ \Longrightarrow\ -ry'+1-y=3kr^2\ \Longrightarrow\ \frac{\dd}{\dd r}(ry)=1-3kr^2\ \Longrightarrow\ ry=r-kr^3+C ,
+\]
+i.e.
+\[
+  g(r)=\frac{1}{1-kr^2+C/r}.
+\]
+\textbf{Boundary condition:} $g\to1$ as $r\to0$ (local flatness: space must look Euclidean around the origin, which is like any other point), hence $C=0$ and $g(r)=\frac{1}{1-kr^2}$.
+
+\begin{keyresult}[The FLRW metric]
+\begin{equation}
+  \dd s^2=c^2\dd t^2-a^2(t)\left[\frac{\dd r^2}{1-kr^2}+r^2\dd\theta^2+r^2\sin^2\theta\,\dd\phi^2\right].
+\end{equation}
+This is the \textbf{Friedmann--Lemaître--Robertson--Walker} (FLRW) metric.
+\end{keyresult}
+
+\section{Remarks}
+\begin{enumerate}[label=(\roman*)]
+\item In principle $k\in\R$. However, it is always possible to rescale $r$ (and $a$ correspondingly: $r\to\lambda r$, $a\to a/\lambda$, $k\to k/\lambda^2$) in order to obtain $k=0,\pm1$.
+\item A Universe is called
+\begin{itemize}[nosep]
+\item \textbf{closed} if $k=+1$: it has a finite volume;
+\item \textbf{open} (hyperbolic) if $k=-1$: infinite volume;
+\item \textbf{flat} if $k=0$: infinite volume. Careful: \emph{not} a flat space-time! The space-time is flat if and only if $k=0$ and $a(t)=$ const.
+\end{itemize}
+\item The Ricci scalar of FLRW is (with $c=1$)
+\begin{equation}
+  R=-6\left[\frac{\ddot a}{a}+\frac{\dot a^2}{a^2}+\frac{k}{a^2}\right]
+\end{equation}
+with our sign conventions (with the conventions used in the lecture, or in the signature $(-,+,+,+)$, it reads $R=+6[\dots]$). If $a\to0$, $R$ diverges: this is a genuine singularity (the Big Bang). Conventionally, $a=1$ today.
+\item $a(t)$ is called the \textbf{scale factor}.
+\item One can write the spatial part of $g_{\mu\nu}$ in a more geometric way by setting
+\[
+  r=\begin{cases}\sin\chi,&k=+1,\\ \chi,&k=0,\\ \sinh\chi,&k=-1,\end{cases}
+\]
+giving
+\[
+  \dd l^2=\begin{cases}\dd\chi^2+\sin^2\!\chi\,(\dd\theta^2+\sin^2\theta\,\dd\phi^2)&\text{3-sphere},\\
+  \dd\chi^2+\chi^2(\dd\theta^2+\sin^2\theta\,\dd\phi^2)&\text{Euclidean},\\
+  \dd\chi^2+\sinh^2\chi\,(\dd\theta^2+\sin^2\theta\,\dd\phi^2)&\text{hyperbolic (``saddle'')}.\end{cases}
+\]
+(Check for $k=1$: $\dd r=\cos\chi\,\dd\chi$ and $1-r^2=\cos^2\chi$, so $\dd r^2/(1-r^2)=\dd\chi^2$; for general $k>0$, $r=\sin(\sqrt k\chi)/\sqrt k$.)
+\end{enumerate}
+
+\section{Comoving observers}
+
+It is possible to show that any world-line with $\chi,\theta,\phi=$ const (equivalently $r,\theta,\phi=$ const) is a \textbf{geodesic}, and that along it $t=\tau$. Indeed, since $g_{00}=1$ and $g_{0i}=0$, $\Ga{i}{0}{0}=\frac12g^{ij}(2\pd_0g_{0j}-\pd_jg_{00})=0$ and $\Ga{0}{0}{0}=0$, so $x^\mu(\tau)=(\tau,\vec x_0)$ solves the geodesic equation. These are the \textbf{comoving} (fundamental) observers: they are freely falling, and their proper time is the cosmic time $t$. When we said ``static'' above we meant precisely this: comoving with the expanding Universe, i.e.\ remaining at the same coordinate position. For an observer at rest in the comoving frame there is no local momentum flow and the local stress is isotropic: the matter content must be a perfect fluid at rest in these coordinates.
+
+The proper (physical) distance, at time $t$, between the observer at the origin and a comoving observer at constant $\chi$ is (along $\dd t=\dd\theta=\dd\phi=0$)
+\[
+  d(t)=\int_0^\chi a(t)\,\dd\chi'=a(t)\,\chi :
+\]
+the distance depends on time. The comoving coordinates of the observers do not change, but their physical separation grows (or shrinks) with $a(t)$ (\cref{fig:comoving}). Differentiating, $\dot d=\frac{\dot a}{a}d\equiv H(t)\,d$: \textbf{Hubble's law}, with $H=\dot a/a$ the Hubble parameter.
+
+\begin{figure}[ht]
+\centering
+\begin{tikzpicture}[scale=1.0,>=Stealth]
+  \node[left] at (-0.3,1.6) {$t=0$};
+  \draw[thick] (0,1.6) -- (5,1.6);
+  \foreach \x/\l in {0/0,1.2/1,2.4/2,3.6/3}{\draw (\x,1.45) -- (\x,1.75); \fill[red!80!black] (\x,1.6) circle (2.5pt); \node[above] at (\x,1.75) {\small $r=\l$};}
+  \node[left] at (-0.3,0) {$t>0$};
+  \draw[thick] (0,0) -- (8.5,0);
+  \foreach \x/\l in {0/0,2.2/1,4.4/2,6.6/3}{\draw (\x,-0.15) -- (\x,0.15); \fill[red!80!black] (\x,0) circle (2.5pt); \node[below] at (\x,-0.15) {\small $r=\l$};}
+  \foreach \a/\b in {1.2/2.2,2.4/4.4,3.6/6.6}{\draw[gray,dashed,->] (\a,1.4) -- (\b,0.2);}
+  \fill[red!80!black] (7.2,1.6) circle (2.5pt); \node[right] at (7.3,1.6) {\small comoving observer};
+  \draw (7.2,1.0) -- (7.2,1.3); \node[right] at (7.3,1.15) {\small comoving coordinate mark};
+\end{tikzpicture}
+\caption{Comoving observers (dots) sit at fixed comoving coordinates $r=0,1,2,3$, marked by the ticks of the coordinate grid. As the Universe expands ($t>0$), the grid itself is stretched: each observer keeps the same coordinate label, but the physical distance $a(t)\,\Delta r$ between neighbouring observers increases. (The marks are not physical rulers: a physical ruler, held together by non-gravitational forces, does not expand; it is the comoving grid that expands.)}
+\label{fig:comoving}
+\end{figure}
+
+\section{Cosmological redshift}
+Consider a fundamental observer $A$ at $\chi=0$ and a fundamental (comoving) source at $\chi_B$. The source emits a light pulse at time $t_e$, which is received by $A$ at $t_o$. Light travels along a radial null geodesic, $\dd s^2=0$ with $\dd\theta=\dd\phi=0$:
+\[
+  c^2\dd t^2-a^2(t)\dd\chi^2=0\quad\Longrightarrow\quad\int_{t_e}^{t_o}\frac{c\,\dd t}{a(t)}=\chi_B .
+\]
+At $t_e+\Delta t_e$ the source emits another pulse (e.g.\ the next wave crest, $\Delta t_e$ being the period of the photon), received at $t_o+\Delta t_o$. Since both observers are comoving, $\chi_B$ is the same constant, so
+\[
+  \Delta\int_{t_e}^{t_o}\frac{\dd t}{a(t)}=\frac{\Delta t_o}{a(t_o)}-\frac{\Delta t_e}{a(t_e)}=0
+  \quad\Longrightarrow\quad\frac{\Delta t_o}{\Delta t_e}=\frac{a(t_o)}{a(t_e)} .
+\]
+\begin{keyresult}[Cosmological redshift]
+\begin{equation}
+  1+z\equiv\frac{\lambda_o}{\lambda_e}=\frac{f_e}{f_o}=\frac{a(t_o)}{a(t_e)}.
+\end{equation}
+In an expanding Universe ($a(t_o)>a(t_e)$) light from distant sources is redshifted: wavelengths are stretched together with the Universe.
+\end{keyresult}
+
+\begin{remarkbox}[Outlook: the Friedmann equations]
+The FLRW metric follows from symmetry alone; the dynamics of $a(t)$ follows from the Einstein equations with a perfect-fluid source $T_{\mu\nu}=(\rho+p)u_\mu u_\nu-pg_{\mu\nu}$ at rest in comoving coordinates. One obtains (with $c=1$) the Friedmann equations
+\[
+  \Big(\frac{\dot a}{a}\Big)^2=\frac{8\pi\GN}{3}\rho-\frac{k}{a^2}+\frac\Lambda3,\qquad
+  \frac{\ddot a}{a}=-\frac{4\pi\GN}{3}(\rho+3p)+\frac\Lambda3,
+\]
+which show explicitly that a positive cosmological constant (negative pressure) accelerates the expansion.
+\end{remarkbox}

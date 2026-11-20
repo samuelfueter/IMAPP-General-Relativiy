@@ -1,0 +1,277 @@
+% =====================================================================
+\chapter{Curvature}\label{ch:curvature}
+% =====================================================================
+
+We want to study curvature in an \emph{intrinsic} way, i.e.\ using only quantities defined on the manifold itself (the metric and the connection), without reference to any higher-dimensional space in which the manifold might be embedded. This is the \textbf{intrinsic curvature}.
+
+\section{Intrinsic versus extrinsic curvature: why is a cylinder flat?}
+
+A cylinder looks curved when seen from the three-dimensional space in which it is embedded (it has \emph{extrinsic} curvature). But for a two-dimensional being living on its surface it is flat. Take a rectangular sheet of paper (\cref{fig:cylinder}): starting from a point $P$, going straight forward and turning by $90^\circ$ four times we come back to the \emph{same} initial point, as in the plane. The sheet can be rolled into a cylinder \emph{without stretching or tearing it} (without adding defects): distances and angles measured on the surface are unchanged, so a cylinder is \textbf{flat} from the geometric (intrinsic) point of view. On the contrary, it is impossible to wrap a sheet of paper around a sphere without adding defects (creases or tears): the sphere is intrinsically curved. On a sphere, a ``square'' made of four geodesic segments with four right angles does not close (and a triangle made of geodesics has a sum of angles larger than $\pi$).
+
+\begin{figure}[ht]
+\centering
+\begin{tikzpicture}[scale=0.9,>=Stealth]
+  % sheet with closed path
+  \draw[thick,fill=gray!8] (0,0) rectangle (3,2);
+  \draw[->,thick,blue!70!black] (0.8,0.5) -- (2.0,0.5);
+  \draw[->,thick,blue!70!black] (2.0,0.5) -- (2.0,1.5);
+  \draw[->,thick,blue!70!black] (2.0,1.5) -- (0.8,1.5);
+  \draw[->,thick,blue!70!black] (0.8,1.5) -- (0.8,0.5);
+  \fill (0.8,0.5) circle (1.5pt) node[below left] {$P$};
+  \fill (2.0,0.5) circle (1.5pt) node[below right] {$S$};
+  \fill (2.0,1.5) circle (1.5pt) node[above right] {$R$};
+  \node at (1.5,-0.6) {flat sheet};
+  % to cylinder
+  \draw[->,thick] (3.4,1) -- (4.4,1);
+  \begin{scope}[shift={(5.4,0)}]
+    \draw[thick,fill=gray!8] (0,0.3) -- (0,1.7) arc (180:0:0.6 and 0.2) -- (1.2,0.3) arc (0:-180:0.6 and 0.2);
+    \draw[thick] (0,1.7) arc (180:360:0.6 and 0.2);
+    \node at (0.6,-0.6) {cylinder};
+    \node[green!50!black] at (1.95,1) {\Large\checkmark};
+    \node[green!50!black,align=left,font=\small] at (2.1,0.3) {no\\defects};
+  \end{scope}
+  % to sphere
+  \begin{scope}[shift={(0,-3.4)}]
+    \draw[thick,fill=gray!8] (0,0) rectangle (3,2);
+    \node at (1.5,-0.6) {flat sheet};
+    \draw[->,thick] (3.4,1) -- (4.4,1);
+    \shade[ball color=gray!20] (6.0,1) circle (0.8);
+    \draw (6.0,1) circle (0.8);
+    \draw[red!70!black,thick] (5.55,1.45) -- (5.75,1.15) (6.4,1.5) -- (6.2,1.2) (5.7,0.45) -- (5.85,0.75);
+    \node at (6.0,-0.6) {sphere};
+    \node[red!70!black,align=left,font=\small] at (7.9,1) {impossible without\\adding defects};
+  \end{scope}
+\end{tikzpicture}
+\caption{A flat sheet can be rolled into a cylinder without any distortion: the cylinder is intrinsically flat (a closed ``square'' path $P\to S\to R\to\dots\to P$ made of straight segments and right angles still closes). A sheet cannot be wrapped on a sphere without creasing or tearing it: the sphere is intrinsically curved.}
+\label{fig:cylinder}
+\end{figure}
+
+The idea we will now make precise is: \emph{curvature is the failure of a vector to come back to itself when parallel transported around a closed loop}, or equivalently the dependence of parallel transport on the path (\cref{fig:pt-flat}).
+
+\section{The Riemann tensor from parallel transport}
+
+Consider a small coordinate ``rectangle'' on the manifold, delimited by coordinate lines of $x^1$ and $x^2$ (all other coordinates fixed), with corners (\cref{fig:loop})
+\[
+  P=(x^1,x^2),\quad Q=(x^1+\delta x^1,x^2),\quad R=(x^1+\delta x^1,x^2+\delta x^2),\quad S=(x^1,x^2+\delta x^2).
+\]
+\textbf{Goal:} parallel transport a tangent vector $V$ from $P$ to $R$ along the two paths $C:P\to Q\to R$ and $C':P\to S\to R$, and compare the results.
+
+\begin{figure}[ht]
+\centering
+\begin{tikzpicture}[scale=1.3,>=Stealth]
+  \draw[thick] (0,0) .. controls (1.2,0.25) and (2.4,0.3) .. (3.6,0.1) node[right] {$x^2=\text{const}$};
+  \draw[thick] (-0.2,1.4) .. controls (1.1,1.75) and (2.3,1.8) .. (3.5,1.6) node[right] {$x^2+\delta x^2$};
+  \draw[thick] (0.6,-0.6) .. controls (0.65,0.4) and (0.45,1.4) .. (0.35,2.2) node[above] {$x^1=\text{const}$};
+  \draw[thick] (2.6,-0.6) .. controls (2.55,0.4) and (2.6,1.4) .. (2.5,2.2) node[above] {$x^1+\delta x^1$};
+  \coordinate (P) at (0.6,0.17);
+  \coordinate (Q) at (2.58,0.25);
+  \coordinate (R) at (2.57,1.73);
+  \coordinate (S) at (0.45,1.62);
+  \draw[->,very thick,blue!70!black] (P) -- ($(P)!0.55!(Q)$);
+  \draw[very thick,blue!70!black] ($(P)!0.5!(Q)$) -- (Q);
+  \draw[->,very thick,blue!70!black] (Q) -- ($(Q)!0.55!(R)$);
+  \draw[very thick,blue!70!black] ($(Q)!0.5!(R)$) -- (R);
+  \draw[->,very thick,green!50!black] (P) -- ($(P)!0.55!(S)$);
+  \draw[very thick,green!50!black] ($(P)!0.5!(S)$) -- (S);
+  \draw[->,very thick,green!50!black] (S) -- ($(S)!0.55!(R)$);
+  \draw[very thick,green!50!black] ($(S)!0.5!(R)$) -- (R);
+  \foreach \p/\pos in {P/below left,Q/below right,R/above right,S/above left} \fill (\p) circle (1.5pt) node[\pos] {$\p$};
+  \node[blue!70!black] at (2.0,0.6) {$C$};
+  \node[green!50!black] at (0.9,1.2) {$C'$};
+  \draw[->] (-1.2,-0.8) -- (-0.5,-0.8) node[right] {$x^1$};
+  \draw[->] (-1.2,-0.8) -- (-1.2,-0.1) node[above] {$x^2$};
+\end{tikzpicture}
+\caption{Parallel transport of a vector from $P$ to $R$ along the path $C:P\to Q\to R$ (blue) and along the path $C':P\to S\to R$ (green), on a small coordinate loop of sides $\delta x^1$ and $\delta x^2$.}
+\label{fig:loop}
+\end{figure}
+
+\paragraph{Reminders.} $D_\nu V^\mu=\pd_\nu V^\mu+\Ga{\mu}{\nu}{\lambda}V^\lambda$ and parallel transport: $\frac{\dd x^\nu}{\dd\lambda}D_\nu V^\mu=0$.
+
+\paragraph{(i) Transport $P\to Q$:} only $x^1$ changes, so $\dd x^2/\dd\lambda=0$ and
+\begin{gather*}
+  \frac{\dd x^\nu}{\dd\lambda}D_\nu V^\mu=\frac{\dd x^1}{\dd\lambda}D_1V^\mu=0\ \Longrightarrow\ \frac{\dd x^1}{\dd\lambda}\big[\pd_1V^\mu+\Ga{\mu}{1}{\lambda}V^\lambda\big]_{x^2}=0\\
+  \Longrightarrow\quad \boxed{\pd_1V^\mu\big|_{x^2}=-\Ga{\mu}{1}{\lambda}V^\lambda\big|_{x^2}}\quad\text{(result A)}.
+\end{gather*}
+Integrating from $x^1$ to $x^1+\delta x^1$ (the left-hand side gives the variation of $V$ as we move from $P$ to $Q$):
+\begin{equation}
+  V_C^\mu(Q)=V^\mu(P)-\underbrace{\int_{x^1}^{x^1+\delta x^1}\Ga{\mu}{1}{\lambda}V^\lambda\,\dd x^1\Big|_{x^2}}_{\equiv I_1}.
+\end{equation}
+\paragraph{(ii) Transport $Q\to R$:} only $x^2$ changes; in the same way ($\pd_2V^\mu=-\Ga{\mu}{2}{\lambda}V^\lambda$),
+\begin{equation}
+  V_C^\mu(R)=V_C^\mu(Q)-\underbrace{\int_{x^2}^{x^2+\delta x^2}\Ga{\mu}{2}{\lambda}V^\lambda\,\dd x^2\Big|_{x^1+\delta x^1}}_{\equiv I_2}.
+\end{equation}
+\paragraph{(iii) Transport $P\to S$:}
+\begin{equation}
+  V_{C'}^\mu(S)=V^\mu(P)-\underbrace{\int_{x^2}^{x^2+\delta x^2}\Ga{\mu}{2}{\lambda}V^\lambda\,\dd x^2\Big|_{x^1}}_{\equiv I_3}.
+\end{equation}
+\paragraph{(iv) Transport $S\to R$:}
+\begin{equation}
+  V_{C'}^\mu(R)=V_{C'}^\mu(S)-\underbrace{\int_{x^1}^{x^1+\delta x^1}\Ga{\mu}{1}{\lambda}V^\lambda\,\dd x^1\Big|_{x^2+\delta x^2}}_{\equiv I_4}.
+\end{equation}
+
+\paragraph{The difference.}
+\begin{align}
+  V_C^\mu(R)-V_{C'}^\mu(R)&=\big[V^\mu(P)-I_1-I_2\big]-\big[V^\mu(P)-I_3-I_4\big]=(I_4-I_1)+(I_3-I_2)\nonumber\\
+  &=\underbrace{\int_{x^1}^{x^1+\delta x^1}\Big[\Ga{\mu}{1}{\lambda}V^\lambda\big|_{x^2+\delta x^2}-\Ga{\mu}{1}{\lambda}V^\lambda\big|_{x^2}\Big]\dd x^1}_{\equiv I_{41}}\nonumber\\
+  &\quad+\underbrace{\int_{x^2}^{x^2+\delta x^2}\Big[\Ga{\mu}{2}{\lambda}V^\lambda\big|_{x^1}-\Ga{\mu}{2}{\lambda}V^\lambda\big|_{x^1+\delta x^1}\Big]\dd x^2}_{\equiv I_{32}} .
+\end{align}
+For small $\delta x^{1,2}$ we Taylor-expand the integrands, keeping only first-order terms:
+\begin{align*}
+  \Ga{\mu}{1}{\lambda}V^\lambda\big|_{x^2+\delta x^2}&\simeq\Ga{\mu}{1}{\lambda}V^\lambda\big|_{x^2}+\Big[\pd_2\big(\Ga{\mu}{1}{\lambda}V^\lambda\big)\Big]_{x^2}\delta x^2 \quad\text{(expansion in $x^2$)},\\
+  \Ga{\mu}{2}{\lambda}V^\lambda\big|_{x^1+\delta x^1}&\simeq\Ga{\mu}{2}{\lambda}V^\lambda\big|_{x^1}+\Big[\pd_1\big(\Ga{\mu}{2}{\lambda}V^\lambda\big)\Big]_{x^1}\delta x^1 \quad\text{(expansion in $x^1$)}.
+\end{align*}
+Hence
+\[
+  I_{41}\simeq\delta x^2\int_{x^1}^{x^1+\delta x^1}\pd_2\big(\Ga{\mu}{1}{\lambda}V^\lambda\big)\dd x^1,\qquad
+  I_{32}\simeq-\delta x^1\int_{x^2}^{x^2+\delta x^2}\pd_1\big(\Ga{\mu}{2}{\lambda}V^\lambda\big)\dd x^2 .
+\]
+To the same (second) order in the small displacements we can treat the integrands as constant over the (small) integration interval:
+\[
+  I_{41}\simeq\delta x^1\delta x^2\,\pd_2\big(\Ga{\mu}{1}{\lambda}V^\lambda\big),\qquad I_{32}\simeq-\delta x^1\delta x^2\,\pd_1\big(\Ga{\mu}{2}{\lambda}V^\lambda\big).
+\]
+Now we open the derivatives and use result A (and its analogue $\pd_2V^\lambda=-\Ga{\lambda}{2}{\alpha}V^\alpha$), which tells us how $V$ varies along the parallel-transport path:
+\begin{align*}
+  I_{41}&\simeq\delta x^1\delta x^2\big[(\pd_2\Ga{\mu}{1}{\lambda})V^\lambda+\Ga{\mu}{1}{\lambda}\pd_2V^\lambda\big]
+  =\delta x^1\delta x^2\big[(\pd_2\Ga{\mu}{1}{\lambda})V^\lambda-\Ga{\mu}{1}{\lambda}\Ga{\lambda}{2}{\alpha}V^\alpha\big]\\
+  &=\delta x^1\delta x^2\big(\pd_2\Ga{\mu}{1}{\lambda}-\Ga{\mu}{1}{\alpha}\Ga{\alpha}{2}{\lambda}\big)V^\lambda,\\
+  I_{32}&\simeq-\delta x^1\delta x^2\big(\pd_1\Ga{\mu}{2}{\lambda}-\Ga{\mu}{2}{\alpha}\Ga{\alpha}{1}{\lambda}\big)V^\lambda ,
+\end{align*}
+where in the last steps we swapped the dummy indices $\lambda\leftrightarrow\alpha$. Putting everything together (all quantities evaluated at $P$ to this order):
+\begin{equation}
+  V_C^\mu(R)-V_{C'}^\mu(R)=\delta x^1\delta x^2\Big(\pd_2\Ga{\mu}{1}{\lambda}-\pd_1\Ga{\mu}{2}{\lambda}+\Ga{\mu}{2}{\alpha}\Ga{\alpha}{1}{\lambda}-\Ga{\mu}{1}{\alpha}\Ga{\alpha}{2}{\lambda}\Big)V^\lambda .
+\end{equation}
+Nothing was special about the directions $1$ and $2$: for a loop spanned by two arbitrary coordinate directions $\sigma,\nu$ (displacements $\delta x^\sigma$ along the first leg of $C'$, $\delta x^\nu$ along the first leg of $C$),
+\begin{equation}
+  V_C^\mu(R)-V_{C'}^\mu(R)=\delta x^\sigma\delta x^\nu\,\Riem{\mu}{\lambda}{\sigma}{\nu}(P)\,V^\lambda(P),
+\end{equation}
+where we have defined the object
+\begin{equation}
+  \boxed{\Riem{\rho}{\sigma}{\mu}{\nu}\equiv\pd_\mu\Ga{\rho}{\nu}{\sigma}-\pd_\nu\Ga{\rho}{\mu}{\sigma}+\Ga{\rho}{\mu}{\lambda}\Ga{\lambda}{\nu}{\sigma}-\Ga{\rho}{\nu}{\lambda}\Ga{\lambda}{\mu}{\sigma}}
+  \label{eq:riemann}
+\end{equation}
+called the \textbf{Riemann curvature tensor}. (Check: $\Riem{\mu}{\lambda}{2}{1}=\pd_2\Ga{\mu}{1}{\lambda}-\pd_1\Ga{\mu}{2}{\lambda}+\Ga{\mu}{2}{\alpha}\Ga{\alpha}{1}{\lambda}-\Ga{\mu}{1}{\alpha}\Ga{\alpha}{2}{\lambda}$ is exactly the bracket above, i.e.\ the loop corresponds to $\sigma=2$, $\nu=1$; we used the symmetry of $\Gamma$ in its lower indices.) It \emph{is} a tensor, as the left-hand side (a difference of two vectors at the same point $R$) is a vector, and $\delta x^\sigma\delta x^\nu$, $V^\lambda$ are arbitrary. A quicker (but less intuitive) proof of its tensorial character is given by the commutator of covariant derivatives (Problem Sheet 3):
+\begin{equation}
+  [D_\mu,D_\nu]V^\rho=\Riem{\rho}{\sigma}{\mu}{\nu}V^\sigma ,
+  \label{eq:commutator}
+\end{equation}
+whose left-hand side is manifestly a tensor.
+
+\begin{warningbox}
+Never take covariant derivatives of non-tensorial objects such as $\Ga{\mu}{\nu}{\lambda}$! The covariant derivative is only defined (and only has its nice transformation properties) for tensors.
+\end{warningbox}
+
+\section{Properties of the Riemann tensor}
+
+\paragraph{Flat space-time.} In flat (Minkowski) space-time there exists a coordinate system (inertial Cartesian coordinates) in which all the $\Gamma$'s vanish \emph{everywhere}, hence also their derivatives, so $\Riem{\rho}{\sigma}{\mu}{\nu}=0$ there. Since it is a tensor,
+\begin{equation}
+  \Riem{\rho}{\sigma}{\mu}{\nu}=0\quad\text{in flat space-time, in any coordinates.}
+\end{equation}
+(The converse also holds: if the Riemann tensor vanishes everywhere, the space is flat.) In this sense the Riemann tensor is the true, coordinate-independent measure of curvature, unlike the $\Gamma$'s which can be non-zero in flat space (polar coordinates!) and zero at a point of a curved space (normal coordinates).
+
+\paragraph{Symmetries.} Defining $R_{\mu\nu\rho\sigma}\equiv g_{\mu\alpha}\Riem{\alpha}{\nu}{\rho}{\sigma}$:
+\begin{enumerate}
+\item Antisymmetry in the last pair: $\Riem{\mu}{\nu}{\rho}{\sigma}=-\Riem{\mu}{\nu}{\sigma}{\rho}$ (obvious from \eqref{eq:riemann}).
+\item Antisymmetry in the first pair: $R_{\mu\nu\rho\sigma}=-R_{\nu\mu\rho\sigma}$.
+\item Cyclic identity (first Bianchi identity): $\Riem{\mu}{\nu}{\rho}{\sigma}+\Riem{\mu}{\rho}{\sigma}{\nu}+\Riem{\mu}{\sigma}{\nu}{\rho}=0$, i.e.\ $R_{\mu\nu\rho\sigma}+R_{\mu\rho\sigma\nu}+R_{\mu\sigma\nu\rho}=0$.
+\item Pair symmetry: $R_{\mu\nu\rho\sigma}=R_{\rho\sigma\mu\nu}$.
+\item The (second) \textbf{Bianchi identity}:
+\begin{equation}
+  D_\lambda\Riem{\mu}{\nu}{\rho}{\sigma}+D_\rho\Riem{\mu}{\nu}{\sigma}{\lambda}+D_\sigma\Riem{\mu}{\nu}{\lambda}{\rho}=0 .
+  \label{eq:bianchi}
+\end{equation}
+\end{enumerate}
+\begin{proof}[Proofs (in Riemann normal coordinates)]
+All these are tensor identities, so it suffices to prove them in one coordinate system; we choose normal coordinates at a point $P$, where $\Gamma(P)=0$ and $\pd g(P)=0$. There
+\[
+  R_{\mu\nu\rho\sigma}=g_{\mu\alpha}\big(\pd_\rho\Ga{\alpha}{\sigma}{\nu}-\pd_\sigma\Ga{\alpha}{\rho}{\nu}\big)
+  =\tfrac12\big(\pd_\rho\pd_\nu g_{\mu\sigma}+\pd_\mu\pd_\sigma g_{\rho\nu}-\pd_\nu\pd_\sigma g_{\rho\mu}-\pd_\mu\pd_\rho g_{\nu\sigma}\big)\qquad\text{(at $P$)},
+\]
+where we used $g_{\mu\alpha}\pd_\rho\Ga{\alpha}{\sigma}{\nu}=\pd_\rho(g_{\mu\alpha}\Ga{\alpha}{\sigma}{\nu})$ at $P$ (as $\pd g=0$) and \eqref{eq:christoffel}; the terms $\pd_\rho\pd_\sigma g_{\nu\mu}$ cancel between the two contributions. (The full expression, valid in any coordinates, is derived in Problem Sheet 3.) From this form, properties 1, 2 and 4 are read off directly: exchanging $\mu\leftrightarrow\nu$ changes the sign; exchanging the pairs $(\mu\nu)\leftrightarrow(\rho\sigma)$ leaves it invariant. Property 3: summing the expression over the cyclic permutations of $(\nu,\rho,\sigma)$, each second derivative appears twice with opposite signs. Property 5: at $P$, $D_\lambda R^\mu{}_{\nu\rho\sigma}=\pd_\lambda R^\mu{}_{\nu\rho\sigma}=\pd_\lambda\pd_\rho\Ga{\mu}{\sigma}{\nu}-\pd_\lambda\pd_\sigma\Ga{\mu}{\rho}{\nu}$ (the $\Gamma\Gamma$ terms have vanishing first derivative since $\Gamma(P)=0$). Adding the cyclic permutations of $(\lambda,\rho,\sigma)$, the six terms cancel in pairs because partial derivatives commute.
+\end{proof}
+
+\paragraph{Counting.} In $n$ dimensions, the symmetries 1, 2, 4 make $R_{\mu\nu\rho\sigma}$ a symmetric matrix in the space of antisymmetric pairs, of dimension $m=n(n-1)/2$, with $m(m+1)/2$ components; the cyclic identity removes $\binom n4$ more. The number of independent components is $n^2(n^2-1)/12$. \textbf{In 4D, the Riemann tensor has 20 independent components} (in 2D just one: the Gaussian curvature).
+
+\section{Ricci tensor, Ricci scalar and Einstein tensor}
+
+\begin{definition}{Ricci tensor and Ricci scalar}{ricci}
+The \textbf{Ricci tensor} is the contraction
+\begin{equation}
+  R_{\mu\nu}\equiv\Riem{\rho}{\mu}{\rho}{\nu}=g^{\rho\lambda}R_{\lambda\mu\rho\nu},
+\end{equation}
+and the \textbf{Ricci scalar} is its trace, $R\equiv g^{\mu\nu}R_{\mu\nu}$.
+\end{definition}
+\begin{itemize}[nosep]
+  \item The Ricci tensor is \textbf{symmetric}, $R_{\mu\nu}=R_{\nu\mu}$: $R_{\mu\nu}=g^{\alpha\beta}R_{\alpha\mu\beta\nu}=g^{\alpha\beta}R_{\beta\nu\alpha\mu}=R_{\nu\mu}$ by pair symmetry (see also Problem Sheet 3 for a second proof).
+  \item In 4D it has $10$ independent components.
+  \item It is essentially the only rank-2 tensor that can be built from contractions of the Riemann tensor (contracting on the first pair gives zero by antisymmetry, and other contractions give $\pm R_{\mu\nu}$).
+\end{itemize}
+
+\paragraph{The Einstein tensor.} Start from the Bianchi identity \eqref{eq:bianchi} with all indices down,
+\[
+  D_\lambda R_{\mu\nu\rho\sigma}+D_\rho R_{\mu\nu\sigma\lambda}+D_\sigma R_{\mu\nu\lambda\rho}=0,
+\]
+and contract it with $g^{\nu\sigma}g^{\mu\rho}$. Since $D g=0$ the metric can be moved inside the derivatives:
+\begin{itemize}[nosep]
+\item first term: $g^{\mu\rho}g^{\nu\sigma}D_\lambda R_{\mu\nu\rho\sigma}=D_\lambda\big(g^{\nu\sigma}R_{\nu\sigma}\big)=D_\lambda R$;
+\item second term: $R_{\mu\nu\sigma\lambda}=-R_{\nu\mu\sigma\lambda}$, so $g^{\mu\rho}g^{\nu\sigma}D_\rho R_{\mu\nu\sigma\lambda}=-g^{\mu\rho}D_\rho\big(g^{\nu\sigma}R_{\nu\mu\sigma\lambda}\big)=-g^{\mu\rho}D_\rho R_{\mu\lambda}=-D^\mu R_{\mu\lambda}$;
+\item third term: $R_{\mu\nu\lambda\rho}=-R_{\mu\nu\rho\lambda}$, so $g^{\mu\rho}g^{\nu\sigma}D_\sigma R_{\mu\nu\lambda\rho}=-g^{\nu\sigma}D_\sigma\big(g^{\mu\rho}R_{\mu\nu\rho\lambda}\big)=-g^{\nu\sigma}D_\sigma R_{\nu\lambda}=-D^\nu R_{\nu\lambda}$.
+\end{itemize}
+Hence
+\[
+  D_\lambda R-2D^\mu R_{\mu\lambda}=0\quad\Longleftrightarrow\quad D^\mu\Big[R_{\mu\lambda}-\frac12 g_{\mu\lambda}R\Big]=0,
+\]
+where we wrote $D_\lambda R=g_{\mu\lambda}D^\mu R=D^\mu(g_{\mu\lambda}R)$.
+
+\begin{keyresult}[Einstein tensor and the contracted Bianchi identity]
+\begin{equation}
+  G_{\mu\nu}\equiv R_{\mu\nu}-\frac12 g_{\mu\nu}R,\qquad D^\mu G_{\mu\nu}=0 .
+\end{equation}
+$G_{\mu\nu}$ is \textbf{symmetric} (it is made of symmetric objects) and it is \textbf{covariantly conserved}. Since also $D^\mu g_{\mu\nu}=0$, for any constant $\Lambda$
+\begin{equation}
+  D^\mu\big[G_{\mu\nu}+\Lambda g_{\mu\nu}\big]=0,
+\end{equation}
+which will give rise to the ``cosmological constant'' term.
+\end{keyresult}
+
+% ---------------------------------------------------------------------
+\section{Geodesic deviation}\label{sec:geodesic-deviation}
+% ---------------------------------------------------------------------
+How does curvature manifest itself physically? Through the relative motion of neighbouring free particles: \emph{tidal forces} (\cref{fig:locally}).
+
+Consider a one-parameter family of geodesics $\{\gamma_s\}$: the parameter $s$ labels \emph{which} geodesic, and an affine parameter $\lambda$ tells us \emph{where} on the geodesic we are. Let $x^\mu(s,\lambda)$ be the coordinates of the points (\cref{fig:deviation}). We define
+\begin{itemize}[nosep]
+  \item the tangent vector $T^\mu\equiv\frac{\pd x^\mu}{\pd\lambda}$ (the 4-velocity if $\lambda=\tau$);
+  \item the \textbf{deviation vector} $X^\mu\equiv\frac{\pd x^\mu}{\pd s}$, pointing from one geodesic to the neighbouring one;
+  \item the relative velocity $U^\mu\equiv T^\rho D_\rho X^\mu$ and the \textbf{relative acceleration} $A^\mu\equiv T^\rho D_\rho\big(T^\sigma D_\sigma X^\mu\big)$.
+\end{itemize}
+
+\begin{figure}[ht]
+\centering
+\begin{tikzpicture}[scale=1.0,>=Stealth]
+  \foreach \s in {0,0.7,1.4,2.1}{
+    \draw[thick,gray!70!black] (\s,0) .. controls (\s+0.6,1.5) and (\s+0.3*\s+0.5,3) .. (\s+0.45*\s+1.2,4.2);}
+  \node[above] at (3.15,4.2) {$\gamma_s$};
+  \draw[->,very thick,blue!70!black] (0.93,1.6) -- (1.15,2.4) node[left] {$T$};
+  \draw[->,very thick,red!70!black] (0.93,1.6) -- (1.68,1.6) node[below right] {$X$};
+  \draw[->,thick] (-0.8,0.5) -- (-0.6,2.0) node[above] {$\lambda$};
+  \draw[->,thick] (0.2,-0.5) -- (2.3,-0.5) node[right] {$s$};
+\end{tikzpicture}
+\caption{A family of geodesics $\gamma_s$. The parameter $s$ labels the geodesic, $\lambda$ is the affine parameter along each geodesic. $T=\pd x/\pd\lambda$ is the tangent vector, $X=\pd x/\pd s$ the deviation vector connecting neighbouring geodesics.}
+\label{fig:deviation}
+\end{figure}
+
+\begin{theorem}{Geodesic deviation equation}{deviation}
+\begin{equation}
+  A^\mu=\frac{D^2X^\mu}{\dd\lambda^2}=\Riem{\mu}{\nu}{\rho}{\sigma}\,T^\nu T^\rho X^\sigma .
+\end{equation}
+The relative acceleration between two neighbouring geodesics is proportional to the curvature.
+\end{theorem}
+\begin{proof}
+(i) Since $x^\mu(s,\lambda)$ are coordinate functions, partial derivatives commute, $\pd_s T^\mu=\pd_\lambda X^\mu$. Using the symmetry of $\Gamma$,
+$T^\rho D_\rho X^\mu=\pd_\lambda X^\mu+\Ga{\mu}{\rho}{\sigma}T^\rho X^\sigma=\pd_sT^\mu+\Ga{\mu}{\sigma}{\rho}X^\sigma T^\rho=X^\rho D_\rho T^\mu$.
+(ii) Then $A^\mu=T^\rho D_\rho(X^\sigma D_\sigma T^\mu)=(T^\rho D_\rho X^\sigma)(D_\sigma T^\mu)+T^\rho X^\sigma D_\rho D_\sigma T^\mu$.
+(iii) Write $D_\rho D_\sigma T^\mu=D_\sigma D_\rho T^\mu+\Riem{\mu}{\nu}{\rho}{\sigma}T^\nu$ by \eqref{eq:commutator}. Then
+$T^\rho X^\sigma D_\sigma D_\rho T^\mu=X^\sigma D_\sigma(T^\rho D_\rho T^\mu)-(X^\sigma D_\sigma T^\rho)D_\rho T^\mu$. The first term vanishes because $T^\rho D_\rho T^\mu=0$ (geodesic equation). The second, using (i), is $-(T^\sigma D_\sigma X^\rho)D_\rho T^\mu$, which cancels the first term of (ii) (after relabelling). What remains is $A^\mu=\Riem{\mu}{\nu}{\rho}{\sigma}T^\rho X^\sigma T^\nu$.
+\end{proof}
+
+\paragraph{Newtonian analogue.} In the weak-field limit (\cref{ch:efe}) $g_{00}=1+2\Phi(\vec x)/c^2$, where $\Phi$ is the Newtonian potential. Two neighbouring particles separated by $\xi^i$ have relative acceleration $\ddot\xi^i=-\frac{\pd^2\Phi}{\pd x^i\pd x^j}\xi^j$: the relative acceleration involves second derivatives of the potential, the \textbf{tidal tensor} $\Delta_{ij}=\pd_i\pd_j\Phi$. In GR its role is played by $R^i{}_{0j0}$ (for slowly moving particles $T^\mu\simeq(c,\vec 0)$). In empty space the Newtonian field equation is $\nabla^2\Phi=0\Leftrightarrow\sum_i\Delta_{ii}=0$: the trace of the tidal tensor vanishes. The relativistic counterpart is $\Riem{\mu}{\alpha}{\mu}{\beta}\dot x^\alpha\dot x^\beta=R_{\alpha\beta}\dot x^\alpha\dot x^\beta=0$, which suggests that the vacuum field equations are $R_{\mu\nu}=0$. This is an important hint towards the Einstein field equations.

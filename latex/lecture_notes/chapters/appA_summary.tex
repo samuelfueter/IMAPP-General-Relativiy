@@ -1,0 +1,37 @@
+% =====================================================================
+\chapter{Summary of key formulae}\label{app:summary}
+% =====================================================================
+Signature $(+,-,-,-)$; $c=1$ unless stated otherwise.
+
+\section*{Tensors and metric}
+\begin{itemize}[nosep]
+\item Vector: $V'^\mu=\frac{\pd x'^\mu}{\pd x^\nu}V^\nu$; covector: $U'_\mu=\frac{\pd x^\nu}{\pd x'^\mu}U_\nu$; metric: $g'_{\mu\nu}=\frac{\pd x^\alpha}{\pd x'^\mu}\frac{\pd x^\beta}{\pd x'^\nu}g_{\alpha\beta}$.
+\item Line element $\dd s^2=g_{\mu\nu}\dd x^\mu\dd x^\nu=c^2\dd\tau^2$; $V_\mu=g_{\mu\nu}V^\nu$; $g_{\mu\nu}g^{\nu\rho}=\delta_\mu{}^\rho$; invariant volume $\sqrt{|g|}\,\dd^4x$.
+\end{itemize}
+\section*{Connection and geodesics}
+\begin{itemize}[nosep]
+\item $\Ga{\lambda}{\sigma}{\rho}=\frac12g^{\lambda\mu}(\pd_\sigma g_{\rho\mu}+\pd_\rho g_{\sigma\mu}-\pd_\mu g_{\sigma\rho})$.
+\item $D_\mu V^\nu=\pd_\mu V^\nu+\Ga{\nu}{\mu}{\lambda}V^\lambda$, $D_\mu U_\nu=\pd_\mu U_\nu-\Ga{\lambda}{\mu}{\nu}U_\lambda$, $D_\alpha g_{\mu\nu}=0$.
+\item Geodesics: $\ddot x^\mu+\Ga{\mu}{\nu}{\rho}\dot x^\nu\dot x^\rho=0$, from $\mathcal L=\frac12g_{\mu\nu}\dot x^\mu\dot x^\nu$.
+\end{itemize}
+\section*{Curvature}
+\begin{itemize}[nosep]
+\item $\Riem{\rho}{\sigma}{\mu}{\nu}=\pd_\mu\Ga{\rho}{\nu}{\sigma}-\pd_\nu\Ga{\rho}{\mu}{\sigma}+\Ga{\rho}{\mu}{\lambda}\Ga{\lambda}{\nu}{\sigma}-\Ga{\rho}{\nu}{\lambda}\Ga{\lambda}{\mu}{\sigma}$, $[D_\mu,D_\nu]V^\rho=\Riem{\rho}{\sigma}{\mu}{\nu}V^\sigma$.
+\item $R_{\mu\nu\rho\sigma}=-R_{\nu\mu\rho\sigma}=-R_{\mu\nu\sigma\rho}=R_{\rho\sigma\mu\nu}$, $R_{\mu[\nu\rho\sigma]}=0$, Bianchi $D_{[\lambda}R^\mu{}_{|\nu|\rho\sigma]}=0$; 20 components in 4D.
+\item $R_{\mu\nu}=\Riem{\rho}{\mu}{\rho}{\nu}$, $R=g^{\mu\nu}R_{\mu\nu}$, $G_{\mu\nu}=R_{\mu\nu}-\frac12g_{\mu\nu}R$, $D^\mu G_{\mu\nu}=0$.
+\item Geodesic deviation: $\frac{D^2X^\mu}{\dd\lambda^2}=\Riem{\mu}{\nu}{\rho}{\sigma}T^\nu T^\rho X^\sigma$.
+\end{itemize}
+\section*{Matter and field equations}
+\begin{itemize}[nosep]
+\item Perfect fluid: $T^{\mu\nu}=(\rho+p)u^\mu u^\nu-pg^{\mu\nu}$; $D_\mu T^{\mu\nu}=0$.
+\item Newtonian limit: $g_{00}=1+2\Phi/c^2$.
+\item EFE: $R_{\mu\nu}-\frac12g_{\mu\nu}R-\Lambda g_{\mu\nu}=\frac{8\pi\GN}{c^4}T_{\mu\nu}$; equivalently $R_{\mu\nu}=8\pi\GN(T_{\mu\nu}-\frac12Tg_{\mu\nu})$ (for $\Lambda=0$).
+\end{itemize}
+\section*{Solutions}
+\begin{itemize}[nosep]
+\item Schwarzschild: $\dd s^2=(1-\rs/r)c^2\dd t^2-(1-\rs/r)^{-1}\dd r^2-r^2\dd\Omega^2$, $\rs=2\GN M/c^2$.
+\item Light deflection $\delta\phi=4\GN M/(c^2b)$; perihelion advance $6\pi\GN M/(c^2a(1-e^2))$ per orbit; Shapiro delay $\frac{4\GN M}{c^3}[1+\ln(4r_Ar_B/R^2)]$.
+\item Kruskal: $\dd s^2=-\frac{4\rs^3}{r}e^{-r/\rs}\dd U\dd V-r^2\dd\Omega^2$, $UV=(r/\rs-1)e^{r/\rs}$, $V/U=e^{ct/\rs}$.
+\item FLRW: $\dd s^2=c^2\dd t^2-a^2(t)\big[\frac{\dd r^2}{1-kr^2}+r^2\dd\Omega^2\big]$, $1+z=a(t_o)/a(t_e)$.
+\item Linearised gravity: $\bar h_{\mu\nu}=h_{\mu\nu}-\frac12\eta_{\mu\nu}h$, harmonic gauge $\pd^\mu\bar h_{\mu\nu}=0$, $\Box\bar h_{\mu\nu}=-16\pi\GN T_{\mu\nu}$; quadrupole formula $h^{\rm TT}_{ij}=\frac{2\GN}{c^4r}\ddot Q^{\rm TT}_{ij}(t-r/c)$.
+\end{itemize}

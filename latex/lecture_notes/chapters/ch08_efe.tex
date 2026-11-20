@@ -1,0 +1,197 @@
+% =====================================================================
+\chapter{Newtonian limit and the Einstein field equations}\label{ch:efe}
+% =====================================================================
+
+\section{Newtonian limit of the geodesic equations}
+
+We would like the geodesic equations to reduce, in an appropriate limit, to Newton's equation of motion in a gravitational potential,
+\begin{equation}
+  \frac{\dd^2\vec x}{\dd t^2}=-\nabla\Phi ,\qquad\text{e.g.}\quad\Phi=-\frac{\GN M}{r},
+\end{equation}
+but now in a \emph{curved} space-time. We set $c=1$ and restore it at the end.
+
+\begin{definition}{Newtonian limit}{newt-limit}
+The Newtonian limit is defined by three requirements:
+\begin{enumerate}
+\item \textbf{Weak fields:} in some appropriate coordinates the metric is a small perturbation of flat space,
+\begin{equation}
+  g_{\mu\nu}=\eta_{\mu\nu}+h_{\mu\nu},\qquad|h_{\mu\nu}|\ll1,
+\end{equation}
+and we keep only terms linear in $h_{\mu\nu}$ and its derivatives (this is a statement about the field \emph{and} the coordinates).
+\item \textbf{Small velocities:} $\left|\frac{\dd x^i}{\dd t}\right|\ll1\ \Longleftrightarrow\ \left|\frac{\dd x^i}{\dd\tau}\right|\ll\frac{\dd t}{\dd\tau}$ (particles move slowly).
+\item \textbf{Stationary fields:} $\pd_0g_{\mu\nu}=0\ \Longleftrightarrow\ \pd_0h_{\mu\nu}=0$ (fields unchanging with time).
+\end{enumerate}
+\end{definition}
+
+\begin{warningbox}[The inverse metric]
+Concerning the inverse metric, $g^{\mu\nu}\simeq\eta^{\mu\nu}\,\boldsymbol{-}\,h^{\mu\nu}$ with $h^{\mu\nu}\equiv\eta^{\mu\alpha}\eta^{\nu\beta}h_{\alpha\beta}$ (note the minus sign!). This follows from the matrix identity $(I+A)^{-1}=I-A+\order{A^2}$, or directly: writing $g^{\mu\nu}=\eta^{\mu\nu}+H^{\mu\nu}$,
+\[
+  g_{\mu\nu}g^{\nu\rho}=(\eta_{\mu\nu}+h_{\mu\nu})(\eta^{\nu\rho}+H^{\nu\rho})=\delta_\mu{}^\rho+\eta_{\mu\nu}H^{\nu\rho}+h_{\mu\nu}\eta^{\nu\rho}+\order{hH}\overset{!}{=}\delta_\mu{}^\rho ,
+\]
+so $\eta_{\mu\nu}H^{\nu\rho}=-h_\mu{}^\rho$, i.e.\ $H^{\mu\rho}=-h^{\mu\rho}$.
+\end{warningbox}
+
+\paragraph{The geodesic equation.}
+\[
+  \frac{\dd^2x^\mu}{\dd\tau^2}+\Ga{\mu}{\nu}{\lambda}\frac{\dd x^\nu}{\dd\tau}\frac{\dd x^\lambda}{\dd\tau}=0,\qquad
+  \Ga{\mu}{\nu}{\lambda}=\frac12 g^{\mu\alpha}\left(\pd_\nu g_{\lambda\alpha}+\pd_\lambda g_{\nu\alpha}-\pd_\alpha g_{\nu\lambda}\right).
+\]
+\begin{itemize}
+\item \emph{Weak fields:} since $\pd\eta=0$, the bracket is already of order $h$, so we can replace $g^{\mu\alpha}\to\eta^{\mu\alpha}$:
+\[
+  \Ga{\mu}{\nu}{\lambda}\simeq\frac12\eta^{\mu\alpha}\left(\pd_\nu h_{\lambda\alpha}+\pd_\lambda h_{\nu\alpha}-\pd_\alpha h_{\nu\lambda}\right).
+\]
+\item \emph{Small velocities:} $\frac{\dd x^i}{\dd\tau}\ll\frac{\dd t}{\dd\tau}$, so in the sum over $\nu,\lambda$ the term with $\nu=\lambda=0$ dominates (the terms $\Ga{\mu}{i}{j}\frac{\dd x^i}{\dd\tau}\frac{\dd x^j}{\dd\tau}$ and $\Ga{\mu}{0}{i}\frac{\dd t}{\dd\tau}\frac{\dd x^i}{\dd\tau}$ are suppressed by powers of $v$):
+\[
+  \frac{\dd^2x^\mu}{\dd\tau^2}+\Ga{\mu}{0}{0}\frac{\dd t}{\dd\tau}\frac{\dd t}{\dd\tau}=0,
+\]
+so we only need $\Ga{\mu}{0}{0}=\frac12 g^{\mu\alpha}\big(\pd_0g_{0\alpha}+\pd_0g_{0\alpha}-\pd_\alpha g_{00}\big)$.
+\item \emph{Stationary fields:} $\pd_0g_{0\alpha}=0$, so
+\[
+  \Ga{\mu}{0}{0}=-\frac12\eta^{\mu\alpha}\pd_\alpha h_{00}=-\frac12\eta^{\mu i}\pd_ih_{00}
+\]
+(the $\alpha=0$ term vanishes as $\pd_0h_{00}=0$). With the signature $(+,-,-,-)$, $\eta^{ij}=-\delta^{ij}$, and therefore
+\begin{equation}
+  \Ga{0}{0}{0}=0,\qquad\Ga{i}{0}{0}=\frac12\pd_ih_{00}.
+\end{equation}
+\end{itemize}
+All in all,
+\begin{equation}
+  \frac{\dd^2x^\mu}{\dd\tau^2}+\Ga{\mu}{0}{0}\frac{\dd t}{\dd\tau}\frac{\dd t}{\dd\tau}=0\quad\Longrightarrow\quad
+  \begin{cases}\dfrac{\dd^2t}{\dd\tau^2}=0 &\Rightarrow\ t(\tau)=a\tau+b,\qquad(1)\\[2ex]
+  \dfrac{\dd^2x^i}{\dd\tau^2}=-\dfrac12\pd_ih_{00}\left(\dfrac{\dd t}{\dd\tau}\right)^2.&\qquad(2)\end{cases}
+\end{equation}
+Equation (1) reflects the fact that there is no difference (up to an affine rescaling) between $t$ and $\tau$ in Newtonian mechanics. For the left-hand side of (2), by the chain rule,
+\[
+  \frac{\dd^2x^i}{\dd\tau^2}=\frac{\dd}{\dd\tau}\left(\frac{\dd t}{\dd\tau}\frac{\dd x^i}{\dd t}\right)=\frac{\dd^2t}{\dd\tau^2}\frac{\dd x^i}{\dd t}+\left(\frac{\dd t}{\dd\tau}\right)^2\frac{\dd^2x^i}{\dd t^2}
+  =\left(\frac{\dd t}{\dd\tau}\right)^2\frac{\dd^2x^i}{\dd t^2},
+\]
+since $\dd^2t/\dd\tau^2=0$ from (1). Going back to (2), the factor $(\dd t/\dd\tau)^2$ cancels:
+\begin{equation}
+  \frac{\dd^2x^i}{\dd t^2}=-\frac12\pd_ih_{00}.
+\end{equation}
+Comparing with Newton, $\frac{\dd^2x^i}{\dd t^2}=-\pd_i\Phi$, we identify $h_{00}=2\Phi$ (up to an irrelevant constant, fixed by requiring $h\to0$ far from sources), i.e.
+\begin{keyresult}[Newtonian limit]
+\begin{equation}
+  g_{00}=1+2\Phi\qquad\Big(g_{00}=1+\frac{2\Phi}{c^2}\ \text{restoring}\ c\Big).
+\end{equation}
+Newtonian mechanics is captured by GR assuming a space-time with
+\begin{equation}
+  \dd s^2=\big(1+2\Phi(\vec x)\big)\dd t^2-\dd\vec x^{\,2}.
+\end{equation}
+\end{keyresult}
+The curvature of space-time (more precisely, of its time--time component) is sufficient to describe gravity in the Newtonian limit.
+
+\begin{remarkbox}[Remarks]
+\begin{enumerate}[label=(\roman*),nosep]
+\item For a radial gravitational field, $\dd s^2=(1+2\Phi(r))\dd t^2-\dd r^2-r^2\dd\Omega_2^2$, with $\dd\Omega_2^2=\dd\theta^2+\sin^2\theta\,\dd\phi^2$ the line element on the unit 2-sphere.
+\item If $c\neq1$: $g_{00}=1+2\Phi/c^2$. Since $|\Phi|/c^2\sim10^{-9}$ at the surface of the Earth and $10^{-6}$ at the surface of the Sun, the weak-field approximation is excellent in the solar system.
+\item With the signature $(-,+,+,+)$ one has instead $g_{00}=-(1+2\Phi)$.
+\item In Minkowski space, spatial indices are raised and lowered with $\eta_{ij}=-\delta_{ij}$, hence $\pd^i=-\pd_i$; with this, $\Ga{i}{0}{0}=-\frac12\pd^ih_{00}$.
+\end{enumerate}
+\end{remarkbox}
+
+\section{The Einstein field equations}
+
+\subsection{Looking for the field equations}
+In Newtonian mechanics the gravitational potential is determined by the mass density through Poisson's equation
+\begin{equation}
+  \nabla^2\Phi=4\pi\GN\rho .\tag{1}
+\end{equation}
+From the previous section $g_{00}=1+2\Phi$ (2). Identifying, on top, $T_{00}=\rho$ (the energy density of non-relativistic matter is dominated by its rest mass) we find
+\begin{equation}
+  \nabla^2g_{00}=8\pi\GN T_{00}.
+\end{equation}
+This suggests to look for a tensor equation of the form
+\begin{equation}
+  E_{\mu\nu}=8\pi\GN T_{\mu\nu}.
+\end{equation}
+What is $E_{\mu\nu}$? Sensible requirements are:
+\begin{enumerate}
+\item $E_{\mu\nu}$ is a \textbf{tensor};
+\item it has the dimension of second derivatives of the metric, i.e.\ it is linear in second derivatives or quadratic in first derivatives of $g_{\mu\nu}$ (like $\nabla^2\Phi$);
+\item it is \textbf{symmetric} (as $T_{\mu\nu}$);
+\item it is \textbf{covariantly conserved}, $D^\mu E_{\mu\nu}=0$ (as $T_{\mu\nu}$, see \cref{ch:emt});
+\item in the Newtonian limit, $E_{00}=\nabla^2g_{00}$.
+\end{enumerate}
+We construct $E_{\mu\nu}$ with the tensors we have previously defined.
+\begin{itemize}
+\item Requirements 1) and 2) leave (essentially) the combination
+\[
+  E_{\mu\nu}=aR_{\mu\nu}+b\,g_{\mu\nu}R ,
+\]
+since the Riemann tensor is the only tensor built with second derivatives of the metric, and its only rank-2 contractions are $R_{\mu\nu}$ and $g_{\mu\nu}R$. Requirement 3) is then automatically satisfied.
+\item For requirement 4), we rewrite it in terms of the Einstein tensor: $E_{\mu\nu}=aG_{\mu\nu}+c\,g_{\mu\nu}R$ (with $c=b+a/2$). We saw that $D^\mu G_{\mu\nu}=0$ and $D^\mu g_{\mu\nu}=0$, hence
+\[
+  D^\mu E_{\mu\nu}=c\,g_{\mu\nu}D^\mu R=c\,D_\nu R\overset{!}{=}0\quad\Longrightarrow\quad\text{either }D_\nu R=0\ \text{or}\ c=0 .
+\]
+\item Observe that, taking the trace (with $g^{\mu\nu}g_{\mu\nu}=\delta^\mu{}_\mu=4$),
+\[
+  g^{\mu\nu}E_{\mu\nu}=a\,g^{\mu\nu}G_{\mu\nu}+c\,g^{\mu\nu}g_{\mu\nu}R=a(R-2R)+4cR=(4c-a)R ,
+\]
+which must also be equal to $8\pi\GN T^\mu{}_\mu$. If $c\neq0$ we would need $D_\nu R=0$, i.e.\ $R$ constant, hence $T^\mu{}_\mu$ constant all over space-time: we could not describe \emph{any} distribution of matter we like. This is physically inconsistent, so we choose $c=0$:
+\begin{equation}
+  E_{\mu\nu}=a\,G_{\mu\nu},
+\end{equation}
+and now ``$a$'' is left to be calculated.
+\end{itemize}
+
+\paragraph{Fixing $a$ with the Newtonian limit.} Take requirement 5): weak fields ($g=\eta+h$, linear in $h$), stationary ($\pd_0g_{\mu\nu}=0$), non-relativistic source: $T_{00}=\rho$ and $T_{\mu\nu}\simeq0$ otherwise (pressures and momentum densities are suppressed by powers of $v^2$). Then we only need $E_{00}=aG_{00}$.
+\begin{itemize}
+\item $G_{00}=R_{00}-\frac12g_{00}R\simeq R_{00}-\frac12R$, at linear order in $h$ (since $R$ is already of order $h$, $g_{00}R\simeq\eta_{00}R=R$).
+\item $T_{ij}=0\Rightarrow G_{ij}=0\Rightarrow R_{ij}=\frac12 g_{ij}R\simeq\frac12\eta_{ij}R=-\frac12\delta_{ij}R$.
+\item Combining the last two: $R=g^{\mu\nu}R_{\mu\nu}\simeq\eta^{\mu\nu}R_{\mu\nu}=R_{00}-\delta^{ij}R_{ij}=R_{00}+\frac32R$, hence $\boxed{R=-2R_{00}}$.
+\item Therefore $G_{00}=R_{00}-\frac12R=R_{00}+R_{00}=2R_{00}$, with $R_{00}=\Riem{\mu}{0}{\mu}{0}$.
+\end{itemize}
+
+\begin{exercise}{Weak static fields}{R00}
+Show that, for time-independent fields in the weak-field limit, $R_{00}=\frac12\nabla^2g_{00}$.
+
+\textit{Solution.} From \eqref{eq:riemann}, $R_{00}=\Riem{\mu}{0}{\mu}{0}=\pd_\mu\Ga{\mu}{0}{0}-\pd_0\Ga{\mu}{\mu}{0}+\Ga{\mu}{\mu}{\lambda}\Ga{\lambda}{0}{0}-\Ga{\mu}{0}{\lambda}\Ga{\lambda}{\mu}{0}$. The $\Gamma\Gamma$ terms are $\order{h^2}$ and are dropped; $\pd_0(\dots)=0$ for static fields. Hence, using $\Ga{0}{0}{0}=0$ and $\Ga{i}{0}{0}=\frac12\pd_ih_{00}$ computed above,
+\[
+  R_{00}\simeq\pd_i\Ga{i}{0}{0}=\frac12\pd_i\pd_ih_{00}=\frac12\nabla^2h_{00}=\frac12\nabla^2g_{00}. \qquad\blacksquare
+\]
+\end{exercise}
+
+Using this result, $G_{00}=2R_{00}=\nabla^2g_{00}$. For requirement 5) to hold, $E_{00}=aG_{00}=\nabla^2g_{00}$, hence $a=1$. Therefore we have:
+
+\begin{keyresult}[The Einstein field equations]
+\begin{equation}
+  \boxed{R_{\mu\nu}-\frac12g_{\mu\nu}R=8\pi\GN T_{\mu\nu}}\qquad\Big(=\frac{8\pi\GN}{c^4}T_{\mu\nu}\ \text{restoring}\ c\Big).
+  \label{eq:efe}
+\end{equation}
+They tell us how the curvature of space-time reacts to the presence of energy and momentum.
+\end{keyresult}
+
+\paragraph{Check of the Newtonian limit.} $G_{00}=\nabla^2g_{00}=2\nabla^2\Phi$ and $8\pi\GN T_{00}=8\pi\GN\rho$: the $00$ component of \eqref{eq:efe} is exactly Poisson's equation $\nabla^2\Phi=4\pi\GN\rho$.
+
+\paragraph{Trace-reversed form.} Taking the trace of \eqref{eq:efe}: $R-2R=-R=8\pi\GN T$, with $T\equiv T^\mu{}_\mu$. Substituting $R=-8\pi\GN T$ back,
+\begin{equation}
+  R_{\mu\nu}=8\pi\GN\Big(T_{\mu\nu}-\frac12Tg_{\mu\nu}\Big)
+\end{equation}
+(see Problem Sheet 4). In vacuum, $T_{\mu\nu}=0\Leftrightarrow R_{\mu\nu}=0$, in agreement with the hint from geodesic deviation (\cref{sec:geodesic-deviation}).
+
+\subsection{Remarks}
+\begin{enumerate}[label=(\roman*)]
+\item For a given distribution of matter, energy, stress, etc., the EFE give us the \textbf{metric} (they are partial differential equations for $g_{\mu\nu}$).
+\item In principle the EFE are a set of $10$ coupled, non-linear partial differential equations (one for each independent component of the symmetric tensors).
+\item However, due to the (contracted) Bianchi identities $D^\mu G_{\mu\nu}=0$ (4 equations), there are only $6$ independent equations. This matches the fact that the metric has $10$ components, of which $4$ can be changed arbitrarily by a coordinate transformation $x\to x'(x)$ (4 functions): the metric is determined up to coordinate choices.
+\item The ``algorithm'' of GR: given a distribution of matter,
+\[
+  \text{energy--momentum tensor}\ \xrightarrow{\ \text{EFE}\ }\ \text{metric}\ \longrightarrow\ \text{geodesics (equations of motion)}.
+\]
+(The Christoffel symbols are computed from the metric, and they determine how objects move.) In general, of course, matter and geometry must be solved for together, since matter moves according to the geometry it creates ($D_\mu T^{\mu\nu}=0$ is a consequence of the EFE).
+\item Sadly, even in vacuum no closed-form \emph{general} solution is known. We must make simplifying assumptions (symmetries).
+\item If $c\neq1$: $8\pi\GN\to8\pi\GN/c^4$.
+\item In higher dimensions we still get equations of the form $G_{\mu\nu}=kT_{\mu\nu}$, but with different coefficients (and more complicated physics).
+\item Including the \textbf{cosmological constant} term (allowed by requirement 4, since $D^\mu g_{\mu\nu}=0$; it only violates requirement 2):
+\begin{equation}
+  R_{\mu\nu}-\frac12g_{\mu\nu}R-\Lambda g_{\mu\nu}=8\pi\GN T_{\mu\nu}.
+\end{equation}
+\begin{itemize}[nosep]
+\item Moving it to the right-hand side, $\Lambda g_{\mu\nu}=8\pi\GN T^{(\Lambda)}_{\mu\nu}$ with $T^{(\Lambda)}_{\mu\nu}=\rho_\Lambda g_{\mu\nu}$, $\rho_\Lambda=\Lambda/8\pi\GN$. Comparing with the perfect fluid $T_{\mu\nu}=(\rho+p)u_\mu u_\nu-pg_{\mu\nu}$, this is a fluid with $p_\Lambda=-\rho_\Lambda$: for $\Lambda>0$ the cosmological constant can be interpreted as a \textbf{negative pressure}.
+\item Negative pressure makes the ``box'' (the Universe) expand; positive pressure makes it contract (attract).
+\item It is treated as a numerical constant, an effective parametrisation of something we do not know: \textbf{dark energy}, responsible for the observed accelerated expansion of the Universe.
+\end{itemize}
+(With the opposite signature or curvature sign conventions, the sign in front of $\Lambda$ changes; what is physical is that $\Lambda>0$ corresponds to accelerated expansion.)
+\end{enumerate}

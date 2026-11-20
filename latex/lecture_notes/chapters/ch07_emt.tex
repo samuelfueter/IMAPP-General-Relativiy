@@ -1,0 +1,221 @@
+% =====================================================================
+\chapter{The energy--momentum tensor}\label{ch:emt}
+% =====================================================================
+
+\paragraph{Motivation.} In Newtonian gravity, empty space is described by Laplace's equation $\nabla^2\Phi=0$; introducing matter, we get Poisson's equation
+\[
+  \nabla^2\Phi=(\text{const})\times\rho(\vec r)=4\pi\GN\rho(\vec r),
+\]
+where $\rho(\vec r)$ is the mass density at each point $\vec r$. Here we are trying to obtain the analogous equation in GR, but written with \emph{tensors}. We therefore need a tensorial object describing the matter (energy) content of space-time: the energy--momentum tensor. We first need a few reminders.
+
+\section{Reminders: volume element and Gauss' theorem}
+
+\paragraph{(i) The volume element.} $\dd^4x=\dd x^0\dd x^1\dd x^2\dd x^3$ is \emph{not} invariant under general coordinate transformations, which is a problem if we want to integrate densities. Under $x\to x'$,
+\begin{equation}
+  \dd^4x'=\left|\det\left(\frac{\pd x'^\mu}{\pd x^\nu}\right)\right|\dd^4x\equiv|J|\,\dd^4x ,
+\end{equation}
+with $J$ the Jacobian determinant of the transformation. On the other hand, from $g'_{\mu\nu}=\frac{\pd x^\alpha}{\pd x'^\mu}\frac{\pd x^\beta}{\pd x'^\nu}g_{\alpha\beta}$ (i.e.\ $g'=M^TgM$ with $\det M=J^{-1}$) and the multiplicativity of determinants,
+\begin{equation}
+  \det(g'_{\mu\nu})=J^{-1}J^{-1}\det(g_{\mu\nu})=J^{-2}\det(g_{\mu\nu}).
+\end{equation}
+Therefore $\sqrt{|\det g'|}=|J|^{-1}\sqrt{|\det g|}$ and the combination
+\begin{equation}
+  \boxed{\dd V=\sqrt{|\det(g_{\mu\nu})|}\,\dd^4x}\qquad\Longrightarrow\qquad\dd V'=\dd V
+\end{equation}
+is invariant: it is the \textbf{invariant volume element}. (In Minkowski space in inertial coordinates $|\det\eta|=1$; in spherical coordinates of flat 3-space, $\sqrt{\det g}=r^2\sin\theta$ and we recover $\dd V=r^2\sin\theta\,\dd r\,\dd\theta\,\dd\phi$.)
+
+\paragraph{(ii) Gauss' theorem.} For a vector field $A^\mu$ and a 4-volume $\mathcal V$ with boundary $\pd\mathcal V$,
+\begin{equation}
+  \int_{\mathcal V}\dd^4x\sqrt{g}\,D_\mu A^\mu=\oint_{\pd\mathcal V}\dd^3x\sqrt{g_3}\,N_\mu A^\mu ,
+\end{equation}
+where $g\equiv|\det(g_{\mu\nu})|$, $g_3$ is the determinant of the induced metric on the 3-dimensional boundary and $N_\mu$ is the (unit) covector orthogonal to the boundary. (It is the 4D version of $\int_V\nabla\cdot\vec F\,\dd V=\oint_{\pd V}\vec F\cdot\dd\vec S$.) It relies on the useful identity $\sqrt g\,D_\mu A^\mu=\pd_\mu(\sqrt g A^\mu)$, which follows from $\Ga{\mu}{\mu}{\lambda}=\pd_\lambda\ln\sqrt g$.
+
+\section{Densities in Minkowski space-time}
+
+In 3D space, a density $\rho$ gives the number of particles $\dd N$ in a volume element $\dd V^3$:
+\begin{equation}
+  \dd N=\rho\,\dd V^3,\qquad N=\int\rho\,\dd V^3 .
+  \label{eq:density3d}
+\end{equation}
+From a 4D perspective, however, a 3D volume acquires an \textbf{orientation}: we can move it along a vector with components $\dd x^\mu$, and the 4D volume swept is a scalar (it has no orientation):
+\begin{equation}
+  \dd V^4=\dd x^\mu\,\dd V_\mu ,
+\end{equation}
+where $\dd V_\mu$ is a 3D \emph{covector} volume element (``normal'' to the 3-volume, \cref{fig:dV}). For instance, for a 3-volume lying in the slice $t=0$, $\dd V_\mu=(\dd V^3,0,0,0)$, and moving it by $\dd x^\mu=(\dd t,\vec 0)$ sweeps $\dd V^4=\dd t\,\dd V^3$. The analogue of \eqref{eq:density3d} must then be
+\begin{equation}
+  \boxed{\dd N=\rho^\mu\,\dd V_\mu}:
+\end{equation}
+\textbf{densities become vectors}. Here $\dd N$ is the number of particles in the volume, $\rho^\mu$ the density 4-vector and $\dd V_\mu$ the 3D volume element in 4D space-time. For the slice $t=0$, $\dd N=\rho^0\dd V^3$: the time component of the density vector is the usual density.
+
+\begin{figure}[ht]
+\centering
+\begin{tikzpicture}[scale=1.0,>=Stealth]
+  \draw[thick,fill=gray!10] (0,0) ellipse (1.6 and 0.5);
+  \draw[->,very thick,red!70!black] (0,0) -- (0,1.5) node[above] {$\dd V_\mu$};
+  \draw[->,thin] (0,0) -- (0.9,-0.25);
+  \draw[->,thin] (0,0) -- (-0.7,-0.3);
+  \node at (2.3,0) {$\dd V^3$};
+\end{tikzpicture}
+\caption{A 3-dimensional volume element in space-time is oriented: it is described by a covector $\dd V_\mu$ ``normal'' to it.}
+\label{fig:dV}
+\end{figure}
+
+\subsection{Particle number density}
+
+\textbf{Question 1:} \emph{how many world-lines cross a given 3-volume $V$?} (\cref{fig:numberdensity}, left). The answer is
+\begin{equation}
+  \dd N=n^\mu\dd V_\mu,\qquad N=\int_V n^\mu\dd V_\mu,
+\end{equation}
+where $n^\mu$ is the \textbf{number density vector}, and $N$ is a physical particle number.
+
+\begin{figure}[ht]
+\centering
+\begin{tikzpicture}[scale=0.95,>=Stealth]
+  % slice t=0
+  \draw[thick,fill=gray!8] (-2.3,-0.6) -- (1.8,-0.6) -- (2.6,0.7) -- (-1.5,0.7) -- cycle;
+  \node at (-1.9,-0.35) {\small $t=0$};
+  \draw[thick,fill=blue!10] (0.1,0.05) ellipse (0.9 and 0.32);
+  \node at (0.1,0.05) {$V$};
+  \node at (1.4,0.45) {$S$};
+  \foreach \x in {-0.4,0.2,0.6}{\draw[red!70!black,thick] (\x,-1.4) .. controls (\x+0.2,-0.4) and (\x-0.2,0.6) .. (\x+0.1,1.8);}
+  \draw[red!70!black,thick] (-1.6,-1.4) .. controls (-1.4,0) and (-1.8,1) .. (-1.5,1.8);
+  \node[red!70!black] at (-1.3,1.9) {\small world-lines};
+  \draw[->] (3,-1.2) -- (3,1.3) node[above] {$t$};
+\end{tikzpicture}
+\hspace{1.2cm}
+\begin{tikzpicture}[scale=0.95,>=Stealth]
+  \draw[thick,fill=blue!8] (0,1.2) ellipse (1.8 and 0.4);
+  \fill[green!25,opacity=0.8] (-1.8,1.2) .. controls (-1.6,-0.6) and (1.6,-0.6) .. (1.8,1.2) arc (0:-180:1.8 and 0.4);
+  \draw[thick,green!50!black] (-1.8,1.2) .. controls (-1.6,-0.6) and (1.6,-0.6) .. (1.8,1.2);
+  \node at (0,1.25) {$V$};
+  \node[green!40!black] at (0,-0.2) {$V'$};
+  \node at (2.15,1.25) {$S$};
+  \node at (-1.2,0.45) {\small $H$};
+  \foreach \x/\y in {-1.0/0.6,0.3/-0.3,1.1/0.4}{\draw[red!70!black,thick,->] (\x-0.2,-1.3) -- (\x+0.25,2.4);}
+\end{tikzpicture}
+\caption{Left: world-lines crossing a 3-volume $V$ (with boundary $S$) in the slice $t=0$ (one spatial dimension suppressed). Right: two 3-volumes $V$ and $V'$ with the same boundary $S$ enclose a 4-dimensional hypervolume $H$; every world-line crossing $V$ also crosses $V'$.}
+\label{fig:numberdensity}
+\end{figure}
+
+\textbf{Question 2:} \emph{what does particle number conservation look like?} The number of particles is a physical quantity and does not change. Consider another 3-volume $V'$ with the same boundary $S$ as $V$ (\cref{fig:numberdensity}, right). If particles are neither created nor destroyed, every world-line crossing $V$ also crosses $V'$ exactly once. $V$ and $V'$ together form the boundary of a 4-dimensional hypervolume $H$, and the difference of the integrals over $V$ and $V'$ is, by Gauss' theorem,
+\begin{equation}
+  \int_H\pd_\mu n^\mu\,\dd^4H=0 .
+\end{equation}
+This must be true for all $H$, hence
+\begin{equation}
+  \boxed{\pd_\mu n^\mu=0}\qquad\Longleftrightarrow\qquad\pd_t n^0=-\nabla\cdot\vec n :
+\end{equation}
+the \textbf{continuity equation} (the density change rate is minus the divergence of the flow). One can also write $n^\mu(x)=n(x)V^\mu(x)$, where $n(x)$ is the \emph{scalar} density (number per unit volume in the rest frame) and $V^\mu$ the 4-velocity field. In the same way we can think about densities of other quantities.
+
+\section{The stress--energy--momentum tensor}
+
+Consider a particle moving with 4-velocity (we set $c=1$ in this section)
+\begin{equation}
+  V^\mu=\frac{\dd x^\mu}{\dd\tau}=\frac{\dd x^\mu}{\dd t}\frac{\dd t}{\dd\tau}=\begin{cases}(1,0,0,0)&\text{in its own rest frame},\\ \gamma(1,v^x,v^y,v^z)&\text{in any other frame.}\end{cases}
+\end{equation}
+It carries the 4-momentum $p^\mu=m\gamma(1,v^x,v^y,v^z)=mV^\mu$.
+
+\textbf{Question:} what is the total 4-momentum carried by a set of particles contained in (or flowing through) a 3-volume $V$? Momentum is itself a vector, so its density must be a vector-valued density, i.e.\ a $(2,0)$ tensor: we can write
+\begin{equation}
+  P^\mu=\int_V T^{\mu\nu}\,\dd V_\nu ,
+\end{equation}
+which defines the \textbf{stress--energy--momentum tensor} $T^{\mu\nu}$. In SR $P^\mu$ is conserved, so, by the same argument as for $n^\mu$,
+\begin{equation}
+  \int_H\pd_\mu T^{\mu\nu}\,\dd^4H=0\quad\forall H\qquad\Longrightarrow\qquad\boxed{\pd_\mu T^{\mu\nu}=0}\quad\text{(in SR)}.
+\end{equation}
+
+\paragraph{Definition for an ensemble of identical particles.} In practice we define
+\begin{equation}
+  T^{\mu\nu}\equiv n\,p^\mu V^\nu=\underbrace{n\,m}_{\rho(x)}V^\mu V^\nu ,
+\end{equation}
+the flow of $\mu$-momentum through a unit surface of constant $x^\nu$. The interpretation of its components is:
+\begin{enumerate}[label=(\roman*),nosep]
+  \item $T^{00}$: \textbf{energy density};
+  \item $T^{0i}$: \textbf{energy flow} (flux) in the $i$-th direction;
+  \item $T^{i0}$: density of the $i$-th component of \textbf{momentum};
+  \item $T^{ij}$: flow of the $i$-th component of momentum in the $j$-th direction: the \textbf{stress tensor}.
+\end{enumerate}
+The tensor is symmetric, $T^{\mu\nu}=T^{\nu\mu}$ (energy flux $=$ momentum density, with $c=1$).
+
+\paragraph{Physical meaning of $T^{ij}$: pressure.} Consider a ``small box'' and particles coming from the left with velocity $v^i$, hitting one of its faces, of area $\dd S_n$, with normal $\vec e_j$ (\cref{fig:box}). In a time $\dd t$, the particles which hit the face are those contained in a slab of thickness $v\,\dd t$, i.e.\ $n(\vec v\dd t)\cdot\dd\vec S_n$ of them, each one carrying momentum $p^i$. The momentum transferred to the face is
+\begin{equation}
+  \dd p^i=n\,(\vec v\dd t)\cdot\dd\vec S_n\,p^i\equiv K^i\dd t=F^i\dd t ,
+\end{equation}
+where $[K^i]=\mathrm{kg\,m\,s^{-2}}$ is a force. For $i=j$ (normal incidence) the force per unit area is a \textbf{pressure}:
+\begin{equation}
+  T^{ii}=n\,m\,(v^i)^2\quad\text{(pressure in the box)}.
+\end{equation}
+If $\dd p^i>0$, momentum is transferred to the surface, $F^i>0$, $P_{\rm in}>0$, $T^{ii}>0$.
+
+\begin{figure}[ht]
+\centering
+\begin{tikzpicture}[scale=1.0,>=Stealth]
+  \foreach \y in {0.2,0.6,1.0,1.4}{\draw[->,thick,red!70!black] (-2.6,\y) -- (-0.9,\y);}
+  \node[red!70!black] at (-2.2,-0.25) {particles, $v^i$};
+  \draw[thick,fill=gray!15] (0,0) -- (0.3,0.25) -- (0.3,1.85) -- (0,1.6) -- cycle;
+  \draw[thick,fill=gray!5] (-0.6,0) -- (0,0) -- (0,1.6) -- (-0.6,1.6) -- cycle;
+  \draw[thick] (-0.6,1.6) -- (-0.3,1.85) -- (0.3,1.85);
+  \draw[<->] (-0.6,-0.25) -- (0,-0.25) node[midway,below] {$v\,\dd t$};
+  \draw[->,thick,blue!70!black] (0.15,0.9) -- (1.4,0.9) node[right] {$\dd\vec S_n\sim\vec e_j$};
+\end{tikzpicture}
+\caption{Particles with velocity $v^i$ hit a face of area $\dd S_n$ (normal $\vec e_j$). In a time $\dd t$ all particles in the slab of thickness $v\,\dd t$ hit the face and transfer their momentum: $T^{ij}$ is the flux of $i$-momentum through the surface orthogonal to $j$, i.e.\ a stress (pressure for $i=j$).}
+\label{fig:box}
+\end{figure}
+
+\section{Conservation law in curved space-time}
+
+Assume that all the particles have the same 4-velocity field and travel along geodesics (free particles). Then:
+\begin{enumerate}
+\item they have zero covariant acceleration:
+\begin{equation}
+  a^\mu=\frac{DV^\mu(x(\tau))}{\dd\tau}=\frac{\dd x^\nu}{\dd\tau}D_\nu V^\mu(x)=V^\nu D_\nu V^\mu=0 ;
+\end{equation}
+\item particles neither appear nor disappear (covariant continuity equation): $D_\mu\big(n(x)V^\mu(x)\big)=0$.
+\end{enumerate}
+Then, by the Leibniz rule,
+\begin{equation}
+  D_\mu T^{\mu\nu}=D_\mu\big(m\,n\,V^\mu V^\nu\big)=m V^\nu\underbrace{D_\mu\big(nV^\mu\big)}_{=0\ \text{(continuity)}}+m\,n\,\underbrace{V^\mu D_\mu V^\nu}_{=0\ \text{(geodesics)}}=0 .
+\end{equation}
+
+\begin{keyresult}[Covariant conservation of energy and momentum]
+\begin{equation}
+  D_\mu T^{\mu\nu}=0 .
+\end{equation}
+This is the generalisation to curved space-time of $\pd_\mu T^{\mu\nu}=0$ (``comma goes to semicolon''). Note that, unlike $\pd_\mu T^{\mu\nu}=0$ in SR, it does not imply the existence of a globally conserved total energy: energy can be exchanged with the gravitational field.
+\end{keyresult}
+
+\section{Special cases}
+
+\paragraph{1) Immobile dust.} A set of particles at rest (pressureless matter): the world-lines are all parallel to the $t$ axis, $V^\mu=(1,0,0,0)$. This implies
+\begin{equation}
+  T^{00}=\rho_0,\qquad T^{\mu\nu}=0\ \text{otherwise},
+\end{equation}
+with $\rho_0$ the rest mass density.
+
+\paragraph{2) Constant-velocity (generic) dust.} For an observer moving along with the dust we come back to case 1: $T^{\mu\nu}=\rho_0V^\mu V^\nu$ with $V^\mu=(1,\vec 0)$. For any other observer, $V^\mu=\gamma(1,v^x,v^y,v^z)$ and
+\begin{equation}
+  T^{\mu\nu}=\rho_0\gamma^2\begin{pmatrix}1&v^x&v^y&v^z\\ v^x&(v^x)^2&v^xv^y&v^xv^z\\ v^y&v^yv^x&(v^y)^2&v^yv^z\\ v^z&v^zv^x&v^zv^y&(v^z)^2\end{pmatrix}.
+\end{equation}
+Now the mass current ($T^{0i}$) is non-zero and the stress ($T^{ij}$) is non-zero. Note the factor $\gamma^2$: one $\gamma$ from the Lorentz contraction of the volume (the number density increases, $n=\gamma n_0$) and one from the energy of each particle ($E=\gamma m$).
+
+\paragraph{3) Static mono-energetic gas.} A set of particles with the same speed $v$ (velocity measure) but random directions. Averaging $T^{\mu\nu}=\rho_0\gamma^2(1,v^i)\otimes(1,v^j)$ over directions: $\langle v^i\rangle=0$, $\langle v^iv^j\rangle=0$ for $i\neq j$, and by isotropy $\langle(v^x)^2\rangle=\langle(v^y)^2\rangle=\langle(v^z)^2\rangle=v^2/3$. Hence
+\begin{equation}
+  T^{\mu\nu}=\rho_0\gamma^2\begin{pmatrix}1&0&0&0\\0&v^2/3&0&0\\0&0&v^2/3&0\\0&0&0&v^2/3\end{pmatrix}:
+\end{equation}
+an \textbf{isotropic stress}, i.e.\ a pressure $p=\frac13\rho_0\gamma^2v^2$.
+
+\paragraph{4) Static ideal (perfect) gas.} The particles follow a statistical distribution of velocities; in the rest frame of the gas
+\begin{equation}
+  T^{\mu\nu}=\begin{pmatrix}\rho&0&0&0\\0&p&0&0\\0&0&p&0\\0&0&0&p\end{pmatrix},
+\end{equation}
+where $\rho$ is the average energy (mass) density and $p$ the average pressure, related through an equation of state (e.g.\ the ideal-gas law). Since in the rest frame $V^\mu=(1,0,0,0)$ and $g^{\mu\nu}=\eta^{\mu\nu}=\mathrm{diag}(1,-1,-1,-1)$, this can be written in the covariant form
+\begin{equation}
+  \boxed{T^{\mu\nu}=(\rho+p)V^\mu V^\nu-p\,g^{\mu\nu}}
+\end{equation}
+(check: $T^{00}=(\rho+p)-p=\rho$, $T^{ii}=0-p(-1)=p$). Being a tensor equation, it is valid in any frame, also for an observer moving with respect to the gas, and locally in curved space-time. This is the \textbf{perfect fluid} energy--momentum tensor, used e.g.\ for stars (Problem Sheet 4) and in cosmology.
+
+\paragraph{5) Radiation.} For a gas of photons (or ultra-relativistic particles) $v\to1$ in case 3 and the pressure is $p_R=\rho/3$. Then
+\begin{equation}
+  T^{\mu\nu}=\frac43\rho\,V^\mu V^\nu-\frac13\rho\,g^{\mu\nu}=\mathrm{diag}\Big(\rho,\frac\rho3,\frac\rho3,\frac\rho3\Big)\quad\text{(rest frame)},
+\end{equation}
+which is traceless: $T^\mu{}_\mu=g_{\mu\nu}T^{\mu\nu}=\rho-3p=0$.

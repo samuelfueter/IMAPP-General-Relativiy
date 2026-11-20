@@ -1,0 +1,163 @@
+% =====================================================================
+\chapter{Black holes}\label{ch:blackholes}
+% =====================================================================
+
+We now consider the singularities of the Schwarzschild metric,
+\[
+  c^2\dd\tau^2=\Big(1-\frac\rs r\Big)c^2\dd t^2-\Big(1-\frac\rs r\Big)^{-1}\dd r^2-r^2\dd\Omega^2 :
+\]
+\begin{itemize}[nosep]
+\item $r=0$ is a \textbf{genuine} (physical, curvature) singularity: it cannot be avoided by a change of coordinates. Indeed the curvature invariant $R_{\mu\nu\rho\sigma}R^{\mu\nu\rho\sigma}=12\rs^2/r^6$ (a scalar!) diverges there. It is, however, not ``naked'' (see below).
+\item $r=\rs$ is only an \textbf{apparent} (coordinate) singularity: it can be removed by a change of coordinates. All curvature invariants are finite there; the problem is that the Schwarzschild coordinates are ill-behaved. At $r=\rs$ the $t$ coordinate changes from time-like to space-like.
+\end{itemize}
+
+\section{Radial light rays}
+
+Let us consider radially moving photons ($\theta,\phi=$ const). Such photons move in a space-time
+\[
+  c^2\Big(1-\frac\rs r\Big)\dd t^2-\frac{\dd r^2}{1-\rs/r}=0\qquad\Longrightarrow\qquad
+  \begin{cases}c\,\dd t=+\dfrac{\dd r}{1-\rs/r}&\text{(outgoing)},\\[1.5ex] c\,\dd t=-\dfrac{\dd r}{1-\rs/r}&\text{(incoming)}.\end{cases}
+\]
+Integrating, with $\int\frac{\dd r}{1-\rs/r}=\int\frac{r\,\dd r}{r-\rs}=\int\Big(1+\frac{\rs}{r-\rs}\Big)\dd r=r+\rs\ln\Big|\frac r\rs-1\Big|+\text{const}$, we get
+\begin{equation}
+  \begin{cases} ct=r+\rs\ln\left|\dfrac r\rs-1\right|+C &\text{(outgoing)},\\[1.5ex] -ct=r+\rs\ln\left|\dfrac r\rs-1\right|+D &\text{(incoming)},\end{cases}
+\end{equation}
+with $C,D$ integration constants (labelling the different light rays). The combination $r_*\equiv r+\rs\ln|r/\rs-1|$ is called the \emph{tortoise coordinate}. As $r\to\rs$, $r_*\to-\infty$: an incoming light ray needs an infinite coordinate time $t$ to reach $r=\rs$. This is a hint that $t$ is a bad coordinate there.
+
+\section{Kruskal--Szekeres coordinates}
+
+We now switch to the Kruskal--Szekeres coordinates $U,V$, defined such that the two families of light rays are the coordinate lines:
+\begin{equation}
+  UV=e^{(C+D)/2\rs}\to e^{r/\rs}\Big(\frac r\rs-1\Big),\qquad
+  \pm\frac VU=e^{(C-D)/2\rs}\to e^{ct/\rs},
+  \label{eq:kruskal}
+\end{equation}
+with the sign $+$ for $r>\rs$ and $-$ for $r<\rs$. Explicitly, for $r>\rs$: $V=e^{(ct+r_*)/2\rs}$, $U=e^{(r_*-ct)/2\rs}$. Along an outgoing ray $ct-r_*=C$, so $U=e^{-C/2\rs}$ is constant; along an incoming ray $ct+r_*=-D$, so $V=e^{-D/2\rs}$ is constant. Note: $r=\rs\Leftrightarrow V=0$ or $U=0$.
+
+\paragraph{The metric in the new coordinates.} Focus first on $r>\rs$ (e.g.\ an incoming photon).
+\begin{enumerate}[label=(\roman*)]
+\item $\dd(UV)=V\dd U+U\dd V=UV\Big(\dfrac{\dd V}V+\dfrac{\dd U}U\Big)$, and on the other hand
+\begin{align*}
+  \dd(UV)&=\dd\Big[e^{r/\rs}\Big(\frac r\rs-1\Big)\Big]=e^{r/\rs}\Big[\frac1\rs+\frac1\rs\Big(\frac r\rs-1\Big)\Big]\dd r=e^{r/\rs}\frac{r}{\rs^2}\dd r\\
+  &=\frac{UV}{\frac r\rs-1}\frac{r}{\rs^2}\dd r=\frac{UV\,\dd r}{\rs(1-\rs/r)}.\quad(1)
+\end{align*}
+\item $\dd\Big(\dfrac VU\Big)=\dfrac1U\dd V-\dfrac V{U^2}\dd U=\dfrac VU\Big(\dfrac{\dd V}V-\dfrac{\dd U}U\Big)$, and on the other hand $\dd\big(e^{ct/\rs}\big)=e^{ct/\rs}\dfrac{c\,\dd t}{\rs}=\dfrac VU\dfrac{c\,\dd t}{\rs}$.\quad(2)
+\end{enumerate}
+Using (1) and (2):
+\begin{equation}
+  \frac{\dd V}V+\frac{\dd U}U=\frac{\dd r}{\rs(1-\rs/r)},\qquad\frac{\dd V}V-\frac{\dd U}U=\frac{c\,\dd t}{\rs}.
+\end{equation}
+Replacing these differential relations back into the radial part of $\dd s^2$:
+\begin{align}
+  \dd s^2\big|_{\rm radial}&=\Big(1-\frac\rs r\Big)\Big[c^2\dd t^2-\frac{\dd r^2}{(1-\rs/r)^2}\Big]
+  =\Big(1-\frac\rs r\Big)\rs^2\Big[\Big(\frac{\dd V}V-\frac{\dd U}U\Big)^2-\Big(\frac{\dd V}V+\frac{\dd U}U\Big)^2\Big]\nonumber\\
+  &=-4\rs^2\Big(1-\frac\rs r\Big)\frac{\dd U\,\dd V}{UV}
+  =-4\rs^2\,\frac{r-\rs}{r}\,\frac{\rs\,e^{-r/\rs}}{r-\rs}\,\dd U\,\dd V ,
+\end{align}
+using $(a-b)^2-(a+b)^2=-4ab$ and $UV=e^{r/\rs}(r-\rs)/\rs$. Hence
+\begin{keyresult}[Schwarzschild metric in Kruskal--Szekeres coordinates]
+\begin{equation}
+  \dd s^2=-\frac{4\rs^3}{r}e^{-r/\rs}\,\dd U\,\dd V-r^2\dd\Omega^2,\qquad UV=\Big(\frac r\rs-1\Big)e^{r/\rs}.
+\end{equation}
+This is \textbf{non-singular at $r=\rs$}: $r=\rs$ was only a coordinate singularity, which we have avoided with this coordinate transformation. The only singularity left is at $r=0$.
+\end{keyresult}
+
+\paragraph{Comments.}
+\begin{itemize}
+\item For a given point $(U,V)$, $r$ can be computed from $UV=(r/\rs-1)e^{r/\rs}$ (the right-hand side is a monotonic function of $r$).
+\item The derivation used $r>\rs$, but the final expression is analytic in $U,V$ and can be extended to $r<\rs$ (with the sign $-$ in \eqref{eq:kruskal}): it is the analytic continuation of the metric.
+\item For a photon initially at $r>\rs$ to reach $r<\rs$, either $V$ or $U$ has to change sign: for $r>\rs$ both $V>0$ and $U>0$, while $r<\rs\Leftrightarrow UV<0$.
+\end{itemize}
+
+\section{The Kruskal diagram}
+
+\textbf{Goal:} draw the Schwarzschild coordinates in the $(U,V)$ plane. It is customary to draw $V$ and $U$ along the two diagonals, so that the ``time'' $T\propto V-U$ points upwards and the ``space'' $X\propto V+U$ to the right (\cref{fig:kruskal}). Reminder: $UV=e^{r/\rs}(r/\rs-1)$ and $\pm V/U=e^{ct/\rs}$ ($+$ for $r>\rs$, $-$ for $r<\rs$).
+\begin{enumerate}
+\item If $V=0$ or $U=0$, then $UV=0\Rightarrow r=\rs$: both axes are the surface $r=\rs$.
+\item If $V=0$: $V/U=0=e^{ct/\rs}\Rightarrow t\to-\infty$ along the $U$ axis. If $U=0$: $V/U=\infty=e^{ct/\rs}\Rightarrow t\to+\infty$ along the $V$ axis.
+\item Lines of $t=$ const: $V/U=$ const, i.e.\ $V=\text{const}\times U$: \textbf{straight lines through the origin}.
+\item Lines of $r=$ const $>\rs$: $UV=$ const $>0$: \textbf{hyperbolas} in the first quadrant ($U,V>0$, the right wedge of the figure).
+\item $r=0$: $UV=-1$, a hyperbola in the region $U<0<V$ (top wedge) --- and its mirror image in the region $V<0<U$ (bottom wedge).
+\end{enumerate}
+\begin{itemize}
+\item The first quadrant ($U,V>0$) corresponds to $r>\rs$ and $-\infty<t<\infty$: full coverage of the $r>\rs$ space-time of Schwarzschild (region I).
+\item Radial photons: $\dd s^2=0\Rightarrow\dd U\,\dd V=0\Rightarrow V=$ const (incoming) or $U=$ const (outgoing): straight lines at $45^\circ$ in the diagram, as in Minkowski space. Light cones are oriented upwards everywhere and they do not change orientation (unlike in Schwarzschild coordinates, where they ``close up'' as $r\to\rs$): \emph{the Kruskal diagram is a good map of the causal structure}.
+\item A stationary (static) observer at $r>\rs$ moves along a hyperbola $r=$ const in region I. He/she does not have access beyond the first quadrant; in particular he/she never receives signals from $r\le\rs$ ($UV\le0$).
+\item The top wedge ($U<0<V$, $0<r<\rs$, region II) is the \textbf{black hole} interior: once inside, every future-directed time-like or null curve ends on the singularity $r=0$. The line $U=0$ ($r=\rs$, $t=+\infty$) is the \textbf{event horizon}: a one-way membrane. (The bottom wedge is a ``white hole'' and the left wedge a second asymptotic region; they are part of the maximal analytic extension of the \emph{eternal} Schwarzschild solution but are absent for a black hole formed by collapse.)
+\end{itemize}
+
+\begin{figure}[ht]
+\centering
+\begin{tikzpicture}[scale=1.25,>=Stealth]
+  \fill[gray!8] (0,0) -- (3.0,3.0) -- (3.0,-3.0) -- cycle;
+  \fill[red!6] (0,0) -- (-2.6,2.6) -- (2.6,2.6) -- cycle;
+  \draw[->,thick] (-3,-3) -- (3.2,3.2) node[above right] {$V$};
+  \draw[->,thick] (-3,3) -- (3.2,-3.2) node[below right] {$U$};
+  \draw[very thick,orange!80!black,decorate,decoration={zigzag,amplitude=0.8pt,segment length=4pt},domain=-2.3:2.3,samples=60] plot (\x,{sqrt(1+\x*\x)});
+  \draw[very thick,orange!80!black,decorate,decoration={zigzag,amplitude=0.8pt,segment length=4pt},domain=-2.3:2.3,samples=60] plot (\x,{-sqrt(1+\x*\x)});
+  \node[orange!70!black,fill=white,inner sep=1pt] at (0,2.85) {\small singularity $r=0$ \ ($UV=-1$)};
+  \node[orange!70!black,fill=white,inner sep=1pt] at (0,-2.85) {\small $r=0$ (white hole)};
+  \foreach \a in {0.7,1.4}{\draw[thick,magenta!80!black,domain=-2.3:2.3,samples=60] plot ({sqrt(\a*\a+\x*\x)},\x);}
+  \node[magenta!80!black,right] at (2.6,-1.8) {\small $r=$ const $>\rs$};
+  \draw[thick,green!50!black] (0,0) -- (3.0,1.3) node[right] {\small $t=t_2$};
+  \draw[thick,green!50!black] (0,0) -- (3.0,0.45) node[right] {\small $t=t_1$};
+  \node[right,font=\small] at (3.25,3.0) {$U=0$: $r=\rs$, $t=+\infty$ (horizon)};
+  \node[right,font=\small] at (3.25,-3.0) {$V=0$: $r=\rs$, $t=-\infty$};
+  \node at (2.2,-0.25) {\bf I};
+  \node at (0,0.55) {\bf II};
+  \node at (-1.4,0) {\bf III};
+  \node at (0,-0.55) {\bf IV};
+  \begin{scope}[shift={(2.35,-1.1)}]
+    \draw[blue!70!black,thick] (-0.3,0.3) -- (0,0) -- (0.3,0.3);
+    \fill[blue!70!black] (0,0) circle (1.2pt);
+    \node[blue!70!black,font=\scriptsize,below] at (0,-0.02) {light cone};
+  \end{scope}
+  \draw[very thick,blue!70!black] (1.6,-1.2) .. controls (1.4,-0.2) and (0.8,0.7) .. (0.3,1.044);
+  \fill[blue!70!black] (0.3,1.044) circle (1.2pt);
+  \node[blue!70!black,font=\scriptsize] at (1.65,-1.4) {free fall};
+  \draw[->,red!70!black,thick,dashed] (0.9,-0.75) -- (1.6,-0.05) node[above,font=\scriptsize] {outgoing};
+  \draw[->,red!70!black,thick,dashed] (2.9,-0.15) -- (2.45,0.3) node[above,font=\scriptsize] {incoming};
+\end{tikzpicture}
+\caption{The Kruskal diagram. The axes $U=0$ and $V=0$ are the surface $r=\rs$. Region I ($U,V>0$) is the exterior $r>\rs$, covered by Schwarzschild coordinates: lines of constant $t$ are straight lines through the origin (green) and lines of constant $r$ are hyperbolas (magenta). Region II is the black-hole interior, bounded by the singularity $r=0$ ($UV=-1$, zigzag). Radial light rays are lines at $45^\circ$ ($U$ or $V$ constant) and light cones keep their orientation. A freely-falling observer crosses the horizon $U=0$ in finite proper time and ends at $r=0$.}
+\label{fig:kruskal}
+\end{figure}
+
+\section{A freely-falling observer}
+
+Consider an observer falling radially ($\theta,\phi=$ const) from rest at infinity. The Lagrangian (with $\lambda=\tau$) is
+\[
+  \mathcal L=c^2\Big(1-\frac\rs r\Big)\dot t^2-\Big(1-\frac\rs r\Big)^{-1}\dot r^2=c^2 .
+\]
+$t$ is cyclic: $\big(1-\frac\rs r\big)\dot t=\gamma$ (constant). Inserting in $\mathcal L=c^2$: $\frac{c^2\gamma^2-\dot r^2}{1-\rs/r}=c^2$, i.e.
+\[
+  \gamma=\sqrt{\Big(1-\frac{\rs}{r}\Big)+\frac{\dot r^2}{c^2}} .
+\]
+Boundary condition: $\dot r=0$ at $r\to\infty$ (at rest at infinity) $\Rightarrow\gamma=1$. Hence
+\begin{equation}
+  \dot r^2=\frac{\rs c^2}{r},\qquad\dot t=\frac{1}{1-\rs/r}.
+\end{equation}
+(The first equation is formally identical to the Newtonian energy conservation $\frac12\dot r^2-\frac{\GN M}{r}=0$, but with proper time.)
+
+\paragraph{Proper time.} We define $x$ by $r=\rs x^2$ (so $\dd r=2\rs x\,\dd x$). For infall $\dot r=-c\sqrt{\rs/r}=-c/x$, so $2\rs x\,\dd x=-\frac cx\dd\tau$, i.e.\ $c\,\dd\tau=-2\rs x^2\dd x$ and
+\begin{equation}
+  c(\tau_0-\tau)=\frac23\rs x^3=\frac23\frac{r^{3/2}}{\rs^{1/2}},
+\end{equation}
+where $\tau_0$ is the proper time at which the observer reaches $r=0$ ($x$ tracks the proper time; everything chosen for $\gamma=1$). In particular, the proper time needed to go from $r=\rs$ ($x=1$) to $r=0$ is \emph{finite}: $\Delta\tau=\frac{2\rs}{3c}$. Nothing special happens to the falling observer at the horizon.
+
+\paragraph{Coordinate time: a static observer at $r>\rs$ watching the free fall.} From the $t$ equation, $\dd t=\frac{\dd\tau}{1-\rs/r}=\frac{x^2}{x^2-1}\dd\tau$, so
+\[
+  c\,\dd t=-\frac{2\rs x^4\,\dd x}{x^2-1}=-2\rs\Big(x^2+1+\frac{1}{x^2-1}\Big)\dd x ,
+\]
+and integrating (with $\int\frac{\dd x}{x^2-1}=\frac12\ln\big|\frac{x-1}{x+1}\big|$):
+\begin{equation}
+  ct=-\rs\left[\frac23x^3+2x+\ln\left|\frac{x-1}{x+1}\right|\right]+\text{const}.
+\end{equation}
+\begin{enumerate}[label=(\roman*)]
+\item For $x\to\infty$ (far away), $ct\simeq-\frac23\rs x^3+\dots$: $\tau$ and $t$ agree qualitatively.
+\item For $x\to1$, i.e.\ $r\to\rs$: $c\tau\to c\tau_0-\frac23\rs$ is finite, while $\ln|x-1|\to-\infty$, so $t\to+\infty$ \textbf{diverges}.
+\end{enumerate}
+The falling observer actually falls (and crosses the horizon in a finite proper time), but for the external (static) observer, who never sees him/her getting there, the image freezes at $r=\rs$, while becoming more and more redshifted.
+
+\begin{keyresult}
+For an external observer, $r=0$ (and indeed the whole region $r\le\rs$) is inaccessible: the singularity is hidden behind the event horizon. GR (with physically reasonable matter) does not seem to produce \textbf{naked singularities} (Penrose's \emph{cosmic censorship conjecture}).
+\end{keyresult}
