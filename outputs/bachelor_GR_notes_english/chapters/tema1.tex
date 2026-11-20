@@ -246,4 +246,25 @@ and for the second derivative we obtain
 \item We see that the tidal force can be attractive or repulsive. In the directions transverse to the direction in which the source lies, the tidal force is attractive, and therefore the particles approach each other, or low tide in the case of the sea. In the direction towards the source the force is repulsive, and therefore the particles move apart, or high tide in the case of the sea. This separation occurs regardless of whether we are closer to or farther from the source (i.e.\ both when $r_x>0$ and when $r_x<0$). The intuitive reason is that when particle 2 is closer to the source than particle 1, it feels a stronger gravitational attraction, so that it tends to move away from particle 1. When particle 1 is closer, it is now the one that feels the stronger gravitational attraction, so that again it tends to move away from particle 2. This is the reason why high tides occur both on the side of the Earth facing the Moon and on the opposite side, and why the average time between high tide and low tide is 6 hours.
 
 \item Tidal forces decrease as the cube of the distance to the source of the field. This is the reason why the tidal effect on the Earth caused by the Moon is stronger (approximately twice as strong) than that caused by the Sun, despite the fact that the gravitational field of the Sun at the Earth is more than 150 times stronger than that caused by the Moon.
+
+\begin{carroll}[: the tidal deformation]
+The equations of motion above say that a small cloud of free particles around the centre of mass, initially at rest, is \emph{stretched} along the direction of the source ($x$) and \emph{compressed} in the two transverse directions ($y$, $z$). An initially spherical cloud therefore becomes a prolate ellipsoid pointing towards the source. Since the trace of $\partial_i\partial_j\Phi$ vanishes outside the sources, the volume of the cloud is unchanged to this order: the stretching along $x$ ($+2$) is exactly compensated by the compression along $y$ and $z$ ($-1-1$). Applied to the oceans of the Earth in the field of the Moon, this gives two tidal bulges, one facing the Moon and one on the opposite side.
+
+\begin{center}
+\begin{tikzpicture}[scale=1.0,>=Stealth]
+  \draw[dashed,gray] (0,0) circle (1);
+  \draw[thick,blue!70!black] (0,0) ellipse (1.35 and 0.8);
+  \foreach \a in {0,180}{\draw[->,thick,red!70!black] (\a:1.4) -- (\a:1.95);}
+  \foreach \a in {90,270}{\draw[->,thick,red!70!black] (\a:1.55) -- (\a:0.95);}
+  \fill (0,0) circle (1.5pt);
+  \node[below right,font=\small] at (0,0) {CM};
+  \shade[ball color=gray!40] (5,0) circle (0.45);
+  \node[below] at (5,-0.5) {$M_e$};
+  \draw[->] (-2.6,-1.6) -- (-1.9,-1.6) node[right,font=\small] {$x$};
+  \draw[->] (-2.6,-1.6) -- (-2.6,-0.9) node[above,font=\small] {$y$};
+  \draw[gray,<->] (0,-1.25) -- (5,-1.25) node[midway,below,font=\small] {$R$};
+\end{tikzpicture}
+\end{center}
+Since the tidal acceleration is $\propto GM_e r/R^3$, it falls off as $1/R^3$, whereas the gravitational acceleration itself falls off as $1/R^2$: this is why the Moon produces larger tides on the Earth than the Sun.
+\end{carroll}
 \end{points}

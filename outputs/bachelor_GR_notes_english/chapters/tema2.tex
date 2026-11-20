@@ -170,6 +170,30 @@ The two situations are completely indistinguishable from the dynamical point of 
 
 \item For example, let us consider an elevator in free fall in the gravitational field of the Earth. If we are inside it we will not notice any weight. We can ask ourselves what happens to two particles that we release from rest at the same height (inside the elevator). Since both particles move attracted by the Earth, their motion will be radial towards the centre of the Earth. Seen from the elevator, we will see that the two particles approach each other very slowly (and this attraction has nothing to do with their own mutual gravitational attraction, which we are neglecting completely). This is a tidal force, which corresponds to variations of the gravitational field.
 
+\begin{carroll}[: why only locally]
+In a sealed box accelerated by a rocket in empty space, free particles released from rest always ``fall'' along parallel straight lines, with the same acceleration. In a large box at rest (or freely falling) in the gravitational field of the Earth, they move instead towards the centre of the Earth, i.e.\ along \emph{converging} directions. By observing such relative motions an observer inside a sufficiently large box could distinguish a gravitational field from a uniform acceleration. This is why the equivalence between the two only holds in sufficiently small regions of space-time, where these inhomogeneities (tidal effects) cannot be detected.
+\begin{center}
+\begin{tikzpicture}[scale=0.85,>=Stealth]
+  \begin{scope}
+    \draw[thick] (0,0) rectangle (4,2.2);
+    \foreach \x in {1,3}{\fill (\x,1.7) circle (3pt); \draw[->,thick] (\x,1.5) -- (\x,0.4);}
+    \foreach \x in {1,3}{\draw[thick] (\x-0.35,0) arc (180:360:0.35 and 0.3);
+      \draw[orange!80!red,thick,decorate,decoration={zigzag,amplitude=2pt,segment length=4pt}] (\x-0.25,-0.35) -- (\x,-0.9) -- (\x+0.25,-0.35);}
+    \node[below,align=center] at (2,-1.1) {accelerated box (rocket):\\ parallel motion};
+  \end{scope}
+  \begin{scope}[shift={(6.5,0)}]
+    \draw[thick] (0,0.6) rectangle (4,2.8);
+    \fill (0.7,2.3) circle (3pt); \fill (3.3,2.3) circle (3pt);
+    \draw[->,thick] (0.75,2.1) -- (1.15,1.0);
+    \draw[->,thick] (3.25,2.1) -- (2.85,1.0);
+    \draw[thick] (-0.3,-1.3) arc (150:30:2.66);
+    \node at (2,-0.55) {Earth};
+    \node[below,align=center] at (2,-1.3) {box in a gravitational field:\\ converging motion};
+  \end{scope}
+\end{tikzpicture}
+\end{center}
+\end{carroll}
+
 \item We conclude that the reference frame is inertial (for mechanical processes) on scales on which tidal forces are negligible.
 \end{points}
 
@@ -265,6 +289,58 @@ and we reach the conclusion that the geometry of space according to $S'$ cannot 
 \]
 
 \item This is a measurable effect. In 1959 Pound and Rebka devised the following experiment (later improved by Pound and Snider in 1965). It consisted in measuring the change in frequency of a photon climbing a column 22.5 metres high (which corresponds to a relative frequency change of $\frac{gh}{c^2}=2.5\cdot10^{-15}$). The experiment was carried out at the Jefferson Laboratory at Harvard. The method used to measure the frequencies consisted in using the Mössbauer effect, i.e.\ the existence of resonances in the absorption and emission of gamma rays by the nuclei of the atoms of a solid. The result of the experiment was the confirmation of the gravitational Doppler effect with a precision of 1\%.
+
+\begin{carroll}[: the gravitational redshift from accelerated boxes, and why space-time is curved]
+\textit{(a) Accelerated boxes.} Consider two boxes, a distance $z$ apart, moving far away from any matter with the same constant acceleration $a$. At time $t_0$ the trailing box emits a photon of wavelength $\lambda_0$. The boxes keep a constant distance, so the photon reaches the leading box after $\Delta t=z/c$, during which the boxes have picked up an additional velocity $\Delta v=a\Delta t=az/c$. To first order in $\Delta v/c$, the photon reaching the leading box is therefore redshifted by the ordinary Doppler effect,
+\[
+  \frac{\Delta\lambda}{\lambda_0}=\frac{\Delta v}{c}=\frac{az}{c^2}.
+\]
+By the equivalence principle the same must happen in a tower of height $z$ on the surface of a planet, with $a\to g$, which reproduces the result above ($\nu'/\nu_0=1-gh/c^2$). For a non-uniform field one integrates along the path, $\frac{\Delta\lambda}{\lambda_0}=\frac{1}{c^2}\int\partial_z\Phi\,dz=\frac{\Delta\Phi}{c^2}$.
+\begin{center}
+\begin{tikzpicture}[scale=0.8,>=Stealth]
+  % accelerated boxes
+  \draw[thick] (0,0) rectangle (0.8,0.6); \draw[thick] (0,2.6) rectangle (0.8,3.2);
+  \draw[->] (0.4,3.2) -- (0.4,3.8) node[right] {$a$};
+  \draw[->] (0.4,0.6) -- (0.4,1.1) node[right] {$a$};
+  \draw[decorate,decoration={snake,amplitude=1.5pt,segment length=5pt},->,red!70!black] (1.1,0.7) -- (1.1,1.8) node[right,black] {$\lambda_0$};
+  \draw[<->] (-0.4,0.3) -- (-0.4,2.9) node[midway,left] {$z$};
+  \node[below] at (0.4,-0.1) {\small $t=t_0$};
+  \begin{scope}[shift={(3.2,1.4)}]
+    \draw[thick] (0,0) rectangle (0.8,0.6); \draw[thick] (0,2.6) rectangle (0.8,3.2);
+    \draw[decorate,decoration={snake,amplitude=1.5pt,segment length=5pt},->,red!70!black] (1.1,1.6) -- (1.1,2.55);
+    \draw[<->] (1.7,0.3) -- (1.7,2.9) node[midway,right] {$z$};
+    \node[below] at (0.4,-0.1) {\small $t=t_0+z/c$};
+  \end{scope}
+  \draw[dashed,gray] (0.8,0.6) -- (3.2,2.0); \draw[dashed,gray] (0.8,3.2) -- (3.2,4.6);
+  % tower
+  \begin{scope}[shift={(7.5,0)}]
+    \fill[pattern=north east lines] (-0.8,-0.3) rectangle (2.4,0);
+    \draw (-0.8,0) -- (2.4,0);
+    \draw[thick] (0.3,0) -- (0.6,3.0) -- (1.0,3.0) -- (1.3,0);
+    \draw (0.38,0.8) -- (1.22,0.8) (0.46,1.6) -- (1.14,1.6) (0.53,2.3) -- (1.07,2.3);
+    \draw (0.38,0.8) -- (1.14,1.6) (1.22,0.8) -- (0.46,1.6);
+    \draw[thick] (0.35,3.0) rectangle (1.25,3.6);
+    \draw[decorate,decoration={snake,amplitude=1.5pt,segment length=5pt},->,red!70!black] (1.9,0.2) -- (1.9,3.4);
+    \node[right] at (1.95,0.6) {$\lambda_0$};
+    \draw[<->] (-0.4,0) -- (-0.4,3.0) node[midway,left] {$z$};
+  \end{scope}
+\end{tikzpicture}
+\end{center}
+
+\textit{(b) Why space-time must be curved.} A physicist on the ground emits a beam of light from height $z_0$, received at the top of the tower at height $z_1$. The time between the emission of the beginning and of the end of one wavelength is $\Delta t_0=\lambda_0/c$, and the time between the reception of the beginning and of the end is $\Delta t_1=\lambda_1/c$. Since the gravitational field does not change with time, the paths in space-time followed by the leading and trailing edges of the wave must be precisely congruent (a time translation of each other, see the figure). In a flat space-time simple geometry would then tell us that $\Delta t_1=\Delta t_0$. But the gravitational redshift implies $\Delta t_1>\Delta t_0$ (``the clock at the top of the tower appears to run faster''). The fault lies with the ``simple geometry'': a better description is to admit that space-time is curved.
+\begin{center}
+\begin{tikzpicture}[scale=0.85,>=Stealth]
+  \draw[->] (0,0) -- (5,0) node[right] {$z$};
+  \draw[->] (0,0) -- (0,4.2) node[above] {$t$};
+  \draw (1,0) -- (1,4); \draw (4,0) -- (4,4);
+  \node[below] at (1,0) {$z_0$}; \node[below] at (4,0) {$z_1$};
+  \draw[thick,->] (1,0.9) .. controls (2,1.1) and (3,1.4) .. (4,1.8);
+  \draw[thick,->] (1,2.0) .. controls (2,2.2) and (3,2.5) .. (4,2.9);
+  \draw[<->] (0.7,0.9) -- (0.7,2.0) node[midway,left] {$\Delta t_0$};
+  \draw[<->] (4.3,1.8) -- (4.3,2.9) node[midway,right] {$\Delta t_1$};
+\end{tikzpicture}
+\end{center}
+\end{carroll}
 
 \item We have already seen that the spatial geometry for an accelerated observer (and therefore also in the presence of a gravitational field) is no longer Euclidean. We also know that, because of special relativity, space and time form a four-dimensional entity called space-time. The space-time of special relativity is described by a metric called the Minkowski metric, which takes the form
 \[

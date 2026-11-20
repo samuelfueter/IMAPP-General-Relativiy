@@ -11,6 +11,11 @@
 \usepackage{tikz}
 \usetikzlibrary{arrows.meta,calc,decorations.pathmorphing,decorations.markings,patterns,3d,intersections}
 \usepackage{titlesec}
+\usepackage[most]{tcolorbox}
+% Material added to the original notes (figures/complements based on S.~Carroll's lecture notes)
+\newtcolorbox{carroll}[1][]{enhanced,breakable,colback=teal!4,colframe=teal!60!black,boxrule=0.6pt,
+  left=6pt,right=6pt,top=4pt,bottom=4pt,fonttitle=\bfseries\small,
+  title={Complement (based on Carroll's lecture notes)#1},before skip=8pt,after skip=8pt}
 \usepackage[colorlinks=true,linkcolor=blue!50!black,urlcolor=blue!50!black]{hyperref}
 \allowdisplaybreaks
 \setlength{\parindent}{0pt}
@@ -40,6 +45,14 @@
 \begin{document}
 \maketitle
 \tableofcontents
+\chapter*{Note on this edition}
+\addcontentsline{toc}{chapter}{Note on this edition}
+This document is an English translation of the original Spanish lecture notes of the course \emph{Gravitación} (Chapters 1--6 and syllabus). The structure and content of the original notes have been kept unchanged; the translation uses the standard English terminology of General Relativity.
+
+Material that is \emph{not} part of the original notes is always placed inside boxes like this one:
+\begin{carroll}
+Complementary explanations, figures and short derivations, based on S.~M.~Carroll, \emph{Lecture Notes on General Relativity} (gr-qc/9712019). They use the same conventions as the original notes: metric signature $(-,+,+,+)$ and the same index and curvature conventions.
+\end{carroll}
 \input{chapters/syllabus}
 \input{chapters/tema1}
 \input{chapters/tema2}
