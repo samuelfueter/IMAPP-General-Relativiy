@@ -25,22 +25,22 @@ On a curved space, e.g.\ the surface of a sphere, all vectors are tangent to the
   \draw (0,0) circle (1.6);
   \draw[dashed,gray] (1.6,0) arc (0:180:1.6 and 0.4);
   \draw[thick] (-1.6,0) arc (180:360:1.6 and 0.4);
-  % points
   \coordinate (Q) at (0,1.6);
   \coordinate (P) at (-0.9,-0.33);
   \coordinate (S) at (0.9,-0.33);
-  % path 1: P -> Q along meridian
   \draw[very thick,green!50!black] (P) to[out=95,in=200] (Q);
-  % path 2: P -> S along equator then S -> Q
   \draw[very thick,red!70!black] (P) arc (236:304:1.6 and 0.4);
   \draw[very thick,red!70!black] (S) to[out=85,in=-20] (Q);
-  \fill (P) circle (1.5pt) node[below left] {$P$};
-  \fill (Q) circle (1.5pt) node[above left] {$Q$};
-  \fill (S) circle (1.5pt) node[below right] {$S$};
+  \fill (P) circle (1.5pt); \node[below left] at (P) {$P$};
+  \fill (S) circle (1.5pt); \node[below right] at (S) {$S$};
+  \fill (Q) circle (1.5pt); \node[above left] at ($(Q)+(-0.05,0.02)$) {$Q$};
+  \node[green!50!black,font=\small] at (-1.05,0.75) {(1)};
+  \node[red!70!black,font=\small] at (1.05,0.75) {(2)};
   % vectors
-  \draw[->,very thick,blue] (P) -- ++(0.15,0.55) node[left] {$V_P$};
-  \draw[->,very thick,green!50!black] (Q) -- ++(0.55,0.15) node[right] {$V_Q^{(1)}$};
-  \draw[->,very thick,red!70!black] (Q) -- ++(-0.15,0.55) node[above] {$V_Q^{(2)}$};
+  \draw[->,very thick,blue] (P) -- ++(0.55,0.15);
+  \node[blue] at ($(P)+(0.45,0.38)$) {$V_P$};
+  \draw[->,very thick,green!50!black] (Q) -- ++(0.6,0.15) node[right] {$V_Q^{(1)}$};
+  \draw[->,very thick,red!70!black] (Q) -- ++(0.15,0.6) node[above] {$V_Q^{(2)}$};
   \node at (0,-2.0) {curved 2D space};
 \end{tikzpicture}
 \caption{Left: in flat space a vector $\vec v$ can be translated parallel to itself to the point of $\vec u$ and compared with it, independently of the path. Right: on a sphere, transporting the tangent vector $V_P$ ``parallel to itself'' from $P$ to $Q$ along path (1) (green) or along path (2) (red, first along the equator to $S$, then up a meridian) gives different vectors at $Q$: the final orientation depends on the path.}

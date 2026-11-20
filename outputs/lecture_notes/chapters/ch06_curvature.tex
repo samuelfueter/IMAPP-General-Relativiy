@@ -39,7 +39,7 @@ A cylinder looks curved when seen from the three-dimensional space in which it i
     \draw (6.0,1) circle (0.8);
     \draw[red!70!black,thick] (5.55,1.45) -- (5.75,1.15) (6.4,1.5) -- (6.2,1.2) (5.7,0.45) -- (5.85,0.75);
     \node at (6.0,-0.6) {sphere};
-    \node[red!70!black,align=left,font=\small] at (7.9,1) {impossible without\\adding defects};
+    \node[red!70!black,align=left,font=\small,right] at (7.0,1) {impossible without\\adding defects};
   \end{scope}
 \end{tikzpicture}
 \caption{A flat sheet can be rolled into a cylinder without any distortion: the cylinder is intrinsically flat (a closed ``square'' path $P\to S\to R\to\dots\to P$ made of straight segments and right angles still closes). A sheet cannot be wrapped on a sphere without creasing or tearing it: the sphere is intrinsically curved.}
@@ -75,7 +75,11 @@ Consider a small coordinate ``rectangle'' on the manifold, delimited by coordina
   \draw[very thick,green!50!black] ($(P)!0.5!(S)$) -- (S);
   \draw[->,very thick,green!50!black] (S) -- ($(S)!0.55!(R)$);
   \draw[very thick,green!50!black] ($(S)!0.5!(R)$) -- (R);
-  \foreach \p/\pos in {P/below left,Q/below right,R/above right,S/above left} \fill (\p) circle (1.5pt) node[\pos] {$\p$};
+  \foreach \p in {P,Q,R,S} \fill (\p) circle (1.5pt);
+  \node[fill=white,inner sep=1pt] at ($(P)+(-0.32,-0.28)$) {$P$};
+  \node[fill=white,inner sep=1pt] at ($(Q)+(0.32,-0.28)$) {$Q$};
+  \node[fill=white,inner sep=1pt] at ($(R)+(0.3,0.28)$) {$R$};
+  \node[fill=white,inner sep=1pt] at ($(S)+(-0.3,0.28)$) {$S$};
   \node[blue!70!black] at (2.0,0.6) {$C$};
   \node[green!50!black] at (0.9,1.2) {$C'$};
   \draw[->] (-1.2,-0.8) -- (-0.5,-0.8) node[right] {$x^1$};
@@ -252,7 +256,8 @@ Consider a one-parameter family of geodesics $\{\gamma_s\}$: the parameter $s$ l
     \draw[thick,gray!70!black] (\s,0) .. controls (\s+0.6,1.5) and (\s+0.3*\s+0.5,3) .. (\s+0.45*\s+1.2,4.2);}
   \node[above] at (3.15,4.2) {$\gamma_s$};
   \draw[->,very thick,blue!70!black] (0.93,1.6) -- (1.15,2.4) node[left] {$T$};
-  \draw[->,very thick,red!70!black] (0.93,1.6) -- (1.68,1.6) node[below right] {$X$};
+  \draw[->,very thick,red!70!black] (0.93,1.6) -- (1.68,1.6);
+  \node[red!70!black,fill=white,inner sep=1pt] at (1.95,1.6) {$X$};
   \draw[->,thick] (-0.8,0.5) -- (-0.6,2.0) node[above] {$\lambda$};
   \draw[->,thick] (0.2,-0.5) -- (2.3,-0.5) node[right] {$s$};
 \end{tikzpicture}

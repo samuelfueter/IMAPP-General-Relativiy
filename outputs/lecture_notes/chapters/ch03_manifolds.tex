@@ -43,23 +43,31 @@ The Hausdorff property avoids pathologies like the ``line with two origins'' (tw
 \centering
 \begin{tikzpicture}[scale=1.0,>=Stealth]
   \draw[very thick] (0,0) circle (1.5);
-  % top chart
-  \draw[line width=3pt,yellow!80!orange,opacity=0.7] (20:1.75) arc (20:160:1.75);
-  \draw[thick,yellow!70!orange] (-1.8,2.6) -- (1.8,2.6); \node[above] at (0,2.6) {$\phi_1(U_1)$};
-  \draw[->,yellow!60!orange] (0,1.8) -- (0,2.5);
-  % bottom
-  \draw[line width=3pt,red!70,opacity=0.6] (200:1.75) arc (200:340:1.75);
-  \draw[thick,red!70] (-1.8,-2.6) -- (1.8,-2.6); \node[below] at (0,-2.6) {$\phi_3(U_3)$};
-  \draw[->,red!70] (0,-1.8) -- (0,-2.5);
-  % left
-  \draw[line width=3pt,blue!60,opacity=0.6] (110:1.95) arc (110:250:1.95);
-  \draw[thick,blue!60] (-2.9,-1.8) -- (-2.9,1.8); \node[left] at (-2.9,0) {$\phi_4(U_4)$};
-  \draw[->,blue!60] (-2.0,0) -- (-2.8,0);
-  % right
-  \draw[line width=3pt,green!50!black,opacity=0.6] (-70:1.95) arc (-70:70:1.95);
-  \draw[thick,green!50!black] (2.9,-1.8) -- (2.9,1.8); \node[right] at (2.9,0) {$\phi_2(U_2)$};
-  \draw[->,green!50!black] (2.0,0) -- (2.8,0);
   \node at (0,0) {$S^1$};
+  % U_1 top (yellow), radius 1.7
+  \draw[line width=2.5pt,yellow!80!orange] (15:1.72) arc (15:165:1.72);
+  \draw[thick,yellow!70!orange] (-1.8,3.0) -- (1.8,3.0);
+  \node[above] at (0,3.0) {$\phi_1(U_1)=(-1,1)$};
+  \draw[->,yellow!60!orange] (0,1.85) -- (0,2.9);
+  \node[yellow!50!orange!80!black,font=\small] at (0.7,2.1) {$U_1$};
+  % U_3 bottom (red), radius 1.7
+  \draw[line width=2.5pt,red!70] (195:1.72) arc (195:345:1.72);
+  \draw[thick,red!70] (-1.8,-3.0) -- (1.8,-3.0);
+  \node[below] at (0,-3.0) {$\phi_3(U_3)$};
+  \draw[->,red!70] (0,-1.85) -- (0,-2.9);
+  \node[red!70!black,font=\small] at (0.7,-2.1) {$U_3$};
+  % U_2 right (green), radius 1.95
+  \draw[line width=2.5pt,green!50!black] (-75:1.98) arc (-75:75:1.98);
+  \draw[thick,green!50!black] (3.2,-1.8) -- (3.2,1.8);
+  \node[right] at (3.2,0) {$\phi_2(U_2)$};
+  \draw[->,green!50!black] (2.1,0) -- (3.1,0);
+  \node[green!40!black,font=\small] at (2.45,0.95) {$U_2$};
+  % U_4 left (blue), radius 1.95
+  \draw[line width=2.5pt,blue!60] (105:1.98) arc (105:255:1.98);
+  \draw[thick,blue!60] (-3.2,-1.8) -- (-3.2,1.8);
+  \node[left] at (-3.2,0) {$\phi_4(U_4)$};
+  \draw[->,blue!60] (-2.1,0) -- (-3.1,0);
+  \node[blue!60!black,font=\small] at (-2.45,0.95) {$U_4$};
 \end{tikzpicture}
 \caption{An atlas for the circle $S^1$: four charts, each one mapping an open arc $U_i$ (coloured) onto an open interval of $\R$. No single chart can cover the whole circle (a homeomorphism from $S^1$ to an open interval does not exist), but together the four charts cover it; on the overlaps the transition maps are smooth.}
 \label{fig:atlas}

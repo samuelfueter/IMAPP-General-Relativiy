@@ -339,14 +339,14 @@ Consider two masses $m_1$, $m_2$ in a circular orbit around their centre of mass
   \draw[->] (0,-1.8) -- (0,2.0) node[above] {$y$};
   \draw[dashed,gray] (0,0) circle (0.7);
   \draw[dashed,gray] (0,0) circle (1.4);
-  \fill[blue!70!black] (40:0.7) circle (4pt) node[above right] {$m_1$};
+  \fill[blue!70!black] (40:0.7) circle (4pt); \node[blue!70!black] at (0.82,0.22) {$m_1$};
   \fill[red!70!black] (220:1.4) circle (3pt) node[below left] {$m_2$};
   \draw[thick] (220:1.4) -- (40:0.7);
-  \node[font=\small] at (0.55,0.15) {$r_1$};
-  \node[font=\small] at (-0.75,-0.35) {$r_2$};
+  \node[font=\small] at (0.17,0.36) {$r_1$};
+  \node[font=\small] at (-0.42,-0.62) {$r_2$};
   \draw[->,thick] (40:0.7) -- ++(130:0.6);
   \draw[->,thick] (220:1.4) -- ++(310:0.6);
-  \draw[->] (0.95,0) arc (0:40:0.95); \node[font=\small] at (1.15,0.35) {$\Omega t$};
+  \draw[->] (1.15,0) arc (0:40:1.15); \node[font=\small] at (1.5,0.42) {$\Omega t$};
   \node[align=left,font=\small] at (3.6,1.3) {$M=m_1+m_2$\\$R=r_1+r_2$\\ observer on the $z$ axis};
 \end{tikzpicture}
 \caption{A binary system in a circular orbit in the $xy$ plane, around its centre of mass at the origin. The observer is located far away on the $z$ axis.}
