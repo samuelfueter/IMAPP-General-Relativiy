@@ -1,0 +1,5 @@
+This is a recap of the main material that was covered in class (in more or less chronological order), for those who could not follow all or part of the lectures  
+1) Introductory lectures  
+- General introduction and the Equivalence Principle - Recap of special relativity, from the point of view of vectors, tensors etc  
+2) Necessary formalism and Einstein equations - Very brief discussion on manifolds - Scalars, curves, vectors and tensors - The metric tensor - Parallel transport and connection (including covariant derivative and Christoffel symbols) - Geodesic equations (including Lagrangians) - Curvature: the Riemann, Ricci and Einstein tensors - The energy-momentum tensor (components, conservation law, special cases) - Newtonian limit of the Geodesic equations - The Einstein Field Equations  
+3) Applications - The Schwarzschild metric - Black holes - Cosmological principle and construction of the FLRW metric for cosmology - Gravitational waves (linearised gravity, Harmonic and TT gauge, gravitational waves, effects on test particles, quadrupole formula)  
