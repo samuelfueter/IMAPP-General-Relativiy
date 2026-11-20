@@ -1,0 +1,50 @@
+\documentclass[11pt,letterpaper]{report}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[english]{babel}
+\usepackage[letterpaper,margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{bm}
+\usepackage{enumitem}
+\usepackage{xcolor}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,calc,decorations.pathmorphing,decorations.markings,patterns,3d,intersections}
+\usepackage{titlesec}
+\usepackage[colorlinks=true,linkcolor=blue!50!black,urlcolor=blue!50!black]{hyperref}
+\allowdisplaybreaks
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.5em}
+
+% Chapters: "Chapter n. Title" in the style of the original "Tema n."
+\titleformat{\chapter}[hang]{\Large\bfseries}{Chapter \thechapter.}{0.5em}{}
+\titlespacing*{\chapter}{0pt}{0pt}{1.5em}
+% Sections: plain "n.m Title." as in the original
+\titleformat{\section}[hang]{\normalfont\large}{\thesection}{0.5em}{}
+\titleformat{\subsection}[hang]{\normalfont\itshape}{\thesubsection}{0.5em}{}
+% Equations numbered (1), (2), ... restarting in every chapter, as in the original
+\counterwithin*{equation}{chapter}
+\renewcommand{\theequation}{\arabic{equation}}
+
+% Bullet style of the original notes (small black squares)
+\setlist[itemize,1]{label=\raisebox{0.15ex}{\tiny$\blacksquare$},leftmargin=1.2em,itemsep=0.5em}
+\newenvironment{points}{\begin{itemize}}{\end{itemize}}
+
+\newcommand{\dd}{\mathrm{d}}
+\newcommand{\R}{\mathbb{R}}
+
+\title{\Huge\bfseries Gravitation\\[0.5em]\Large Lecture Notes (Chapters 1--6)\\[0.3em]\large English translation}
+\date{Academic year 2025/2026}
+\author{}
+
+\begin{document}
+\maketitle
+\tableofcontents
+\input{chapters/syllabus}
+\input{chapters/tema1}
+\input{chapters/tema2}
+\input{chapters/tema3}
+\input{chapters/tema4}
+\input{chapters/tema5}
+\input{chapters/tema6}
+\end{document}

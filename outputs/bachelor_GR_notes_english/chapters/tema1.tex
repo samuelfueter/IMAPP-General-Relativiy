@@ -1,0 +1,249 @@
+\chapter{Newtonian gravitation}
+
+\section{Newton's law of universal gravitation.}
+
+\begin{points}
+\item Newton's law of universal gravitation first appeared in the book ``Philosophiae Naturalis Principia Mathematica'' in 1687. It states that two masses exert on each other an attractive force along the straight line joining them, directly proportional to their masses and inversely proportional to the square of the distance:
+\begin{gather*}
+  F_g(1\to2)=-G\frac{m_1m_2}{r^2}e_r,\qquad e_r\ \text{unit vector pointing from particle 1 to particle 2},\\
+  G\ \text{Newton's gravitational constant},\qquad G=6.674\cdot10^{-11}\,\frac{N\,m^2}{kg^2}.
+\end{gather*}
+
+\item When Newton presented it at the Royal Society of London in 1686, Robert Hooke accused him of having plagiarised his own ideas about the inverse-square dependence on distance. In fact, in his ``Principia'' Newton explicitly mentioned that the idea that the force between the Sun and the planets might be inversely proportional to their mutual distance had been proposed by Hooke, as well as by Sir Christopher Wren and by Edmund Halley, with whom he had corresponded on the subject (for instance, in 1679 Hooke wrote to Newton communicating his idea of the inverse-square dependence on distance). He also mentioned Ismaël Bullialdus, a French astronomer and mathematician of the time who had already proposed the inverse-square law of proportionality in 1645. However, Bullialdus did not accept Kepler's second and third laws and, in fact, in his theory the force exerted by the Sun on the planets was attractive at aphelion and repulsive at perihelion.
+
+\item The fundamental difference between Newton's proposal and all the previous ones is that Newton justified his proposal by studying its consequences. For example, he derived Kepler's laws and proved that for spherical bodies the gravitational field was independent of the size of the object, thereby justifying that the law could be applied near the surface of the Earth, in a regime in which the Earth obviously cannot be treated as a point particle.
+
+\item A fundamental component of Newton's law of gravitation is that it is universal, i.e.\ it applies to all bodies, both on Earth and in the heavens.
+
+\item According to the famous story of Newton and the apple, which has reached us through the writings of John Conduitt (who was Newton's assistant at the Royal Mint and the husband of his niece), in 1666 Newton came up with the idea that the action of gravity, which acted on everyday objects (for instance making apples fall from a tree), might also act at distances much greater than was normally thought, so that it might act on the Moon and be the cause of it remaining in orbit around the Earth.
+
+\item Note that the date in this account, 1666, is much earlier than the publication date of the Principia. The fact is that the idea that gravitation could be a universal phenomenon was already mature enough at that time for more than one scientist to propose it. For example, Hooke himself had published in 1674 a work that aimed to explain a ``System of the World'' based on three hypotheses: 1) all celestial bodies undergo an attraction towards their own centres, 2) they also attract all the other celestial bodies that lie within their sphere of attraction, and 3) any body set in simple and direct motion will keep moving forward in a straight line until it is deflected by other ``effective powers''. Hooke's version is not completely universal, but it already comes very close.
+
+\item The universal gravitational constant $G$ was measured for the first time by Sir Henry Cavendish in a work published by the Royal Society of London in 1798, in which he described his experiment based on a torsion balance. It is worth noting that Cavendish's primary goal was not to measure $G$ (he does not even mention it in his article) but to obtain the mean density of the Earth (Cavendish concludes that the Earth is 5.48 times denser than water). Measuring the density of the Earth is equivalent to knowing its mass. Combining this datum with the value of the intensity of the gravitational force at the surface of the Earth (approximately $g=9.81\,\mathrm{ms^{-2}}$), one obtains the value of $G$ from the expression $g=\frac{GM}{R^2}$, where $R$ is the radius of the Earth.
+
+\item All the gravitational physics developed in the eighteenth and nineteenth centuries (and a good part of the research carried out in the twentieth and twenty-first centuries) is based on the law of universal gravitation combined with the superposition principle, which states that the total gravitational force on a body is the sum of the individual (gravitational) forces exerted by each of the objects that make up the system.
+
+\item These two laws lead immediately to Poisson's law for the gravitational potential.
+
+\item The force of universal gravitation is conservative, $F=-\nabla U=-m\nabla\Phi$, with the gravitational potential (per unit mass) $\Phi$ given by
+\[
+  \Phi=-G\frac{m_1}{r}
+\]
+as follows directly from $\nabla\frac1r=-\frac{1}{r^2}e_r$.
+
+\item The gravitational potential generated by a continuous, compactly supported mass distribution described by a mass density $\mu(x)$ is
+\[
+  \Phi(x)=-\int_VG\frac{\mu(y)}{|x-y|}dy
+\]
+where $V$ is the volume in which the mass density does not vanish. If we compute the Laplacian of $\Phi$ we obtain
+\begin{equation}
+  \Delta\Phi=4\pi G\mu .
+\end{equation}
+This equation can be derived using the fact that, in the sense of distributions, $\Delta_x|x-y|^{-1}=-4\pi\delta(x-y)$, where $\delta(a)$ is the Dirac distribution centred at the point $a$.
+
+\item This equation is called \emph{Poisson's equation} and, when supplemented with suitable boundary data, it provides the gravitational potential generated by a mass distribution $\mu$. For example, when the distribution has compact support, the boundary condition is $\Phi(|x|)\to0$ as $|x|\to\infty$.
+
+\item When one considers a number $n$ of spatial dimensions different from 3, the fundamental equation of the gravitational field is still Poisson's equation.
+
+\item We must decide whether to keep the number $4\pi$ appearing in Poisson's equation or to replace it by another quantity. The change would only amount to a redefinition of $G$, so there is no loss of generality in keeping the form (1) (this choice seems to be the most common one in the literature, but it is not the only one).
+
+\item We can define the Green's function $G(x;y)$ as the general solution of the distributional equation
+\[
+  \Delta_xG(x;y)=-\delta(x-y)
+\]
+that satisfies the following condition: in dimension $n=2$ it must depend only on $x-y$, and in dimension $\geq3$ it must satisfy $G(x;y)\to0$ as $|x|\to\infty$ with $y$ fixed.
+
+\item One can show that the Green's function takes the form
+\[
+  G(x;y)=\left\{\begin{array}{ll}-\frac{1}{2\pi}\log(|x-y|)+C, & n=2,\\[0.5ex] \frac{1}{(n-2)\omega_{n-1}}\frac{1}{|x-y|^{n-2}} & n\geq3,\end{array}\right.
+\]
+where $\omega_{n-1}$ is the area of the sphere of unit radius in $\R^n$ and $C$ is an arbitrary constant. Since the potential is always defined up to an arbitrary constant, we can choose $C=0$ without loss of generality.
+
+\item We conclude that the gravitational field of a point mass located at the point $y$ in a Euclidean space of dimension $n\geq2$ is
+\begin{align*}
+  \Phi(x)&=-4\pi G\frac{m}{(n-2)\omega_{n-1}}\frac{1}{|x-y|^{n-2}}, && n\geq3,\\
+  \Phi(x)&=2Gm\log(|x-y|), && n=2.
+\end{align*}
+Note that in dimension 2 the gravitational potential tends to infinity as the distance between the particles tends to infinity. The force, however, decreases as the inverse of the distance and therefore vanishes at infinity.
+\end{points}
+
+\section{Successes and limitations of the theory.}
+
+\begin{points}
+\item Let us place ourselves at the beginning of the twentieth century. While electromagnetic theory had advanced enormously during the nineteenth century, with the works of Ampère, Ohm, Biot and especially of Faraday and Maxwell, culminating in Maxwell's equations, the theory of gravitation had remained unchanged in its basic aspects since its formulation by Newton.
+
+\item The fundamental idea of Newtonian gravitation is that massive particles interact through an action at a distance between them, i.e.\ masses attract each other instantaneously and without the need for any mediation between them. Of course, one can reformulate Newtonian gravitation and introduce a gravitational field $\Phi(x,t)$, but this field changes instantaneously when we modify the configuration of the masses.
+
+\item In this sense one cannot say that this field has an independent existence, as can be asserted in the case of the electromagnetic field, since the latter can propagate in the form of radiation and be measured.
+
+\item For a physicist of the early twentieth century this instantaneous action at a distance could seem strange compared with the propagation at finite speed of electromagnetic waves, but it was not necessarily in contradiction with his physical conceptions, since the framework in which he worked was that of Galilean relativity and, in particular, of the existence of an absolute, universal and observer-independent time.
+
+\item This perception changed radically in 1905 with the development of Einstein's special relativity. This theory predicts, among other things, that time is not absolute but depends on the observer. In other words, distinct events that are simultaneous for an observer in an inertial frame need not be so for another observer moving with constant velocity with respect to the former.
+
+\item Consequently, the concept of instantaneous action at a distance is incompatible with special relativity, since the interaction could only be instantaneous for one inertial observer. The latter would automatically become a privileged observer, which would contradict the principle of relativity.
+
+\item Although the theory of special relativity needed some time to be accepted, already in 1906 Henri Poincaré pointed out that the Newtonian theory of gravitation is incompatible with special relativity. It was clear (especially from our modern perspective, in which special relativity is a physical theory fully confirmed from an experimental point of view) that it was necessary to modify the Newtonian theory of gravitation.
+
+\item However, this was a purely theoretical need for consistency. On the other hand, in the last instance physics must always be based on observations. It is therefore legitimate to ask whether, at the end of the nineteenth or the beginning of the twentieth century, there was any experiment or observation of a gravitational nature that could not be satisfactorily explained by Newtonian gravitation.
+
+\item It is worth stressing that the planet Neptune was discovered in 1846 by the astronomer Johann G.~Galle, of the Berlin Observatory, on the basis of some calculations carried out by the French mathematician Urbain Le Verrier, who told him in which part of the sky he should look.
+
+\item The basis of this discovery lies in the fact that the planet Uranus did not follow the trajectory predicted by Newtonian gravitation when all the corrections due to the effect of the planets known at that time were taken into account. In 1842 the Göttingen Academy of Sciences offered a prize to whoever solved the problem of Uranus.
+
+\item Le Verrier assumed that the discrepancy in the motion of Uranus was due to the existence of a more distant planet, of undetermined mass and position. Through a perturbative calculation of the planetary orbits and its comparison with the actual data on the motion of Uranus, Le Verrier was able to predict the position of Neptune and communicate it to Galle.
+
+\item It is curious to note that the solution to this problem had been found earlier, by the same method, by a recent graduate of the University of Cambridge, John C.~Adams, who in 1843 found the solution and asked the Astronomer Royal George B.~Airy to observe that position in the sky. Unfortunately, Airy paid no attention whatsoever. It was not until 1848 that Adams was given the credit he deserved; in that same year he was awarded the same prize that had been awarded to Le Verrier the previous year.
+
+\item We see, therefore, that Newtonian theory was precise enough to predict the motion of Uranus with such accuracy that the discrepancy with the observations could be resolved with the discovery of another planet.
+
+\item In fact, all the astronomical predictions based on Newtonian gravitation agreed perfectly with the observations, with a single exception: the precession of the perihelion of Mercury.
+
+\item Recall that, to solve the problem of two isolated bodies in Newtonian mechanics, one introduces a variable $\vec r:=\vec r_2-\vec r_1$ for the position of the second body relative to the first, and a variable $\vec R_{CM}:=\frac1M(m_1\vec r_1+m_2\vec r_2)$, which gives the position of the centre of mass ($m_1$ and $m_2$ are the respective masses of particles 1 and 2 and $M:=m_1+m_2$ is the total mass of the system). If the interaction force between the two particles is $\vec f(\vec r)$ (more precisely, the force exerted by particle 1 on particle 2 is $\vec f$, and it depends only on $\vec r_2-\vec r_1$; we also assume that Newton's third law holds in the system), Newton's equations reduce to
+\begin{gather*}
+  M\frac{d^2\vec R_{CM}}{dt^2}=0,\\
+  \mu\frac{d^2\vec r}{dt^2}=\vec f(\vec r)
+\end{gather*}
+where $\mu:=\frac{m_1m_2}{m_1+m_2}$ is the reduced mass of the system. If the interaction between the particles is gravitational we have
+\[
+  \vec f=-G\frac{m_1m_2}{r^2}e_r=-G\frac{\mu M}{r^2}e_r
+\]
+so that the relative position between the two masses satisfies the equation
+\[
+  \frac{d^2\vec r}{dt^2}=-G\frac{M}{r^2}e_r .
+\]
+Consequently, the motion of particle 2 relative to 1 is planar and, in polar coordinates $\{r,\phi\}$ centred at the position of 1, it follows the trajectory
+\[
+  \frac pr=1+\epsilon\cos(\phi-\phi_0)
+\]
+where $p$, $\phi_0$ and $\epsilon$ are constants. $p$ has dimensions of length (the so-called ``semi-latus rectum'') and $\epsilon\geq0$ is a dimensionless parameter called the eccentricity. When $\epsilon=1$ the orbit is a parabola, when $\epsilon>1$ the orbit is a hyperbola and when $0\leq\epsilon<1$ the orbit is an ellipse (which degenerates into a circle when $\epsilon=0$).
+
+\item In the case $\epsilon<1$, the ellipse has its major axis along the line $\phi=\phi_0$, and the values of the semi-major and semi-minor axes are, respectively,
+\[
+  a=\frac{p}{1-\epsilon^2},\qquad b=\frac{p}{\sqrt{1-\epsilon^2}}
+\]
+and with principal axis along the line $\phi=\phi_0$.
+
+\item In the inertial frame in which the centre of mass is at rest and located at the origin, the motion of each particle with respect to the origin is also an ellipse, with the same eccentricity $\epsilon$ and semi-major axis
+\begin{align*}
+  a_1&=\frac{m_2\,a}{m_1+m_2}, &&\text{particle 1},\\
+  a_2&=\frac{m_1\,a}{m_1+m_2}, &&\text{particle 2}.
+\end{align*}
+
+\item The Solar System is made up of many bodies. However, for a given planet the main contribution to its motion is that of the Sun, and the effect of the other celestial bodies can be studied by means of perturbation theory.
+
+\item The main effect of the perturbations is that the ellipse essentially keeps its shape but the orbit rotates around the Sun, in the same direction as the revolution of the planet or in the opposite direction, depending on the conditions.
+
+\item In 1855 Urbain Le Verrier computed the theoretical precession of Mercury due to the effects of the other planets of the Solar System (essentially Venus, Earth, Jupiter and Saturn, which are the ones with the largest influence in this case).
+
+\item He found that it should be 527 arcsec/century in the direction of motion. Using observations covering a period of a century and a half, Le Verrier also determined that Mercury precessed by 565 arcsec/century, so that there was a discrepancy of 38 arcsec/century.
+
+\item As a possible explanation, Le Verrier proposed either the existence of a belt of planetoids between Mercury and the Sun, or the existence of a planet inside the orbit of Mercury.
+
+\item Shortly after the publication of these results, in 1859, an amateur astronomer named Lescarbault announced that he had already observed a small planet in transit across the Sun, which was named Vulcan. Le Verrier considered this observation satisfactory. The Royal Society of London hailed the discovery as ``the second triumphant conclusion of the theoretical investigations of Monsieur Le Verrier''.
+
+\item However, observing planets so close to the Sun is very difficult, so there was controversy about the actual existence of Vulcan. There were several announcements of other observations of Vulcan, although some of them proved to be false or mistaken. In 1876 Le Verrier predicted transits of Vulcan that could be observed. Le Verrier died in 1877, shortly before his predictions of the transits were refuted by the observations.
+
+\item The theoretical calculations of the anomalous precession of the perihelion were revised by the American astronomer Simon Newcomb. Using improved values for the masses of the four inner planets and of Jupiter, in 1882 he obtained a theoretical precession of 531.5 arcsec/century. He also improved the observed value to 575.1 arcsec/century by taking into account six additional transits of Mercury that had taken place between 1848 and 1881. The discrepancy between theory and observation therefore became $43.4\pm2.1$ arcsec/century.
+
+\item Various hypotheses were put forward to explain the anomalous advance of the perihelion of Mercury, such as, for example, a modification of the inverse-square law of Newtonian gravitation, but none of the explanations turned out to be sufficiently satisfactory.
+
+\item Despite this unexplained observation, there was no widespread impression that the theory of Newtonian gravitation was in crisis. On the contrary, there was little doubt that in time a satisfactory explanation would be found within the theory.
+
+\item In fact, Einstein's motivation for modifying the theory of gravity had nothing to do with trying to explain this anomalous precession; it arose instead from the theoretical need to make the theory of gravity compatible with special relativity.
+
+\item Einstein began to work on this problem shortly after 1905, when he proposed the theory of special relativity. After a truly arduous and labyrinthine task, the process culminated in 1915 with the formulation of the theory of general relativity.
+
+\item When it was applied to planetary motion in 1915 by Einstein himself, exactly the value of 43 arcsec/century was obtained, and it therefore provided a precise explanation of the additional precession of Mercury. This experimental agreement was a great boost for the new theory of gravitation.
+\end{points}
+
+\section{Tidal forces}
+
+\begin{points}
+\item The tides that occur on Earth are due to the gravitational attraction of the Moon and, to a lesser extent, of the Sun.
+
+\item However, they are not effects directly due to the gravitational force. The reason is that the Earth is an accelerated reference frame, so that, in addition to the forces due to interactions, inertial forces act.
+
+\item If we ignore the rotation of the Earth, a reference frame attached to the Earth accelerates with respect to an inertial one because of the effect of the gravitational field of the other celestial objects.
+
+\item To understand the effective force with which gravity acts to cause the tides, we consider a simplified system formed by two interacting particles.
+
+\item Let $\vec R_{CM}$ be the position vector of the centre of mass with respect to an inertial reference frame and $\vec r$ the position vector of particle 2 relative to particle 1. Let $m_1$ and $m_2$ be the respective masses of the particles, $M$ the total mass $M=m_1+m_2$ and $\mu=\frac{m_1m_2}{M}$ the reduced mass.
+
+\item The position vector of each particle in the inertial reference frame is
+\[
+  \vec r_1=\vec R_{CM}-\frac{m_2}{M}\vec r,\qquad\qquad\vec r_2=\vec R_{CM}+\frac{m_1}{M}\vec r .
+\]
+
+\item Suppose that the system is immersed in a gravitational field $\Phi(\vec x,t)$.
+
+\item If we call $\vec f$ the force exerted by particle 1 on particle 2, we arrive at the following Newton's laws
+\begin{gather*}
+  m_1\ddot{\vec r}_1=-\vec f-m_1\left.\nabla\Phi\right|_{r_1}\\
+  m_2\ddot{\vec r}_2=\vec f-m_2\left.\nabla\Phi\right|_{r_2}
+\end{gather*}
+
+\item We can combine these equations to obtain differential equations for $\vec R_{CM}$ and $\vec r$. The result is
+\begin{align}
+  M\ddot{\vec R}_{CM}&=-\left(m_1\nabla\Phi|_{r_1}+m_2\nabla\Phi|_{r_2}\right),\\
+  \mu\ddot r&=\vec f-\mu\left(\nabla\Phi|_{r_2}-\nabla\Phi|_{r_1}\right).
+\end{align}
+
+\item If the gravitational field is completely homogeneous, the gradient of the potential is independent of the point, and the relative position vector does not feel any gravitational effect.
+
+\item We therefore see that tidal effects (i.e.\ the effects on the relative position in a system of particles immersed in an external gravitational field) depend on the variations of the gradient of the external gravitational potential (or, equivalently, on the inhomogeneities of the external gravitational field).
+
+\item When the system is small enough with respect to the characteristic scale of variation of the gravitational field, we can perform a Taylor expansion. We obtain
+\[
+  (\partial_i\Phi)|_{\vec r_1}=(\partial_i\Phi)|_{\vec R_{CM}-\frac{m_2}{M}\vec r}=(\partial_i\Phi)|_{\vec R_{CM}}-\frac{m_2}{M}\partial_i\partial_j\Phi|_{\vec R_{CM}}r^j+O(r^2)
+\]
+and similarly
+\[
+  (\partial_i\Phi)|_{\vec r_2}=(\partial_i\Phi)|_{\vec R_{CM}+\frac{m_1}{M}\vec r}=(\partial_i\Phi)|_{\vec R_{CM}}+\frac{m_1}{M}\partial_i\partial_j\Phi|_{\vec R_{CM}}r^j+O(r^2)
+\]
+
+\item The equations take the form
+\begin{gather*}
+  M\ddot{\vec R}{}^i_{CM}=-M(\partial_i\Phi)|_{\vec R_{CM}}+O(r^2)\\
+  \mu\ddot{\vec r}{}^i=f^i-\mu(\partial_i\partial_j\Phi)|_{\vec R_{CM}}r^j+O(r^2).
+\end{gather*}
+
+\item In the approximation in which we can neglect the terms in $r^2$, the centre of mass moves in the same way as a particle of total mass $M$ located at the position of the centre of mass and under the effects of the external gravitational field.
+
+\item The relative acceleration of the particles is due, on the one hand, to the internal forces between them (including their mutual gravitational attraction) and, on the other, to a term called the \textbf{tidal force}, whose expression is
+\[
+  F^i_m=-\mu(\partial_i\partial_j\Phi)|_{\vec R_{CM}}r^j+O(r^2)
+\]
+
+\item The tidal force depends on the second derivatives of the gravitational field.
+
+\item In the case in which the gravitational potential is due to a point particle of total mass $M_e$, the potential takes the form
+\[
+  \Phi(\vec R)=-\frac{GM_e}{R}
+\]
+so that the gradient is
+\[
+  \partial_i\Phi=\frac{GM_e}{R^3}R^i,
+\]
+and for the second derivative we obtain
+\[
+  \partial_i\partial_j\Phi=\frac{GM_e}{R^3}\left(\delta_{ij}-\frac{3R_iR_j}{R^2}\right)
+\]
+
+\item Note that the matrix $\partial_i\partial_j\Phi$ is traceless. This result is completely general in the region outside the sources that generate the field, since in that region the Laplace equation $\Delta\Phi=0$ is satisfied, which states precisely that the trace of the matrix of second derivatives vanishes.
+
+\item If we place the centre of mass of the system on the $x$ axis at a distance $R$ from the mass $M_e$ (so that $R_i=(R,0,0)$), the matrix $\partial_i\partial_j\Phi|_{R_{CM}}$ takes the form
+\[
+  (\partial_i\partial_j\Phi)|_{R_{CM}}=\frac{GM_e}{R^3_{CM}}\left(\begin{array}{ccc}-2&0&0\\0&1&0\\0&0&1\end{array}\right).
+\]
+
+\item The equation of motion for the relative position (in the case $\vec f=0$) is
+\begin{align*}
+  \ddot r_x&=\frac{2GM_e}{R^3}r_x\\
+  \ddot r_y&=-\frac{GM_e}{R^3}r_y\\
+  \ddot r_z&=-\frac{GM_e}{R^3}r_z.
+\end{align*}
+
+\item We see that the tidal force can be attractive or repulsive. In the directions transverse to the direction in which the source lies, the tidal force is attractive, and therefore the particles approach each other, or low tide in the case of the sea. In the direction towards the source the force is repulsive, and therefore the particles move apart, or high tide in the case of the sea. This separation occurs regardless of whether we are closer to or farther from the source (i.e.\ both when $r_x>0$ and when $r_x<0$). The intuitive reason is that when particle 2 is closer to the source than particle 1, it feels a stronger gravitational attraction, so that it tends to move away from particle 1. When particle 1 is closer, it is now the one that feels the stronger gravitational attraction, so that again it tends to move away from particle 2. This is the reason why high tides occur both on the side of the Earth facing the Moon and on the opposite side, and why the average time between high tide and low tide is 6 hours.
+
+\item Tidal forces decrease as the cube of the distance to the source of the field. This is the reason why the tidal effect on the Earth caused by the Moon is stronger (approximately twice as strong) than that caused by the Sun, despite the fact that the gravitational field of the Sun at the Earth is more than 150 times stronger than that caused by the Moon.
+\end{points}
