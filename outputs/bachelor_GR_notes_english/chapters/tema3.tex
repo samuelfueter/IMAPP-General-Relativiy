@@ -1,1 +1,1667 @@
+\chapter{Introduction to differential geometry}
+
+\section{Differentiable manifold.}
+
+\begin{points}
+\item The basic object of differential geometry is the \textbf{differentiable manifold}.
+
+\item Intuitively, a differentiable manifold is a space of points that, locally (i.e.\ in some neighbourhood of each of its points), looks the same as a domain of $\R^n$.
+
+\item The idea is that we can use local coordinates to describe sufficiently small regions of the manifold. This allows us to use all the tools of differential calculus in $\R^n$ without having to restrict ourselves to the space $\R^n$.
+
+\item In fact, from a global point of view a differentiable manifold is, in general, completely different from $\R^n$.
+
+\item Each of the coordinate systems that we can use to coordinatise the neighbourhood of some point is called a \textbf{local chart}. The set of all the local charts is called an \textbf{atlas}.
+
+\item A fundamental property of differentiable manifolds is that all local charts are equally valid for drawing conclusions. This does not mean that in some charts the calculations cannot be simpler, but in principle all of them are allowed. There are no a priori privileged coordinates (as long as the chart belongs to the atlas of the manifold).
+
+\item The simplest example of a differentiable manifold is $\R^n$ itself, in which we can use a single local chart (Cartesian coordinates) to describe all the points. However, we can also use many other charts. For example, spherical coordinates, which cover all the points except a line, cylindrical coordinates (which also cover all the points except a line), or many other coordinate systems. In general, each of them will be able to coordinatise a specific region of $\R^n$.
+
+\item A differentiable manifold that is no longer globally $\R^2$ is the two-dimensional sphere. In this case we need at least two local charts to describe all the points of the manifold. In other words, if we want to represent the points of the terrestrial globe by a pair of numbers, we need to divide the sphere into at least two regions (which must necessarily intersect) and to use coordinates in each of them. For example, if we decide to use longitude and latitude as coordinates, we can cover the whole sphere except the North and South poles, with latitude $\theta=\pm\pi/2$, and the meridian corresponding to the values $\phi=\pi$ and $\phi=-\pi$. On this meridian the longitude coordinate stops varying continuously, so it must be excluded from the domain of the chart.
+
+\item Naturally, there are many other local charts that allow us to describe regions of a two-dimensional sphere, for example the stereographic projection, or the Mercator projection, among many others.
+
+\item The names local chart and atlas come from the historical need (fundamentally to allow navigation) to coordinatise regions of the terrestrial globe in order to describe them by means of (two-dimensional) sheets of paper.
+
+\item More formally, to define a differentiable manifold we need to introduce the concept of topological space.
+
+\item A set $\mathcal T$ is a topological space if a collection of subsets of $\mathcal T$ has been selected, which will be called the open sets of $\mathcal T$, with the following three properties:
+
+(i) Both the empty set $\emptyset$ and the whole set $\mathcal T$ are open.
+
+(ii) If $V_1$ and $V_2$ are open sets of $\mathcal T$, then $V_1\cap V_2$ is also open.
+
+(iii) If $\{V_a\}$ is any collection of open sets of $\mathcal T$, then the union of all of them is also an open set of $\mathcal T$.
+
+\item A topological space $\mathcal T$ is \textbf{connected} if there is no open set $V$ different from $\emptyset$ and from $\mathcal T$ itself such that $\mathcal T\setminus V$ is also open. In other words, we cannot decompose the whole space into two disjoint, non-empty open sets.
+
+\item A differentiable manifold $M$ is a connected topological space together with an atlas (i.e.\ a collection of local charts) satisfying some compatibility properties. We define these concepts below.
+
+\item A \textbf{local chart} is a pair $(U_a,\varphi_a)$, where each $U_a$ is an open set of $M$ and each
+\[
+  \varphi_a:U_a\longrightarrow\varphi_a(U_a)\subset\R^n
+\]
+is a continuous, invertible map with continuous inverse. These conditions imply in particular that the image $\varphi_a(U_a)$ is necessarily an open set of $\R^n$. An atlas is a collection of local charts with the condition that $M=\bigcup_aU_a$. The index $a$ takes values in a set on which we impose no restriction.
+
+\item An atlas defines a structure of differentiable manifold of class $C^m$ on $M$, $m\in\mathbb N$, if for each pair of charts in the atlas, i.e.\ for each $a$ and $b$, the map
+\[
+  \varphi_a\circ\varphi_b^{-1}:\varphi_b(U_a\cap U_b)\longrightarrow\varphi_a(U_a\cap U_b)
+\]
+is of class $C^m$, or, in other words, it can be differentiated $m$ times with continuity.
+
+\item If an atlas is $C^m$ for every $m$, the atlas is called $C^\infty$. In what follows we shall assume for simplicity that all differentiable manifolds are $C^\infty$.
+
+\item The number $n$ is called the \textbf{dimension of the manifold}.
+
+\item The map $\varphi_a\circ\varphi_b^{-1}$ is called the \textbf{transition function} or, more commonly, \textbf{change of coordinates}.
+
+\item If we use $x^\alpha$ ($\alpha=1,\cdots,n$) to denote the Cartesian coordinates of $\R^n$, the map $\varphi_a\circ\varphi_b^{-1}$, which is a function from an open set of $\R^n$ to another open set of $\R^n$, will take the form of $n$ real functions of $n$ real variables, which we will denote by
+\[
+  y^\beta(x^\alpha)\qquad\alpha,\beta=1,\cdots,n
+\]
+or by
+\[
+  x^{\alpha'}(x^\alpha)\qquad\alpha,\alpha'=1,\cdots,n .
+\]
+
+\item In the second notation the coordinates are distinguished by their indices. This notation is especially convenient when carrying out calculations.
+\end{points}
+
+\begin{carroll}[: charts, transition functions and the sphere]
+A chart $\varphi_a$ maps an open set $U_a\subset M$ one-to-one onto an open set of $\R^n$, where ordinary calculus is available. Where two charts overlap, the transition function $\varphi_a\circ\varphi_b^{-1}$ relates the two sets of coordinates of the same points; requiring it to be $C^\infty$ is what makes ``differentiable'' a chart-independent notion.
+\begin{center}
+\begin{tikzpicture}[scale=0.95,>=Stealth]
+  \draw[thick,fill=gray!8] plot[smooth cycle,tension=0.8] coordinates {(0,0.2) (1.5,1.6) (3.5,1.7) (5,0.6) (4.2,-1.0) (1.6,-1.1)};
+  \node at (4.9,1.6) {$M$};
+  \draw[thick,blue!70!black,fill=blue!10,opacity=0.8] (1.8,0.2) ellipse (1.1 and 0.8);
+  \draw[thick,red!70!black,fill=red!10,opacity=0.6] (3.2,0.2) ellipse (1.1 and 0.8);
+  \node[blue!70!black] at (1.2,0.3) {$U_b$};
+  \node[red!70!black] at (3.8,0.3) {$U_a$};
+  % R^n images
+  \begin{scope}[shift={(-0.6,-4.2)}]
+    \draw[->] (0,0) -- (2.6,0); \draw[->] (0,0) -- (0,2.0); \node at (2.3,1.8) {$\R^n$};
+    \draw[thick,blue!70!black,fill=blue!10] (1.2,1.0) circle (0.7);
+  \end{scope}
+  \begin{scope}[shift={(3.6,-4.2)}]
+    \draw[->] (0,0) -- (2.6,0); \draw[->] (0,0) -- (0,2.0); \node at (2.3,1.8) {$\R^n$};
+    \draw[thick,red!70!black,fill=red!10] (1.3,1.0) circle (0.7);
+  \end{scope}
+  \draw[->,thick,blue!70!black] (1.4,-0.7) -- (0.7,-2.0) node[midway,left] {$\varphi_b$};
+  \draw[->,thick,red!70!black] (3.6,-0.7) -- (4.8,-2.0) node[midway,right] {$\varphi_a$};
+  \draw[->,thick] (1.4,-3.5) to[bend right=15] node[midway,below] {$\varphi_a\circ\varphi_b^{-1}$} (4.3,-3.5);
+\end{tikzpicture}
+\end{center}
+For the two-dimensional sphere $S^2$ one can use, for example, two stereographic projections, from the North and from the South pole; each one covers the whole sphere except the pole from which it projects, and together they form an atlas. No single chart can cover $S^2$: a sphere is not homeomorphic to an open subset of $\R^2$.
+\end{carroll}
+
+
+\section{Vectors, 1-forms and tensors.}
+
+\begin{points}
+\item Given a differentiable manifold, we can define \textbf{differentiable curves}. These are maps
+\[
+  \gamma:(s,t)\subset\R\longrightarrow M
+\]
+which, expressed in local coordinates, give rise to a differentiable function of $(s,t)$ into $\R^n$. More precisely, for each $a$, the map $\varphi_a\circ\gamma:\gamma^{-1}(U_a)\subset(s,t)\longrightarrow\R^n$ must be a differentiable function.
+
+\item Unless stated otherwise, by \emph{curve} we mean a \emph{differentiable curve}.
+
+\item We can define tangent vectors at a point $p\in M$ by means of equivalence classes of curves ``that point in the same direction at $p$''.
+
+\item To give a more direct definition we use the concept of directional derivative acting on scalar fields.
+
+\item A scalar field is a differentiable map $f:M\longrightarrow\R$. A map is differentiable if its expression in each local chart gives rise to a function of a real variable that is $C^\infty$. More precisely, the expression of $f$ in a local chart is $f\circ\varphi_a^{-1}$. The domain of this map is the open set $\varphi_a(U_a)\subset\R^n$. We therefore have a real function of $n$ real variables, for which the notion of derivative makes sense, so we can impose the condition that this function be $C^\infty$.
+
+\item If we express a function $f:M\longrightarrow\R$ in a set of local charts covering the manifold, and the resulting functions are $C^\infty$, the differentiability of $f$ is guaranteed. That is, it is not necessary to check the differentiability in the rest of the charts of the atlas.
+
+\item If we are only interested in establishing the differentiability of $f$ in a neighbourhood of a point $p$, it is enough to check the differentiability in one local chart containing $p$. Differentiability in any other local chart containing $p$ is then automatically satisfied.
+
+\item The local chart $(U_a,\varphi_a)$ will be denoted simply by $x^\alpha$, and the function $f\circ\varphi_a^{-1}$ by $f(x^\alpha)$.
+
+\item We define a vector $V|_p$ at $p$ as an object that is able to act on scalar fields and to provide a numerical value, which we denote by $V(f)|_p\in\R$, and that satisfies the following conditions:
+
+(ii) linearity: $V(f+g)|_p=V(f)|_p+V(g)|_p$, \quad $V(cf)|_p=cV(f)|_p$, for $c\in\R$.
+
+(i) Leibniz rule: $V(fg)|_p=f(p)V(g)|_p+g(p)V(f)|_p$
+
+\item Given a (differentiable) curve $\gamma:(s,t)\to M$, which we denote by $\gamma(\sigma)$, and a point $p=\gamma(\sigma_0)$, we can define a vector at $p$ called the \textbf{tangent vector to the curve at} $p$, which we denote by $\dot\gamma|_p$, by means of the expression
+\[
+  \dot\gamma|_p(f)=\left.\frac{d f(\gamma(\sigma))}{d\sigma}\right|_{\sigma_0}.
+\]
+
+\item Note that $f\circ\gamma:(s,t)\to\R$ is a real function of a real variable, so that the notion of derivative makes sense. It is immediate to check that this operation is a vector (in the sense that it satisfies the properties of linearity and the Leibniz rule).
+
+\item Two curves defining the same vector at a point $p$ are called \textbf{tangent} at $p$.
+
+\item On the other hand, given a vector $V|_p$ at $p$ there always exists a curve $\gamma(\sigma)$ passing through $p$ that has $V|_p$ as its tangent vector.
+
+\item We define the sum of vectors and the product by scalars $a_1,a_2\in\R$ by
+\[
+  \left(a_1V_1+a_2V_2\right)(f)|_p:=a_1V_1(f)|_p+a_2V_2(f)|_p .
+\]
+
+\item The set of vectors at $p\in M$ forms a vector space, which we denote by $T_pM$ and call the \textbf{tangent space} to the manifold at the point $p$.
+
+\item Given a local chart (which we will also call a coordinate system) $\{x^\alpha\}$ whose domain contains the point $p$, we can define a set of $n$ vectors $\left.\frac{\partial}{\partial x^\alpha}\right|_p$ by means of the expression
+\[
+  \left.\frac{\partial}{\partial x^\alpha}\right|_p(f):=\left.\frac{\partial f(x^\beta)}{\partial x^\alpha}\right|_{x(p)} .
+\]
+
+\item We will also denote the vector $\left.\frac{\partial}{\partial x^\alpha}\right|_p$ by $\partial_{x^\alpha}|_p$ or by $\partial_\alpha|_p$.
+
+\item One can prove that (i) $\partial_\alpha|_p$ is a vector (i.e.\ it satisfies the properties of linearity and the Leibniz rule), (ii) the set of $n$ vectors $\{\partial_\alpha|_p\}$ ($\alpha=1,\cdots,n$) is linearly independent, and (iii) any vector $V_p\in T_pM$ can be expressed as a linear combination of them, i.e.\ there exist $n$ constants $V^\alpha|_p\in\R$, $\alpha=1,\cdots,n$, such that
+\[
+  V_p=V^\alpha|_p\partial_{x^\alpha}|_p .
+\]
+
+\item These properties show that the dimension of the vector space $T_pM$ is $n$, the same as the dimension of the manifold.
+
+\item The vector $\partial_{x^1}$ is the tangent vector to the curve $\{x^1=\sigma,x^2=x_0^2,\cdots,x^n=x_0^n\}$. This curve is called the \textbf{coordinate line} $x^1$. Analogously, the coordinate line $x^\alpha$ is the curve defined by the rest of the coordinates $x^{\beta\neq\alpha}=\text{const}$ and $x^\alpha=\sigma$.
+
+\item We can imagine the set of coordinate lines forming a mesh in the open set $U$ of the manifold where this coordinate system is defined. The basis tangent vectors $\partial_{x^\alpha}|_p$ are the $n$ independent directions that point along each of the directions of the mesh.
+
+\item The coefficients $V^\alpha|_p$ are called the \textbf{components} of the vector $V|_p$ in the coordinate system $\{x^\alpha\}$.
+
+\item The basis $e_\alpha|_p:=\partial_{x^\alpha}|_p$ is called the \textbf{natural basis} associated with the coordinates $\{x^\alpha\}$, or simply the coordinate basis.
+
+\item Suppose we have two different coordinate systems in a neighbourhood of a point $p$ (i.e.\ both local charts contain $p$ in their domain). The coordinate change functions $x^{\alpha'}(x^\alpha)$ are $n$ functions of $n$ variables, invertible and $C^\infty$.
+
+\item We therefore have two bases of vectors $\partial_{x^\alpha}|_p$ and $\partial_{x^{\alpha'}}|_p$, so there must exist a change-of-basis matrix.
+
+\item Using the fact that vectors are derivations and using the chain rule we obtain, for any scalar function $f:M\to\R$,
+\[
+  \left.\frac{\partial f(x)}{\partial x^\alpha}\right|_{x(p)}=\left.\frac{\partial f(x')}{\partial x^{\alpha'}}\right|_{x'(p)}\left.\frac{\partial x^{\alpha'}}{\partial x^\alpha}\right|_{x(p)}
+\]
+
+\item Since this property holds for every $f$, we have the following relation between the vectors
+\[
+  \partial_{x^\alpha}|_p=\left.\frac{\partial x^{\alpha'}}{\partial x^\alpha}\right|_{x(p)}\partial_{x^{\alpha'}}\big|_p .
+\]
+
+\item The change-of-basis matrix between the coordinate bases is the Jacobian of the coordinate change $x^{\alpha'}(x^\alpha)$ evaluated at the point $p$.
+
+\item Like any other vector space, $T_pM$ has an associated dual space $T^\star_pM$, which is called the cotangent space to the manifold at $p$. The elements of $T^\star_pM$ are called 1-forms or covectors.
+
+\item To determine a basis of 1-forms, we first define the differential of a scalar function at a point $p$. Let $f:M\to\R$ be a scalar function. We want to define the differential of $f$ at $p\in M$ in such a way that it is a covector in $T^\star_pM$. Therefore, we must determine how it acts on vectors of $T_pM$. We define
+\[
+  df|_p(V|_p):=V|_p(f).
+\]
+
+\item Note that $f$ only needs to be defined in a neighbourhood of $p$ for its differential to exist.
+
+\item Given a coordinate system $\{x^\alpha\}$ on a domain $U$ containing $p$, each of the maps $x^\alpha:U\to\R$ is a scalar function, and therefore we can define its differential at $p$.
+
+\item The set of 1-forms $\{dx^\alpha|_p\}$ constitutes the dual basis of the coordinate basis $\{\partial_\alpha|_p\}$. Indeed
+\[
+  dx^\alpha|_p(\partial_{x^\beta}|_p)=\partial_{x^\beta}|_p(x^\alpha)=\left.\frac{\partial x^\alpha}{\partial x^\beta}\right|_{x(p)}=\delta^\alpha_\beta .
+\]
+
+\item The basis $\{dx^\alpha|_p\}$ associated with a coordinate system $\{x^\alpha\}$ is called the natural cobasis at $p$. Since they form a basis, any 1-form $\omega|_p\in T^\star_pM$ can be decomposed as
+\[
+  \omega|_p=\omega_\alpha|_pdx^\alpha|_p .
+\]
+
+\item The coefficients $\omega_\alpha|_p$ are called the components of the 1-form $\omega$ in the cobasis $\{dx^\alpha|_p\}$.
+
+\item Given a coordinate change $x^{\alpha'}=x^{\alpha'}(x^\beta)$, we can relate the two corresponding natural cobases. We have
+\[
+  dx^{\alpha'}|_p\left(\partial_{x^\beta}|_p\right)=dx^{\alpha'}|_p\left(\left.\frac{\partial x^{\beta'}}{\partial x^\beta}\right|_{x(p)}\partial_{x^{\beta'}}|_p\right)=\left.\frac{\partial x^{\alpha'}}{\partial x^\beta}\right|_{x(p)}
+  \quad\Longrightarrow\quad dx^{\alpha'}|_p=\left.\frac{\partial x^{\alpha'}}{\partial x^\alpha}\right|_{x(p)}dx^\alpha|_p .
+\]
+
+\item Once we have $T_pM$ and $T^\star_pM$, we can define the vector space of tensors at a point.
+
+\item A tensor $r$ times covariant and $s$ times contravariant (where $r,s\in\mathbb N$) at $p\in M$ is a multilinear map
+\[
+  T:\underbrace{T^\star_pM\times\cdots\times T^\star_pM}_{s\text{ times}}\times\underbrace{T_pM\times\cdots\times T_pM}_{r\text{ times}}\longrightarrow\R
+\]
+
+\item The set of tensors $r$ times covariant and $s$ times contravariant is denoted by
+\[
+  \underbrace{T_pM\otimes\cdots\otimes T_pM}_{s\text{ times}}\otimes\underbrace{T^\star_pM\otimes\cdots\otimes T^\star_pM}_{r\text{ times}}:=(T_pM)^s_r
+\]
+
+\item If $\{e_\alpha|_p\}$ is a basis of $T_pM$ (for example a natural basis, although it can be any other) and $\theta^\alpha|_p$ is its dual basis (i.e.\ the one satisfying $\theta^\alpha|_p(e_\beta|_p)=\delta^\alpha_\beta$), we can define a set of $n^{r+s}$ tensors $r$ times covariant and $s$ times contravariant, $e_{\alpha_1}\otimes\cdots\otimes e_{\alpha_s}\otimes\theta^{\beta_1}\otimes\cdots\otimes\theta^{\beta_r})|_p$, by means of
+\[
+  e_{\alpha_1}\otimes\cdots\otimes e_{\alpha_s}\otimes\theta^{\beta_1}\otimes\cdots\otimes\theta^{\beta_r}|_p(\theta^{\mu_1}|_p,\cdots,\theta^{\mu_s}|_p,e_{\nu_1}|_p,\cdots,e_{\nu_r}|_p)=\delta^{\mu_1}_{\alpha_1}\cdots\delta^{\mu_s}_{\alpha_s}\cdot\delta^{\beta_1}_{\nu_1}\cdots\delta^{\beta_r}_{\nu_r}.
+\]
+
+\item It is easy to prove that this set of tensors is linearly independent and that any tensor $r$ times covariant and $s$ times contravariant can be expressed as a linear combination of them. Therefore, the set of $n^{r+s}$ tensors $e_{\alpha_1}\otimes\cdots\otimes e_{\alpha_s}\otimes\theta^{\beta_1}\otimes\cdots\otimes\theta^{\beta_r}|_p$ forms a basis of $(T_pM)^s_r$. This vector space therefore has dimension $n^{r+s}$.
+
+\item The decomposition of any tensor $\mathcal T\in(T_pM)^s_r$ in this basis introduces a set of $n^{r+s}$ coefficients, called the \textbf{components} of the tensor. These coefficients are defined by the decomposition
+\[
+  \mathcal T=\left.\mathcal T^{\alpha_1\cdots\alpha_s}_{\beta_1\cdots\beta_r}\right|_pe_{\alpha_1}\otimes\cdots\otimes e_{\alpha_s}\otimes\theta^{\beta_1}\otimes\cdots\otimes\theta^{\beta_r}|_p .
+\]
+
+\item In a completely equivalent way we can write
+\[
+  \left.\mathcal T^{\alpha_1\cdots\alpha_s}_{\beta_1\cdots\beta_r}\right|_p=\mathcal T(\theta^{\alpha_1},\cdots,\theta^{\alpha_s},e_{\beta_1}\cdots e_{\beta_r}).
+\]
+
+\item If we consider a different basis $\{e_{\alpha'}|_p\}$ and its corresponding dual basis $\{\theta^{\alpha'}|_p\}$ (for example the natural bases of another coordinate system $\{x^{\alpha'}\}$), we have a change-of-basis matrix $A^\alpha_{\alpha'}$ such that $e_{\alpha'}|_p=A^\alpha_{\alpha'}e_\alpha|_p$. This $n\times n$ square matrix is necessarily invertible, since it relates two bases of a vector space.
+
+\item The dual bases will also be related by a change-of-basis matrix $\theta^{\alpha'}|_p=B^{\alpha'}_\alpha\theta^\alpha|_p$. We can compute $B$ in terms of $A$:
+\[
+  \delta^{\alpha'}_{\beta'}=\theta^{\alpha'}|_p(e_{\beta'}|_p)=B^{\alpha'}_\alpha\theta^\alpha|_p\left(A^\gamma_{\beta'}e_\gamma|_p\right)=B^{\alpha'}_\alpha A^\gamma_{\beta'}\delta^\alpha_\gamma=B^{\alpha'}_\alpha A^\alpha_{\beta'} .
+\]
+
+\item That is, the matrix $B$ is the inverse of $A$. Since $A^\alpha_{\alpha'}$ has an unprimed index up and a primed index down, if we wrote $A^{\alpha'}_\alpha$ for the inverse there would be no possible confusion: the position of the primes would distinguish which of the two matrices we are considering.
+
+\item Therefore, we can denote $B^{\alpha'}_\alpha$ simply as $A^{\alpha'}_\alpha$. With this notation, the changes of basis can be written in a very compact way as
+\[
+  e_{\alpha'}|_p=A^\alpha_{\alpha'}e_\alpha|_p,\qquad\qquad\theta^{\alpha'}|_p=A^{\alpha'}_\alpha\theta^\alpha|_p .
+\]
+
+\item This notation simplifies the expressions, since it is not necessary to remember for each index whether we must write a matrix or its inverse (for example, whether we must use the Jacobian of the transformation $x^\alpha(x^{\alpha'})$ or that of the inverse transformation $x^{\alpha'}(x^\beta)$). The index names and the Einstein summation convention imply that there is only one possibility in each case. It will be necessary to distinguish between $A$ and its inverse $A^{-1}$ when we write expressions in which the indices $\alpha,\beta,\alpha',\beta'$ etc.\ take concrete numerical values (unless we insist on keeping the primes on the numerical values).
+
+\item The components of a tensor $\mathcal T$ in two different bases are related by
+\[
+  \left.\mathcal T^{\alpha'_1\cdots\alpha'_s}_{\beta'_1\cdots\beta'_r}\right|_p=A^{\alpha'_1}_{\alpha_1}\cdots A^{\alpha'_s}_{\alpha_s}A^{\beta_1}_{\beta'_1}\cdots A^{\beta_r}_{\beta'_r}\left.\mathcal T^{\alpha_1\cdots\alpha_s}_{\beta_1\cdots\beta_r}\right|_p .
+\]
+
+\item In particular, for the components of a vector
+\[
+  V^{\alpha'}|_p=A^{\alpha'}_\alpha V^\alpha|_p
+\]
+Note that the way in which the components of a vector transform is the inverse of the way in which the vectors of the basis being used transform. The same happens for the components of 1-forms, which transform inversely to the basis.
+\end{points}
+
+\section{Tensor fields.}
+
+\begin{points}
+\item Up to this point vectors, covectors and tensors have been defined at a point $p\in M$.
+
+\item A vector field is an assignment of a vector $V|_p\in T_pM$ to each point $p\in M$, with the condition that this assignment depends differentiably on $p$. More precisely, the components of the vector $V^\alpha(x)$ in a local chart $\{x\}$ whose domain contains $p$ must be differentiable functions of the coordinates.
+
+\item In a similar way we define fields of 1-forms or tensor fields.
+
+\item We have previously defined a vector as an object acting on scalar fields. If we have a vector field $X$ on the manifold and a scalar function $f:M\longrightarrow\R$, we can define a new scalar function by
+\begin{align*}
+  X(f):M&\longrightarrow\R\\
+  p&\longrightarrow X(f)(p):=X|_p(f)
+\end{align*}
+i.e.\ vector fields act on scalar fields and give scalar fields. The linearity and the Leibniz rule of vectors imply the following properties
+
+(ii) linearity: $V(f_1+f_2)=V(f_1)+V(f_2)$
+
+(i) Leibniz rule: $X(fg)=X(f)g+fX(g)$
+
+\item Alternatively, a vector field can be defined as a map that acts on scalar functions and gives scalar functions, and that satisfies the properties of linearity and the Leibniz rule.
+
+\item Given a field of 1-forms $\omega$ and a vector field $X$, we can define a scalar function by means of the expression
+\begin{align*}
+  \omega(X):M&\longrightarrow\R\\
+  p&\longrightarrow\omega(X)(p):=\omega|_p(X|_p)
+\end{align*}
+
+\item Analogously to the previous case, we can also define a field of 1-forms by its action on vector fields, i.e.\ by defining the scalar function $\omega(X)$ for each vector field $X$. Similarly, a covariant tensor field with $r$ indices can be defined by its action on $r$ arbitrary vector fields.
+
+\item Given a function $f:M\to\R$ we can define a field of 1-forms, which we call the \textbf{differential} of $f$. The definition is simply
+\[
+  (df)(X)=X(f).
+\]
+
+\item Tensor fields need not be defined on the whole manifold. On many occasions they are only defined on certain open sets of $M$. For example, consider a coordinate system $\{x^\alpha\}$ whose domain is an open set $U$ of $M$. For each value of $\alpha$, the vector field $\partial_{x^\alpha}$ is defined at every point of $U$. Outside this open set it makes no sense to write $\partial_{x^\alpha}$.
+
+\item Suppose that $\mathcal T$ is a tensor field $s$ times contravariant and $r$ times covariant, and let us choose a local coordinate system $\{x^\alpha\}$. The components of this tensor in the natural basis $\{\partial_\alpha\}$ are
+\[
+  T^{\alpha_1\cdots\alpha_s}_{\beta_1\cdots\beta_r}(x^\mu)
+\]
+and they define a set of $n^{r+s}$ differentiable functions of the coordinates. Note that these components are only defined in the domain of the chart $\{x^\alpha\}$.
+
+\item Let us consider another coordinate system $\{x^{\alpha'}\}$ whose domain $U'$ intersects $U$, i.e.\ we assume that $U\cap U'\neq\emptyset$. In this intersection we have two coordinate systems and therefore two natural bases $\{\partial_{x^\alpha}\}$ and $\{\partial_{x^{\alpha'}}\}$.
+
+\item We can relate the components of $\mathcal T$ in both bases. We have seen previously that the two natural bases are related by
+\[
+  \partial_{x^\alpha}|_p=\left.\frac{\partial x^{\alpha'}}{\partial x^\alpha}\right|_{x(p)}\partial_{x^{\alpha'}}|_p,\qquad dx^\alpha|_p=\left.\frac{\partial x^\alpha}{\partial x^{\alpha'}}\right|_{x'(p)}dx^{\alpha'}|_p .
+\]
+Consequently, the components of the tensor transform in the following way
+\[
+  \mathcal T^{\alpha'_1\cdots\alpha'_s}_{\beta'_1\cdots\beta'_r}(x')=\mathcal T^{\alpha_1\cdots\alpha_s}_{\beta_1\cdots\beta_r}(x(x'))\left.\frac{\partial x^{\alpha'_1}}{\partial x^{\alpha_1}}\right|_{x(x')}\cdots\left.\frac{\partial x^{\alpha'_s}}{\partial x^{\alpha_s}}\right|_{x(x')}\left.\frac{\partial x^{\beta_1}}{\partial x^{\beta'_1}}\right|_x\cdots\left.\frac{\partial x^{\beta_r}}{\partial x^{\beta'_r}}\right|_x .
+\]
+
+\item A tensor $\mathcal T|_p$, $r$ times covariant at $p\in M$, is symmetric in its positions $i$, $j$, with $1\leq i<j\leq r$, if it satisfies
+\[
+  \mathcal T|_p(X_1,\cdots,X_i,\cdots,X_j,\cdots,X_r)=\mathcal T|_p(X_1,\cdots X_j,\cdots X_i,\cdots,X_r)
+\]
+where $X_1,\cdots X_r$ are any $r$ vectors in $T_pM$.
+
+\item A tensor $\mathcal T|_p$, $r$ times covariant at $p\in M$, is antisymmetric in its positions $i$, $j$, with $1\leq i<j\leq r$, if it satisfies
+\[
+  \mathcal T|_p(X_1,\cdots,X_i,\cdots,X_j,\cdots,X_s)=-\mathcal T|_p(X_1,\cdots X_j,\cdots X_i,\cdots,X_s).
+\]
+
+\item Expressed in terms of any basis of 1-forms $\{\theta^\alpha|_p\}$, a tensor is symmetric or antisymmetric in its positions $i,j$ if and only if the components of the tensor satisfy
+\begin{align*}
+  \mathcal T_{\alpha_1\cdots\alpha_i\cdots\alpha_j\cdots\alpha_s}&=\mathcal T_{\alpha_1\cdots\alpha_j\cdots\alpha_i\cdots\alpha_s} &&\text{symmetric in }i,j\\
+  \mathcal T_{\alpha_1\cdots\alpha_i\cdots\alpha_j\cdots\alpha_s}&=-\mathcal T_{\alpha_1\cdots\alpha_j\cdots\alpha_i\cdots\alpha_s} &&\text{antisymmetric in }i,j
+\end{align*}
+
+\item A tensor that is symmetric with respect to any pair of indices is called \textbf{totally symmetric}.
+\end{points}
+
+\section{Exterior product and exterior derivative.}
+
+\begin{points}
+\item A $p$-covariant tensor that is antisymmetric with respect to any pair of indices is called \textbf{totally antisymmetric} or, more frequently, a $p$-form.
+
+\item The set of $p$-forms at a point $q\in M$ is denoted by $\Lambda^p|_q$.
+
+\item $\Lambda^p|_q$ is a vector space, since the sum of two totally antisymmetric $p$-covariant tensors is also totally antisymmetric.
+
+\item When $p>n$, the only completely antisymmetric tensor is $\{0\}$. To prove it, note first that a tensor antisymmetric in $i,j$ satisfies
+\[
+  \mathcal T(\cdots,\underbrace{X}_i,\cdots,\underbrace{X}_j,\cdots)=0
+\]
+since $\mathcal T(\cdots,\underbrace{X}_i,\cdots,\underbrace{X}_j,\cdots)=-\mathcal T(\cdots,\underbrace{X}_j,\cdots,\underbrace{X}_i,\cdots)$. Let us consider a basis $\{e_\alpha\}$ at $q$. The action of $\mathcal T$ is fixed by the action of $\mathcal T$ on any choice of $p$ elements of the basis. When $p>n$, any choice we make of elements of the basis must contain at least two repeated elements, so that antisymmetry forces the action of the tensor $\mathcal T$ to vanish. Therefore all the components of the tensor $\mathcal T$ vanish, and the tensor itself vanishes.
+
+\item When $p\leq n$, the dimension of $\Lambda^p|_q$ is $\binom np$ (Exercise: prove it).
+
+\item A field of $p$-forms is a $p$-covariant tensor field that is a covector at each point. The set of such tensor fields is denoted by $\Lambda^p$.
+
+\item To obtain a basis of $p$-forms at a point $q\in M$, let us consider a coordinate system $\{x^\alpha\}$ whose domain contains $q$. We know that $dx^\alpha|_q$ is a cobasis at $q$.
+
+\item We first study the case of a two-form $\Omega$. If we decompose it in the basis of 2-covariant tensors $dx^\alpha\otimes dx^\beta$ (we do not write the point $q$ explicitly, for simplicity), we have
+\[
+  \Omega=\Omega_{\alpha\beta}dx^\alpha\otimes dx^\beta .
+\]
+The components $\Omega_{\alpha\beta}$ satisfy $\Omega_{\alpha\beta}=-\Omega_{\beta\alpha}$ by the antisymmetry property.
+
+\item Since the indices $\alpha$ and $\beta$ are dummy indices we can write
+\begin{align*}
+  \Omega=\Omega_{\alpha\beta}\,dx^\alpha\otimes dx^\beta&=\frac12\left(\Omega_{\alpha\beta}\,dx^\alpha\otimes dx^\beta+\Omega_{\alpha\beta}\,dx^\alpha\otimes dx^\beta\right)\\
+  &=\frac12\left(\Omega_{\alpha\beta}\,dx^\alpha\otimes dx^\beta+\Omega_{\beta\alpha}\,dx^\beta\otimes dx^\alpha\right)=\frac12\left(\Omega_{\alpha\beta}\,dx^\alpha\otimes dx^\beta-\Omega_{\alpha\beta}\,dx^\beta\otimes dx^\alpha\right)\\
+  &=\frac12\Omega_{\alpha\beta}\left(dx^\alpha\otimes dx^\beta-dx^\beta\otimes dx^\alpha\right).
+\end{align*}
+
+\item We define the antisymmetric tensor $dx^\alpha\wedge dx^\beta:=dx^\alpha\otimes dx^\beta-dx^\beta\otimes dx^\alpha$.
+
+\item The set of all these tensors with $\alpha<\beta$ is linearly independent and, since
+\[
+  \Omega=\frac12\Omega_{\alpha\beta}dx^\alpha\wedge dx^\beta=\sum_{\alpha<\beta}\Omega_{\alpha\beta}dx^\alpha\wedge dx^\beta
+\]
+we conclude that they form a basis of $\Lambda^2|_p$.
+
+\item The previous definition of $dx^\alpha\wedge dx^\beta$, although very widespread, is not the only possible one. The definition $dx^\alpha\wedge dx^\beta:=\frac12(dx^\alpha\otimes dx^\beta-dx^\beta\otimes dx^\alpha)$ is also common. Many of the formulae involving $p$-forms are different depending on the definition being used, so one has to be careful to check which notation is being used in each case.
+
+\item Note that, by construction, $dx^\alpha\wedge dx^\beta=-dx^\beta\wedge dx^\alpha$.
+
+\item For the case of arbitrary $p$-forms we introduce the generalised Kronecker delta $\delta^{\alpha_1\cdots\alpha_p}_{\beta_1\cdots\beta_p}$
+\[
+  \delta^{\alpha_1\cdots\alpha_p}_{\beta_1\cdots\beta_p}=\left\{\begin{array}{lll}
+  1&\text{if }\begin{pmatrix}\alpha_1\cdots\alpha_p\\ \beta_1\cdots\beta_p\end{pmatrix}&\text{is an even permutation}\\[3ex]
+  -1&\text{if }\begin{pmatrix}\alpha_1\cdots\alpha_p\\ \beta_1\cdots\beta_p\end{pmatrix}&\text{is an odd permutation}\\[3ex]
+  0&\text{if }\begin{pmatrix}\alpha_1\cdots\alpha_p\\ \beta_1\cdots\beta_p\end{pmatrix}&\text{is not a permutation}
+  \end{array}\right.
+\]
+
+\item We define $dx^{\alpha_1}\wedge\cdots\wedge dx^{\alpha_p}:=\delta^{\alpha_1\cdots\alpha_p}_{\beta_1\cdots\beta_p}dx^{\beta_1}\otimes\cdots\otimes dx^{\beta_p}$. Note that if two of the indices $\alpha_i,\alpha_j$ coincide, this expression vanishes. When all the indices $\{\alpha_1,\cdots,\alpha_p\}$ are distinct, the $p$-form $dx^{\alpha_1}\wedge\cdots\wedge dx^{\alpha_p}$ consists of the sum of the $p!$ terms involving all the possible permutations of $dx^{\alpha_1}\otimes\cdots\otimes dx^{\alpha_p}$, each one with its corresponding sign.
+
+\item An arbitrary $p$-form $\Omega$ can be decomposed as
+\begin{align}
+  \Omega=\Omega_{\alpha_1\cdots\alpha_p}dx^{\alpha_1}\otimes\cdots\otimes dx^{\alpha_p}&=\frac{1}{p!}\Omega_{\beta_1\cdots\beta_p}\delta^{\beta_1\cdots\beta_p}_{\alpha_1\cdots\alpha_p}dx^{\alpha_1}\otimes\cdots\otimes dx^{\alpha_p}\nonumber\\
+  &=\frac{1}{p!}\Omega_{\beta_1\cdots\beta_p}dx^{\beta_1}\wedge\cdots\wedge dx^{\beta_p}
+\end{align}
+where in the first equality we have used that $\Omega_{\beta_1\cdots\beta_p}$ is totally antisymmetric.
+
+\item It is worth noting that the coefficients $\Omega_{\beta_1\cdots\beta_p}$ in the final decomposition (1) are the tensor components, and that the expression contains a factor $p!$. If we write the sum in an ordered basis $dx^{\alpha_1}\wedge\cdots\wedge dx^{\alpha_p}$, with $\alpha_1<\alpha_2<\cdots<\alpha_p$, the coefficients in that expansion are directly the tensor components $\Omega_{\alpha_1\cdots\alpha_p}$ ($\alpha_1<\alpha_2<\cdots<\alpha_p$). The rest of the components are obtained simply by using antisymmetry.
+
+\item For example, let us consider the 2-form
+\[
+  \Omega=x\,dx\wedge dy .
+\]
+Its tensor components are $\Omega_{xy}=x$. The rest are obtained by antisymmetry: $\Omega_{yx}=-x$, $\Omega_{xx}=0$, $\Omega_{yy}=0$.
+
+\item At a point $a\in M$ we can define a product between $p$- and $q$-forms, which we call the \textbf{exterior product} (or wedge product) and denote by
+\[
+  \wedge:\Lambda^p|_a\times\Lambda^q|_a\longrightarrow\Lambda^{p+q}|_a
+\]
+simply by linearity. That is, if $\Omega=\frac{1}{p!}\Omega_{\alpha_1\cdots\alpha_p}dx^{\alpha_1}\wedge\cdots\wedge dx^{\alpha_p}$ is a $p$-form and $\omega=\frac{1}{q!}\Omega_{\beta_1\cdots\beta_q}dx^{\beta_1}\wedge\cdots\wedge dx^{\beta_q}$ is a $q$-form, we define $\Omega\wedge\omega$ as the $(p+q)$-form
+\[
+  \Omega\wedge\omega=\frac{1}{p!}\frac{1}{q!}\Omega_{\alpha_1\cdots\alpha_p}\omega_{\beta_1\cdots\beta_q}dx^{\alpha_1}\wedge\cdots\wedge dx^{\alpha_p}\wedge dx^{\beta_1}\wedge\cdots\wedge dx^{\beta_q}.
+\]
+
+\item Note that the coefficients $\Omega_{\alpha_1\cdots\alpha_p}\omega_{\beta_1\cdots\beta_q}$ \textbf{are not} the tensor components of $\Omega\wedge\omega$, because they are not antisymmetric under the interchange of all the indices. However, $\Omega\wedge\omega$ is a $(p+q)$-form, because it is a linear combination of the $(p+q)$-forms $dx^{\alpha_1}\wedge\cdots\wedge dx^{\alpha_p}\wedge dx^{\beta_1}\wedge\cdots\wedge dx^{\beta_q}$.
+
+\item The exterior product satisfies the following property
+\[
+  \Omega_p\wedge\omega_q=(-1)^{pq}\omega_q\wedge\Omega_p .
+\]
+In particular, if $\omega$ is a 1-form, we have $\omega\wedge\omega=0$. This is true in general for $p$-forms of odd degree $p$, but not for $p$-forms of even degree (since the square of an odd number is odd, but the square of an even number is even).
+
+\item Given a scalar function $f:M\longrightarrow\R$ we have defined $df$. We can consider $f$ as a 0-form (it has no tensor index) and we know that $df$ is a 1-form. We want to extend this operation $d$ (called the \textbf{exterior derivative}) to an arbitrary field of $p$-forms, i.e.
+\[
+  d:\Lambda^p\longrightarrow\Lambda^{p+1}.
+\]
+
+\item The coefficients $\Omega_{\alpha_1\cdots\alpha_p}$ of a $p$-form $\Omega=\frac{1}{p!}\Omega_{\alpha_1\cdots\alpha_p}dx^{\alpha_1}\wedge\cdots\wedge dx^{\alpha_p}$ in a natural basis $\{x^\alpha\}$ are scalar functions on the domain $U$ of the coordinate system $\{x^\alpha\}$. Therefore we know how to compute their differential. This allows us to propose the following definition of $d\Omega$
+\[
+  d\Omega:=\frac{1}{p!}d\left(\Omega_{\alpha_1\cdots\alpha_p}\right)\wedge dx^{\alpha_1}\cdots\wedge dx^{\alpha_p}
+\]
+or, equivalently,
+\[
+  d\Omega:=\frac{1}{p!}\partial_{x^\mu}\Omega_{\alpha_1\cdots\alpha_p}dx^\mu\wedge dx^{\alpha_1}\cdots\wedge dx^{\alpha_p}.
+\]
+
+\item This definition has been given in a local coordinate system. For $d\Omega$ to be well defined, it is necessary to prove that if we define $d\Omega$ in another local chart $\{x^{\alpha'}\}$ and perform the coordinate change $x^{\alpha'}=x^{\alpha'}(x^\alpha)$, we recover the initial definition in the coordinates $\{x^\alpha\}$ (exercise: prove this property).
+
+\item As in the case of the exterior product, the functions $\partial_\mu\Omega_{\alpha_1\cdots\alpha_p}$ are not the tensor components of $d\Omega$, since they do not satisfy the antisymmetry property that a $(p+1)$-form must satisfy.
+
+\item The properties of the exterior derivative are:
+\begin{align*}
+  &(i)&&d\text{ is a linear operator:}\quad s,t\in\R\quad\omega_1,\omega_2\in\Lambda^p\quad d(a\omega_1+b\omega_2)=ad\omega_1+bd\omega_2\\
+  &(ii)&&d^2=0\\
+  &(iii)&&d\text{ is an \textbf{antiderivation} with respect to }\wedge:\\
+  &&&\qquad\Omega\in\Lambda^p,\ \omega\in\Lambda^q\qquad d\left(\Omega\wedge\omega\right)=d\Omega\wedge\omega+(-1)^p\Omega\wedge d\omega.\\
+  &(iv)&&\text{On 0-forms, the exterior derivative coincides with the ordinary differential}
+\end{align*}
+
+\item The exterior derivative is a derivation intrinsic to all differentiable manifolds, but it has the disadvantage that it can only act on $p$-forms.
+
+\item There is a second derivation intrinsic to all manifolds that is able to act on any tensor field. It is the so-called \textbf{Lie derivative}.
+\end{points}
+
+\section{Lie derivative.}
+
+\begin{points}
+\item The Lie derivative is a derivation along a vector field $X$ of the manifold.
+
+\item We can define the Lie derivative through its action on scalar functions and on vector fields, and extend it to the set of tensor fields by means of the Leibniz rule.
+
+\item Before defining the Lie derivative we need to introduce the Lie bracket $[X,Y]$ between two vector fields.
+
+\item If $X$, $Y$ are vector fields, we define the vector field $[X,Y]$ (\textbf{Lie bracket} of $X$ and $Y$) by
+\[
+  f:M\to\R\quad\text{scalar function},\qquad[X,Y](f):=X(Y(f))-Y(X(f)).
+\]
+
+\item To check that it is well defined, we must prove that it satisfies the Leibniz rule, i.e.\ that, if $f,g$ are scalar functions, $[X,Y](f\cdot g)=[X,Y](f)\cdot g+f\cdot[X,Y](g)$ is satisfied.
+\begin{align*}
+  [X,Y](f\,g)&=X(Y(f\,g))-Y(X(f\,g))=X(Y(f)g+fY(g))-Y(X(f)g+fX(g))\\
+  &=X(Y(f))g+Y(f)X(g)+X(f)Y(g)+fX(Y(g))\\
+  &\quad-(Y(X(f))g+X(f)Y(g)+Y(f)X(g)+fY(X(g)))\\
+  &=X(Y(f))g+fX(Y(g))-Y(X(f))g-fY(X(g))\\
+  &=[X,Y](f)g+f[X,Y](g).
+\end{align*}
+Note that this same calculation shows that $X(Y(f))$ does not define a vector field, since it does not satisfy the Leibniz rule.
+
+\item The properties of the Lie bracket are the following:
+\begin{align*}
+  &\text{(i)}&&\text{Antisymmetry:}&&[X,Y]=-[Y,X]\\
+  &\text{(ii)}&&\text{Linearity:}&&X,Y,Z\text{ vector fields},\quad a,b\in\R\\
+  &&&&&[X,aY+bZ]=a[X,Y]+b[X,Z]\\
+  &\text{(iii)}&&\text{Leibniz rule:}&&f\text{ scalar}\qquad[X,fY]=f[X,Y]+X(f)Y\\
+  &\text{(iv)}&&\text{Jacobi identity:}&&[X,[Y,Z]]+[Y,[Z,X]]+[Z,[X,Y]]=0.
+\end{align*}
+
+\item Properties (i), (ii) are immediate.
+
+\item To prove (iii), let $g$ be a scalar:
+\begin{align*}
+  [X,fY](g)&=X(fY(g))-fY(X(g))=X(f)Y(g)+fX(Y(g))-fY(X(g))\\
+  &=(X(f)Y+f[X,Y])(g).
+\end{align*}
+
+\item To prove (iv):
+\begin{align*}
+  [X,[Y,Z]](f)&=X([Y,Z](f))-[Y,Z](X(f))\\
+  &=X(Y(Z(f))-X(Z(Y(f)))-Y(Z(X(f)))+Z(Y(X(f)))
+\end{align*}
+and therefore,
+\begin{align*}
+  ([X,[Y,Z]]&+[Y,[Z,X]]+[Z,[X,Y]])(f)=\\
+  &X(Y(Z(f))-X(Z(Y(f)))-Y(Z(X(f)))+Z(Y(X(f)))\\
+  &+Y(Z(X(f))-Y(X(Z(f)))-Z(X(Y(f)))+X(Z(Y(f)))\\
+  &+Z(X(Y(f))-Z(Y(X(f)))-X(Y(Z(f)))+Y(X(Z(f)))\\
+  =&\ 0.
+\end{align*}
+
+\item We can now define the Lie derivative of a scalar field $f$ and of a vector field $Y$ along the field $X$:
+\[
+  \mathcal L_Xf:=X(f),\qquad\qquad\mathcal L_XY:=[X,Y].
+\]
+
+\item In both cases, the result of the Lie derivative is a tensor field of the same type as the one on which it acts. We want to preserve this property in the definition of the Lie derivative when it acts on arbitrary tensor fields.
+
+\item To extend the definition to the rest of the tensor fields, we start by defining the Lie derivative of a field of 1-forms $\omega$. A field of 1-forms is defined through its action on an arbitrary vector field $Y$. Therefore, it is natural to define
+\[
+  (\mathcal L_X\omega)(Y):=\mathcal L_X(\omega(Y))-\omega(\mathcal L_XY)=X(\omega(Y))-\omega([X,Y]).
+\]
+
+\item Once we have defined the Lie derivative for scalar functions, vector fields and fields of 1-forms, we extend the definition to an arbitrary tensor field by imposing two conditions: (i) linearity and (ii) that $\mathcal L_X$ satisfies the Leibniz rule with respect to the tensor product. That is,
+\begin{align}
+  &(i)\qquad\text{Linearity}\qquad T_1,T_2\text{ tensor fields of the same type},\quad a,b\in\R\nonumber\\
+  &\qquad\qquad\mathcal L_X(aT_1+bT_2)=a\mathcal L_XT_1+b\mathcal L_XT_2\\
+  &(ii)\qquad\text{Leibniz rule with respect to }\otimes:\qquad T,S\text{ arbitrary tensor fields}:\nonumber\\
+  &\qquad\qquad\mathcal L_X(T\otimes S)=(\mathcal L_XT)\otimes S+T\otimes\mathcal L_XS.
+\end{align}
+
+\item An interesting property of the Lie derivative is that it commutes with the exterior derivative. We prove it only for the case of 0-forms (i.e.\ scalar functions). $\mathcal L_Xdf$ is a field of 1-forms, so we must evaluate how it acts on an arbitrary vector field $Y$
+\begin{align*}
+  (\mathcal L_Xdf)(Y)&=X(df(Y))-df(\mathcal L_XY)=X(Y(f))-df([X,Y])\\
+  &=X(Y(f))-[X,Y](f)=X(Y(f))-X(Y(f))+Y(X(f))=Y(X(f))\\
+  &=Y(\mathcal L_Xf)=d(\mathcal L_Xf)(Y)
+\end{align*}
+and we conclude that $\mathcal L_Xdf=d(\mathcal L_Xf)$. This commutation property, which we have proved for 0-forms, remains true for arbitrary fields of $p$-forms.
+
+\item We can apply directly the properties of $\mathcal L_X$ to obtain an explicit expression for the Lie derivative of a tensor in an arbitrary coordinate system $\{x^\alpha\}$. The result is (exercise)
+\[
+  (\mathcal L_XT)^{\alpha_1\cdots\alpha_r}_{\beta_1\cdots\beta_s}=X^\mu\partial_\mu T^{\alpha_1\cdots\alpha_r}_{\beta_1\cdots\beta_s}-\sum_{i=1}^rT^{\alpha_1\cdots\mu\cdots\alpha_r}_{\beta_1\cdots\beta_s}\partial_\mu X^{\alpha_i}+\sum_{i=1}^rT^{\alpha_1\cdots\alpha_r}_{\beta_1\cdots\mu\cdots\beta_s}\partial_{\beta_i}X^\mu .
+\]
+
+\item The Lie derivative, in addition to (2)--(3), satisfies the following property. If $X$, $Y$ are vector fields,
+\[
+  \mathcal L_X\mathcal L_Y-\mathcal L_Y\mathcal L_X=\mathcal L_{[X,Y]}
+\]
+as operators acting on an arbitrary tensor $T$.
+
+
+\item We have two derivation operations on the manifold: the exterior derivative, which acts on $p$-forms, and the Lie derivative, which acts on arbitrary tensors.
+
+\item The exterior derivative is not sufficient, because there are many physical and geometric fields that are not totally antisymmetric.
+
+\item The Lie derivative is not sufficient either because, despite being able to act on arbitrary tensors, it does not define a directional derivative, for the following reason. A directional derivative must have the following two properties. On the one hand, it must depend only on the values of the field on the curve along which we want to take the derivative. On the other hand, when we travel along the curve at a different rate (for example, twice as fast), the directional derivative must increase (or decrease) its value in the same proportion.
+
+\item This second property requires that, if we multiply the derivation field $X$ by an arbitrary function $f$, a true directional derivative $D_{fX}$ acting on a tensor $T$ must satisfy $D_{fX}T=fD_XT$.
+
+\item This property is not satisfied by the Lie derivative (except when it acts on scalar fields). For example, for vectors
+\[
+  \mathcal L_{fX}Y=[fX,Y]=-[Y,fX]=-Y(f)X-f[Y,X]=f\mathcal L_X(Y)-Y(f)X
+\]
+which contains an additional term $-Y(f)X$.
+
+\item The Lie derivative has many useful geometric properties and many interesting applications, but it is not a directional derivative, so it does not allow us to generalise the concept of partial derivative to differentiable manifolds. Since the equations of physics are written, in most cases, in terms of partial derivatives, it is necessary to introduce a new derivation that really has the properties of a directional derivative.
+
+\item This new concept of derivation that we need is the \textbf{covariant derivative}.
+\end{points}
+
+\section{Covariant derivative}
+
+\begin{points}
+\item We want to introduce a concept of directional derivation along a field $X$. We will denote it by $\nabla_X$, and we want it to satisfy the condition $\nabla_{fX}T=f\nabla_XT$ when the covariant derivative acts on an arbitrary tensor $T$.
+
+\item Furthermore, since $X$ already defines a directional derivative when it acts on functions, we want to impose $\nabla_Xf=X(f)$ when $f$ is a scalar function. Finally, $\nabla_X$ must be linear and satisfy the Leibniz rule with respect to the tensor product.
+
+\item In summary, we want to impose the following conditions on the covariant derivative:
+\begin{align*}
+  &(i)&&\text{Linearity with respect to the argument:}\qquad T_1,T_2\text{ tensors of the same type},\quad a,b\in\R\\
+  &&&\qquad\nabla_X(aT_1+bT_2)=a\nabla_XT_1+b\nabla_XT_2\\
+  &(ii)&&\text{Linearity with respect to the direction:}\qquad X,Y\text{ vector fields}\\
+  &&&\qquad\nabla_{X+Y}T=\nabla_XT+\nabla_YT\\
+  &(iii)&&\text{Directional derivative:}\qquad\text{if }f\text{ is any scalar function}\qquad\nabla_{fX}T=f\nabla_XT\\
+  &(iv)&&\text{Definition on 1-forms:}\qquad\omega\text{ 1-form},\quad Y\text{ vector field}\\
+  &&&\qquad\left(\nabla_X\omega\right)(Y):=X(\omega(Y))-\omega(\nabla_XY)\\
+  &(v)&&\text{Leibniz rule:}\qquad T,S\text{ arbitrary tensors}\\
+  &&&\qquad\nabla_X(T\otimes S):=(\nabla_XT)\otimes S+T\otimes(\nabla_XS)
+\end{align*}
+
+\item If we choose any coordinate system $\{x^\alpha\}$, we have a basis of vectors $e_\alpha:=\partial_{x^\alpha}$ and of 1-forms $\theta^\alpha:=dx^\alpha$. Let us consider any two vector fields $X=X^\alpha e_\alpha$, $Y=Y^\alpha e_\alpha$.
+
+\item The derivative of $Y$ along $X$ must satisfy the following expression.
+\begin{align*}
+  \nabla_XY=\nabla_{X^\alpha e_\alpha}Y=X^\alpha\nabla_{e_\alpha}Y=X^\alpha\nabla_{e_\alpha}\left(Y^\beta e_\beta\right)&=X^\alpha(\nabla_{e_\alpha}Y^\beta)e_\beta+X^\alpha Y^\beta\nabla_{e_\alpha}e_\beta\\
+  &=X^\alpha e_\alpha(Y^\beta)e_\beta+X^\alpha Y^\beta\nabla_{e_\alpha}e_\beta\\
+  &=X^\alpha\partial_\alpha(Y^\beta)e_\beta+X^\alpha Y^\beta\nabla_{e_\alpha}e_\beta
+\end{align*}
+
+\item The second term $\nabla_{e_\alpha}e_\beta$ is a vector field, so it can be decomposed in the natural basis itself. We call the coefficients of this decomposition the \textbf{connection symbols}. We write these coefficients as
+\[
+  \nabla_{e_\alpha}e_\beta:=\Gamma^\mu_{\beta\alpha}e_\mu
+\]
+and we obtain the following expression for the covariant derivative in a coordinate system $\{x^\alpha\}$
+\[
+  \nabla_XY=\left(X^\alpha\partial_{x^\alpha}Y^\beta+X^\alpha Y^\mu\Gamma^\beta_{\mu\alpha}\right)\partial_{x^\beta}.
+\]
+
+\item We introduce the following notation:
+\[
+  \nabla_\alpha Y^\beta:=\left(\nabla_{e_\alpha}Y\right)^\beta
+\]
+
+\item It is important to note that $\nabla_\alpha Y^\beta$ \textbf{is not} the derivative of the component $\beta$ of the vector $Y$, but the derivative of the whole vector $Y$ along the direction $e_\alpha$, from which the component $\beta$ of the resulting vector is then extracted.
+
+\item In terms of the connection symbols $\Gamma^\mu_{\alpha\beta}$ we have (in a coordinate basis)
+\[
+  \nabla_\alpha Y^\beta=\partial_\alpha Y^\beta+\Gamma^\beta_{\mu\alpha}Y^\mu .
+\]
+
+\item It is worth noting once more that $\nabla_\alpha Y^\beta$ depends on all the components $Y^\mu$ of the vector being differentiated.
+
+\item Let us now consider a 1-form $\omega=\omega_\alpha dx^\alpha$ and obtain its covariant derivative along $X$. Using property (iv),
+\[
+  (\nabla_{e_\alpha}dx^\beta)(\partial_{x^\gamma})=e_\alpha\left(dx^\beta(\partial_{x^\gamma})\right)-dx^\beta\left(\nabla_{e_\alpha}e_\gamma\right)=e_\alpha(\delta^\beta_\gamma)-dx^\beta\left(\Gamma^\mu_{\gamma\alpha}\partial_{x^\mu}\right)=-\Gamma^\beta_{\gamma\alpha}.
+\]
+
+\item Therefore, for a 1-form $\omega_\alpha dx^\alpha$ and a field $X^\alpha\partial_{x^\alpha}$ we obtain
+\begin{align*}
+  \nabla_X\omega=X^\alpha\nabla_{e_\alpha}\omega=X^\alpha\nabla_{e_\alpha}\left(\omega_\beta dx^\beta\right)&=X^\alpha\nabla_{e_\alpha}(\omega_\beta)\,dx^\beta+X^\alpha\omega_\beta\nabla_{e_\alpha}(dx^\beta)\\
+  &=\left(X^\alpha\partial_\alpha\omega_\beta-\Gamma^\mu_{\beta\alpha}\omega_\mu X^\alpha\right)dx^\beta .
+\end{align*}
+
+\item The components of $\nabla_X\omega$ are $\nabla_X\omega_\beta=X^\alpha\partial_\alpha\omega_\beta-\Gamma^\mu_{\beta\alpha}\omega_\mu X^\alpha$.
+
+\item Using the Leibniz rule we can compute the components of the covariant derivative of an arbitrary tensor $T=T^{\alpha_1\cdots\alpha_r}_{\beta_1\cdots\beta_s}dx^{\beta_1}\cdots\otimes dx^{\beta_s}\otimes\partial_{x^{\alpha_1}}\otimes\cdots\otimes\partial_{x^{\alpha_r}}$. The result is that the tensor $\nabla_XT$ has components, in the natural basis of the coordinate system $\{x^\alpha\}$:
+\[
+  (\nabla_XT)^{\alpha_1\cdots\alpha_r}_{\beta_1\cdots\beta_s}=X^\nu\partial_\nu T^{\alpha_1\cdots\alpha_r}_{\beta_1\cdots\beta_s}+\sum_{i=1}^r\Gamma^{\alpha_i}_{\mu\nu}T^{\alpha_1\cdots\mu\cdots\alpha_r}_{\beta_1\cdots\beta_s}X^\nu-\sum_{j=1}^s\Gamma^\mu_{\beta_j\nu}T^{\alpha_1\cdots\alpha_r}_{\beta_1\cdots\mu\beta_s}X^\nu .
+\]
+
+\item As in the case of vectors, we will use the following notation
+\[
+  \nabla_\nu T^{\alpha_1\cdots\alpha_r}_{\beta_1\cdots\beta_s}:=\left(\nabla_{e_\nu}T\right)^{\alpha_1\cdots\alpha_r}_{\beta_1\cdots\beta_s} .
+\]
+
+\item Again, it is important to observe that the covariant derivative $\nabla_\nu T^{\alpha_1\cdots\alpha_r}_{\beta_1\cdots\beta_s}$ is not a derivative of the specific component $T^{\alpha_1\cdots\alpha_r}_{\beta_1\cdots\beta_s}$, but involves all the components, as can be seen from its explicit expression:
+\[
+  \nabla_\nu T^{\alpha_1\cdots\alpha_r}_{\beta_1\cdots\beta_s}=\partial_\nu T^{\alpha_1\cdots\alpha_r}_{\beta_1\cdots\beta_s}+\sum_{i=1}^r\Gamma^{\alpha_i}_{\mu\nu}T^{\alpha_1\cdots\mu\cdots\alpha_r}_{\beta_1\cdots\beta_s}-\sum_{j=1}^s\Gamma^\mu_{\beta_j\nu}T^{\alpha_1\cdots\alpha_r}_{\beta_1\cdots\mu\beta_s} .
+\]
+
+\item Since the covariant derivative of a tensor is a tensor, it can be expressed in any basis. Consequently, the connection symbols in two different coordinate systems must be related by an expression involving the change of coordinates.
+
+\item Let us consider two coordinate systems, $\{x^\alpha\}$ with domain $U$ and $\{x^{\alpha'}\}$ with domain $U'$, and let us suppose that $U\cap U'$ is not empty. At the points of $U\cap U'$ we can relate the two natural bases $e_\alpha=\partial_\alpha$ and $e_{\alpha'}=\partial_{\alpha'}$ through a change of basis
+\[
+  e_{\alpha'}=\frac{\partial x^\alpha}{\partial x^{\alpha'}}e_\alpha:=A^\alpha_{\alpha'}e_\alpha .
+\]
+
+\item We can compute the covariant derivative $\nabla_{e_{\alpha'}}e_{\beta'}$ in two ways. On the one hand,
+\[
+  \nabla_{e_{\alpha'}}e_{\beta'}=\Gamma^{\mu'}_{\beta'\alpha'}e_{\mu'} .
+\]
+On the other hand,
+\begin{align*}
+  \nabla_{e_{\alpha'}}e_{\beta'}=\nabla_{e_{\alpha'}}(A^\beta_{\beta'}e_\beta)=\nabla_{e_{\alpha'}}(A^\beta_{\beta'})e_\beta+A^\beta_{\beta'}\nabla_{e_{\alpha'}}e_\beta&=\frac{\partial}{\partial x^{\alpha'}}\left(\frac{\partial x^\beta}{\partial x^{\beta'}}\right)e_\beta+A^\beta_{\beta'}A^\alpha_{\alpha'}\nabla_{e_\alpha}e_\beta\\
+  &=\frac{\partial^2x^\beta}{\partial x^{\alpha'}\partial x^{\beta'}}e_\beta+A^\alpha_{\alpha'}A^\beta_{\beta'}\Gamma^\mu_{\beta\alpha}e_\mu\\&=\left(\frac{\partial^2x^\beta}{\partial x^{\alpha'}\partial x^{\beta'}}A^{\mu'}_\beta+A^\alpha_{\alpha'}A^\beta_{\beta'}A^{\mu'}_\mu\Gamma^\mu_{\beta\alpha}\right)e_{\mu'}
+\end{align*}
+
+\item Comparing both expressions, we arrive at the form in which the connection symbols transform under changes of coordinates:
+\[
+  \Gamma^{\mu'}_{\beta'\alpha'}=\frac{\partial x^\alpha}{\partial x^{\alpha'}}\frac{\partial x^\beta}{\partial x^{\beta'}}\frac{\partial x^{\mu'}}{\partial x^\mu}\Gamma^\mu_{\beta\alpha}+\frac{\partial^2x^\beta}{\partial x^{\alpha'}\partial x^{\beta'}}\frac{\partial x^{\mu'}}{\partial x^\beta} .
+\]
+
+\begin{carroll}[: the connection symbols are not tensors]
+Because of the second, inhomogeneous, term the connection symbols do not transform as the components of a tensor. However, the inhomogeneous term only depends on the coordinate change, not on the connection. Therefore, if $\nabla$ and $\tilde\nabla$ are two connections on $M$, the difference $S^\mu_{\beta\alpha}:=\Gamma^\mu_{\beta\alpha}-\tilde\Gamma^\mu_{\beta\alpha}$ \emph{is} a tensor (once contravariant, twice covariant): the inhomogeneous terms cancel. The torsion $T^\mu_{\alpha\beta}=\Gamma^\mu_{\beta\alpha}-\Gamma^\mu_{\alpha\beta}$ introduced below is an example (the second ``connection'' being the one obtained by exchanging the lower indices). Conversely, any connection can be written as a given one plus an arbitrary tensor $S^\mu_{\beta\alpha}$: there are infinitely many connections on a manifold, and one needs an extra structure (the metric, see the Levi-Civita connection) to select one of them.
+
+(Notation: in these notes the \emph{last} lower index of $\Gamma^\mu_{\beta\alpha}$ is the direction of differentiation, $\nabla_{e_\alpha}e_\beta=\Gamma^\mu_{\beta\alpha}e_\mu$. Carroll uses the opposite order. For the torsion-free connections used in General Relativity the two orderings coincide.)
+\end{carroll}
+
+
+\item A fundamental property of the covariant derivative is that it allows us to relate vectors at different points of the manifold connected by a curve.
+
+\item In an arbitrary differentiable manifold the tangent vector spaces at different points are not related to each other. This is the reason why we cannot differentiate vector fields, since a derivative involves a variation of the field when we move the point. If we cannot compare vectors at different points, we cannot give a meaning to the concept of variation.
+
+\item When we have a covariant derivative and a curve $\gamma(\sigma)$, we can transport along the curve any vector $A_0$ defined in the tangent space at one of the points of the curve (say $p=\gamma(t_0)$). In this way we can define, starting from $A_0$, a vector at each point of the curve (in other words, a \textbf{vector field along} $\gamma$).
+
+\item This field is called the \textbf{parallel transport of} $A_0$. It is defined as the solution of the differential equation
+\[
+  \nabla_{\dot\gamma}A=0,\qquad\qquad A|_{t=t_0}=A_0
+\]
+where $\dot\gamma$ is the tangent vector to the curve. In index notation, we can write this equation as
+\[
+  \dot\gamma^\alpha\nabla_\alpha A^\beta=0,\qquad\qquad A^\alpha|_{t=t_0}=A^\alpha_0 .
+\]
+
+\item Although this equation a priori involves partial derivatives, we can rewrite it as a system of ordinary differential equations (in the variable $\sigma$) as follows. We look for a solution $A(\sigma)$ of the equation. Let us suppose, however, that this solution (which would be defined only on the curve) can be extended to a vector field $A(x)$ in a neighbourhood of the curve\footnote{We assume for simplicity that we can use a coordinate system $\{x\}$ covering this whole neighbourhood, but this condition is not necessary.}. Saying that the field $A(x)$ \emph{extends} the field $A(\sigma)$ means that it satisfies $A(x(\sigma))=A(\sigma)$, where $x^\alpha(\sigma)$ is the expression of the curve $\gamma$ in the coordinates $\{x^\alpha\}$.
+
+\item The tangent vector to the curve is
+\[
+  \dot\gamma^\alpha=\frac{dx^\alpha(\sigma)}{d\sigma}
+\]
+so that, using the chain rule, we can write the equation in the following way
+\[
+  \dot\gamma^\alpha\nabla_\alpha A^\beta=\frac{dx^\alpha}{d\sigma}\left(\partial_\alpha A^\beta+\left.\Gamma^\beta_{\mu\alpha}\right|_{x(\sigma)}A^\mu\right)=\frac{dA^\beta}{d\sigma}+\left.\Gamma^\beta_{\mu\alpha}\right|_{x(\sigma)}A^\mu\frac{dx^\alpha}{d\sigma}=0
+\]
+and we obtain that, indeed, the parallel transport equation is a system of ordinary equations. This system is linear and always has a unique solution once we have fixed an initial value.
+
+\item A notation that is sometimes used for the expression $\nabla_{\dot\gamma}A$ is $\frac{\nabla A}{d\sigma}$. This expression emphasises the fact that parallel transport does not involve partial derivatives, but only ordinary ones.
+
+\item The linearity of the parallel transport equation implies that the parallel transport of $aA_0+bB_0$ (where $a,b\in\R$ and $A_0,B_0\in T_{\gamma(t_0)}M$) along the curve $\gamma(\sigma)$ is $aA(\sigma)+bB(\sigma)$, where $A(\sigma)$ is the parallel transport of $A_0$ and $B(\sigma)$ is the parallel transport of $B_0$. This property is consistent with the intuitive notion of parallel transport.
+
+\item Another important property is that, in general, the transport depends on the curve we use. Let us fix two points $p,q$ on the manifold and a vector $A_0\in T_pM$. If we join the points $p$ and $q$ by two different curves, the parallel-transported vector obtained at $q$ from a vector $A_0$ will be different for each of the curves.
+
+\begin{carroll}[: path dependence of parallel transport on a sphere]
+The simplest example is the two-sphere with its natural (Levi-Civita) connection. Take a vector tangent to the equator at a point $p$ of the equator, pointing along a meridian towards the North pole. (1) Transport it along the meridian up to the North pole $q$: it keeps pointing ``northwards'', i.e.\ along the meridian. (2) Alternatively, first transport it along the equator by a quarter of a turn (it stays perpendicular to the equator), and then up the new meridian to the North pole. The two vectors obtained at $q$ are perpendicular to each other: the result of parallel transport depends on the path.
+\begin{center}
+\begin{tikzpicture}[scale=1.5,>=Stealth]
+  \shade[ball color=gray!12] (0,0) circle (1.5);
+  \draw (0,0) circle (1.5);
+  \draw[dashed,gray] (1.5,0) arc (0:180:1.5 and 0.38);
+  \draw[thick] (-1.5,0) arc (180:360:1.5 and 0.38);
+  \coordinate (q) at (0,1.5);
+  \coordinate (p) at (-0.6,-0.348);
+  \coordinate (r) at (0.95,-0.294);
+  \draw[very thick,green!50!black] (p) to[out=92,in=200] (q);
+  \draw[very thick,red!70!black] (p) arc (247:310:1.5 and 0.38);
+  \draw[very thick,red!70!black] (r) to[out=95,in=-25] (q);
+  \fill (p) circle (1.2pt); \node[below left] at (p) {$p$};
+  \fill (r) circle (1.2pt);
+  \fill (q) circle (1.2pt); \node[above left] at (q) {$q$};
+  \draw[->,very thick,blue] (p) -- ++(0.02,0.5);
+  \draw[->,very thick,blue] (r) -- ++(0.07,0.5);
+  \draw[->,very thick,green!50!black] (q) -- ++(0.55,-0.12) node[right] {(1)};
+  \draw[->,very thick,red!70!black] (q) -- ++(0.15,0.5) node[above] {(2)};
+\end{tikzpicture}
+\end{center}
+This path dependence is precisely what the curvature tensor, introduced below, measures.
+\end{carroll}
+
+
+\item On the other hand, if we travel along the same curve between $p$ and $q$, but at a different rate (i.e.\ if we reparametrise the curve), the parallel-transported vector obtained at $q$ from a vector $A_0\in T_pM$ does not change. The reason is that under the reparametrisation $\gamma(\sigma(\sigma'))$ the differential equation of parallel transport is modified to
+\[
+  \frac{dA^\alpha}{d\sigma'}+\left.\Gamma^\alpha_{\mu\nu}\right|_\gamma A^\mu\frac{d\gamma^\nu}{d\sigma'}=\frac{dA^\alpha}{d\sigma'}+\left.\Gamma^\alpha_{\mu\nu}\right|_\gamma A^\mu(\sigma')\frac{d\gamma^\nu}{d\sigma}\frac{d\sigma}{d\sigma'}=\frac{d\sigma}{d\sigma'}\left(\frac{dA^\alpha}{d\sigma}+\left.\Gamma^\alpha_{\mu\nu}\right|_\gamma A^\mu\frac{d\gamma^\nu}{d\sigma}\right)
+\]
+so that if $A^\alpha(\sigma)$ is a solution of the parallel transport equation along the curve $\gamma(\sigma)$, then $A(\sigma(\sigma'))$ is the solution of the parallel transport equation along the reparametrised curve $\gamma(\sigma(\sigma'))$. The value of the field at each point of the curve is not modified.
+\end{points}
+
+\section{Autoparallel curves}
+
+\begin{points}
+\item In Euclidean space we have a set of very special curves: straight lines.
+
+\item These curves are the only ones that have the following two properties.
+
+(i) They minimise the distance between two given points,
+
+(ii) The acceleration of the curve is proportional to the velocity.
+
+\item To generalise these properties to differentiable manifolds we must be able either to have a notion of distance along a curve (property (i)) or to know what the acceleration is (property (ii)).
+
+\item For the first we will need a metric, which we will introduce later, but for the second it is only necessary to have a connection.
+
+\item Given a trajectory $\{x^\alpha(t)\}$ on a manifold, the velocity of the curve is simply the tangent vector to the trajectory
+\[
+  V^\alpha(t)=\frac{dx^\alpha(t)}{dt} .
+\]
+The acceleration in Euclidean space in Cartesian coordinates $\{X^\alpha\}$ is $a^\alpha=\frac{d^2X^\alpha(t)}{dt^2}$. However, this expression is no longer valid when we use coordinates other than Cartesian ones.
+
+\item In non-Cartesian coordinates of Euclidean space the acceleration involves additional terms. For example, in polar coordinates in the plane, a trajectory $\rho(t),\theta(t)$ has acceleration
+\[
+  \vec a=\left(\ddot\rho-\rho\dot\theta^2\right)u_\rho+\left(\rho\ddot\theta+2\dot\rho\dot\theta\right)u_\theta
+\]
+where $\{u_\rho,u_\theta\}$ is the basis of unit vectors along the coordinate lines $\rho$ and $\theta$ respectively.
+
+\item The reason for this behaviour under changes of coordinates is that the expression $\frac{d^2x^\alpha(t)}{dt^2}$ does not define the components of any tensor.
+
+\item If we look at the terms appearing in the acceleration when we express it in polar coordinates, we observe that, in addition to the terms in second derivatives, there are terms quadratic in the first derivatives.
+
+\item As we will see below, these terms correspond to the connection symbols. The reason why the acceleration in Cartesian coordinates is simply $\frac{d^2x^\alpha}{dt^2}$ is that Euclidean space can be endowed with a connection whose symbols vanish identically when expressed in Cartesian coordinates.
+
+\item We can define the acceleration of a curve on an arbitrary manifold endowed with a covariant derivative in the following way. Let us suppose that we have extended the velocity vector of the curve $V^\alpha(t)$ to a velocity field $V^\alpha(x^\beta)$, in such a way that, evaluated along the curve, it satisfies
+\[
+  V^\alpha(x(t))=\frac{dx^\alpha(t)}{dt}=V^\alpha(t).
+\]
+To compute the second derivative $\frac{d^2x^\alpha}{dt^2}$ we use the chain rule, as we already did in the equation of autoparallel curves,
+\[
+  \frac{d^2x^\alpha(t)}{dt^2}=\frac{dx^\beta}{dt}\left.\frac{\partial V^\alpha}{\partial x^\beta}\right|_{x(t)}=\left.V^\beta\partial_\beta V^\alpha\right|_{x(t)}
+\]
+
+\item The term on the right is not a vector, but on a manifold with a connection we can replace the partial derivative by the covariant derivative, and the result will automatically be a vector.
+
+\item We therefore define the acceleration of the curve $\{x^\alpha(t)\}$ as
+\[
+  a^\alpha(t)=V^\beta\nabla_\beta V^\alpha|_{x(t)},\qquad\text{where}\qquad V^\alpha(t)=\frac{dx^\alpha(t)}{dt}.
+\]
+
+\item The acceleration of the curve is also usually denoted by
+\[
+  a^\alpha=\frac{\nabla^2x^\alpha(t)}{dt^2}
+\]
+for the same reasons as those indicated above.
+
+\item The explicit expression of the tensor $a^\alpha(t)$ in an arbitrary coordinate system $\{x^\alpha\}$ is
+\[
+  a^\alpha(t)=V^\beta\partial_\beta V^\alpha+\left.\Gamma^\alpha_{\beta\mu}\right|_{x(t)}V^\beta V^\mu=\frac{d^2x^\alpha(t)}{dt^2}+\left.\Gamma^\alpha_{\beta\mu}\right|_{x(t)}\frac{dx^\beta}{dt}\frac{dx^\mu}{dt}
+\]
+and we recover the property that the terms that must be added to the second derivatives are always quadratic in the velocities.
+
+\item It is important to stress that, when the components $a^\alpha$ are given by this expression, the acceleration vector is
+\[
+  a=a^\alpha\partial_{x^\alpha} .
+\]
+This vector is expressed in the basis $\partial_{x^\alpha}$. If we change this basis (even without changing the coordinates), the components of $a^\alpha$ change.
+
+\item For example, in the case of polar coordinates described above, the basis $\{u_\rho,u_\theta\}$ is made of unit vectors, which are different from the coordinate vectors $\{\partial_\theta,\partial_\phi\}$ (the two bases are proportional, but with a proportionality factor that is different at each point).
+
+\item On manifolds on which we have defined a connection we can now generalise the property that defines straight lines as those curves whose acceleration is proportional to the velocity.
+
+\item We define \textbf{autoparallel} curves as those curves $x^\alpha(t)$ satisfying
+\[
+  a^\alpha(t)\propto v^\alpha(t).
+\]
+If we call $b(t)$ the proportionality factor, we obtain that the autoparallel curves are those satisfying
+\[
+  a^\alpha(t)=b(t)v^\alpha(t)
+\]
+for some function $b(t)$. Explicitly, the following equation must be satisfied
+\[
+  \frac{d^2x^\alpha(t)}{dt^2}+\left.\Gamma^\alpha_{\beta\mu}\right|_{x(t)}\frac{dx^\beta}{dt}\frac{dx^\mu}{dt}=b(t)\frac{dx^\alpha}{dt}.
+\]
+
+\item If we know $b(t)$ explicitly, the autoparallel-curve equation is a second-order differential equation. Once an initial point $x^\alpha(t_0)$ and an initial velocity $v^\alpha(t_0)$ are fixed at an initial value of the parameter $t$, we have a unique solution $x^\alpha(t)$.
+
+\item Autoparallel curves have the following property (exercise: prove it)
+\end{points}
+
+\textbf{Exercise 1.} \emph{For every autoparallel curve $x^\alpha(t)$ there exists a reparametrisation of the curve $x^\alpha(t(s))$ whose tangent vector
+\[
+  W^\alpha:=\frac{dx^\alpha}{ds}
+\]
+satisfies the autoparallel-curve equation with $b(s)=0$. That is, the acceleration of the curve vanishes:
+\[
+  W^\alpha\nabla_\alpha W^\beta=0.
+\]
+Moreover, the affine parameter is unique up to transformations $s'=a_0s+b_0$, with $a_0\neq0$, $b_0\in\R$.}
+
+\begin{points}
+\item In particular, the vector $W^\alpha$ satisfies the parallel transport equation along $x^\alpha(s)$. Hence the name autoparallel curve.
+\end{points}
+
+\section{Torsion and curvature}
+
+\begin{points}
+\item Every connection on a manifold has two associated tensors, torsion and curvature. Both encode important properties of the connection that defines them.
+
+\item The first notion is that of torsion, which measures, among other things, whether the second covariant derivatives of a scalar function commute.
+
+\item Let us consider a scalar function $f$ and a local coordinate system $\{x^\alpha\}$. The differential of $f$ is the 1-form $df=\partial_\alpha f\,dx^\alpha$.
+
+\item The second covariant derivative of $f$ is (using the general expression for the covariant derivative of a 1-form)
+\[
+  \nabla_\beta\nabla_\alpha f=\partial_\beta(df_\alpha)-\Gamma^\mu_{\alpha\beta}df_\mu=\partial_\beta\partial_\alpha f-\Gamma^\mu_{\alpha\beta}\partial_\mu f .
+\]
+
+\item Therefore, the antisymmetric part of the second covariant derivative of a function $f$ is
+\[
+  \nabla_\alpha\nabla_\beta f-\nabla_\beta\nabla_\alpha f=\left(\Gamma^\mu_{\alpha\beta}-\Gamma^\mu_{\beta\alpha}\right)\nabla_\mu f .
+\]
+
+\item The left-hand side is a tensor, so the right-hand side must also be one. Consequently, although the connection symbols are not tensors, their antisymmetric part is.
+
+\item This antisymmetric part defines the torsion tensor $T$ (note the position of the indices in the following expression)
+\[
+  T^\mu_{\alpha\beta}:=\Gamma^\mu_{\beta\alpha}-\Gamma^\mu_{\alpha\beta} .
+\]
+
+\item In terms of this tensor, the antisymmetrised covariant derivative of a function $f$ satisfies
+\[
+  \left(\nabla_\alpha\nabla_\beta-\nabla_\beta\nabla_\alpha\right)f=-T^\mu_{\alpha\beta}\partial_\mu f .
+\]
+
+\item This definition is valid in any coordinate system. We can also define the torsion tensor in an equivalent way without having to use coordinates:
+
+\item The torsion tensor is a multilinear map that takes a pair of vector fields $X,Y$ and gives the field $T(X,Y)$ defined by
+\[
+  T(X,Y)=\nabla_XY-\nabla_YX-[X,Y].
+\]
+
+\item The antisymmetry property $T(X,Y)=-T(Y,X)$ is immediate from the definition.
+
+\item To check that $T(X,Y)$ defines a tensor we must check that it is multilinear, i.e.\ that given any function $f$ we have $T(fX,Y)=fT(X,Y)$ and $T(X,fY)=fT(X,Y)$. Given the antisymmetry, it is enough to prove that $T(fX,Y)=fT(X,Y)$, which follows from
+\begin{align*}
+  T(fX,Y)&=\nabla_{fX}Y-\nabla_Y(fX)-[fX,Y]\\
+  &=f\nabla_XY-f\nabla_YX-Y(f)X-f[X,Y]+Y(f)X\\
+  &=f\left(\nabla_XY-\nabla_YX-[X,Y]\right)\\
+  &=fT(X,Y).
+\end{align*}
+
+\item The components $T^\mu_{\alpha\beta}$ of the torsion tensor in a basis $e_\alpha$ are
+\[
+  T(e_\alpha,e_\beta)=T^\mu_{\alpha\beta}e_\mu
+\]
+
+\item If the basis is a coordinate basis, we recover the previous definition in terms of the difference of the connection symbols
+\[
+  T(\partial_\alpha,\partial_\beta)=\nabla_{\partial_\alpha}\partial_\beta-\nabla_{\partial_\beta}\partial_\alpha-[\partial_\alpha,\partial_\beta]=\Gamma^\mu_{\beta\alpha}\partial_\mu-\Gamma^\mu_{\alpha\beta}\partial_\mu=\left(\Gamma^\mu_{\beta\alpha}-\Gamma^\mu_{\alpha\beta}\right)\partial_\mu=T^\mu_{\alpha\beta}\partial_\mu .
+\]
+
+\item Second partial derivatives in $\R^n$ commute, so it will be natural to impose the condition that the torsion of the connection vanishes.
+
+\item The second fundamental tensor that can be defined from the covariant derivative is the curvature of the connection.
+
+\item The geometric idea of curvature is to measure the difference between a vector $w^\alpha$ at a point and its parallel transport along an infinitesimally small parallelogram with sides $u^\alpha$ and $v^\alpha$.
+
+\begin{carroll}[: the infinitesimal loop]
+Transporting $w$ around the small parallelogram spanned by $u$ and $v$ (first along $u$ and then along $v$, or first along $v$ and then along $u$) produces two vectors that differ, to lowest order, by an amount proportional to $w$, to $u$ and to $v$:
+\[
+  \delta w^\alpha\propto R^\alpha{}_{\beta\mu\nu}\,w^\beta u^\mu v^\nu ,
+\]
+as computed explicitly further below with coordinate lines. The antisymmetry $R^\alpha{}_{\beta\mu\nu}=-R^\alpha{}_{\beta\nu\mu}$ reflects the fact that going around the loop in the opposite sense changes the sign of $\delta w$.
+\begin{center}
+\begin{tikzpicture}[scale=1.2,>=Stealth]
+  \coordinate (A) at (0,0); \coordinate (B) at (2.4,0.3); \coordinate (C) at (3.0,1.9); \coordinate (D) at (0.6,1.6);
+  \draw[thick,->] (A) -- ($(A)!0.55!(B)$); \draw[thick] ($(A)!0.5!(B)$) -- (B);
+  \draw[thick,->] (B) -- ($(B)!0.55!(C)$); \draw[thick] ($(B)!0.5!(C)$) -- (C);
+  \draw[thick,->] (C) -- ($(C)!0.55!(D)$); \draw[thick] ($(C)!0.5!(D)$) -- (D);
+  \draw[thick,->] (D) -- ($(D)!0.55!(A)$); \draw[thick] ($(D)!0.5!(A)$) -- (A);
+  \node[below] at ($(A)!0.5!(B)$) {$u$};
+  \node[left] at ($(A)!0.5!(D)$) {$v$};
+  \draw[->,very thick,blue!70!black] (A) -- ++(-0.3,0.75) node[left] {$w$};
+  \draw[->,very thick,red!70!black] (A) -- ++(-0.05,0.8);
+  \node[red!70!black,right] at (-0.02,0.65) {\small $w+\delta w$};
+  \fill (A) circle (1.3pt);
+\end{tikzpicture}
+\end{center}
+\end{carroll}
+
+
+\item To define it, it is convenient to try to generalise the previous construction of the torsion tensor. Instead of using second covariant derivatives of a function, we use second covariant derivatives of a vector field.
+
+\item Given three vector fields $X,Y,Z$ we can define $\nabla_X\nabla_YZ-\nabla_Y\nabla_XZ$.
+
+\item However, this construction does not define a tensor, since the operation is not multilinear in any of the three vectors.
+
+\item Analogously to the case of torsion, it is possible to modify the expression by means of a Lie derivative in such a way that the result does define a tensor.
+
+\item We introduce the curvature tensor $R(X,Y)Z$ as the operator that takes three vector fields $X,Y,Z$ and gives the vector
+\[
+  R(X,Y)Z=\nabla_X\nabla_YZ-\nabla_Y\nabla_XZ-\nabla_{[X,Y]}Z .
+\]
+
+\item By definition, this operator is antisymmetric in $X,Y$, i.e.
+\[
+  R(X,Y)Z=-R(Y,X)Z .
+\]
+
+\item To check that it defines a tensor, we must prove that it is multilinear in $X$, $Y$ and $Z$. Thanks to the antisymmetry in $X$, $Y$, it is enough to check $R(fX,Y)Z=fR(X,Y)Z$ and $R(X,Y)fZ=fR(X,Y)Z$, where $f$ is any scalar function.
+
+\item We start with the first one
+\begin{align*}
+  R(fX,Y)Z&=\nabla_{fX}\nabla_YZ-\nabla_Y\nabla_{fX}Z-\nabla_{[fX,Y]}Z\\
+  &=f\nabla_X\nabla_YZ-\nabla_Y(f\nabla_XZ)-\nabla_{f[X,Y]-Y(f)X}Z\\
+  &=f\left(\nabla_X\nabla_YZ-\nabla_Y\nabla_XZ-\nabla_{[X,Y]}Z\right)-(\nabla_Yf)\nabla_XZ+Y(f)\nabla_XZ\\
+  &=fR(X,Y)Z.
+\end{align*}
+
+\item For the second linearity property
+\begin{align*}
+  R(X,Y)fZ&=\nabla_X\nabla_Y(fZ)-\nabla_Y\nabla_X(fZ)-\nabla_{[X,Y]}(fZ)\\
+  &=\nabla_X(Y(f)Z+f\nabla_YZ)-\nabla_Y(X(f)Z+f\nabla_XZ)-[X,Y](f)Z-f\nabla_{[X,Y]}Z\\
+  &=X(Y(f))Z+Y(f)\nabla_XZ+X(f)\nabla_YZ+f\nabla_X\nabla_YZ\\
+  &\quad-(Y(X(f))Z+X(f)\nabla_YZ+Y(f)\nabla_XZ+f\nabla_Y\nabla_XZ)-[X,Y](f)Z-f\nabla_{[X,Y]}Z\\
+  &=\left(X(Y(f))-Y(X(f))-[X,Y](f)\right)Z+f\left(\nabla_X\nabla_YZ-\nabla_Y\nabla_XZ-\nabla_{[X,Y]}Z\right)\\
+  &=fR(X,Y)Z.
+\end{align*}
+
+\item Therefore $R(X,Y)Z$ defines a tensor. Since it acts on three vectors and gives a vector, this operator defines a tensor that is 1 time contravariant and 3 times covariant.
+
+\item The components $R^\alpha{}_{\beta\mu\nu}$ of this tensor in a basis $\{e_\alpha\}$ and its dual $\{\theta^\alpha\}$ are defined by (note the position of the indices)
+\[
+  R(e_\mu,e_\nu)e_\beta=R^\alpha{}_{\beta\mu\nu}e_\alpha\qquad\Longleftrightarrow\qquad R^\alpha{}_{\beta\mu\nu}=\theta^\alpha\left(R(e_\mu,e_\nu)e_\beta\right).
+\]
+
+\item From the antisymmetry of $R(X,Y)Z$ in $X,Y$ follows the antisymmetry property in the last two indices
+\[
+  R^\alpha{}_{\beta\mu\nu}=-R^\alpha{}_{\beta\nu\mu} .
+\]
+
+\item Since the curvature is defined from a connection, there must be an explicit expression for the curvature tensor in terms of the connection symbols.
+
+\item Suppose that $e_\alpha=\partial_{x^\alpha}$ is a coordinate basis (so that $[e_\alpha,e_\beta]=0$). Recalling that the connection symbols in this basis are defined by
+\[
+  \nabla_{e_\nu}e_\beta=\Gamma^\alpha_{\beta\nu}e_\alpha
+\]
+we can compute the second covariant derivative
+\begin{align*}
+  \nabla_{e_\mu}\nabla_{e_\nu}e_\beta=\nabla_{e_\mu}\left(\Gamma^\alpha_{\beta\nu}e_\alpha\right)=e_\mu\left(\Gamma^\alpha_{\beta\nu}\right)e_\alpha+\Gamma^\alpha_{\beta\nu}\nabla_{e_\mu}e_\alpha&=\frac{\partial\Gamma^\alpha_{\beta\nu}}{\partial x^\mu}e_\alpha+\Gamma^\alpha_{\beta\nu}\Gamma^\gamma_{\alpha\mu}e_\gamma\\
+  &=\left(\frac{\partial\Gamma^\alpha_{\beta\nu}}{\partial x^\mu}+\Gamma^\rho_{\beta\nu}\Gamma^\alpha_{\rho\mu}\right)e_\alpha
+\end{align*}
+
+\item Inserting into the definition of the curvature tensor,
+\begin{align*}
+  R^\alpha{}_{\beta\mu\nu}e_\alpha=R(e_\mu,e_\nu)e_\beta&=\nabla_{e_\mu}\nabla_{e_\nu}e_\beta-\nabla_{e_\nu}\nabla_{e_\mu}e_\beta-\nabla_{[e_\mu,e_\nu]}e_\beta=\nabla_{e_\mu}\nabla_{e_\nu}e_\beta-\nabla_{e_\nu}\nabla_{e_\mu}e_\beta\\
+  &=\left(\frac{\partial\Gamma^\alpha_{\beta\nu}}{\partial x^\mu}-\frac{\partial\Gamma^\alpha_{\beta\mu}}{\partial x^\nu}+\Gamma^\alpha_{\rho\mu}\Gamma^\rho_{\beta\nu}-\Gamma^\alpha_{\rho\nu}\Gamma^\rho_{\beta\mu}\right)e_\alpha
+\end{align*}
+and we arrive at the following explicit expression in terms of the connection symbols
+\[
+  R^\alpha{}_{\beta\mu\nu}=\partial_\mu\Gamma^\alpha_{\beta\nu}-\partial_\nu\Gamma^\alpha_{\beta\mu}+\Gamma^\alpha_{\rho\mu}\Gamma^\rho_{\beta\nu}-\Gamma^\alpha_{\rho\nu}\Gamma^\rho_{\beta\mu} .
+\]
+
+\item As mentioned above, the curvature admits a geometric interpretation in terms of parallel transport along a parallelogram. The construction is as follows.
+
+\item Let us consider a point $p\in M$ and a vector $Z$ in $T_pM$, and let us choose a coordinate system $x^\alpha$ containing $p$. By shifting the origin of the coordinates we can assume that the point $p$ has coordinates $x^\alpha(p)=0$.
+
+\item Let us choose two independent coordinate lines passing through $p$. That is, we choose two different values of $\alpha$ and $\beta$ and consider the two curves $\gamma_\alpha(t)=(0,0,\cdots,t,\cdots0)$ and $\gamma_\beta(s)=(0,0,\cdots,s,\cdots0)$, where in the first curve $t$ is in the $\alpha$-th position and in the second $s$ is in the $\beta$-th position.
+
+\item If we transport $Z$ parallelly along the curve $\gamma_\alpha$ we obtain a field $Z^\nu_1(t)$ along this curve that satisfies the equation
+\[
+  \frac{dZ^\nu_1(t)}{dt}+\left.\Gamma^\nu_{\mu\alpha}\right|_{\gamma_\alpha(t)}Z^\mu_1(t)=0 .
+\]
+
+\item For small values of $t$, the expression of the field $Z_1(t)$ is
+\begin{equation}
+  Z^\nu_1(t)=Z^\nu|_p-t\Gamma^\nu_{\mu\alpha}|_pZ^\mu|_p+O(t^2).
+\end{equation}
+
+\item From the point $\gamma_\alpha(t)$ we transport the vector $Z_1(t)$ parallelly along the curve $\gamma^t_\beta(s)$ defined by $x^\alpha=t$, $x^\beta=s$ and the rest of the coordinates equal to zero (the parameter of the curve is $s$, while $t$ is kept constant). Note that $\gamma^t_\beta(s=0)=\gamma_\alpha(t)$. The parallel transport equation is, in this case,
+\[
+  \frac{dZ^\nu_1(t;s)}{ds}+\left.\Gamma^\nu_{\mu\beta}\right|_{\gamma^t_\beta(s)}Z^\mu_1(t;s)=0 .
+\]
+
+\item For small values of $s$ we obtain
+\[
+  Z^\nu_1(t;s)=Z^\nu_1(t)-s\left.\Gamma^\nu_{\mu\beta}\right|_{\gamma_\alpha(t)}Z^\mu_1(t)+O(s^2).
+\]
+
+\item If the value of $t$ is also small, we can expand to first order in $t$ and use (4):
+\begin{align*}
+  Z^\nu_1(t;s)&=Z^\nu|_p-t\Gamma^\nu_{\mu\alpha}|_pZ^\mu|_p-s\left.\Gamma^\nu_{\mu\beta}\right|_{\gamma_\alpha(t)}\left(Z^\mu|_p-t\Gamma^\mu_{\gamma\alpha}Z^\gamma|_p+O(t^2)\right)+O(s^2)\\
+  &=Z^\nu|_p-t\Gamma^\nu_{\mu\alpha}|_pZ^\mu|_p-s\left(\Gamma^\nu_{\mu\beta}|_p+t\partial_\alpha\Gamma^\nu_{\mu\beta}|_p\right)\left(Z^\mu|_p-t\Gamma^\mu_{\gamma\alpha}Z^\gamma|_p+O(t^2)\right)+O(s^2)\\
+  &=Z^\nu|_p-t\Gamma^\nu_{\mu\alpha}|_pZ^\mu|_p-s\Gamma^\nu_{\mu\beta}|_pZ^\mu|_p-s\,t\left(\partial_\alpha\Gamma^\nu_{\mu\beta}Z^\mu|_p-\Gamma^\nu_{\mu\beta}\Gamma^\mu_{\gamma\alpha}Z^\gamma|_p\right)+O(t^2,s^2)\\
+  &=Z^\nu|_p-t\Gamma^\nu_{\mu\alpha}|_pZ^\mu|_p-s\Gamma^\nu_{\mu\beta}|_pZ^\mu|_p-s\,t\left(\partial_\alpha\Gamma^\nu_{\mu\beta}-\Gamma^\nu_{\rho\beta}\Gamma^\rho_{\mu\alpha}\right)Z^\mu|_p+O(t^2,s^2).
+\end{align*}
+where in the second equality we have used a first-order Taylor expansion of $\Gamma^\nu_{\mu\beta}|_{\gamma_\alpha(t)}$.
+
+\item We repeat the process but now moving first along the coordinate curve $x^\beta$ by an amount $s$ and then along the integral curve $x^\alpha$ by an amount $t$; we arrive at exactly the same point of space-time (with coordinates $x^\alpha=t$, $x^\beta=s$ and the rest of the coordinates zero). The transported vector $Z^\nu_2(s;t)$ in this case is obtained simply by interchanging $\alpha$ with $\beta$ and $t$ with $s$ in the previous expression. We obtain
+\[
+  Z^\nu_2(s;t)=Z^\nu|_p-s\Gamma^\nu_{\mu\beta}|_pZ^\mu|_p-t\Gamma^\nu_{\mu\alpha}|_pZ^\mu|_p-s\,t\left(\partial_\beta\Gamma^\nu_{\mu\alpha}-\Gamma^\nu_{\rho\alpha}\Gamma^\rho_{\mu\beta}\right)Z^\mu|_p+O(t^2,s^2).
+\]
+
+\item The difference between the two vectors evaluates the difference between transporting the vector along one path and transporting it along the other. The result is
+\begin{align*}
+  Z^\nu_2(s;t)-Z^\nu_1(t;s)&=s\,t\left(\partial_\alpha\Gamma^\nu_{\mu\beta}-\partial_\beta\Gamma^\nu_{\mu\alpha}-\Gamma^\nu_{\rho\beta}\Gamma^\rho_{\mu\alpha}+\Gamma^\nu_{\rho\alpha}\Gamma^\rho_{\mu\beta}\right)Z^\mu|_p+O(t^2,s^2)\\
+  &=s\,t\,R^\nu{}_{\mu\alpha\beta}|_pZ^\mu|_p+O(t^2,s^2).
+\end{align*}
+
+\item Consequently, on a manifold with a connection whose curvature does not vanish, the notion of parallel transport is not absolute, but is associated with the path used for the transport. This property distinguishes these manifolds from Euclidean space.
+
+\item In Euclidean space the manifold is $\R^n$. The Cartesian coordinates $\{X^\alpha\}$ define a basis of tangent vectors at each point that are parallel in the absolute sense, i.e.\ along any curve. In particular, $\partial_{X^\alpha}$ is parallel along the integral curve of $X^\beta$ and therefore
+\[
+  \nabla_{\partial_{X^\alpha}}\partial_{X^\beta}=0 .
+\]
+By the definition of the connection symbols we have $\Gamma^\alpha_{\beta\mu}=0$ in these coordinates. This connection of Euclidean space is called the \textbf{flat connection}. It follows from the definition that the curvature and the torsion of the flat connection vanish identically.
+
+\item The following result is fundamental in differential geometry. It states that the only connection whose torsion and curvature vanish is the flat connection.
+\end{points}
+
+\textbf{Theorem 1.} \emph{Let $(M,\nabla)$ be a differentiable manifold with a connection $\nabla$. There exists a coordinate system $\{X^\alpha\}$ in a neighbourhood of each point $p\in M$ with the property that the connection symbols $\Gamma^\alpha_{\mu\nu}$ vanish in these coordinates if and only if the torsion and the curvature of $\nabla$ vanish identically.}
+
+\begin{points}
+\item From now on we shall assume that we have a differentiable manifold $M$ endowed with a connection $\nabla$ and that the torsion of $\nabla$ vanishes identically.
+
+\item This means that in local coordinates $\{x^\alpha\}$ the connection symbols are symmetric, i.e.
+\[
+  \Gamma^\alpha_{\mu\nu}=\Gamma^\alpha_{\nu\mu} .
+\]
+
+\item In these circumstances, the definition of the curvature tensor implies the following formula, whose validity is independent of the coordinate system $\{x^\alpha\}$ being used. Let $V^\alpha$ be any vector field expressed in this coordinate system. Then
+\[
+  \nabla_\mu\nabla_\nu V^\alpha-\nabla_\nu\nabla_\mu V^\alpha=R^\alpha{}_{\beta\mu\nu}V^\beta
+\]
+
+\item This identity is known as the \textbf{Ricci identity}.
+
+\item To prove it, we simply recall that the covariant derivative of a tensor $W^\alpha_\nu$ has components
+\[
+  \nabla_\mu W^\alpha_\nu=\partial_\mu W^\alpha_\nu+\Gamma^\alpha_{\gamma\mu}W^\gamma_\nu-\Gamma^\gamma_{\nu\mu}W^\alpha_\gamma
+\]
+
+\item Therefore, if the connection has no torsion, we obtain
+\[
+  \nabla_\mu W^\alpha_\nu-\nabla_\nu W^\alpha_\mu=\partial_\mu W^\alpha_\nu-\partial_\nu W^\alpha_\mu+\Gamma^\alpha_{\rho\mu}W^\rho_\nu-\Gamma^\alpha_{\rho\nu}W^\rho_\mu
+\]
+
+\item Particularising to $W^\alpha_\mu=\nabla_\mu V^\alpha$ and taking into account that the coordinate expression of $\nabla_\mu V^\alpha$ is
+\[
+  \nabla_\mu V^\alpha=\partial_\mu V^\alpha+\Gamma^\alpha_{\gamma\mu}V^\gamma
+\]
+we obtain
+\begin{align*}
+  \nabla_\mu\nabla_\nu V^\alpha-\nabla_\nu\nabla_\mu V^\alpha&=\partial_\mu\left(\partial_\nu V^\alpha+\Gamma^\alpha_{\gamma\nu}V^\gamma\right)-\partial_\nu\left(\partial_\mu V^\alpha+\Gamma^\alpha_{\gamma\mu}V^\gamma\right)\\
+  &\quad+\Gamma^\alpha_{\rho\mu}\left(\partial_\nu V^\rho+\Gamma^\rho_{\gamma\nu}V^\gamma\right)-\Gamma^\alpha_{\rho\nu}\left(\partial_\mu V^\rho+\Gamma^\rho_{\gamma\mu}V^\gamma\right)\\
+  &=\left(\partial_\mu\Gamma^\alpha_{\gamma\nu}-\partial_\nu\Gamma^\alpha_{\gamma\mu}+\Gamma^\alpha_{\rho\mu}\Gamma^\rho_{\gamma\nu}-\Gamma^\alpha_{\rho\nu}\Gamma^\rho_{\gamma\mu}\right)V^\gamma\\
+  &=R^\alpha{}_{\gamma\mu\nu}V^\gamma
+\end{align*}
+where in the last equality we have used the symmetry of the partial derivatives and that of the connection symbols.
+
+\item Note that in this calculation we have expanded first the outermost covariant derivative, since if we expanded first an inner covariant derivative we would encounter terms of the type $\nabla_\mu(\partial_\nu V^\alpha)$. These terms are not defined, since the object in parentheses is not a tensor and it makes no sense to compute its covariant derivative.
+
+\item The Ricci identity can be generalised to connections with torsion, although the resulting expression is slightly more complicated.
+
+\item The Ricci identity can also be generalised to tensors of arbitrary type ($p$ times contravariant and $q$ times covariant). The corresponding expression is
+\[
+  \left(\nabla_\mu\nabla_\nu-\nabla_\nu\nabla_\mu\right)T^{\alpha_1\cdots\alpha_p}_{\beta_1\cdots\beta_q}=\sum_{i=1}^pR^{\alpha_i}{}_{\rho\mu\nu}T^{\alpha_1\cdots\rho\cdots\alpha_p}_{\beta_1\cdots\beta_q}-\sum_{j=1}^qR^\rho{}_{\beta_j\mu\nu}T^{\alpha_1\cdots\alpha_p}_{\beta_1\cdots\rho\cdots\beta_q} .
+\]
+
+\item The curvature tensor is not only antisymmetric in its last two indices. It also satisfies the \textbf{first Bianchi identity}, which, in the case of a torsion-free connection, states that
+\[
+  R^\alpha{}_{\beta\mu\nu}+R^\alpha{}_{\mu\nu\beta}+R^\alpha{}_{\nu\beta\mu}=0 .
+\]
+
+\item We can prove it from the definition of the curvature tensor
+\begin{align*}
+  R(X,Y)Z+R(Y,Z)X+R(Z,X)Y&=\nabla_X\nabla_YZ-\nabla_Y\nabla_XZ-\nabla_{[X,Y]}Z\\
+  &\quad+\nabla_Y\nabla_ZX-\nabla_Z\nabla_YX-\nabla_{[Y,Z]}X\\
+  &\quad+\nabla_Z\nabla_XY-\nabla_X\nabla_ZY-\nabla_{[Z,X]}Y\\
+  &=\nabla_X\left(\nabla_YZ-\nabla_ZY\right)+\nabla_Y\left(\nabla_ZX-\nabla_XZ\right)+\nabla_Z\left(\nabla_XY-\nabla_YX\right)\\
+  &\quad-\nabla_{[X,Y]}Z-\nabla_{[Y,Z]}X-\nabla_{[Z,X]}Y.
+\end{align*}
+
+\item We use that the connection has no torsion, so that $\nabla_XY-\nabla_YX=[X,Y]$, and we obtain
+\begin{align*}
+  R(X,Y)Z+R(Y,Z)X+R(Z,X)Y&=\nabla_X[Y,Z]+\nabla_Y[Z,X]+\nabla_Z[X,Y]-\nabla_{[X,Y]}Z-\nabla_{[Y,Z]}X-\nabla_{[Z,X]}Y\\
+  &=[X,[Y,Z]]+[Y,[Z,X]]+[Z,[X,Y]]=0
+\end{align*}
+where in the second equality we have used again that the connection has no torsion, and in the last equality we have used the Jacobi identity.
+
+\item In addition to this algebraic property, the curvature tensor satisfies a differential identity known as the \textbf{second Bianchi identity}.
+\[
+  \nabla_\gamma R^\alpha{}_{\beta\mu\nu}+\nabla_\mu R^\alpha{}_{\beta\nu\gamma}+\nabla_\nu R^\alpha{}_{\beta\gamma\mu}=0 .
+\]
+
+\item Again, this identity is valid when the connection has no torsion. If the torsion does not vanish, the corresponding expression is somewhat more complicated.
+
+\item We can prove this identity from the Ricci identity, which, let us recall, states
+\[
+  \left(\nabla_\mu\nabla_\nu-\nabla_\nu\nabla_\mu\right)V^\alpha=R^\alpha{}_{\beta\mu\nu}V^\beta .
+\]
+
+\item We take the covariant derivative in the direction $\nabla_\gamma$ and obtain
+\[
+  \nabla_\gamma\nabla_\mu\nabla_\nu V^\alpha-\nabla_\gamma\nabla_\nu\nabla_\mu V^\alpha=\left(\nabla_\gamma R^\alpha{}_{\beta\mu\nu}\right)V^\beta+R^\alpha{}_{\beta\mu\nu}\nabla_\gamma V^\beta
+\]
+
+\item If we add three copies of this equation, after permuting the indices as they appear in the expression of the second Bianchi identity, we obtain
+\begin{align*}
+  \left(\nabla_\gamma R^\alpha{}_{\beta\mu\nu}+\nabla_\mu R^\alpha{}_{\beta\nu\gamma}+\nabla_\nu R^\alpha{}_{\beta\gamma\mu}\right)V^\beta&=\nabla_\gamma\nabla_\mu\nabla_\nu V^\alpha-\nabla_\gamma\nabla_\nu\nabla_\mu V^\alpha+\nabla_\mu\nabla_\nu\nabla_\gamma V^\alpha-\nabla_\mu\nabla_\gamma\nabla_\nu V^\alpha\\
+  &\quad+\nabla_\nu\nabla_\gamma\nabla_\mu V^\alpha-\nabla_\nu\nabla_\mu\nabla_\gamma V^\alpha-R^\alpha{}_{\beta\mu\nu}\nabla_\gamma V^\beta-R^\alpha{}_{\beta\nu\gamma}\nabla_\mu V^\beta-R^\alpha{}_{\beta\gamma\mu}\nabla_\nu V^\beta
+\end{align*}
+
+\item We now use the Ricci identity applied to $\nabla_\mu V^\alpha$, $\nabla_\nu V^\alpha$ and $\nabla_\gamma V^\alpha$ and obtain
+\begin{align*}
+  \left(\nabla_\gamma R^\alpha{}_{\beta\mu\nu}+\nabla_\mu R^\alpha{}_{\beta\nu\gamma}+\nabla_\nu R^\alpha{}_{\beta\gamma\mu}\right)V^\beta&=R^\alpha{}_{\rho\gamma\mu}\nabla_\nu V^\rho-R^\rho{}_{\nu\gamma\mu}\nabla_\rho V^\alpha+R^\alpha{}_{\rho\mu\nu}\nabla_\gamma V^\rho-R^\rho{}_{\gamma\mu\nu}\nabla_\rho V^\alpha\\
+  &\quad+R^\alpha{}_{\rho\nu\gamma}\nabla_\mu V^\rho-R^\rho{}_{\mu\nu\gamma}\nabla_\rho V^\alpha-\left(R^\alpha{}_{\rho\mu\nu}\nabla_\gamma V^\rho+R^\alpha{}_{\rho\nu\gamma}\nabla_\mu V^\rho+R^\alpha{}_{\rho\gamma\mu}\nabla_\nu V^\rho\right)=\\
+  &=-\left(R^\rho{}_{\nu\gamma\mu}+R^\rho{}_{\gamma\mu\nu}+R^\rho{}_{\mu\nu\gamma}\right)\nabla_\rho V^\alpha=0
+\end{align*}
+where in the last equality we have used the first Bianchi identity. Since $V^\beta$ is arbitrary, we conclude the validity of
+\[
+  \nabla_\gamma R^\alpha{}_{\beta\mu\nu}+\nabla_\mu R^\alpha{}_{\beta\nu\gamma}+\nabla_\nu R^\alpha{}_{\beta\gamma\mu}=0 .
+\]
+\end{points}
+
+\section{(Pseudo-)Riemannian manifolds}
+
+\begin{points}
+\item To be able to define distances on a differentiable manifold we need a metric.
+\end{points}
+
+\textbf{Definition 1.} \emph{A metric on a differentiable manifold $M$ is a symmetric ($g(X,Y)=g(Y,X)$) and non-degenerate 2-covariant tensor $g$, i.e.\ such that at each point $p\in M$ the following property holds:}
+\[
+  g|_p(X,Y)=0\quad\forall Y\in T_pM\qquad\Longrightarrow\qquad X=0 .
+\]
+
+\begin{points}
+\item Given two vectors $X,Y\in T_pM$, the quantity $g|_p(X,Y)$ defines the \textbf{scalar product} of the two vectors.
+
+\item When $g(X,Y)=0$ is satisfied we say that $X$ and $Y$ are \textbf{orthogonal}. Therefore, the non-degeneracy condition means that there is no vector orthogonal to all the others, except the zero vector.
+
+\item In a basis $\{e_\alpha\}$ the components of $g$ are $g_{\alpha\beta}$, and the scalar product of two vectors $X=X^\alpha e_\alpha$ and $Y=Y^\alpha e_\alpha$ can be computed by
+\[
+  g(X,Y)=g_{\alpha\beta}X^\alpha Y^\beta .
+\]
+
+\item The condition that $g$ is a symmetric tensor is
+\[
+  g_{\alpha\beta}=g_{\beta\alpha}
+\]
+and the non-degeneracy condition is
+\[
+  g_{\alpha\beta}V^\beta=0\qquad\Longleftrightarrow\qquad V^\beta=0 .
+\]
+
+\item If we regard $g_{\alpha\beta}$ as an $n\times n$ square matrix (where $n$ is the dimension of the manifold), the non-degeneracy condition simply states that the matrix $g_{\alpha\beta}$ is invertible. We denote the components of the inverse matrix with the indices up, i.e.\ we define $g^{\alpha\beta}$ by the equation
+\[
+  g^{\alpha\mu}g_{\mu\beta}=\delta^\alpha_\beta .
+\]
+
+\item We can introduce a contravariant tensor $g^\sharp$ whose components in the basis $\{\theta^\alpha\}$ dual to $\{e_\alpha\}$ are $g^{\sharp\alpha\beta}=g^{\alpha\beta}$. This tensor is known as the \textbf{contravariant metric} (or inverse metric).
+
+\item Given two 1-forms $\omega=\omega_\alpha\theta^\alpha$ and $\Omega=\Omega_\alpha\theta^\alpha$, the scalar product of $\omega$ and $\Omega$ is defined by $g^\sharp(\omega,\Omega)$ or, in components,
+\[
+  g^{\alpha\beta}\omega_\alpha\Omega_\beta .
+\]
+
+\item Since the inverse of a symmetric matrix is also symmetric, the contravariant metric is a symmetric tensor $g^\sharp(\omega,\Omega)=g^\sharp(\Omega,\omega)$.
+
+\item Since $g$ is a symmetric tensor, we can write its decomposition in the basis $\{\theta^\alpha\}$ in the following way
+\[
+  g=g_{\alpha\beta}\theta^\alpha\otimes\theta^\beta=\frac12g_{\alpha\beta}\theta^\alpha\otimes\theta^\beta+\frac12g_{\beta\alpha}\theta^\beta\otimes\theta^\alpha=\frac12g_{\alpha\beta}\left(\theta^\alpha\otimes\theta^\beta+\theta^\beta\otimes\theta^\alpha\right).
+\]
+
+\item It is usual to write $\theta^\alpha\theta^\beta:=\frac12\left(\theta^\alpha\otimes\theta^\beta+\theta^\beta\otimes\theta^\alpha\right)$, so that we can express the metric in the form
+\[
+  g=g_{\alpha\beta}\theta^\alpha\theta^\beta .
+\]
+
+\item In particular, if we use a coordinate basis $\theta^\alpha=dx^\alpha$, the metric is defined by the so-called \textbf{line element} $ds^2$, defined by
+\[
+  ds^2=g_{\alpha\beta}dx^\alpha dx^\beta .
+\]
+
+\item $ds^2$ is simply another way of writing the tensor $g$, so we can also express it in an arbitrary cobasis, $ds^2=g_{\alpha\beta}\theta^\alpha\theta^\beta$.
+
+\item At each point $p\in M$, the line element $ds^2$ defines a quadratic form. An important result of algebra states that every quadratic form admits a basis that diagonalises it and in which, moreover, the terms on the diagonal consist only of $+1$, $-1$ or $0$. There are multiple bases that diagonalise a quadratic form, but the number of $+1$, $-1$ and $0$ appearing in the canonical form is independent of the basis (Sylvester's law of inertia).
+
+\item Since metrics are non-degenerate, they cannot contain any zero in their canonical form. Therefore, there exists a basis of vectors $\{e_\alpha\}$ in $T_pM$, whose dual basis we call $\{\theta^\alpha\}$, in which $ds^2|_p$ takes the form
+\[
+  ds^2|_p=\underbrace{-(\theta^1)^2-(\theta^2)^2-\cdots-(\theta^{p})^2}_{p\text{ terms}}+\underbrace{(\theta^{p+1})^2+(\theta^{p+2})^2+\cdots+(\theta^n)^2}_{n-p\text{ terms}} .
+\]
+
+\item In matrix form, the components of the metric in this basis are
+\[
+  g_{\alpha\beta}=\mathrm{diag}\{-1,\cdots,-1,+1,\cdots,+1\}.
+\]
+
+\item The basis $\{e_\alpha\}$ is called orthonormal. The reason for this name is that any two different vectors of the basis are orthogonal to each other and, moreover, the scalar product of a basis vector with itself is $-1$ or $+1$.
+
+\item The number $n-2p$, which coincides with the sum of the $-1$ and $+1$ in the diagonal expression of the metric (since $n-2p=(n-p)1+p(-1)$), is called the \textbf{signature}. The collection of numbers $\{-1,\cdots-1,1,\cdots1\}$ appearing in the canonical form of the metric is also called the \textbf{signature}.
+
+\item A metric is called \textbf{Riemannian} if the signature is $n$ (or $-n$, although this form is used less). From a geometric point of view, this condition states that any non-zero vector $V\in T_pM$ has a positive scalar product with itself:
+\[
+  g(V,V)>0\qquad\text{for every }V\in T_pM\text{ with }V\neq0 .
+\]
+In general, the \textbf{squared norm} of a vector $V$ with respect to a metric $g$ is defined as $V^2|_g:=g(V,V)$. For an arbitrary metric, this squared norm can be zero (even if the vector does not vanish) or negative. If there is no possibility of confusion, the squared norm can be denoted simply by $V^2$.
+
+\item In a Riemannian metric, the squared norm of a vector is positive except when the vector vanishes. In these circumstances we can define the norm of $V$ as $|V|:=\sqrt{V^2}$.
+
+\item A metric is called \textbf{Lorentzian} if it has signature $n-2$ or, equivalently, $\{-1,+1,\cdots+1\}$ (the opposite signature $\{+1,-1,-1,\cdots,-1\}$ is also used).
+
+\item In general, a metric $g$ with an arbitrary signature is called pseudo-Riemannian. A manifold $M$ endowed with a pseudo-Riemannian metric $g$ is called a \textbf{pseudo-Riemannian manifold} and is denoted by $(M,g)$.
+
+\item If the metric of $(M,g)$ is Riemannian, we call $(M,g)$ a \textbf{Riemannian manifold}, and if the signature is Lorentzian, $(M,g)$ is called a \textbf{Lorentzian manifold}.
+
+\item Given a pseudo-Riemannian manifold $(M,g)$, we can define a canonical isomorphism between vectors and covectors, which is called the musical isomorphism (because of the flat symbol that is usually used to denote it). The more prosaic name of ``lowering an index'' is also used. The intrinsic definition of this operation is
+\[
+  \begin{array}{rcl}
+  \flat:T_pM&\longrightarrow&T^\star_pM\\
+  V&\longrightarrow&V_\flat:\left\{\begin{array}{rcl}T_pM&\longrightarrow&\R\\ W&\longrightarrow&g(V,W).\end{array}\right.
+  \end{array}
+\]
+
+\item In any basis $\{e_\alpha\}$ and its dual $\{\theta^\alpha\}$, the components of $V_\flat$ are $V_{\flat\alpha}:=g_{\alpha\beta}V^\beta$. In index notation, the position of the indices already identifies whether we are dealing with a vector or a covector, so it is not necessary to use the symbol $\flat$ and we can simply write $V_\alpha=g_{\alpha\beta}V^\beta$; hence the name ``lowering the index'' that this operation also receives.
+
+\item Analogously, we can define the operation of raising the index of a covector $\omega_\alpha$ and define the vector
+\[
+  \omega^\alpha=g^{\alpha\beta}\omega_\beta .
+\]
+
+\item The operations of raising and lowering indices are inverse to each other. Indeed, if we raise the index of $V_\flat$ we obtain
+\[
+  g^{\alpha\beta}V_\beta=g^{\alpha\beta}g_{\beta\mu}V^\mu=\delta^\alpha_\mu V^\mu=V^\alpha
+\]
+and we recover the original vector.
+
+\item Given any tensor $T^{\alpha_1\cdots\alpha_p}_{\beta_1\cdots\beta_q}$, we can raise and lower any of its indices. If we want to use the same symbol $T$ for all the tensors constructed in this way, it is necessary to place each of the indices in a different vertical slot, so as to know without ambiguity which index we have raised and lowered. If we write the tensor $T$ in the form $T^{\alpha_1\cdots\alpha_p}{}_{\beta_1\cdots\beta_q}$ and, for example, we lower the first index and raise the $(p+1)$-th one, we obtain
+\[
+  T_{\alpha_1}{}^{\alpha_2\cdots\alpha_p\beta_1}{}_{\beta_2\cdots\beta_q}
+\]
+and there is no ambiguity in the meaning.
+\end{points}
+
+\section{Levi-Civita connection}
+
+\begin{points}
+\item Let us suppose that we have a manifold $M$ on which a connection $\nabla$ and a metric $g$ are defined. In that case we have a notion of parallel transport along curves, as well as a notion of scalar product.
+
+\item We can ask whether it is possible to relate both concepts. A natural compatibility consists in studying whether it is possible to make the parallel transport of vectors keep their scalar product constant. Let us consider two vectors $X(\sigma)$, $Y(\sigma)$ parallelly propagated along a curve $\gamma(\sigma)$ with tangent vector $u(\sigma)$. Therefore the equations $\nabla_uX=\nabla_uY=0$ are satisfied.
+
+\item We can compute the directional derivative of $g(X,Y)$ (which is a scalar function of $\sigma$ along the curve), i.e.
+\begin{align*}
+  \frac{dg(X,Y)}{d\sigma}&=u^\alpha\partial_\alpha(g(X,Y))=u^\alpha\nabla_\alpha(g(X,Y))\\
+  &=\left(u^\alpha\nabla_\alpha g\right)(X,Y)+g(u^\alpha\nabla_\alpha X,Y)+g(X,u^\alpha\nabla_\alpha Y)=\left(u^\alpha\nabla_\alpha g\right)(X,Y).
+\end{align*}
+
+\item We conclude that the scalar product $g(X,Y)$ is constant along any curve if and only if $\nabla_\alpha g_{\mu\nu}=0$.
+
+\item Given a metric $g$, the connections $\nabla$ satisfying $\nabla g=0$ are called \textbf{compatible with the metric}, or simply \textbf{metric}.
+
+\item A fundamental theorem of differential geometry states that, given a metric $g$, there exists a unique connection $\nabla$ that is at the same time metric and whose torsion vanishes (i.e.\ which is torsion-free).
+\end{points}
+
+\textbf{Theorem 2} (Levi-Civita)\textbf{.} \emph{Given a pseudo-Riemannian manifold $(M,g)$, there exists a unique connection $\nabla$ satisfying: (i) the torsion vanishes and (ii) it is compatible with the metric, $\nabla g=0$. This connection is called the Levi-Civita connection.}
+
+\begin{points}
+\item We shall give a constructive proof that will allow us to obtain an explicit expression for the symbols of the Levi-Civita connection $\Gamma^\alpha_{\beta\mu}$ in any coordinate basis. These connection symbols are known as \textbf{Christoffel symbols}.
+
+\item The absence of torsion imposes the condition $\Gamma^\alpha_{\beta\mu}=\Gamma^\alpha_{\mu\beta}$, and compatibility with the metric imposes the condition
+\begin{equation}
+  \nabla_\alpha g_{\beta\gamma}=\partial_\alpha g_{\beta\gamma}-\Gamma^\mu_{\beta\alpha}g_{\mu\gamma}-\Gamma^\mu_{\gamma\alpha}g_{\beta\mu}=0 .
+\end{equation}
+Note that this expression includes a large number of conditions, since the indices $\alpha$, $\beta$ and $\gamma$ are free. At the same time, the equation involves a large number of unknowns (each of the terms $\Gamma^\mu_{\beta\alpha}$). The idea is to combine all these equations algebraically to obtain the solution.
+
+\item We permute the indices $\alpha\beta\gamma$ cyclically and obtain three sets of equations
+\begin{align*}
+  \partial_\alpha g_{\beta\gamma}&=\Gamma^\mu_{\beta\alpha}g_{\mu\gamma}+\Gamma^\mu_{\gamma\alpha}g_{\beta\mu},\\
+  \partial_\beta g_{\gamma\alpha}&=\Gamma^\mu_{\gamma\beta}g_{\mu\alpha}+\Gamma^\mu_{\alpha\beta}g_{\gamma\mu},\\
+  \partial_\gamma g_{\alpha\beta}&=\Gamma^\mu_{\alpha\gamma}g_{\mu\beta}+\Gamma^\mu_{\beta\gamma}g_{\alpha\mu}.
+\end{align*}
+
+\item If we add the first two equations and subtract the third, four of the terms on the right cancel (since the connection is symmetric) and the other two simply add up. We obtain
+\[
+  \partial_\alpha g_{\beta\gamma}+\partial_\beta g_{\alpha\gamma}-\partial_\gamma g_{\alpha\beta}=2\Gamma^\mu_{\alpha\beta}g_{\mu\gamma}
+\]
+We invert the metric $g_{\mu\gamma}$ (or, more precisely, we multiply by $g^{\gamma\nu}$) and obtain
+\begin{equation}
+  \Gamma^\nu_{\alpha\beta}=\frac12g^{\nu\gamma}\left(\partial_\alpha g_{\beta\gamma}+\partial_\beta g_{\alpha\gamma}-\partial_\gamma g_{\alpha\beta}\right).
+\end{equation}
+Since we have obtained an explicit and unique expression, we can conclude that, if the Levi-Civita connection does exist, it must necessarily have this form.
+
+\item To check that the Christoffel symbols (6) do satisfy all the equations, we simply observe that they are symmetric in $\alpha\beta$ (so that they define a torsion-free connection) and that, if we substitute them into (5), we obtain $\nabla_\alpha g_{\beta\gamma}=0$.
+
+\item The Levi-Civita connection also satisfies
+\[
+  \nabla_\alpha g^{\mu\nu}=0 .
+\]
+To prove it, we use the property that any connection has (regardless of whether it has torsion or not, or whether it is metric or not) that the covariant derivative of the identity always vanishes identically. The identity $I$ is the 1-covariant, 1-contravariant tensor defined by $I(V)=V$ for any vector $V\in T_pM$. If we apply a covariant derivative to this expression we obtain
+\[
+  \nabla_XV=\nabla_XI(V)=(\nabla_XI)(V)+I(\nabla_XV)=(\nabla_XI)(V)+\nabla_XV\qquad\Longleftrightarrow\qquad\nabla_XI=0,
+\]
+
+\item We can also prove this property by a calculation in a coordinate basis $\{\partial_{x^\alpha}\}$. In this basis the tensor $I^\alpha{}_\beta$ is simply the Kronecker delta $I^\alpha{}_\beta=\delta^\alpha{}_\beta$. We compute its covariant derivative
+\[
+  \nabla_\mu\delta^\alpha{}_\beta=\partial_\mu\delta^\alpha{}_\beta+\Gamma^\alpha_{\rho\mu}\delta^\rho{}_\beta-\Gamma^\rho_{\beta\mu}\delta^\alpha{}_\rho=\Gamma^\alpha_{\beta\mu}-\Gamma^\alpha_{\beta\mu}=0 .
+\]
+
+\item To compute $\nabla_\nu g^{\alpha\beta}$ we recall the definition $g^{\alpha\beta}g_{\beta\mu}=\delta^\alpha_\mu$. Taking the covariant derivative of this equality we arrive at
+\[
+  0=\nabla_\nu\delta^\alpha_\mu=\nabla_\nu(g^{\alpha\beta}g_{\beta\mu})=(\nabla_\nu g^{\alpha\beta})g_{\beta\mu}+g^{\alpha\beta}\nabla_\mu g_{\beta\mu}=(\nabla_\nu g^{\alpha\beta})g_{\beta\mu}\qquad\Longrightarrow\qquad\nabla_\nu g^{\alpha\beta}=0
+\]
+\end{points}
+
+
+\section{Riemann, Ricci and Einstein tensors.}
+
+\begin{points}
+\item The curvature tensor $R^\alpha{}_{\beta\gamma\mu}$ of the Levi-Civita connection is called the \textbf{Riemann tensor}.
+
+\item Since we have a metric that allows us to lower and raise indices, we can define the totally covariant Riemann tensor (or simply ``with all indices down'') by
+\[
+  R_{\alpha\beta\mu\nu}:=g_{\alpha\gamma}R^\gamma{}_{\beta\mu\nu} .
+\]
+
+\item The Riemann tensor has the following algebraic properties
+\begin{align*}
+  R_{\alpha\beta\mu\nu}&=-R_{\alpha\beta\nu\mu},\\
+  R_{\alpha\beta\mu\nu}&=-R_{\beta\alpha\mu\nu},\\
+  R_{\alpha\beta\mu\nu}+R_{\alpha\mu\nu\beta}+R_{\alpha\nu\beta\mu}&=0\\
+  R_{\alpha\beta\mu\nu}&=R_{\mu\nu\alpha\beta}.
+\end{align*}
+
+\item The first one corresponds simply to the antisymmetry in the last two indices that every curvature tensor has, and the third one is the first Bianchi identity.
+
+\item The second one is a consequence of the Ricci identity applied to the metric $g$. Using that $\nabla_\alpha g_{\mu\nu}=0$ (and therefore its second covariant derivatives also vanish),
+\[
+  \nabla_\alpha\nabla_\beta g_{\mu\nu}-\nabla_\beta\nabla_\alpha g_{\mu\nu}=-R^\rho{}_{\mu\alpha\beta}g_{\rho\nu}-R^\rho{}_{\nu\alpha\beta}g_{\mu\rho}=-R_{\nu\mu\alpha\beta}-R_{\mu\nu\alpha\beta}=0
+\]
+
+\item The fourth algebraic property $R_{\alpha\beta\mu\nu}=R_{\mu\nu\alpha\beta}$ is a consequence of the three previous ones.
+\end{points}
+
+\textbf{Exercise 2.} \emph{Prove that the Riemann tensor satisfies $R_{\alpha\beta\mu\nu}=R_{\mu\nu\alpha\beta}$ starting from the antisymmetry in the first two indices, in the last two indices and from the first Bianchi identity.}
+
+\begin{points}
+\item From the Riemann tensor we can define other curvature tensors by taking traces with the metric $g$.
+
+\item Given a tensor $T^{\alpha_1\cdots\alpha_p}{}_{\beta_1\cdots\beta_q}$, $p$ times contravariant and $q$ times covariant, we can contract one contravariant and one covariant index (for example $\alpha_1$ and $\beta_1$) and obtain a tensor $(p-1)$ times contravariant and $(q-1)$ times covariant, with components
+\[
+  T^{\alpha_2\cdots\alpha_p}{}_{\beta_2\cdots\beta_q}:=T^{\alpha_1\cdots\alpha_p}{}_{\alpha_1\cdots\beta_q}
+\]
+
+\item Two contravariant indices can also be contracted, for example $\alpha_1$ and $\alpha_p$, with the metric $g$, defining a tensor $(p-2)$ times contravariant and $q$ times covariant by
+\[
+  T^{\alpha_2\cdots\alpha_{p-1}}{}_{\beta_1\cdots\beta_q}:=g_{\alpha_1\alpha_p}T^{\alpha_1\cdots\alpha_p}{}_{\beta_1\cdots\beta_q}
+\]
+
+\item This operation can be done with any pair of contravariant indices (naturally, in general the result depends on the indices chosen to perform the contraction).
+
+\item Analogously, we can contract pairs of covariant indices with the contravariant metric. For example, if we contract the indices $\beta_1$ and $\beta_q$ we obtain
+\[
+  T^{\alpha_1\cdots\alpha_p}{}_{\beta_2\cdots\beta_{q-1}}:=g^{\beta_1\beta_q}T^{\alpha_1\cdots\alpha_p}{}_{\beta_1\cdots\beta_q}
+\]
+
+\item An important algebraic property is that, if a tensor $T^{\alpha_1\cdots\alpha_p}{}_{\beta_1\cdots\beta_q}$ is antisymmetric in a pair of indices, the tensor obtained by contracting them vanishes identically.
+
+\item More generally, the contraction of a symmetric tensor $S^{\alpha\beta}$ and an antisymmetric tensor $A_{\alpha\beta}$ vanishes identically (exercise: prove it).
+
+\item We now define the tensors that can be obtained by contracting the Riemann tensor.
+
+\item Given the algebraic properties of this tensor, it is only possible to construct a single independent trace.
+
+\item We define the Ricci tensor by
+\[
+  R_{\alpha\beta}=R^\mu{}_{\alpha\mu\beta} .
+\]
+
+\item From the properties of the Riemann tensor it follows that the Ricci tensor is symmetric.
+\[
+  R_{\alpha\beta}=R^\mu{}_{\alpha\mu\beta}=g^{\mu\nu}R_{\mu\alpha\nu\beta}=g^{\mu\nu}R_{\nu\beta\mu\alpha}=R_{\beta\alpha} .
+\]
+
+\item The number of independent components of a symmetric tensor on a manifold of dimension $n$ is $\frac{n(n+1)}{2}$. In dimension four, the number of independent components of the Ricci tensor is 10.
+
+\item The rest of the traces of the Riemann tensor either vanish (for example when contracting the first two or the last two indices) or give tensors that can be written directly in terms of the Ricci tensor.
+
+\item From the Ricci tensor we can define a single trace. The result is a scalar function known as the curvature scalar (or Ricci scalar), defined by
+\[
+  R=g^{\alpha\beta}R_{\alpha\beta} .
+\]
+
+\item From the Ricci tensor and the curvature scalar one defines a fundamental tensor in general relativity, the so-called Einstein tensor
+\[
+  G_{\alpha\beta}:=R_{\alpha\beta}-\frac12Rg_{\alpha\beta} .
+\]
+
+\item This tensor is symmetric. If the dimension $n$ is at least three, the Einstein tensor contains the same information as the Ricci tensor. Indeed, the trace of the metric tensor $g$ is a constant function whose value is the dimension of the manifold
+\[
+  g^{\alpha\beta}g_{\alpha\beta}=\delta^\alpha{}_\alpha=n
+\]
+since $\delta$ is the identity matrix and its trace is directly $n$.
+
+\item Taking the trace of the Einstein tensor,
+\[
+  G:=G_{\alpha\beta}g^{\alpha\beta}=R-\frac12Rn=\frac{2-n}{2}R .
+\]
+
+\item Therefore, the Ricci tensor can be written in terms of the Einstein tensor by
+\[
+  R_{\alpha\beta}=G_{\alpha\beta}+\frac12Rg_{\alpha\beta}=G_{\alpha\beta}-\frac{1}{n-2}Gg_{\alpha\beta} .
+\]
+
+\item The fundamental importance of the Einstein tensor is that it satisfies an identity called the ``conservation identity''
+\[
+  \nabla_\alpha G^{\alpha\beta}=0 .
+\]
+This expression is satisfied identically for any metric and its corresponding Levi-Civita connection and Einstein tensor. It can be proved directly from the second Bianchi identity by taking two traces, as follows:
+\[
+  \nabla_\alpha R_{\beta\gamma\mu\nu}+\nabla_\mu R_{\beta\gamma\nu\alpha}+\nabla_\nu R_{\beta\gamma\alpha\mu}=0
+\]
+We first contract with $g^{\beta\mu}$ and use that $\nabla_\alpha g^{\beta\mu}=0$, so that the metric can go through the covariant derivative
+\[
+  \nabla_\alpha(g^{\beta\mu}R_{\beta\gamma\mu\nu})+\nabla_\mu R^\mu{}_{\gamma\nu\alpha}+\nabla_\nu(g^{\beta\mu}R_{\beta\gamma\alpha\mu})=\nabla_\alpha R_{\gamma\nu}+\nabla_\mu R^\mu{}_{\gamma\nu\alpha}-\nabla_\nu R_{\gamma\alpha}=0
+\]
+
+\item We now contract with $g^{\alpha\gamma}$ and arrive at
+\[
+  \nabla_\alpha R^\alpha{}_\nu+\nabla_\mu R^\mu{}_\nu-\nabla_\nu R=\nabla_\alpha\left(2R^\alpha{}_\nu-R\delta^\alpha{}_\nu\right)=2\nabla_\alpha G^\alpha{}_\nu=0
+\]
+\end{points}
+
+\section{Geodesics}
+
+\begin{points}
+\item Let us consider a Riemannian manifold $(M,g)$. Given a curve $\gamma(\sigma)$ between two points $p=\gamma(\sigma_0)$ and $q=\gamma(\sigma_1)$, we can define the \textbf{length} between $p$ and $q$ along the curve $\gamma(\sigma)$ by the following expression
+\[
+  L=\int_{\sigma_0}^{\sigma_1}\sqrt{g(\dot\gamma,\dot\gamma)}d\sigma
+\]
+where $\dot\gamma$ is the tangent vector to the curve.
+
+\item To motivate this definition, we can use a local coordinate system $\{x^\alpha\}$ in which the curve has the form $x^\alpha(\sigma)$. The tangent vector is
+\[
+  \dot\gamma=\frac{dx^\alpha}{d\sigma}\partial_{x^\alpha}
+\]
+so that we have
+\[
+  g(\dot\gamma,\dot\gamma)=g_{\alpha\beta}|_{x(\sigma)}\frac{dx^\alpha}{d\sigma}\frac{dx^\beta}{d\sigma} .
+\]
+
+\item If we substitute it into the expression for $L$ we arrive at
+\[
+  L=\int_{\sigma_0}^{\sigma_1}\sqrt{g_{\alpha\beta}|_{x(\sigma)}\frac{dx^\alpha}{d\sigma}\frac{dx^\beta}{d\sigma}}d\sigma=\int_\gamma\sqrt{g_{\alpha\beta}|_{x(\sigma)}dx^\alpha dx^\beta}=\int_\gamma\sqrt{ds^2}=\int_\gamma ds
+\]
+so that the length is indeed the sum (integral) of the infinitesimal distance elements $ds$ along the curve.
+
+\item This expression shows that the distance between two points along a curve does not depend on the way we parametrise the curve. It depends only on the path we use to go from $p$ to $q$.
+
+\item Given two points $p,q$, we can consider all the curves $\gamma$ going from $p$ to $q$ and compute the distance between $p$ and $q$ along each of these curves. In this way we define a functional on the set of curves, which we call the \textbf{distance functional}.
+
+\item We call \textbf{geodesic} any curve that makes the distance functional take an extremal (or ``stationary'') value.
+
+\item To find the equation satisfied by geodesics, we must obtain the Euler--Lagrange equations of the functional $L[\gamma]$. This calculation presents a complication due to the fact that the functional is invariant under reparametrisations, so that the differential equation we obtain can never have a unique solution (if a curve $x^\alpha(\sigma)$ satisfies the Euler--Lagrange equation, then any reparametrisation $x^\alpha(\sigma(\sigma'))$ must also satisfy that same equation).
+
+\item There are several ways of dealing with this difficulty. A particularly simple one is to choose for each curve a parametrisation (which turns out to be unique) satisfying the following three conditions
+\[
+  x^\alpha(\sigma=0)=p,\qquad x^\alpha(\sigma=1)=q,\qquad\frac{dx^\alpha}{d\sigma}\text{ has constant norm}
+\]
+
+\item That is, we impose the condition that we move with a ``speed'' of constant modulus along the curve, and that we leave at $\sigma=0$ and arrive at $\sigma=1$. Physically it is clear (and easy to prove) that this parametrisation exists and is unique.
+
+\item With these restrictions, the functional is
+\[
+  L[\gamma]=\int_{\sigma=0}^{\sigma=1}\sqrt{g_{\alpha\beta}|_{x(\sigma)}\frac{dx^\alpha}{d\sigma}\frac{dx^\beta}{d\sigma}}d\sigma .
+\]
+
+\item Although the quantity $g_{\alpha\beta}(x(\sigma))\frac{dx^\alpha}{d\sigma}\frac{dx^\beta}{d\sigma}$ is independent of $\sigma$, its value is different for each curve.
+
+\item We can write the Euler--Lagrange equations of this functional
+\[
+  \frac{d}{d\sigma}\left(\frac{\partial\mathcal L}{\partial\dot x^\alpha}\right)=\frac{\partial\mathcal L}{\partial x^\alpha}
+\]
+where
+\[
+  \mathcal L(x^\alpha,\dot x^\alpha)=\sqrt{g_{\alpha\beta}|_{x(\sigma)}\dot x^\alpha\dot x^\beta}
+\]
+is the Lagrangian of the functional $L$. We evaluate the derivatives
+\[
+  \frac{d}{d\sigma}\left(\frac{g_{\alpha\beta}\dot x^\beta}{\sqrt{g_{\mu\nu}|_{x(\sigma)}\dot x^\mu\dot x^\nu}}\right)=\frac{(\partial_\alpha g_{\beta\gamma})\dot x^\gamma}{2\sqrt{g_{\mu\nu}|_{x(\sigma)}\dot x^\mu\dot x^\nu}} .
+\]
+
+\item We can now use the fact that $\sqrt{g_{\alpha\beta}|_{x(\sigma)}\dot x^\alpha\dot x^\beta}$ is constant along the curve, so that it can be taken out of the derivative on the left and cancel the corresponding factor on the right. We obtain
+\[
+  \frac{d}{d\sigma}\left(g_{\alpha\beta}\dot x^\beta\right)=\frac12(\partial_\alpha g_{\beta\gamma})\dot x^\beta\dot x^\gamma
+\]
+
+\item We evaluate the total derivative on the left
+\begin{align*}
+  (\partial_\gamma g_{\alpha\beta})\dot x^\gamma\dot x^\beta+g_{\alpha\beta}\ddot x^\beta&=\frac12(\partial_\alpha g_{\beta\gamma})\dot x^\beta\dot x^\gamma\qquad\Longleftrightarrow\\
+  \ddot x^\mu&=g^{\mu\alpha}\left(\frac12(\partial_\alpha g_{\beta\gamma})\dot x^\beta\dot x^\gamma-\partial_\gamma g_{\alpha\beta}\dot x^\gamma\dot x^\beta\right)\\
+  &=g^{\mu\alpha}\left(\frac12(\partial_\alpha g_{\beta\gamma})\dot x^\beta\dot x^\gamma-\frac12\partial_\gamma g_{\alpha\beta}\dot x^\gamma\dot x^\beta-\frac12\partial_\beta g_{\alpha\gamma}\dot x^\gamma\dot x^\beta\right)\\
+  &=-\Gamma^\mu_{\beta\gamma}\dot x^\beta\dot x^\gamma .
+\end{align*}
+
+\item Therefore the Euler--Lagrange equations are
+\[
+  \frac{d^2x^\mu}{d\sigma^2}+\left.\Gamma^\mu_{\beta\gamma}\right|_{x(\sigma)}\frac{dx^\beta}{d\sigma}\frac{dx^\gamma}{d\sigma}=0
+\]
+which can be written in covariant form (as it must be, since we have not imposed any condition on the coordinates)
+\[
+  u^\alpha\nabla_\alpha u^\beta=0\qquad\text{where}\qquad u^\alpha=\frac{dx^\alpha}{d\sigma} .
+\]
+
+\item We have obtained that the geodesic equation on a Riemannian manifold coincides with the equation of the autoparallel curves with zero acceleration of its Levi-Civita connection. If we had not imposed the condition that the velocity of the curve has constant modulus, we would have obtained (with a bit more work) the equation of the autoparallel curves $a^\alpha=b(\sigma)u^\alpha$.
+
+\item Therefore, on any Riemannian manifold, geodesics are at the same time the curves that make the distance between two points extremal and the curves whose acceleration is parallel to the velocity, as happens in the case of straight lines in Euclidean space.
+
+\item A self-consistency check of the previous derivation is the following exercise.
+\end{points}
+
+\textbf{Exercise 3.} \emph{Prove that any curve satisfying $a^\alpha:=u^\mu\nabla_\mu u^\alpha=0$, where $u^\alpha$ is the tangent vector to the curve, has the property that
+\[
+  g_{\alpha\beta}u^\alpha u^\beta=\text{const}.
+\]
+Conversely, if a curve satisfies $a^\alpha=bu^\alpha$ and the tangent vector has constant modulus different from zero along the curve, then necessarily $b=0$ and the equation $a^\alpha=0$ is satisfied.}
+
+\begin{points}
+\item We call \textbf{geodesic} any curve $x^\alpha(\sigma)$ satisfying the autoparallel-curve equation $a^\alpha=bu^\alpha$. In the case in which $a^\alpha=0$ is satisfied, we say that the curve is an \textbf{affinely parametrised geodesic}.
+
+\item These names are not universal; there are authors who prefer to call the former \textbf{pregeodesics} and to reserve the name \textbf{geodesics} for the latter.
+
+\item Given any curve $\gamma(\sigma)$ on a Riemannian manifold, we can always find a parametrisation $\sigma(s)$ such that the tangent vector to the curve in the new parametrisation is unitary
+\[
+  g\left(\frac{d\gamma}{ds},\frac{d\gamma}{ds}\right)=1
+\]
+This parameter is called the \textbf{arc length}, and it is unique except for the possibility of choosing its origin arbitrarily.
+
+\item On a geodesic, the arc-length parameter is always an affine parameter.
+\end{points}
+
+\section{Geodesics in pseudo-Riemannian manifolds.}
+
+\begin{points}
+\item On pseudo-Riemannian manifolds a vector can have a negative squared norm, so that the square root $\sqrt{g_{\alpha\beta}|_{x(\sigma)}\dot x^\alpha\dot x^\beta}$ may cease to make sense as a real quantity.
+
+\item This difficulty can be solved by defining the following functional on curves
+\[
+  \mathcal F[\gamma]=\int_\gamma\sqrt{|g(\dot\gamma,\dot\gamma)|}d\sigma .
+\]
+
+\item This functional is differentiable on curves whose tangent vector satisfies
+\[
+  g(\dot\gamma,\dot\gamma)\neq0
+\]
+and, if we compute its corresponding Euler--Lagrange equations, we obtain the equation of the autoparallel curves
+\begin{equation}
+  u^\alpha\nabla_\alpha u^\beta=b(\sigma)u^\alpha,\qquad u^\alpha=\frac{dx^\alpha}{d\sigma} .
+\end{equation}
+When we use the affine parametrisation, in which $g_{\alpha\beta}u^\alpha u^\beta=\text{const}$ is satisfied,
+\begin{equation}
+  u^\alpha\nabla_\alpha u^\beta=0\qquad u^\alpha=\frac{dx^\alpha}{d\sigma} .
+\end{equation}
+
+\item Analogously to the previous case, a curve satisfying (7) is a geodesic of the pseudo-Riemannian manifold $(M,g)$, and a curve satisfying (8) is, by definition, an affinely parametrised geodesic of $(M,g)$.
+
+\item It is important to stress that the equation of affinely parametrised geodesics (8) also turns out to be the Euler--Lagrange equation of another functional on curves, called the \textbf{energy of the curve}.
+
+\item This alternative functional is defined by
+\[
+  E[\gamma]=\frac12\int_\gamma g(\dot\gamma,\dot\gamma)d\sigma
+\]
+and it makes sense even when the tangent vector to the curve has zero squared modulus.
+
+\item Its expression in coordinates is
+\[
+  E(x^\alpha(\sigma))=\frac12\int_{\sigma=\sigma_0}^{\sigma=\sigma_1}g_{\alpha\beta}|_{x(\sigma)}\frac{dx^\alpha}{d\sigma}\frac{dx^\beta}{d\sigma} .
+\]
+
+\item By means of a calculation analogous to the one done for the Euler--Lagrange equations of the length of a curve $L[\gamma]$, it is easy to conclude that the Euler--Lagrange equations of $E[\gamma]$ are precisely the equations of affinely parametrised geodesics.
+
+\item The energy functional is not invariant under reparametrisations. In the case of geodesic curves, the energy functional automatically selects an affine parameter, so that the acceleration of the curve vanishes.
+
+\item An efficient way of computing the Christoffel symbols of a pseudo-Riemannian metric $g$ consists in writing the energy functional of that metric and computing the Euler--Lagrange equations explicitly. From the expression
+\[
+  \frac{d^2x^\alpha}{d\sigma^2}+\Gamma^\alpha_{\beta\mu}\frac{dx^\beta}{d\sigma}\frac{dx^\mu}{d\sigma}=0
+\]
+and from the fact that the Christoffel symbols are symmetric (i.e.\ $\Gamma^\alpha_{\beta\mu}=\Gamma^\alpha_{\mu\beta}$ is satisfied), the explicit expressions of all the Christoffel symbols of the metric can be extracted directly.
+\end{points}
+
+\begin{carroll}[: example --- the two-sphere]
+Let us apply the method of the energy functional to the two-sphere of radius $a$, with metric
+\[
+  ds^2=a^2\left(d\theta^2+\sin^2\theta\,d\phi^2\right).
+\]
+The energy functional has Lagrangian $\frac12a^2(\dot\theta^2+\sin^2\theta\,\dot\phi^2)$, and its Euler--Lagrange equations are
+\[
+  \ddot\theta-\sin\theta\cos\theta\,\dot\phi^2=0,\qquad\ddot\phi+2\cot\theta\,\dot\theta\dot\phi=0 .
+\]
+Comparing with $\ddot x^\alpha+\Gamma^\alpha_{\beta\mu}\dot x^\beta\dot x^\mu=0$ (and remembering that a crossed term $\dot\theta\dot\phi$ appears twice in the sum), the only non-vanishing Christoffel symbols are
+\[
+  \Gamma^\theta_{\phi\phi}=-\sin\theta\cos\theta,\qquad\Gamma^\phi_{\theta\phi}=\Gamma^\phi_{\phi\theta}=\cot\theta .
+\]
+With $R^\alpha{}_{\beta\mu\nu}=\partial_\mu\Gamma^\alpha_{\beta\nu}-\partial_\nu\Gamma^\alpha_{\beta\mu}+\Gamma^\alpha_{\rho\mu}\Gamma^\rho_{\beta\nu}-\Gamma^\alpha_{\rho\nu}\Gamma^\rho_{\beta\mu}$,
+\[
+  R^\theta{}_{\phi\theta\phi}=\partial_\theta\Gamma^\theta_{\phi\phi}-\Gamma^\theta_{\phi\phi}\Gamma^\phi_{\phi\theta}=-(\cos^2\theta-\sin^2\theta)+\sin\theta\cos\theta\cot\theta=\sin^2\theta .
+\]
+In two dimensions this is the only independent component (the general count of independent components of the Riemann tensor in dimension $n$ is $\frac{n^2(n^2-1)}{12}$: 1 for $n=2$, 6 for $n=3$, 20 for $n=4$). Lowering the index, $R_{\theta\phi\theta\phi}=a^2\sin^2\theta$. The Ricci tensor and the curvature scalar are
+\[
+  R_{\theta\theta}=1,\qquad R_{\phi\phi}=\sin^2\theta,\qquad R_{\theta\phi}=0,\qquad R=g^{\theta\theta}R_{\theta\theta}+g^{\phi\phi}R_{\phi\phi}=\frac{2}{a^2}.
+\]
+The curvature scalar is positive and constant (the sphere is homogeneous), and it becomes smaller for larger spheres, as expected. (For a flat plane in polar coordinates, $ds^2=dr^2+r^2d\phi^2$, the Christoffel symbols $\Gamma^r_{\phi\phi}=-r$, $\Gamma^\phi_{r\phi}=1/r$ do not vanish, but the Riemann tensor does: non-vanishing connection symbols do not imply curvature.)
+\end{carroll}
+
 
