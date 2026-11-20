@@ -1,0 +1,351 @@
+% =====================================================================
+\chapter{Parallel transport, connection and geodesics}\label{ch:connection}
+% =====================================================================
+
+\section{The problem: comparing vectors at different points}
+
+In the plane $\R^2$, to compare two vectors $\vec u$ and $\vec v$ attached at different points, we simply translate $\vec v$ parallel to itself until it sits at the same point as $\vec u$, and then compare them (\cref{fig:pt-flat}, left). The result does not depend on the path along which we translate $\vec v$.
+
+On a curved space, e.g.\ the surface of a sphere, all vectors are tangent to the surface, and the natural notion of ``moving a vector parallel to itself'' (keeping it tangent and not rotating it) gives a result that \emph{depends on the path} (\cref{fig:pt-flat}, right): this is the \textbf{problem} we have to address. To formulate it we need a notion of derivative of vector fields that makes sense on a manifold.
+
+\begin{figure}[ht]
+\centering
+\begin{tikzpicture}[scale=0.95,>=Stealth]
+  \draw[->] (0,0) -- (4.2,0) node[right] {$x$};
+  \draw[->] (0,0) -- (0,3.2) node[above] {$y$};
+  \draw[->,very thick,blue!70!black] (0.6,1.6) -- (1.4,2.6) node[above] {$\vec v$};
+  \draw[->,very thick,red!70!black] (2.9,1.5) -- (3.7,2.0) node[right] {$\vec u$};
+  \draw[->,thick,blue!70!black,dashed] (2.9,1.5) -- (3.7,2.5);
+  \draw[->,gray,dashed] (1.0,1.5) -- (2.6,1.45);
+  \node at (2.1,-0.6) {plane (2D) space};
+\end{tikzpicture}
+\hspace{1.2cm}
+\begin{tikzpicture}[scale=1.25,>=Stealth]
+  \shade[ball color=gray!15] (0,0) circle (1.6);
+  \draw (0,0) circle (1.6);
+  \draw[dashed,gray] (1.6,0) arc (0:180:1.6 and 0.4);
+  \draw[thick] (-1.6,0) arc (180:360:1.6 and 0.4);
+  % points
+  \coordinate (Q) at (0,1.6);
+  \coordinate (P) at (-0.9,-0.33);
+  \coordinate (S) at (0.9,-0.33);
+  % path 1: P -> Q along meridian
+  \draw[very thick,green!50!black] (P) to[out=95,in=200] (Q);
+  % path 2: P -> S along equator then S -> Q
+  \draw[very thick,red!70!black] (P) arc (236:304:1.6 and 0.4);
+  \draw[very thick,red!70!black] (S) to[out=85,in=-20] (Q);
+  \fill (P) circle (1.5pt) node[below left] {$P$};
+  \fill (Q) circle (1.5pt) node[above left] {$Q$};
+  \fill (S) circle (1.5pt) node[below right] {$S$};
+  % vectors
+  \draw[->,very thick,blue] (P) -- ++(0.15,0.55) node[left] {$V_P$};
+  \draw[->,very thick,green!50!black] (Q) -- ++(0.55,0.15) node[right] {$V_Q^{(1)}$};
+  \draw[->,very thick,red!70!black] (Q) -- ++(-0.15,0.55) node[above] {$V_Q^{(2)}$};
+  \node at (0,-2.0) {curved 2D space};
+\end{tikzpicture}
+\caption{Left: in flat space a vector $\vec v$ can be translated parallel to itself to the point of $\vec u$ and compared with it, independently of the path. Right: on a sphere, transporting the tangent vector $V_P$ ``parallel to itself'' from $P$ to $Q$ along path (1) (green) or along path (2) (red, first along the equator to $S$, then up a meridian) gives different vectors at $Q$: the final orientation depends on the path.}
+\label{fig:pt-flat}
+\end{figure}
+
+\paragraph{First attempt: partial derivatives.} Is the partial derivative of a vector a tensor? Take a vector $A^\nu$ and ask whether $\pd_\mu A^\nu\equiv\pd A^\nu/\pd x^\mu$ is a $(1,1)$ tensor. Under a general coordinate transformation, with $\pd'_\mu=\frac{\pd x^\alpha}{\pd x'^\mu}\pd_\alpha$ and $A'^\nu=\frac{\pd x'^\nu}{\pd x^\beta}A^\beta$, we already found in \eqref{eq:partial-not-tensor}:
+\begin{equation}
+  (\pd_\mu A^\nu)'=\underbrace{\frac{\pd x^\alpha}{\pd x'^\mu}\frac{\pd x'^\nu}{\pd x^\beta}\pd_\alpha A^\beta}_{\text{tensor-like}}
+  +\underbrace{\frac{\pd x^\alpha}{\pd x'^\mu}\frac{\pd^2x'^\nu}{\pd x^\alpha\pd x^\beta}A^\beta}_{\text{not tensor-like}} .
+\end{equation}
+$\pd_\mu A^\nu$ is \textbf{not} a tensor (epic fail!). The physical reason is clear: $\pd_\mu A^\nu$ compares the components of $A$ at two neighbouring points, $A^\nu(x+\dd x)-A^\nu(x)$, but the two vectors live in different tangent spaces, and the components are taken with respect to bases that themselves change from point to point.
+
+\section{Interlude: locally inertial (Riemann normal) coordinates}
+
+\begin{theorem}{Riemann normal coordinates}{rnc}
+For every metric $g_{\mu\nu}$ it is possible to find coordinates $x'$ (\emph{Riemann normal coordinates}, or locally inertial coordinates) such that, at \emph{one} chosen point $P$ (with $x_P=0=x'_P$):
+\begin{enumerate}[nosep]
+  \item $g'_{\mu\nu}(x'_P)=\eta_{\mu\nu}$;
+  \item $\pd'_\rho g'_{\mu\nu}\big|_{x'_P}=0$;
+  \item but in general $\pd'_\rho\pd'_\sigma g'_{\mu\nu}\big|_{x'_P}\neq0$, unless the space is flat.
+\end{enumerate}
+\end{theorem}
+\begin{proofsketch}
+Expand the coordinate transformation around $P$: $x^\mu=\frac{\pd x^\mu}{\pd x'^\alpha}\big|_P x'^\alpha+\frac12\frac{\pd^2x^\mu}{\pd x'^\alpha\pd x'^\beta}\big|_P x'^\alpha x'^\beta+\frac16\frac{\pd^3 x^\mu}{\pd x'^\alpha\pd x'^\beta\pd x'^\gamma}\big|_P x'^\alpha x'^\beta x'^\gamma+\dots$ and use $g'_{\mu\nu}=\frac{\pd x^\alpha}{\pd x'^\mu}\frac{\pd x^\beta}{\pd x'^\nu}g_{\alpha\beta}$. Count the free parameters order by order (in 4D):
+\begin{itemize}[nosep]
+\item order 0: the $4\times4=16$ numbers $\pd x^\mu/\pd x'^\alpha|_P$ can be used to set the $10$ components of $g'_{\mu\nu}(P)$ to $\eta_{\mu\nu}$ (any symmetric non-degenerate matrix of signature $(+,-,-,-)$ can be brought to $\eta$); the $6$ remaining parameters are the Lorentz transformations, which preserve $\eta$;
+\item order 1: the $4\times10=40$ numbers $\pd^2x^\mu/\pd x'^\alpha\pd x'^\beta|_P$ (symmetric in $\alpha\beta$) can be used to cancel the $10\times4=40$ first derivatives $\pd'_\rho g'_{\mu\nu}(P)$;
+\item order 2: the $4\times20=80$ third derivatives (symmetric in three indices) are not enough to cancel the $10\times10=100$ second derivatives $\pd'_\rho\pd'_\sigma g'_{\mu\nu}(P)$: $100-80=20$ combinations survive. These are precisely the $20$ independent components of the Riemann tensor (\cref{ch:curvature}), which measures the curvature.
+\end{itemize}
+\end{proofsketch}
+This is the mathematical expression of the Equivalence Principle: at any point, a freely-falling observer can choose coordinates in which, locally (to first order), space-time looks like Minkowski space-time and gravity is absent; curvature (tidal effects) shows up at second order.
+
+\section{The covariant derivative}
+
+We define the \textbf{covariant derivative} of a vector field $A^\nu$ as
+\begin{equation}
+  \boxed{D_\mu A^\nu\equiv\pd_\mu A^\nu+\Ga{\nu}{\mu}{\lambda}A^\lambda}
+  \label{eq:cov-der-vector}
+\end{equation}
+and \emph{require} that it transforms as a $(1,1)$ tensor. The first term tells us ``how much the vector changes'', the second ``how much the coordinates (basis) change''. The coefficients $\Ga{\nu}{\mu}{\lambda}$ are called \textbf{Christoffel symbols} or \textbf{affine connection coefficients}.
+
+\begin{proposition}{The $\Gamma$'s are not tensors}{gamma-transf}
+For $D_\mu V^\nu$ to be a $(1,1)$ tensor, the connection coefficients must transform as
+\begin{equation}
+  \Gamma'^{\alpha}{}_{\beta\rho}=
+  \underbrace{\frac{\pd x'^\alpha}{\pd x^\nu}\frac{\pd x^\mu}{\pd x'^\beta}\frac{\pd x^\lambda}{\pd x'^\rho}\Ga{\nu}{\mu}{\lambda}}_{\text{tensor-like}}
+  -\underbrace{\frac{\pd x^\mu}{\pd x'^\beta}\frac{\pd x^\lambda}{\pd x'^\rho}\frac{\pd^2x'^\alpha}{\pd x^\mu\pd x^\lambda}}_{\text{inhomogeneous}} .
+  \label{eq:gamma-transf}
+\end{equation}
+Because of the inhomogeneous term, the $\Gamma$'s are \textbf{not} tensors.
+\end{proposition}
+\begin{proof}
+Useful relations: (i) $V'^\alpha=\frac{\pd x'^\alpha}{\pd x^\nu}V^\nu\Leftrightarrow V^\nu=\frac{\pd x^\nu}{\pd x'^\alpha}V'^\alpha$; (ii) for covectors $V'_\mu=\frac{\pd x^\alpha}{\pd x'^\mu}V_\alpha$; (iii) for a $(1,1)$ tensor $T'^\alpha{}_\beta=\frac{\pd x'^\alpha}{\pd x^\nu}\frac{\pd x^\mu}{\pd x'^\beta}T^\nu{}_\mu$.
+
+We demand $(D_\beta V^\alpha)'=\frac{\pd x'^\alpha}{\pd x^\nu}\frac{\pd x^\mu}{\pd x'^\beta}D_\mu V^\nu$, i.e.
+\[
+  \pd'_\beta V'^\alpha+\Gamma'^\alpha{}_{\beta\rho}V'^\rho
+  =\frac{\pd x'^\alpha}{\pd x^\nu}\frac{\pd x^\mu}{\pd x'^\beta}\left(\pd_\mu V^\nu+\Ga{\nu}{\mu}{\lambda}V^\lambda\right).
+\]
+Using \eqref{eq:partial-not-tensor} for the first term on the left and $V'^\rho=\frac{\pd x'^\rho}{\pd x^\lambda}V^\lambda$ for the second,
+\[
+  \frac{\pd x^\mu}{\pd x'^\beta}\frac{\pd x'^\alpha}{\pd x^\nu}\pd_\mu V^\nu
+  +\frac{\pd x^\mu}{\pd x'^\beta}\frac{\pd^2x'^\alpha}{\pd x^\mu\pd x^\lambda}V^\lambda
+  +\Gamma'^\alpha{}_{\beta\rho}\frac{\pd x'^\rho}{\pd x^\lambda}V^\lambda
+  =\frac{\pd x'^\alpha}{\pd x^\nu}\frac{\pd x^\mu}{\pd x'^\beta}\pd_\mu V^\nu+\frac{\pd x'^\alpha}{\pd x^\nu}\frac{\pd x^\mu}{\pd x'^\beta}\Ga{\nu}{\mu}{\lambda}V^\lambda .
+\]
+The terms with $\pd_\mu V^\nu$ cancel. The remaining equation must hold for all $V^\lambda$:
+\[
+  \Gamma'^\alpha{}_{\beta\rho}\frac{\pd x'^\rho}{\pd x^\lambda}
+  =\frac{\pd x'^\alpha}{\pd x^\nu}\frac{\pd x^\mu}{\pd x'^\beta}\Ga{\nu}{\mu}{\lambda}-\frac{\pd x^\mu}{\pd x'^\beta}\frac{\pd^2x'^\alpha}{\pd x^\mu\pd x^\lambda}.
+\]
+Multiplying both sides by $\pd x^\lambda/\pd x'^\sigma$ and using $\frac{\pd x'^\rho}{\pd x^\lambda}\frac{\pd x^\lambda}{\pd x'^\sigma}=\delta^\rho{}_\sigma$ gives \eqref{eq:gamma-transf} (with $\sigma$ renamed $\rho$).
+\end{proof}
+
+\paragraph{Torsion.} Although $\Gamma$ is not a tensor, the \emph{difference of two connections} is, because the inhomogeneous terms cancel. In particular, consider $\Ga{\mu}{\nu}{\lambda}$ and $\tilde\Gamma^\mu{}_{\nu\lambda}\equiv\Ga{\mu}{\lambda}{\nu}$ (indices swapped). Then the \textbf{torsion}
+\begin{equation}
+  T^\mu{}_{\nu\lambda}\equiv\Ga{\mu}{\nu}{\lambda}-\Ga{\mu}{\lambda}{\nu}
+\end{equation}
+is a $(1,2)$ tensor. \textit{Proof:} applying \eqref{eq:gamma-transf} to both terms,
+\[
+  T'^\alpha{}_{\beta\rho}=\frac{\pd x'^\alpha}{\pd x^\nu}\frac{\pd x^\mu}{\pd x'^\beta}\frac{\pd x^\lambda}{\pd x'^\rho}\left(\Ga{\nu}{\mu}{\lambda}-\Ga{\nu}{\lambda}{\mu}\right)
+  -\frac{\pd x^\mu}{\pd x'^\beta}\frac{\pd x^\lambda}{\pd x'^\rho}\left(\frac{\pd^2x'^\alpha}{\pd x^\mu\pd x^\lambda}-\frac{\pd^2x'^\alpha}{\pd x^\lambda\pd x^\mu}\right),
+\]
+(in the second term we renamed the dummy indices $\mu\leftrightarrow\lambda$). The last bracket vanishes because partial derivatives commute, so $T'^\alpha{}_{\beta\rho}=\frac{\pd x'^\alpha}{\pd x^\nu}\frac{\pd x^\mu}{\pd x'^\beta}\frac{\pd x^\lambda}{\pd x'^\rho}T^\nu{}_{\mu\lambda}$. $\blacksquare$
+
+\begin{keyresult}
+General Relativity is a \textbf{torsion-free} theory: $T^\mu{}_{\nu\lambda}=0$, i.e.\ $\Ga{\mu}{\nu}{\lambda}=\Ga{\mu}{\lambda}{\nu}$ (the connection is symmetric in its lower indices). Since $T$ is a tensor, this statement is coordinate independent.
+\end{keyresult}
+
+\paragraph{Covariant derivative along a vector field.} Given a vector field $A$, the covariant derivative of $V$ along $A$ is
+\begin{equation}
+  D_AV^\mu\equiv A^\nu D_\nu V^\mu .
+\end{equation}
+
+\subsection{Covariant derivative of general tensors}
+
+\begin{definition}{Covariant derivative}{covder}
+The covariant derivative of tensors is an operation such that:
+\begin{enumerate}[nosep]
+\item $D_\mu$ is a linear operator mapping $(p,q)$ tensors to $(p,q+1)$ tensors;
+\item acting on scalars it reduces to the partial derivative: $D_\mu S=\pd_\mu S$;
+\item it obeys the Leibniz rule:
+$D_\mu\big(A^{\mu_1\dots\mu_p}{}_{\nu_1\dots\nu_q}B^{\rho_1\dots\rho_r}{}_{\lambda_1\dots\lambda_s}\big)
+=(D_\mu A^{\dots}{}_{\dots})B^{\dots}{}_{\dots}+A^{\dots}{}_{\dots}(D_\mu B^{\dots}{}_{\dots})$.
+\end{enumerate}
+\end{definition}
+
+\begin{example}{Covariant derivative of a covector}{covder-covector}
+$U_\nu V^\nu$ is a scalar, so by 2) and 3):
+\begin{align*}
+  D_\mu(U_\nu V^\nu)&=\pd_\mu(U_\nu V^\nu)=(\pd_\mu U_\nu)V^\nu+U_\nu\pd_\mu V^\nu ,\\
+  D_\mu(U_\nu V^\nu)&=(D_\mu U_\nu)V^\nu+U_\nu D_\mu V^\nu=(D_\mu U_\nu)V^\nu+U_\nu\pd_\mu V^\nu+U_\nu\Ga{\nu}{\mu}{\lambda}V^\lambda .
+\end{align*}
+Equating, $(D_\mu U_\nu)V^\nu=(\pd_\mu U_\nu)V^\nu-U_\lambda\Ga{\lambda}{\mu}{\nu}V^\nu$ (renaming $\nu\leftrightarrow\lambda$ in the last term). Since $V$ is arbitrary,
+\begin{equation}
+  \boxed{D_\mu U_\nu=\pd_\mu U_\nu-\Ga{\lambda}{\mu}{\nu}U_\lambda .}
+\end{equation}
+\end{example}
+In the general case, there is a $+\Gamma$ term for each upper index and a $-\Gamma$ term for each lower index:
+\begin{align}
+  D_\mu T^{\nu_1\dots\nu_p}{}_{\rho_1\dots\rho_q}=\pd_\mu T^{\nu_1\dots\nu_p}{}_{\rho_1\dots\rho_q}
+  &+\Ga{\nu_1}{\mu}{\lambda}T^{\lambda\nu_2\dots\nu_p}{}_{\rho_1\dots\rho_q}+\dots+\Ga{\nu_p}{\mu}{\lambda}T^{\nu_1\dots\nu_{p-1}\lambda}{}_{\rho_1\dots\rho_q}\nonumber\\
+  &-\Ga{\lambda}{\mu}{\rho_1}T^{\nu_1\dots\nu_p}{}_{\lambda\rho_2\dots\rho_q}-\dots-\Ga{\lambda}{\mu}{\rho_q}T^{\nu_1\dots\nu_p}{}_{\rho_1\dots\rho_{q-1}\lambda}.
+\end{align}
+
+\subsection{Properties and the Christoffel symbols}
+
+In GR the connection is chosen such that:
+\begin{enumerate}[nosep]
+\item $D_\mu$ commutes with index contraction;
+\item \textbf{metric compatibility}: $\boxed{D_\alpha g_{\mu\nu}=0}$;
+\item consequently, $D_\mu$ commutes with raising and lowering of indices ($D_\mu V_\nu=D_\mu(g_{\nu\alpha}V^\alpha)=g_{\nu\alpha}D_\mu V^\alpha$);
+\item covariant derivatives commute on scalars, $D_\mu D_\nu S=D_\nu D_\mu S$ (equivalent to torsion-freeness: $D_\mu D_\nu S-D_\nu D_\mu S=-T^\lambda{}_{\mu\nu}\pd_\lambda S$).
+\end{enumerate}
+\begin{remarkbox}[Why $D_\alpha g_{\mu\nu}=0$?]
+In Riemann normal coordinates at $P$, $\pd g=0$ and (as we will see) $\Gamma=0$, so $D_\alpha g_{\mu\nu}=\pd_\alpha g_{\mu\nu}=0$ at $P$. Since $D_\alpha g_{\mu\nu}$ is a tensor, it vanishes at $P$ in every coordinate system; and $P$ is arbitrary. Physically: in a local inertial frame the metric is locally constant (Equivalence Principle).
+\end{remarkbox}
+
+\begin{theorem}{Levi-Civita connection (Christoffel symbols)}{christoffel}
+The unique torsion-free, metric-compatible connection is
+\begin{equation}
+  \boxed{\Ga{\lambda}{\sigma}{\rho}=\frac12 g^{\lambda\mu}\left(\pd_\sigma g_{\rho\mu}+\pd_\rho g_{\sigma\mu}-\pd_\mu g_{\sigma\rho}\right).}
+  \label{eq:christoffel}
+\end{equation}
+Equivalently, lowering the index, $\Gamma_{\mu\sigma\rho}\equiv g_{\mu\lambda}\Ga{\lambda}{\sigma}{\rho}=\frac12(\pd_\sigma g_{\rho\mu}+\pd_\rho g_{\sigma\mu}-\pd_\mu g_{\sigma\rho})$.
+\end{theorem}
+\begin{proof}
+Write metric compatibility, $D_\rho g_{\sigma\mu}=\pd_\rho g_{\sigma\mu}-\Ga{\lambda}{\rho}{\sigma}g_{\lambda\mu}-\Ga{\lambda}{\rho}{\mu}g_{\sigma\lambda}=0$, for three cyclic permutations of the indices:
+\begin{align*}
+  \text{(a)}\quad &\pd_\rho g_{\sigma\mu}-\Ga{\lambda}{\rho}{\sigma}g_{\lambda\mu}-\Ga{\lambda}{\rho}{\mu}g_{\sigma\lambda}=0,\\
+  \text{(b)}\quad &\pd_\sigma g_{\mu\rho}-\Ga{\lambda}{\sigma}{\mu}g_{\lambda\rho}-\Ga{\lambda}{\sigma}{\rho}g_{\mu\lambda}=0,\\
+  \text{(c)}\quad &\pd_\mu g_{\rho\sigma}-\Ga{\lambda}{\mu}{\rho}g_{\lambda\sigma}-\Ga{\lambda}{\mu}{\sigma}g_{\rho\lambda}=0.
+\end{align*}
+Compute (a)$+$(b)$-$(c), using $g_{\mu\nu}=g_{\nu\mu}$ and the symmetry $\Ga{\lambda}{\rho}{\sigma}=\Ga{\lambda}{\sigma}{\rho}$:
+the terms $\Ga{\lambda}{\rho}{\mu}g_{\sigma\lambda}$ (from (a)) and $\Ga{\lambda}{\mu}{\rho}g_{\lambda\sigma}$ (from (c)) cancel; the terms $\Ga{\lambda}{\sigma}{\mu}g_{\lambda\rho}$ (from (b)) and $\Ga{\lambda}{\mu}{\sigma}g_{\rho\lambda}$ (from (c)) cancel; the terms $\Ga{\lambda}{\rho}{\sigma}g_{\lambda\mu}$ and $\Ga{\lambda}{\sigma}{\rho}g_{\mu\lambda}$ add up. We get
+\[
+  \pd_\rho g_{\sigma\mu}+\pd_\sigma g_{\mu\rho}-\pd_\mu g_{\rho\sigma}-2\Ga{\lambda}{\sigma}{\rho}g_{\lambda\mu}=0 .
+\]
+Multiplying by $\frac12 g^{\mu\kappa}$ and using $g_{\lambda\mu}g^{\mu\kappa}=\delta_\lambda{}^\kappa$ gives \eqref{eq:christoffel} (with $\kappa$ renamed $\lambda$). The derivation shows uniqueness: $\Gamma$ is completely determined by $g$.
+\end{proof}
+
+\begin{remarkbox}[Counting]
+In 4D a general connection has $4^3=64$ components. Symmetry in the lower indices removes the $4\times6=24$ antisymmetric combinations, leaving $64-24=40$ independent $\Gamma$'s --- exactly the $40$ first derivatives $\pd_\rho g_{\mu\nu}$ ($4\times10$), consistent with \eqref{eq:christoffel} being an invertible linear relation between them. In Riemann normal coordinates $\pd g=0$ at $P$, hence $\Gamma(P)=0$: \emph{one can always make the Christoffel symbols vanish at a point}, but not, in general, in a neighbourhood.
+\end{remarkbox}
+
+\paragraph{Geometric meaning of the $\Gamma$'s.} Consider a vector $\vec V=V^\alpha\vec e_{(\alpha)}$ expanded on basis vectors which change from point to point. Then
+\[
+  \frac{\pd\vec V}{\pd x^\beta}=\frac{\pd V^\alpha}{\pd x^\beta}\vec e_{(\alpha)}+V^\alpha\frac{\pd\vec e_{(\alpha)}}{\pd x^\beta}.
+\]
+Writing the derivative of the basis vectors in the same basis, $\frac{\pd\vec e_{(\alpha)}}{\pd x^\beta}=\Ga{\mu}{\alpha}{\beta}\vec e_{(\mu)}$, we find $\frac{\pd\vec V}{\pd x^\beta}=\big(\pd_\beta V^\mu+\Ga{\mu}{\beta}{\alpha}V^\alpha\big)\vec e_{(\mu)}=(D_\beta V^\mu)\,\vec e_{(\mu)}$. Hence: \emph{$\Ga{\mu}{\alpha}{\beta}$ is the $\mu$-th component of the derivative of the $\alpha$-th basis vector with respect to the $\beta$-th coordinate}, and $D_\beta V^\mu$ are the components of the full derivative of the geometric object $\vec V$.
+
+\section{Parallel transport}
+
+\begin{definition}{Parallel transport}{pt}
+Let $C:[a,b]\subseteq\R\to U\subseteq\M$ be a parametrised curve which, in a given coordinate system, reads $x^\mu(\lambda)$, $\lambda\in\R$. A vector $V$ is \textbf{parallel transported} along the curve if and only if
+\begin{equation}
+  \frac{DV^\mu}{\dd\lambda}\equiv\frac{\dd x^\nu}{\dd\lambda}D_\nu V^\mu=\frac{\dd V^\mu}{\dd\lambda}+\Ga{\mu}{\nu}{\lambda}\frac{\dd x^\nu}{\dd\lambda}V^\lambda=0
+\end{equation}
+everywhere along the curve (``covariant derivative along the curve'').
+\end{definition}
+Here $\dd x^\nu/\dd\lambda$ is the tangent vector (the ``velocity'') to the curve. The second form follows from $\frac{\dd x^\nu}{\dd\lambda}\pd_\nu V^\mu=\frac{\dd V^\mu}{\dd\lambda}$. Given $V$ at one point, this is a first-order ODE which determines $V$ uniquely along the curve.
+
+\begin{remarkbox}[Properties]
+\begin{itemize}[nosep]
+\item Since $D_\alpha g_{\mu\nu}=0$, if $V$ and $W$ are both parallel transported then
+$\frac{\dd}{\dd\lambda}(g_{\mu\nu}V^\mu W^\nu)=\frac{\dd x^\alpha}{\dd\lambda}D_\alpha(g_{\mu\nu}V^\mu W^\nu)=0$. Parallel transport preserves the \textbf{scalar product}, hence the \textbf{norm} of vectors (length is invariant under PT) and the \textbf{angles} between them.
+\item The \textbf{covariant acceleration} of a curve is defined as
+\begin{equation}
+  a^\mu\equiv\frac{D\dot x^\mu}{\dd\lambda}=\ddot x^\mu+\Ga{\mu}{\nu}{\lambda}\dot x^\nu\dot x^\lambda=\dot x^\nu D_\nu\dot x^\mu,\qquad \dot x^\mu\equiv\frac{\dd x^\mu}{\dd\lambda}.
+\end{equation}
+\end{itemize}
+\end{remarkbox}
+
+\section{Geodesics}
+
+\begin{definition}{Geodesic}{geodesic}
+Let $V^\mu(x)=\frac{\dd x^\mu}{\dd\lambda}$ be the tangent vector field to a curve $C(\lambda)$. $C$ is a \textbf{geodesic} if and only if its tangent vector is parallel transported along itself:
+\begin{equation}
+  \boxed{\frac{\dd^2x^\mu}{\dd\lambda^2}+\Ga{\mu}{\nu}{\rho}\frac{\dd x^\nu}{\dd\lambda}\frac{\dd x^\rho}{\dd\lambda}=0}\qquad\text{(geodesic equation)}.
+  \label{eq:geodesic}
+\end{equation}
+\end{definition}
+\paragraph{Comments.}
+\begin{enumerate}
+\item The geodesic equation defines a curve such that, if a vector is tangent to $C(\lambda)$ at one point, it stays tangent at all points along $C$ (``auto-parallel'' curve). A geodesic is a curve of \emph{zero covariant acceleration}: it is what would have been a straight path in a flat space.
+\item The geodesic equations retain their form under all \emph{affine} reparametrisations, $\lambda\to\tilde\lambda=a\lambda+b$ ($a,b$ constants): then $\dd/\dd\lambda=a\,\dd/\dd\tilde\lambda$ and each term of \eqref{eq:geodesic} gets multiplied by $a^2$. Such parameters are called \emph{affine parameters} (for massive particles, e.g.\ the proper time $\tau$).
+\item The covariant acceleration vanishes along affinely parametrised geodesics, $a^\mu=\frac{D\dot x^\mu}{\dd\lambda}=\frac{\dd^2x^\mu}{\dd\lambda^2}+\Ga{\mu}{\nu}{\rho}\frac{\dd x^\nu}{\dd\lambda}\frac{\dd x^\rho}{\dd\lambda}=0$.
+\item There is one geodesic equation for each component $\mu$: a system of $n$ coupled second-order ODEs.
+\end{enumerate}
+
+\subsection{Geodesics extremise the proper time}
+
+Why are geodesics physically relevant? Consider the proper time, $c^2\dd\tau^2=\dd s^2=g_{\mu\nu}\dd x^\mu\dd x^\nu$, elapsed between two events $A$ and $B$ along a time-like world-line:
+\begin{equation}
+  \tau_{AB}=\int_A^B\dd\tau=\int_A^B\sqrt{g_{\mu\nu}\dd x^\mu\dd x^\nu}
+\end{equation}
+(we set $c=1$ in this subsection). For simplicity, take a world-line parametrised as $x^\alpha=x^\alpha(\sigma)$ with $\sigma=0$ at $A$ and $\sigma=1$ at $B$:
+\[
+  \tau_{AB}=\int_0^1\left[g_{\alpha\beta}\frac{\dd x^\alpha}{\dd\sigma}\frac{\dd x^\beta}{\dd\sigma}\right]^{1/2}\dd\sigma\equiv\int_0^1 L\!\left[\frac{\dd x^\alpha}{\dd\sigma},x^\alpha\right]\dd\sigma ,
+  \qquad L\equiv\left[g_{\alpha\beta}\frac{\dd x^\alpha}{\dd\sigma}\frac{\dd x^\beta}{\dd\sigma}\right]^{1/2}=\frac{\dd\tau}{\dd\sigma}.
+\]
+A useful relation: for any function $F=F(\tau(\sigma))$,
+\begin{equation}
+  \frac{\dd F}{\dd\sigma}=\frac{\dd F}{\dd\tau}\frac{\dd\tau}{\dd\sigma}=L\frac{\dd F}{\dd\tau}.\tag{$\ast$}
+\end{equation}
+From analytical mechanics, the action is extremised when $L$ obeys the Euler--Lagrange equations,
+\[
+  \frac{\pd L}{\pd x^\gamma}-\frac{\dd}{\dd\sigma}\left[\frac{\pd L}{\pd(\dd x^\gamma/\dd\sigma)}\right]=0 .
+\]
+Let us compute each term.
+\begin{itemize}
+\item \textbf{First term.} Only the metric depends on $x^\gamma$:
+\[
+  \frac{\pd L}{\pd x^\gamma}=\frac{1}{2L}\frac{\pd g_{\alpha\beta}}{\pd x^\gamma}\frac{\dd x^\alpha}{\dd\sigma}\frac{\dd x^\beta}{\dd\sigma}
+  \overset{(\ast)}{=}\frac{L}{2}\frac{\pd g_{\alpha\beta}}{\pd x^\gamma}\frac{\dd x^\alpha}{\dd\tau}\frac{\dd x^\beta}{\dd\tau}.
+\]
+\item \textbf{Second term.} Using $\pd(\dd x^\alpha/\dd\sigma)/\pd(\dd x^\gamma/\dd\sigma)=\delta^\alpha{}_\gamma$,
+\[
+  \frac{\pd L}{\pd(\dd x^\gamma/\dd\sigma)}=\frac{1}{2L}g_{\alpha\beta}\left(\delta^\alpha{}_\gamma\frac{\dd x^\beta}{\dd\sigma}+\frac{\dd x^\alpha}{\dd\sigma}\delta^\beta{}_\gamma\right)
+  =\frac{1}{2L}\left(g_{\gamma\beta}\frac{\dd x^\beta}{\dd\sigma}+g_{\alpha\gamma}\frac{\dd x^\alpha}{\dd\sigma}\right)=\frac1L g_{\alpha\gamma}\frac{\dd x^\alpha}{\dd\sigma},
+\]
+since the two terms are equal (dummy indices, symmetric metric). By $(\ast)$, $\frac1L\frac{\dd x^\alpha}{\dd\sigma}=\frac{\dd x^\alpha}{\dd\tau}$, and
+\begin{align*}
+  \frac{\dd}{\dd\sigma}\left[\frac{\pd L}{\pd(\dd x^\gamma/\dd\sigma)}\right]
+  &=\frac{\dd}{\dd\sigma}\left[g_{\alpha\gamma}\frac{\dd x^\alpha}{\dd\tau}\right]\overset{(\ast)}{=}L\frac{\dd}{\dd\tau}\left[g_{\alpha\gamma}\frac{\dd x^\alpha}{\dd\tau}\right]
+  =L\left[g_{\alpha\gamma}\frac{\dd^2x^\alpha}{\dd\tau^2}+\frac{\dd g_{\alpha\gamma}}{\dd\tau}\frac{\dd x^\alpha}{\dd\tau}\right]\\
+  &=L\left[g_{\alpha\gamma}\frac{\dd^2x^\alpha}{\dd\tau^2}+\frac{\pd g_{\alpha\gamma}}{\pd x^\beta}\frac{\dd x^\beta}{\dd\tau}\frac{\dd x^\alpha}{\dd\tau}\right]
+  =L\left[g_{\alpha\gamma}\frac{\dd^2x^\alpha}{\dd\tau^2}+\frac12\left(\frac{\pd g_{\alpha\gamma}}{\pd x^\beta}+\frac{\pd g_{\beta\gamma}}{\pd x^\alpha}\right)\frac{\dd x^\alpha}{\dd\tau}\frac{\dd x^\beta}{\dd\tau}\right],
+\end{align*}
+where in the last step we split the term into two equal halves and relabelled $\alpha\leftrightarrow\beta$ in one of them.
+\end{itemize}
+Putting the pieces together and dividing by $L$:
+\[
+  \frac12\frac{\pd g_{\alpha\beta}}{\pd x^\gamma}\frac{\dd x^\alpha}{\dd\tau}\frac{\dd x^\beta}{\dd\tau}-g_{\alpha\gamma}\frac{\dd^2x^\alpha}{\dd\tau^2}-\frac12\left(\frac{\pd g_{\alpha\gamma}}{\pd x^\beta}+\frac{\pd g_{\beta\gamma}}{\pd x^\alpha}\right)\frac{\dd x^\alpha}{\dd\tau}\frac{\dd x^\beta}{\dd\tau}=0,
+\]
+that is
+\[
+  g_{\alpha\gamma}\frac{\dd^2x^\alpha}{\dd\tau^2}=-\frac12\left[\pd_\beta g_{\gamma\alpha}+\pd_\alpha g_{\gamma\beta}-\pd_\gamma g_{\alpha\beta}\right]\frac{\dd x^\alpha}{\dd\tau}\frac{\dd x^\beta}{\dd\tau}
+  =-g_{\gamma\lambda}\Ga{\lambda}{\alpha}{\beta}\frac{\dd x^\alpha}{\dd\tau}\frac{\dd x^\beta}{\dd\tau},
+\]
+by \eqref{eq:christoffel}. Multiplying by $g^{\gamma\mu}$:
+\begin{equation}
+  \frac{\dd^2x^\mu}{\dd\tau^2}+\Ga{\mu}{\alpha}{\beta}\frac{\dd x^\alpha}{\dd\tau}\frac{\dd x^\beta}{\dd\tau}=0 .
+\end{equation}
+
+\begin{keyresult}
+The geodesic equation is the equation of the curve along which the action (the proper time) is \emph{extremised}. Free particles --- both massive and massless --- follow geodesics. (For massless particles $\dd\tau=0$ and one uses an affine parameter $\lambda$ and the Lagrangian below.)
+\end{keyresult}
+
+\begin{proposition}{The ``squared'' Lagrangian}{L1}
+The function $L_1\equiv\frac12L^2=\frac12 g_{\mu\nu}\dot x^\mu\dot x^\nu$ (with $\dot{}=\dd/\dd\lambda$, $\lambda$ an affine parameter) also obeys the Euler--Lagrange equations and gives the geodesic equation.
+\end{proposition}
+\begin{proof}
+$\pd L_1/\pd\dot x^\gamma=L\,\pd L/\pd\dot x^\gamma$ and $\pd L_1/\pd x^\gamma=L\,\pd L/\pd x^\gamma$. Then
+\[
+\frac{\dd}{\dd\lambda}\frac{\pd L_1}{\pd\dot x^\gamma}-\frac{\pd L_1}{\pd x^\gamma}=L\left[\frac{\dd}{\dd\lambda}\frac{\pd L}{\pd\dot x^\gamma}-\frac{\pd L}{\pd x^\gamma}\right]+\frac{\dd L}{\dd\lambda}\frac{\pd L}{\pd\dot x^\gamma}.
+\]
+For an affine parameter $L=\dd\tau/\dd\lambda$ is constant, so the last term vanishes and the two sets of equations are equivalent. Directly: $\frac{\dd}{\dd\lambda}(g_{\gamma\mu}\dot x^\mu)-\frac12\pd_\gamma g_{\mu\nu}\dot x^\mu\dot x^\nu=0$ reproduces, as above, $\ddot x^\mu+\Ga{\mu}{\alpha}{\beta}\dot x^\alpha\dot x^\beta=0$. This version has the advantage of avoiding square roots and of being valid also for null geodesics.
+\end{proof}
+
+\subsection{Example: geodesics of the Euclidean plane in polar coordinates}
+
+Consider the 2D Euclidean space. We look for its geodesics, in Cartesian and in polar coordinates. The line element is
+\[
+  \dd s^2=\dd x^2+\dd y^2=\dd r^2+r^2\dd\phi^2,
+\]
+so the components of $g$ are
+\[
+  g_{xx}=g_{yy}=1,\ g_{xy}=g_{yx}=0;\qquad g_{rr}=1,\ g_{\phi\phi}=r^2,\ g_{r\phi}=g_{\phi r}=0 .
+\]
+\begin{enumerate}[label=(\roman*)]
+\item \textbf{Cartesian:} $g_{\mu\nu}=\delta_{\mu\nu}$, so all partial derivatives of the metric vanish and all $\Gamma=0$. The geodesic equations are $\frac{\dd^2x}{\dd\lambda^2}=0$, $\frac{\dd^2y}{\dd\lambda^2}=0$, with general solution $x(\lambda)=a\lambda+b$, $y(\lambda)=c\lambda+d$, i.e.\ $y=kx+e$: a \textbf{straight line}. (In flat space-time one usually parametrises with the proper time, $\tau=t$ for a particle at rest.)
+\item \textbf{Polar:} the only non-vanishing derivative is $\pd_r g_{\phi\phi}=2r$. From \eqref{eq:christoffel}:
+\[
+  \Ga{r}{\phi}{\phi}=\frac12 g^{rr}(-\pd_r g_{\phi\phi})=-r,\qquad
+  \Ga{\phi}{r}{\phi}=\Ga{\phi}{\phi}{r}=\frac12 g^{\phi\phi}\pd_r g_{\phi\phi}=\frac{1}{2r^2}2r=\frac1r ,
+\]
+all others vanish. The geodesic equations are
+\begin{align}
+  \frac{\dd^2r}{\dd\lambda^2}+\Ga{r}{\phi}{\phi}\left(\frac{\dd\phi}{\dd\lambda}\right)^2=0&\quad\Longrightarrow\quad\ddot r-r\dot\phi^2=0,\\
+  \frac{\dd^2\phi}{\dd\lambda^2}+2\Ga{\phi}{r}{\phi}\frac{\dd r}{\dd\lambda}\frac{\dd\phi}{\dd\lambda}=0&\quad\Longrightarrow\quad\ddot\phi+\frac2r\dot r\dot\phi=0,
+\end{align}
+where the factor $2$ comes from the two terms $\Ga{\phi}{r}{\phi}\dot r\dot\phi+\Ga{\phi}{\phi}{r}\dot\phi\dot r$ (symmetric lower indices).
+\end{enumerate}
+These are also straight lines --- the physics remains the same when changing coordinates --- even though in polar coordinates the Christoffel symbols are non-zero: \emph{even in flat space there can be non-zero Christoffel symbols}. Choosing coordinate systems wisely is important!
+
+\textit{Check with the Lagrangian method.} With $L_1=\frac12(\dot r^2+r^2\dot\phi^2)$: $\frac{\dd}{\dd\lambda}\dot r-r\dot\phi^2=0$ and $\frac{\dd}{\dd\lambda}(r^2\dot\phi)=0\Leftrightarrow r^2\ddot\phi+2r\dot r\dot\phi=0$: the same equations. The second one expresses conservation of angular momentum $r^2\dot\phi$. One can verify that $r\cos(\phi-\phi_0)=\text{const}$ (a straight line at distance $|\text{const}|$ from the origin) solves them.

@@ -1,0 +1,132 @@
+% =====================================================================
+\chapter{The metric tensor}\label{ch:metric}
+% =====================================================================
+
+\section{Definition}
+
+\begin{definition}{Metric tensor}{metric}
+The \textbf{metric tensor} is a $(0,2)$ tensor field $g_{\mu\nu}(x)$ such that:
+\begin{enumerate}[label=(\roman*),nosep]
+  \item it is \textbf{symmetric}: $g_{\mu\nu}=g_{\nu\mu}$;
+  \item it is \textbf{non-degenerate}: $\det(g_{\mu\nu})\neq0$;
+  \item it defines the line element, which is invariant under general coordinate transformations $x\to x'$:
+  \begin{equation}
+    \dd s'^2=g'_{\mu\nu}(x')\dd x'^\mu\dd x'^\nu=g_{\mu\nu}(x)\dd x^\mu\dd x^\nu=\dd s^2\ (=c^2\dd\tau^2).
+  \end{equation}
+\end{enumerate}
+\end{definition}
+The metric describes the \emph{geometry} of the manifold: it defines lengths, angles, the scalar product of vectors ($g(V,W)=g_{\mu\nu}V^\mu W^\nu$) and proper time along world-lines. In GR the metric is the gravitational field itself. In SR, in inertial coordinates, $g_{\mu\nu}=\eta_{\mu\nu}$.
+
+\begin{remarkbox}[Remark: the two meanings of $\dd x^\mu$]
+The symbol $\dd x^\mu$ has two meanings, and it is worth being careful.
+\begin{enumerate}
+\item \textbf{Basis covector.} $\dd x^\mu$ is the covector (one-form) defined by $\dd x^\mu(\pd_\nu)=\delta^\mu{}_\nu$; it is part of the covector basis. For any vector $V=V^\mu\pd_\mu$ it extracts a component, $\dd x^\mu(V)=V^\mu$. Every covector is $U=U_\mu\dd x^\mu$, and $\dd f=\pd_\mu f\,\dd x^\mu$.
+\item \textbf{Components of a small displacement.} Along a curve $x^\mu(\lambda)$, a step $\dd\lambda$ displaces the point by $\Delta=V\dd\lambda$ (tangent vector times a real number), whose components are
+\[
+  \Delta^\mu=\dd x^\mu(\Delta)=V^\mu\dd\lambda=\frac{\dd x^\mu}{\dd\lambda}\dd\lambda\equiv\dd x^\mu ,
+\]
+and these transform like vector components: $\dd x'^\mu=\frac{\pd x'^\mu}{\pd x^\nu}\dd x^\nu$.
+\end{enumerate}
+The notation is the same because the number in (2) is the output of the covector in (1) applied to the displacement. In $\dd s^2=g_{\mu\nu}\dd x^\mu\dd x^\nu$ the $\dd x^\mu$ are displacement components (meaning 2); in $g=g_{\mu\nu}\,\dd x^\mu\otimes\dd x^\nu$ they are basis covectors (meaning 1).
+\end{remarkbox}
+
+\section{Transformation law of the metric}
+
+\begin{proposition}{The metric is a $(0,2)$ tensor}{metric-transf}
+Requirement (iii) implies that the components of the metric transform as a $(0,2)$ tensor:
+\begin{equation}
+  g'_{\mu\nu}(x')=\frac{\pd x^\alpha}{\pd x'^\mu}\frac{\pd x^\beta}{\pd x'^\nu}\,g_{\alpha\beta}(x).
+  \label{eq:metric-law}
+\end{equation}
+\end{proposition}
+\begin{proof}
+Notice first that, since $\dd x$ is a vector (from new to old coordinates, $x'\to x$),
+\[
+  \dd x^\alpha=\frac{\pd x^\alpha}{\pd x'^\mu}\dd x'^\mu,\qquad \dd x^\beta=\frac{\pd x^\beta}{\pd x'^\nu}\dd x'^\nu .
+\]
+Because $\dd s^2$ is a scalar,
+\[
+  g'_{\mu\nu}\dd x'^\mu\dd x'^\nu=g_{\alpha\beta}\dd x^\alpha\dd x^\beta=g_{\alpha\beta}\left(\frac{\pd x^\alpha}{\pd x'^\mu}\dd x'^\mu\right)\left(\frac{\pd x^\beta}{\pd x'^\nu}\dd x'^\nu\right).
+\]
+Rearranging,
+\[
+  \Big(\underbrace{g'_{\mu\nu}-\frac{\pd x^\alpha}{\pd x'^\mu}\frac{\pd x^\beta}{\pd x'^\nu}g_{\alpha\beta}}_{\equiv A_{\mu\nu}}\Big)\dd x'^\mu\dd x'^\nu=0\qquad\forall\,\dd x'^\mu .
+\]
+Now $A_{\mu\nu}$ is symmetric (it is built from the symmetric $g'_{\mu\nu}$ and $g_{\alpha\beta}$; exchanging $\mu\leftrightarrow\nu$ in the second term and relabelling $\alpha\leftrightarrow\beta$ gives back the same expression) and the displacement is arbitrary. We show that a symmetric array with $A_{\mu\nu}\xi^\mu\xi^\nu=0$ for all $\xi$ must vanish. Since $\dd x'^\mu\dd x'^\nu=\dd x'^\nu\dd x'^\mu$ (ordinary numbers), we can split the sum into diagonal and cross terms:
+\[
+  A_{\mu\nu}\dd x'^\mu\dd x'^\nu=\sum_\mu A_{\mu\mu}(\dd x'^\mu)^2+\sum_{\mu<\nu}(A_{\mu\nu}+A_{\nu\mu})\dd x'^\mu\dd x'^\nu=0 .
+\]
+We now choose the displacements to isolate each coefficient.
+\begin{itemize}
+\item Take a displacement with only the component $\ell$ non-zero. Then only one term survives: $A_{\ell\ell}(\dd x'^\ell)^2=0\Rightarrow A_{\ell\ell}=0$ (no sum on $\ell$).
+\item Take a displacement with only the components $\ell$ and $\sigma$ non-zero ($\ell\neq\sigma$). The diagonal terms vanish by the previous point, so only the cross term remains: $(A_{\ell\sigma}+A_{\sigma\ell})\dd x'^\ell\dd x'^\sigma=0\Rightarrow A_{\ell\sigma}+A_{\sigma\ell}=0$.
+\end{itemize}
+Using the symmetry $A_{\sigma\ell}=A_{\ell\sigma}$, the last result gives $2A_{\ell\sigma}=0$. So every entry vanishes, $A_{\mu\nu}=0$, which is \eqref{eq:metric-law}.
+\end{proof}
+
+\section{The inverse metric}
+
+From requirements (i) and (ii), $g_{\mu\nu}$ is an invertible matrix (invertibility actually only uses (ii)). We call its inverse $g^{\mu\nu}$:
+\begin{equation}
+  g_{\mu\nu}\,g^{\nu\alpha}=\delta_\mu{}^\alpha .
+\end{equation}
+$g^{\mu\nu}$ is also symmetric, because the inverse of a symmetric matrix is symmetric: $(g^{-1})^T=(g^T)^{-1}=g^{-1}$.
+
+\begin{proposition}{The inverse metric is a $(2,0)$ tensor}{inv-metric}
+\begin{equation}
+  g'^{\mu\nu}=\frac{\pd x'^\mu}{\pd x^\alpha}\frac{\pd x'^\nu}{\pd x^\beta}\,g^{\alpha\beta}.
+\end{equation}
+\end{proposition}
+\begin{proof}
+Write $M^\alpha{}_\mu\equiv\pd x^\alpha/\pd x'^\mu$. The metric law reads, in matrix notation,
+\[
+  g'_{\mu\nu}=\sum_{\alpha,\beta}\frac{\pd x^\alpha}{\pd x'^\mu}\frac{\pd x^\beta}{\pd x'^\nu}g_{\alpha\beta}
+  =\sum_{\alpha\beta}M^\alpha{}_\mu\,g_{\alpha\beta}\,M^\beta{}_\nu
+  =\sum_{\alpha\beta}(M^T)_\mu{}^\alpha g_{\alpha\beta}M^\beta{}_\nu
+  \quad\Longrightarrow\quad g'=M^TgM ,
+\]
+where we used that a matrix product $(XYZ)_{ij}=\sum X_{ik}Y_{k\ell}Z_{\ell j}$ chains indices from left to right, and rewrote $M^\alpha{}_\mu=(M^T)_\mu{}^\alpha$.
+Taking the inverse of both sides, using $(XYZ)^{-1}=Z^{-1}Y^{-1}X^{-1}$ and $(M^T)^{-1}=(M^{-1})^T$,
+\[
+  (g')^{-1}=(M^TgM)^{-1}=M^{-1}g^{-1}(M^{-1})^T .
+\]
+The inverse of $M$ has entries $(M^{-1})^\mu{}_\alpha=\pd x'^\mu/\pd x^\alpha$, since $\frac{\pd x'^\mu}{\pd x^\alpha}\frac{\pd x^\alpha}{\pd x'^\nu}=\delta^\mu{}_\nu$. Back to indices,
+\[
+  g'^{\mu\nu}=(M^{-1})^\mu{}_\alpha\,g^{\alpha\beta}\,((M^{-1})^T)_\beta{}^\nu=(M^{-1})^\mu{}_\alpha\,g^{\alpha\beta}\,(M^{-1})^\nu{}_\beta
+  =\frac{\pd x'^\mu}{\pd x^\alpha}\frac{\pd x'^\nu}{\pd x^\beta}g^{\alpha\beta},
+\]
+which is the $(2,0)$ tensor law.
+\end{proof}
+
+\section{Raising and lowering indices}
+
+The metric tensor allows us to construct a vector from a covector and vice versa; in other words, it allows us to raise and lower indices:
+\begin{equation}
+  \boxed{U^\mu=g^{\mu\nu}U_\nu,\qquad U_\mu=g_{\mu\nu}U^\nu .}
+\end{equation}
+
+\paragraph{Geometric meaning.}
+\begin{enumerate}[label=(\roman*)]
+\item $g$ takes two vectors and returns a number: $g(V,W)=g_{\mu\nu}V^\mu W^\nu$.
+\item Fix $V$ and leave the second slot open: $W\mapsto g(V,W)=g_{\mu\nu}V^\mu W^\nu$. This map eats one vector $W$ and returns a number, and it is linear in $W$ (because $g$ is bilinear): by definition, it is a covector. Call it $U$: $U(W)\equiv g(V,W)$.
+\item Its components are $U_\nu=U(\pd_\nu)$. The components of the basis vector $\pd_\nu$ are $W^\alpha=\delta^\alpha{}_\nu$, so
+\[
+  U_\nu=U(\pd_\nu)=g(V,\pd_\nu)=g_{\mu\alpha}V^\mu\delta^\alpha{}_\nu=g_{\mu\nu}V^\mu\ \Longrightarrow\ \boxed{V_\nu=g_{\nu\mu}V^\mu} .
+\]
+\end{enumerate}
+The inverse operation is consistent: from $V_\nu=g_{\nu\mu}V^\mu$, $g^{\alpha\nu}V_\nu=g^{\alpha\nu}g_{\nu\mu}V^\mu=\delta^\alpha{}_\mu V^\mu=V^\alpha$; and $g_{\mu\nu}g^{\nu\alpha}U_\alpha=\delta_\mu{}^\alpha U_\alpha=U_\mu$.
+
+\paragraph{Raising and lowering produce tensors,} because they are a tensor product followed by a contraction. Let us check explicitly that $U_\mu=g_{\mu\nu}U^\nu$ transforms as a lower index. With $M^\alpha{}_\mu=\pd x^\alpha/\pd x'^\mu$ and $N^\nu{}_\gamma=\pd x'^\nu/\pd x^\gamma$ (so that $M^\beta{}_\nu N^\nu{}_\gamma=\delta^\beta{}_\gamma$):
+\[
+  U'_\mu=g'_{\mu\nu}U'^\nu=\big(M^\alpha{}_\mu M^\beta{}_\nu g_{\alpha\beta}\big)\big(N^\nu{}_\gamma U^\gamma\big)
+  =M^\alpha{}_\mu g_{\alpha\beta}\delta^\beta{}_\gamma U^\gamma=M^\alpha{}_\mu g_{\alpha\gamma}U^\gamma=M^\alpha{}_\mu U_\alpha ,
+\]
+which is the $(0,1)$ law: $U'_\mu=\frac{\pd x^\alpha}{\pd x'^\mu}U_\alpha$. The same works for any index of any tensor, e.g.\ $T^\mu{}_\nu=g_{\nu\alpha}T^{\mu\alpha}$.
+
+\begin{example}{Minkowski space}{mink-lower}
+With $(+,-,-,-)$: $V_\mu=\eta_{\mu\nu}V^\nu=(V^0,-\vec V)$. For instance $p_\mu=(E/c,-\vec p)$ and $\dd s^2=\dd x_\mu\dd x^\mu$. In Minkowski space spatial indices are raised and lowered with $-\delta_{ij}$: $V_i=-V^i$.
+\end{example}
+
+\begin{remarkbox}[Remark: the trace $\delta^\mu{}_\mu$]
+$g_{\mu\nu}g^{\mu\nu}=\delta^\mu{}_\mu=n$, the dimension of the manifold ($=4$ in space-time). This identity is used repeatedly (e.g.\ when taking traces of the Einstein equations).
+\end{remarkbox}

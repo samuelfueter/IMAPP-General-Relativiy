@@ -1,0 +1,347 @@
+% =====================================================================
+\chapter{Manifolds, scalars, curves, vectors and tensors}\label{ch:manifolds}
+% =====================================================================
+
+\section{Manifolds}
+
+\paragraph{Why do we need them?} In GR, space-time has no preferred global coordinate system: in a curved space-time there is no ``Cartesian grid'' covering everything. The structure we need is that of a space which
+\begin{center}
+\emph{locally looks like $\R^4$, so that we can use calculus, but globally can be curved or have a non-trivial topology.}
+\end{center}
+That is a \textbf{differentiable manifold}. The physical principle behind this is that coordinates are only \emph{labels} of events: physical statements must not depend on the labelling.
+
+\begin{keyresult}
+In General Relativity, space-time is a \textbf{four-dimensional differentiable manifold} (equipped with a metric, see \cref{ch:metric}).
+\end{keyresult}
+
+\begin{definition}{Differentiable manifold}{manifold}
+A \textbf{differentiable manifold of dimension $n$} is a set $\M$ with a topology such that:
+\begin{enumerate}[label=(\roman*)]
+\item $\M$ is a \textbf{Hausdorff} topological space: for all $x_1,x_2\in\M$ with $x_1\neq x_2$ there exist open neighbourhoods $U_1\ni x_1$, $U_2\ni x_2$ with $U_1\cap U_2=\emptyset$ (any two distinct points have disjoint open neighbourhoods). One also normally assumes that $\M$ is \emph{second-countable}.
+\item There exists a family of open sets $\{U_i\}_{i\in I}$ covering $\M$: $\bigcup_{i\in I}U_i=\M$.
+\item Each $U_i$ can be mapped by a \textbf{homeomorphism} (a continuous bijection with continuous inverse) $\phi_i:U_i\to U_i'\subseteq\R^n$ onto an open subset of $\R^n$.
+\item \textbf{Compatibility:} given two sets $U_i,U_j$ such that $U_i\cap U_j\neq\emptyset$, the \emph{transition map}
+\begin{equation}
+  \psi_{ij}\equiv\phi_j\circ\phi_i^{-1}:\ \phi_i(U_i\cap U_j)\subseteq\R^n\longrightarrow\phi_j(U_i\cap U_j)\subseteq\R^n
+\end{equation}
+is $C^\infty$ (infinitely differentiable).
+\end{enumerate}
+\end{definition}
+
+\begin{remarkbox}[Why Hausdorff?]
+The Hausdorff property avoids pathologies like the ``line with two origins'' (two copies of $\R$ glued everywhere except at the origin), in which a sequence could converge to two different points. Limits, and hence derivatives, would then not be unique.
+\end{remarkbox}
+
+\paragraph{Terminology.}
+\begin{itemize}[nosep]
+  \item A pair $(U_i,\phi_i)$ is called a \textbf{chart}; $U_i$ is a \emph{coordinate neighbourhood} and $\phi_i$ a \emph{coordinate function}.
+  \item In $\R^n$, $\phi_i$ is represented by a set of $n$ functions $x^1(p),\dots,x^n(p)$, $p\in U_i$: the \textbf{coordinates} of $p$.
+  \item A collection of compatible charts covering $\M$ is an \textbf{atlas}. The collection of \emph{all} compatible charts is the \textbf{maximal atlas}.
+\end{itemize}
+
+\begin{figure}[ht]
+\centering
+\begin{tikzpicture}[scale=1.0,>=Stealth]
+  \draw[very thick] (0,0) circle (1.5);
+  % top chart
+  \draw[line width=3pt,yellow!80!orange,opacity=0.7] (20:1.75) arc (20:160:1.75);
+  \draw[thick,yellow!70!orange] (-1.8,2.6) -- (1.8,2.6); \node[above] at (0,2.6) {$\phi_1(U_1)$};
+  \draw[->,yellow!60!orange] (0,1.8) -- (0,2.5);
+  % bottom
+  \draw[line width=3pt,red!70,opacity=0.6] (200:1.75) arc (200:340:1.75);
+  \draw[thick,red!70] (-1.8,-2.6) -- (1.8,-2.6); \node[below] at (0,-2.6) {$\phi_3(U_3)$};
+  \draw[->,red!70] (0,-1.8) -- (0,-2.5);
+  % left
+  \draw[line width=3pt,blue!60,opacity=0.6] (110:1.95) arc (110:250:1.95);
+  \draw[thick,blue!60] (-2.9,-1.8) -- (-2.9,1.8); \node[left] at (-2.9,0) {$\phi_4(U_4)$};
+  \draw[->,blue!60] (-2.0,0) -- (-2.8,0);
+  % right
+  \draw[line width=3pt,green!50!black,opacity=0.6] (-70:1.95) arc (-70:70:1.95);
+  \draw[thick,green!50!black] (2.9,-1.8) -- (2.9,1.8); \node[right] at (2.9,0) {$\phi_2(U_2)$};
+  \draw[->,green!50!black] (2.0,0) -- (2.8,0);
+  \node at (0,0) {$S^1$};
+\end{tikzpicture}
+\caption{An atlas for the circle $S^1$: four charts, each one mapping an open arc $U_i$ (coloured) onto an open interval of $\R$. No single chart can cover the whole circle (a homeomorphism from $S^1$ to an open interval does not exist), but together the four charts cover it; on the overlaps the transition maps are smooth.}
+\label{fig:atlas}
+\end{figure}
+
+\begin{remarkbox}[What the definition is telling us]
+Basically, we just found a definition that allows us to do calculus by mapping (pieces of) the manifold onto $\R^n$ and doing the differential calculus there. Given $p\in\M$ we map a neighbourhood of $p$ to $\R^n$, do ordinary tensor calculus, map back, move to a different neighbourhood, map again into $\R^n$, and so on. The mapping is \emph{local} and depends on the chart chosen; the compatibility condition guarantees that the results do not depend on which chart we use in the overlaps. \textbf{$\M$ locally looks like $\R^n$.}
+\end{remarkbox}
+
+\section{Scalars and curves}
+
+\begin{definition}{Scalar field}{scalar}
+A \textbf{scalar (field)} on space-time is a smooth map $S:\M\to\R$: to each point $p\in\M$ it associates a number $S(p)$.
+\end{definition}
+A scalar transforms ``trivially'' under coordinate transformations: its value at a given point is the same in all coordinates (every observer agrees on it),
+\begin{equation}
+  S'(x')=S(x)\qquad\text{under}\qquad x\to x'(x).
+\end{equation}
+The \emph{function} changes its form ($S'\neq S$ as functions of their arguments), but the \emph{number} attached to a given point does not.
+
+\begin{definition}{Parametrised curve}{curve}
+A \textbf{parametrised curve} on a manifold $\M$ is a smooth map $C:I\subseteq\R\to\M$, which to every real number $\lambda\in I$ associates a point $C(\lambda)\in\M$.
+\end{definition}
+If the image of $C$ lies inside a chart domain $U\subseteq\M$ with $\phi:U\to\R^n$, the composition
+\begin{equation}
+  \phi\circ C:\ I\subseteq\R\longrightarrow\R^n,\qquad \lambda\mapsto x^\mu(\lambda)\equiv\phi(C(\lambda))
+\end{equation}
+gives the \emph{coordinate functions} of the curve, on which we can do ordinary calculus (\cref{fig:curve}).
+
+\begin{figure}[ht]
+\centering
+\begin{tikzpicture}[scale=1.0,>=Stealth]
+  % interval
+  \draw[->] (-0.5,1.7) -- (0.9,3.3) node[above] {$\R$};
+  \draw[line width=2.5pt,magenta!70] (-0.1,2.15) -- (0.5,2.85);
+  \node[left] at (-0.1,2.3) {$I$};
+  % manifold
+  \draw[thick,fill=gray!8] plot[smooth cycle,tension=0.8] coordinates {(5,2.2) (6.2,3.4) (7.8,3.3) (8.5,2.3) (7.6,1.3) (6,1.4)};
+  \node at (8.3,3.5) {$U\subseteq\M$};
+  \draw[very thick,red!80!black] plot[smooth] coordinates {(5.6,2.0) (6.4,2.6) (7.2,2.4) (7.9,2.9)};
+  \node[red!70!black] at (7.3,2.0) {$C(\lambda)$};
+  \draw[->,thick] (1.1,2.8) -- (4.7,2.8) node[midway,above] {$C$};
+  % R^n
+  \draw[->] (2.5,-2.2) -- (5.5,-2.2);
+  \draw[->] (2.5,-2.2) -- (2.5,0.0);
+  \node at (3.0,0.1) {$\R^n$};
+  \draw[very thick,red!80!black] plot[smooth] coordinates {(2.9,-1.6) (3.6,-1.0) (4.4,-1.3) (5.1,-0.7)};
+  \node[red!70!black,right] at (4.3,-1.75) {$x^\mu(\lambda)=\phi(C(\lambda))$};
+  \draw[->,thick] (6.4,1.2) -- (4.9,-0.4) node[midway,right] {$\phi$};
+  \draw[->,thick] (0.4,1.8) -- (2.4,-0.4) node[midway,left] {$\phi\circ C$};
+\end{tikzpicture}
+\caption{A parametrised curve $C:I\to\M$ and its coordinate representation $\phi\circ C:I\to\R^n$, obtained by composing with a chart $\phi$. Calculus is done in $\R^n$.}
+\label{fig:curve}
+\end{figure}
+
+\section{Tangent vectors}
+
+\paragraph{How do we differentiate along a curve?} Given a scalar $f$, its rate of change along $C$ is, by the chain rule,
+\begin{equation}
+  \frac{\dd}{\dd\lambda}f(C(\lambda))=\frac{\dd}{\dd\lambda}f(x^\mu(\lambda))=\frac{\dd x^\mu}{\dd\lambda}\frac{\pd f}{\pd x^\mu}.
+\end{equation}
+This holds for any $f$, so we have the identity of \emph{operators}
+\begin{equation}
+  \frac{\dd}{\dd\lambda}=\frac{\dd x^\mu}{\dd\lambda}\frac{\pd}{\pd x^\mu}=\frac{\dd x^\mu}{\dd\lambda}\pd_\mu .
+\end{equation}
+This defines a \textbf{vector}: the \emph{tangent vector} to the curve at $p$ is the operator
+\begin{equation}
+  \boxed{V\equiv\frac{\dd}{\dd\lambda}=\frac{\dd x^\mu}{\dd\lambda}\pd_\mu=V^\mu\pd_\mu,\qquad V^\mu\equiv\frac{\dd x^\mu}{\dd\lambda}.}
+\end{equation}
+The operator $V$ acts on any scalar field and returns its derivative along the curve; the numbers $V^\mu$ are its components.
+
+\begin{definition}{Tangent space}{tangent-space}
+Given $p\in\M$, let
+\[
+  C^\infty_{\M,p}\equiv\{C:(-\epsilon,\epsilon)\to\M\ |\ \epsilon>0,\ C\ \text{smooth},\ C(0)=p\}
+\]
+be the set of all smooth curves passing through $p$ at $\lambda=0$ (``smooth'' means that the coordinate functions $x^\mu(C(\lambda))$ can be differentiated as often as we like). The \textbf{tangent space} at $p$ is the set of their velocities:
+\begin{equation}
+  T_p(\M)=\{C'(0)\ |\ C\in C^\infty_{\M,p}\}.
+\end{equation}
+\end{definition}
+For each curve through $p$ we compute its velocity at $p$ and collect them all in one set. Concretely, $C'(0)$ means:
+\begin{itemize}[nosep]
+  \item in a chart: the components $V^\mu=\left.\frac{\dd x^\mu(C(\lambda))}{\dd\lambda}\right|_{\lambda=0}$;
+  \item as an operator on scalar fields: $C'(0)(f)=\left.\frac{\dd}{\dd\lambda}f(C(\lambda))\right|_{\lambda=0}$.
+\end{itemize}
+Strictly speaking, $C'(0)$ is an \emph{equivalence class} of curves: different curves can define the same vector. Two curves $C_1,C_2$ with $C_1(0)=C_2(0)=p$ are equivalent if
+\begin{equation}
+  \left.\frac{\dd}{\dd\lambda}x^\mu(C_1(\lambda))\right|_{\lambda=0}=\left.\frac{\dd}{\dd\lambda}x^\mu(C_2(\lambda))\right|_{\lambda=0}\qquad\forall\mu .
+\end{equation}
+The vector \emph{is} the class, and it is determined by the $n$ numbers $V^\mu$.
+
+\begin{theorem}{Coordinate basis}{coord-basis}
+$T_p(\M)$ is an $n$-dimensional vector space, and the partial derivatives $\{e_{(\mu)}\equiv\pd_\mu\}_{\mu=1,\dots,n}$ form a basis of it (the \emph{coordinate basis}).
+\end{theorem}
+\begin{proof}
+\textbf{(1) Each $\pd_\mu$ is a tangent vector.} Take the coordinate line through $p$ along which only $x^\mu$ changes: $x^\alpha(\lambda)=x^\alpha_p+\lambda\,\delta^\alpha{}_\mu$. Its velocity at $p$ is $\dd x^\alpha/\dd\lambda=\delta^\alpha{}_\mu$. Acting on a scalar $f$:
+\[
+  \frac{\dd}{\dd\lambda}f=\frac{\dd x^\alpha}{\dd\lambda}\pd_\alpha f=\delta^\alpha{}_\mu\pd_\alpha f=\pd_\mu f .
+\]
+So the operator $\pd_\mu$ is exactly the tangent vector of the $\mu$-th coordinate line.
+
+\textbf{(2) They span $T_p(\M)$.} Any tangent vector $V=\dd/\dd\lambda$ of some curve acts as $V(f)=\frac{\dd x^\mu}{\dd\lambda}\pd_\mu f=V^\mu\pd_\mu f$ for all $f$, hence $V=V^\mu\pd_\mu$: every vector is a linear combination of the $\pd_\mu$, with coefficients $V^\mu=\dd x^\mu/\dd\lambda$.
+
+\textbf{(3) They are linearly independent.} Suppose $c^\mu\pd_\mu=0$ as an operator (the zero vector: $c^\mu\pd_\mu f=0$ for all $f$). Apply it to the coordinate function $f=x^\nu$ (which is a scalar field):
+\[
+  0=c^\mu\pd_\mu x^\nu=c^\mu\delta^\nu{}_\mu=c^\nu\qquad\forall\nu .
+\]
+So all $c^\nu=0$: no $\pd_\mu$ can be written in terms of the others.
+
+Hence $\{\pd_\mu\}$ spans $T_p(\M)$ and is linearly independent: it is a basis, and $\dim T_p(\M)=n$.
+\end{proof}
+
+\subsection{Transformation law of vectors}
+
+Under a coordinate change $x\to x'$, the chain rule gives for the components of the tangent vector
+\begin{equation}
+  V'^\mu=\frac{\dd x'^\mu}{\dd\lambda}=\frac{\pd x'^\mu}{\pd x^\nu}\frac{\dd x^\nu}{\dd\lambda}=\frac{\pd x'^\mu}{\pd x^\nu}V^\nu ,
+\end{equation}
+where $V^\nu$ are the components in the old coordinates and $V'^\mu$ those in the new ones.
+
+\paragraph{Basis vectors transform the other way.} The object $V$ itself is coordinate independent: $V=V^\mu\pd_\mu=V'^\mu\pd'_\mu$. The chain rule gives
+\begin{equation}
+  \pd'_\mu=\frac{\pd}{\pd x'^\mu}=\frac{\pd x^\nu}{\pd x'^\mu}\frac{\pd}{\pd x^\nu}=\frac{\pd x^\nu}{\pd x'^\mu}\pd_\nu .
+\end{equation}
+Let us collect the relevant Jacobians:
+\begin{equation}
+  \Lambda^\mu{}_\nu\equiv\frac{\pd x'^\mu}{\pd x^\nu}\ \ \text{(Jacobian)},\qquad
+  (\Lambda^{-1})^\mu{}_\nu=\frac{\pd x^\mu}{\pd x'^\nu}\ \ \text{(inverse)},
+\end{equation}
+and indeed, by the chain rule,
+\begin{equation}
+  \frac{\pd x'^\mu}{\pd x^\alpha}\frac{\pd x^\alpha}{\pd x'^\nu}=\frac{\pd x'^\mu}{\pd x'^\nu}=\delta^\mu{}_\nu,\qquad
+  \frac{\pd x^\mu}{\pd x'^\alpha}\frac{\pd x'^\alpha}{\pd x^\nu}=\delta^\mu{}_\nu .
+  \label{eq:jacobian-inverse}
+\end{equation}
+Using \eqref{eq:jacobian-inverse} we verify that the arrow is unchanged:
+\begin{equation}
+  V'^\mu\pd'_\mu=\frac{\pd x'^\mu}{\pd x^\alpha}V^\alpha\,\frac{\pd x^\nu}{\pd x'^\mu}\pd_\nu=\delta^\nu{}_\alpha V^\alpha\pd_\nu=V^\nu\pd_\nu=V .
+\end{equation}
+
+\begin{remarkbox}[Physical meaning]
+Components and basis vectors transform in \emph{opposite} ways, so that the ``arrow'' itself is unchanged. If you stretch your basis vectors, the components shrink. This is the essence of the word ``contra-variant''.
+\end{remarkbox}
+
+\begin{definition}{Contravariant (tangent) vector}{vector}
+A \textbf{contravariant} (or tangent) \textbf{vector} is an object $V$ whose components, under a general coordinate transformation $x\to x'$, transform as
+\begin{equation}
+  V'^\mu=\frac{\pd x'^\mu}{\pd x^\nu}V^\nu .
+\end{equation}
+\end{definition}
+For a Lorentz transformation $\pd x'^\mu/\pd x^\nu=L^\mu{}_\nu$ and we recover \cref{ch:sr}.
+
+\begin{example}{The displacement $\dd x^\mu$}{dx}
+An example of contravariant vector is $\dd x^\mu$, since $\dd x'^\mu=\frac{\pd x'^\mu}{\pd x^\nu}\dd x^\nu$. We can derive this in two ways:
+\begin{enumerate}[nosep]
+\item take a tiny step along a curve $x^\mu(\lambda)$: the displacement is $\dd x^\mu=\frac{\dd x^\mu}{\dd\lambda}\dd\lambda=V^\mu\dd\lambda$, where $V^\mu$ are the components of the tangent vector and $\dd\lambda$ is just a number (a scalar, the same in all coordinates). So $\dd x^\mu$ transforms exactly like $V^\mu$;
+\item directly, from the chain rule applied to $x'^\mu=x'^\mu(x)$: $\dd x'^\mu=\frac{\pd x'^\mu}{\pd x^\nu}\dd x^\nu$, which is the contravariant law with $V\to\dd x$.
+\end{enumerate}
+\end{example}
+
+In summary, we can think of vectors as \textbf{first-order differential operators},
+\begin{equation}
+  V^\mu\ \longleftrightarrow\ V=V^\mu\pd_\mu,
+\end{equation}
+where $V^\mu$ are the components, $\pd_\mu$ the basis vectors, and $V$ the invariant object. In $\M$: $V\equiv\frac{\dd}{\dd\lambda}=V^\mu\pd_\mu\in T_p(\M)$.
+
+\section{Covectors (one-forms)}
+
+\begin{definition}{Covector}{covector}
+A \textbf{covector} (or one-form) $U$ at $p$ is a \emph{linear} map $U:T_p(\M)\to\R$. Covectors form a vector space, the \textbf{cotangent space} $T_p^*(\M)$. Its \emph{dual basis} $\{\dd x^\mu\}$ is defined by
+\begin{equation}
+  \dd x^\mu(\pd_\nu)=\delta^\mu{}_\nu .
+\end{equation}
+Any covector can be expanded as $U=U_\mu\dd x^\mu$, and $U(V)=U_\mu V^\mu$.
+\end{definition}
+
+\paragraph{Explanation.}
+\begin{enumerate}
+  \item \emph{The dual basis picks components.} On a general vector $V=V^\nu\pd_\nu$, linearity gives
+  \[
+    \dd x^\mu(V)=\dd x^\mu(V^\nu\pd_\nu)=V^\nu\,\dd x^\mu(\pd_\nu)=V^\nu\delta^\mu{}_\nu=V^\mu :
+  \]
+  $\dd x^\mu$ picks out the $\mu$-th component of whatever vector it is fed.
+  \item \emph{Action of an arbitrary covector.} $U$ is linear, so $U(V)=U(V^\nu\pd_\nu)=V^\nu U(\pd_\nu)$ for all $V$. Defining the $n$ numbers $U_\nu\equiv U(\pd_\nu)$ --- the \emph{components} of $U$ --- we get $U(V)=U_\nu V^\nu$.
+  \item \emph{Why $U=U_\mu\dd x^\mu$.} Evaluate the proposed expansion on $V$: $(U_\mu\dd x^\mu)(V)=U_\mu\,\dd x^\mu(V)=U_\mu V^\mu$. This equals $U(V)$ for all $V$, so $U$ and $U_\mu\dd x^\mu$ are the same linear map. Hence $\{\dd x^\mu\}$ is a basis of $T_p^*(\M)$, and the components are $U_\mu=U(\pd_\mu)$.
+\end{enumerate}
+
+\paragraph{The differential of a function.} $\dd x^\mu$ is the differential of the coordinate function $x^\mu$. For any scalar $f$, the differential
+\begin{equation}
+  \dd f=\frac{\pd f}{\pd x^\mu}\dd x^\mu=(\pd_\mu f)\,\dd x^\mu
+\end{equation}
+is a covector with components $(\dd f)_\mu=\pd_\mu f$. Feeding it a vector gives the \emph{directional derivative}:
+\begin{equation}
+  \dd f(V)=(\pd_\mu f)V^\mu=(V^\mu\pd_\mu)(f)=V(f)=\frac{\dd f}{\dd\lambda}.
+\end{equation}
+Give it a direction $V$ and it returns how fast $f$ changes in that direction. Covectors are the objects that \emph{measure how much a scalar changes in a given direction}; the gradient $\pd_\mu f$ is the prime example, which is why it transforms as a covector.
+
+\paragraph{Transformation law.} The number $U(V)$ cannot depend on the coordinates, so $U'_\mu V'^\mu=U_\alpha V^\alpha$. Inserting $V'^\mu=\frac{\pd x'^\mu}{\pd x^\alpha}V^\alpha$,
+\[
+  U'_\mu V'^\mu-U_\alpha V^\alpha=\left(U'_\mu\frac{\pd x'^\mu}{\pd x^\alpha}-U_\alpha\right)V^\alpha=0\qquad\forall V^\alpha
+  \ \Longrightarrow\ U'_\mu\frac{\pd x'^\mu}{\pd x^\alpha}=U_\alpha .
+\]
+Multiplying by $\pd x^\alpha/\pd x'^\beta$ and using \eqref{eq:jacobian-inverse}, $U'_\mu\frac{\pd x'^\mu}{\pd x^\alpha}\frac{\pd x^\alpha}{\pd x'^\beta}=U'_\mu\delta^\mu{}_\beta=U'_\beta$, so
+\begin{equation}
+  U'_\beta=\frac{\pd x^\alpha}{\pd x'^\beta}U_\alpha .
+\end{equation}
+
+\begin{definition}{Covariant vector (covector)}{covector-law}
+A \textbf{covector} is an object $U$ whose components transform under general coordinate transformations as
+\begin{equation}
+  U'_\mu=\frac{\pd x^\nu}{\pd x'^\mu}U_\nu .
+\end{equation}
+\end{definition}
+\textit{Example:} the partial derivative (gradient) of a scalar $s$: $\left(\frac{\pd s}{\pd x^\mu}\right)'=\frac{\pd s}{\pd x'^\mu}=\frac{\pd x^\nu}{\pd x'^\mu}\frac{\pd s}{\pd x^\nu}$.
+
+\section{General tensors}
+
+\begin{definition}{Tensor of type $(p,q)$}{tensor}
+A \textbf{tensor of type $(p,q)$} is an object with $p$ upper (contravariant) indices and $q$ lower (covariant) indices, whose components transform under $x\to x'$ with one Jacobian factor per index:
+\begin{equation}
+  T'^{\mu_1\dots\mu_p}{}_{\nu_1\dots\nu_q}=
+  \frac{\pd x'^{\mu_1}}{\pd x^{\alpha_1}}\cdots\frac{\pd x'^{\mu_p}}{\pd x^{\alpha_p}}\,
+  \frac{\pd x^{\beta_1}}{\pd x'^{\nu_1}}\cdots\frac{\pd x^{\beta_q}}{\pd x'^{\nu_q}}\,
+  T^{\alpha_1\dots\alpha_p}{}_{\beta_1\dots\beta_q}.
+  \label{eq:tensor-law}
+\end{equation}
+\end{definition}
+Tensors transform \emph{linearly and homogeneously}: the new components are linear combinations of the old ones, with no additive term.
+
+\begin{example}{Tensor product of two vectors}{tensor-product}
+If $V,W$ are vectors (each a $(1,0)$ tensor), then
+\[
+  (V^\mu W^\nu)'=V'^\mu W'^\nu=\frac{\pd x'^\mu}{\pd x^\alpha}\frac{\pd x'^\nu}{\pd x^\beta}V^\alpha W^\beta ,
+\]
+which is the $(2,0)$ law: $V^\mu W^\nu$ are the components of the $(2,0)$ tensor $V\otimes W$.
+\end{example}
+
+\begin{proposition}{The Kronecker delta is a $(1,1)$ tensor}{delta}
+The Kronecker delta $\delta^\mu{}_\nu$ is a $(1,1)$ tensor, and its components are $1$ or $0$ in every coordinate system.
+\end{proposition}
+\begin{proof}
+Write $\delta^\mu{}_\nu=\pd x^\mu/\pd x^\nu$ and, in the primed system, $\delta'^\mu{}_\nu=\pd x'^\mu/\pd x'^\nu$ (the components of the identity in the primed system). Applying the chain rule through the unprimed coordinates:
+\[
+  \delta'^\mu{}_\nu=\frac{\pd x'^\mu}{\pd x'^\nu}=\frac{\pd x'^\mu}{\pd x^\alpha}\frac{\pd x^\alpha}{\pd x'^\nu}
+  =\frac{\pd x'^\mu}{\pd x^\alpha}\frac{\pd x^\beta}{\pd x'^\nu}\delta^\alpha{}_\beta ,
+\]
+where in the last step we inserted $\delta^\alpha{}_\beta$ to rename the index $\alpha\to\beta$ in the second Jacobian. This is exactly the $(1,1)$ transformation law. Conversely, since $\delta^\alpha{}_\beta$ is $1$ when $\alpha=\beta$ and $0$ otherwise, the sum over $\beta$ keeps only $\beta=\alpha$: $\delta'^\mu{}_\nu=\frac{\pd x'^\mu}{\pd x^\alpha}\frac{\pd x^\alpha}{\pd x'^\nu}=\delta^\mu{}_\nu$ by \eqref{eq:jacobian-inverse}. Its components are $1$ or $0$ in every coordinate system.
+\end{proof}
+
+\section{Operations that produce tensors}
+
+\begin{enumerate}[label=(\roman*)]
+\item \textbf{Multiplication by a scalar:} if $T$ is a $(p,q)$ tensor and $a\in\R$, $aT$ is a $(p,q)$ tensor.
+\item \textbf{Addition:} the sum of two tensors of the \emph{same} type $(p,q)$ is a $(p,q)$ tensor. \emph{You cannot add a $(1,0)$ and a $(0,1)$ tensor: they transform differently!}
+\item \textbf{Tensor product:} $(p,q)\otimes(p',q')\to(p+p',q+q')$, e.g.\ $V^\mu W_\nu\equiv T^\mu{}_\nu$, i.e.\ $T=V\otimes W$.
+\item \textbf{Contraction of indices:} set one upper and one lower index equal and sum: $(p,q)\to(p-1,q-1)$,
+\[
+  T^{\alpha_1\dots\alpha_k\dots\alpha_p}{}_{\beta_1\dots\beta_k\dots\beta_q}\ \longrightarrow\ T^{\alpha_1\dots\kappa\dots\alpha_p}{}_{\beta_1\dots\kappa\dots\beta_q}.
+\]
+Why does it work? For $T^\mu{}_\nu$:
+\[
+  T'^\mu{}_\mu=\frac{\pd x'^\mu}{\pd x^\alpha}\frac{\pd x^\beta}{\pd x'^\mu}T^\alpha{}_\beta=\delta^\beta{}_\alpha T^\alpha{}_\beta=T^\alpha{}_\alpha ,
+\]
+using \eqref{eq:jacobian-inverse}. The contracted object is a scalar (same value in every coordinate system). In particular $U_\mu V^\mu$ is a scalar. The same argument works for any pair of contracted indices in a general tensor: the two corresponding Jacobians combine into a $\delta$.
+\item \textbf{Covariant differentiation} $D_\mu:(p,q)\to(p,q+1)$, introduced in \cref{ch:connection}. Let us see why it is needed: the ordinary derivative $\pd_\mu V^\nu$ of a vector is \emph{not} a tensor. Differentiating $V'^\nu=\frac{\pd x'^\nu}{\pd x^\beta}V^\beta$ --- both factors depend on the old coordinates $x^\alpha$, and $\frac{\pd}{\pd x'^\mu}=\frac{\pd x^\alpha}{\pd x'^\mu}\frac{\pd}{\pd x^\alpha}$ --- we get
+\begin{equation}
+  \pd'_\mu V'^\nu=\frac{\pd x^\alpha}{\pd x'^\mu}\frac{\pd}{\pd x^\alpha}\left(\frac{\pd x'^\nu}{\pd x^\beta}V^\beta\right)
+  =\underbrace{\frac{\pd x^\alpha}{\pd x'^\mu}\frac{\pd x'^\nu}{\pd x^\beta}\pd_\alpha V^\beta}_{\text{(1) tensor law}}
+  +\underbrace{\frac{\pd x^\alpha}{\pd x'^\mu}\frac{\pd^2x'^\nu}{\pd x^\alpha\pd x^\beta}V^\beta}_{\text{(2) inhomogeneous term}} .
+  \label{eq:partial-not-tensor}
+\end{equation}
+The first term is the tensor law, while the second involves \emph{second derivatives} of the coordinate change, which vanish only for linear transformations (e.g.\ Lorentz). This extra term is what the connection $\Ga{\nu}{\mu}{\beta}$ in $D_\mu V^\nu=\pd_\mu V^\nu+\Ga{\nu}{\mu}{\beta}V^\beta$ will cancel.
+\end{enumerate}
+
+\begin{remarkbox}[Remarks]
+\begin{itemize}
+\item \textbf{If a tensor is zero in one coordinate system, it is zero in all coordinate systems.} Indeed $T'=(\text{Jacobian terms})\cdot T$ with no additive term, so $T=0\Rightarrow T'=0$. This is why tensor equations, such as the Einstein equations $G_{\mu\nu}=\frac{8\pi\GN}{c^4}T_{\mu\nu}$ (equivalently $G_{\mu\nu}-\frac{8\pi\GN}{c^4}T_{\mu\nu}=0$), valid in one coordinate system are true in all of them.
+\item Keep track of which index belongs to which object: $V^\mu W^\nu=W^\nu V^\mu$ (the components are numbers), but $V^\mu W^\nu\neq V^\nu W^\mu$ in general.
+\end{itemize}
+\end{remarkbox}
+
+\begin{definition}{Tensor field}{tensor-field}
+A \textbf{scalar/vector/tensor field} is a smooth assignment of a scalar/vector/tensor to each point of the manifold.
+\end{definition}

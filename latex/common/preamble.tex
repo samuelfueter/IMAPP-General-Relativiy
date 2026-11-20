@@ -1,0 +1,83 @@
+% ==========================================================
+%  Common preamble for the General Relativity documents
+%  (IMAPP M1, Université Clermont Auvergne)
+% ==========================================================
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[english]{babel}
+\usepackage[a4paper,margin=2.4cm,headheight=14pt]{geometry}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{bm}
+\usepackage{enumitem}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,calc,decorations.pathmorphing,decorations.markings,patterns,shapes.geometric,positioning,3d,intersections}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usepackage[most]{tcolorbox}
+\usepackage[colorlinks=true,linkcolor=blue!50!black,citecolor=blue!50!black,urlcolor=blue!50!black]{hyperref}
+\usepackage[capitalise,noabbrev]{cleveref}
+\usepackage{caption}
+\captionsetup{font=small,labelfont=bf}
+
+\allowdisplaybreaks
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.55em}
+\numberwithin{equation}{section}
+
+% ---------- colours ----------
+\definecolor{defcol}{RGB}{0,90,160}
+\definecolor{thmcol}{RGB}{160,40,40}
+\definecolor{remcol}{RGB}{90,90,90}
+\definecolor{excol}{RGB}{0,120,60}
+\definecolor{warncol}{RGB}{200,110,0}
+
+% ---------- boxes ----------
+\tcbset{boxbase/.style={enhanced,breakable,sharp corners=south,boxrule=0.6pt,
+    left=6pt,right=6pt,top=4pt,bottom=4pt,fonttitle=\bfseries,
+    before skip=8pt,after skip=8pt}}
+\newtcbtheorem[number within=section]{definition}{Definition}{boxbase,
+    colback=defcol!4,colframe=defcol!70!black}{def}
+\newtcbtheorem[use counter from=definition]{theorem}{Theorem}{boxbase,
+    colback=thmcol!4,colframe=thmcol!70!black}{thm}
+\newtcbtheorem[use counter from=definition]{proposition}{Proposition}{boxbase,
+    colback=thmcol!4,colframe=thmcol!70!black}{prop}
+\newtcbtheorem[use counter from=definition]{example}{Example}{boxbase,
+    colback=excol!4,colframe=excol!70!black}{ex}
+\newtcbtheorem[use counter from=definition]{exercise}{Exercise}{boxbase,
+    colback=excol!4,colframe=excol!70!black}{exc}
+
+\newtcolorbox{keyresult}[1][]{enhanced,breakable,colback=yellow!8,colframe=orange!70!black,
+    boxrule=0.8pt,left=6pt,right=6pt,top=4pt,bottom=4pt,fonttitle=\bfseries,
+    title={#1},before skip=8pt,after skip=8pt}
+\newtcolorbox{remarkbox}[1][Remark]{enhanced,breakable,colback=remcol!5,colframe=remcol!70,
+    boxrule=0.4pt,left=6pt,right=6pt,top=3pt,bottom=3pt,fonttitle=\bfseries\small,
+    title={#1},before skip=6pt,after skip=6pt}
+\newtcolorbox{warningbox}[1][Warning]{enhanced,breakable,colback=warncol!6,colframe=warncol!80!black,
+    boxrule=0.6pt,left=6pt,right=6pt,top=3pt,bottom=3pt,fonttitle=\bfseries\small,
+    title={#1},before skip=6pt,after skip=6pt}
+
+\theoremstyle{remark}
+\newtheorem*{proofsketch}{Proof sketch}
+
+% ---------- macros ----------
+\newcommand{\dd}{\mathrm{d}}
+\newcommand{\pd}{\partial}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\M}{\mathcal{M}}
+\newcommand{\Ga}[3]{\Gamma^{#1}{}_{#2#3}}
+\newcommand{\Riem}[4]{R^{#1}{}_{#2#3#4}}
+\newcommand{\tr}{\operatorname{tr}}
+\newcommand{\sgn}{\operatorname{sgn}}
+\newcommand{\GN}{G_{\mathrm N}}
+\newcommand{\rs}{r_{\mathrm s}}
+\newcommand{\eq}[1]{\begin{align}#1\end{align}}
+\renewcommand{\Box}{\square}
+\renewcommand{\vec}[1]{\bm{#1}}
+\newcommand{\order}[1]{\mathcal{O}\!\left(#1\right)}
+\newcommand{\half}{\tfrac12}

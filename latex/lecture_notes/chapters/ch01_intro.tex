@@ -1,0 +1,271 @@
+% =====================================================================
+\chapter{Introduction and the Equivalence Principle}
+% =====================================================================
+
+\section{Why General Relativity?}
+
+Physics, as we know it today, describes Nature through \emph{four fundamental interactions}:
+\begin{enumerate}[label=(\roman*)]
+  \item \textbf{Electromagnetism}, described classically by Maxwell's equations and, at the quantum level, by Quantum Electrodynamics (QED);
+  \item the \textbf{weak interaction}, responsible e.g.\ for $\beta$ decay;
+  \item the \textbf{strong interaction}, described by Quantum Chromodynamics (QCD);
+  \item \textbf{gravity}, described by Newtonian mechanics in the regime of weak fields and small velocities, and in full generality by \emph{General Relativity} (GR).
+\end{enumerate}
+The first two are unified, within the Standard Model (SM) of particle physics, into the \emph{electroweak theory},
+based on the gauge group $SU(2)_L\times U(1)_Y$. Together with QCD (gauge group $SU(3)_c$) they form the SM,
+which is a \emph{quantum} field theory. Gravity stands apart: General Relativity is a \emph{classical} (i.e.\ non-quantum) theory,
+and no fully satisfactory quantum theory of gravity is known.
+
+General Relativity is at the same time
+\begin{itemize}[nosep]
+  \item a \textbf{theory of gravity}, and
+  \item a \textbf{theory of space-time} itself.
+\end{itemize}
+In Newtonian physics space and time are a fixed, absolute stage on which physics happens. In GR the stage becomes an actor:
+the geometry of space-time is dynamical and is determined by its matter and energy content. This double role is beautifully summarised by J.\,A.~Wheeler:
+\begin{quote}
+\emph{``Space-time tells matter how to move; matter tells space-time how to curve.''}
+\end{quote}
+The first half of the sentence will be made precise by the \emph{geodesic equation} (\cref{ch:connection}), the second half by the \emph{Einstein field equations} (\cref{ch:efe}).
+
+\section{Useful notions}
+
+Before entering the subject we fix a few basic notions that will be used throughout the course.
+
+\begin{definition}{Event}{event}
+An \textbf{event} is a physical occurrence at a specific point of space and at a specific instant of time, i.e.\ associated with a specific space-time point.
+An event has no spatial extension and no duration: it is a zero-dimensional object.
+\end{definition}
+\textit{Examples:} the emission of a photon by an atom; the presence of a point-like particle at a given place at a given time; two particles colliding.
+
+\begin{definition}{Observer}{observer}
+An \textbf{observer} is, essentially, a \emph{reference frame}: a way of assigning coordinates (three spatial coordinates and a time) to events.
+\end{definition}
+We can switch from one observer to another by means of \emph{coordinate transformations}. A central theme of the course is that physical statements must not depend on which observer (i.e.\ which coordinates) we use.
+
+\begin{definition}{Local time}{localtime}
+Each observer is equipped with an ideal standard clock and has a notion of time: he/she can assign a time to events and, therefore, a temporal ordering (``this event happened before that one'').
+All observers measure time in the same way (with identical ideal clocks), even if, as we will see, they do not necessarily agree on the result.
+\end{definition}
+
+\begin{definition}{World-line}{worldline}
+The \textbf{world-line} of a point-like object is the path that it follows in space-time. It is a one-dimensional object (a curve).
+For extended objects one speaks of a \emph{world-sheet} (a string, 2D) or a \emph{world-volume} (higher-dimensional objects).
+\end{definition}
+
+% ---------------------------------------------------------------------
+\section{The Equivalence Principle}
+% ---------------------------------------------------------------------
+The Equivalence Principle (EP) is the physical cornerstone on which Einstein built General Relativity. We first recall its Newtonian (Galilean) version and then formulate Einstein's version.
+
+\subsection{The Newtonian (Galilean) version}
+
+Consider a body of mass $m$, located at a point $P$ near the surface of the Earth. In Newtonian physics two \emph{a priori} completely different notions of mass enter its description:
+\begin{itemize}
+  \item From \textbf{Newtonian gravity}, the gravitational force acting on the body is
+  \begin{equation}
+    \vec F = -m_g\,\nabla\phi ,
+  \end{equation}
+  where $\phi$ is the gravitational potential and $m_g$ is the \textbf{gravitational mass}.
+  It plays for gravity the role that the electric charge plays for electromagnetism ($\vec F=q\vec E=-q\nabla V$): it is a kind of ``gravitational charge'', measuring how strongly the body couples to the gravitational field.
+  \item From \textbf{Newtonian mechanics} (Newton's second law),
+  \begin{equation}
+    \vec F = m_i\,\vec a ,
+  \end{equation}
+  where $m_i$ is the \textbf{inertial mass}. It tells us how much the body \emph{resists} being accelerated by \emph{any} force.
+\end{itemize}
+
+\begin{figure}[ht]
+\centering
+\begin{tikzpicture}[scale=1]
+  \fill[pattern=north east lines] (-2,-0.25) rectangle (2,0);
+  \draw[thick] (-2,0) -- (2,0) node[right] {Earth};
+  \fill (0,1.6) circle (2.5pt) node[left=3pt] {$P$} node[right=3pt] {$m$};
+  \draw[-{Stealth[length=3mm]},thick,red!70!black] (0,1.5) -- (0,0.55) node[midway,right] {$\vec F_g$};
+\end{tikzpicture}
+\caption{A body of mass $m$ at a point $P$ above the surface of the Earth, subject to the gravitational force $\vec F_g$.}
+\label{fig:newton-ep}
+\end{figure}
+
+There is no reason, within Newtonian theory, for these two quantities to be equal: they are \emph{fundamentally different} concepts. Yet, experimentally, one observes (to an extremely high precision: $|m_i-m_g|/m_i\lesssim 10^{-15}$ in modern torsion-balance and space experiments) that
+\begin{equation}
+  m_i = m_g
+\end{equation}
+(more precisely, they are proportional to each other with a universal constant, which can be absorbed into the definition of Newton's constant $\GN$ and set to one).
+
+\begin{keyresult}[Galilean Equivalence Principle]
+The inertial and the gravitational masses of any body are equal, $m_i=m_g$. Consequently, equating the two expressions of the force,
+\begin{equation}
+  m_i\,\vec a = -m_g\,\nabla\phi \quad\Longrightarrow\quad \vec a = -\nabla\phi ,
+\end{equation}
+\emph{independently of the mass and of the composition of the body}. This is the \textbf{universality of free fall}: all bodies fall in the same way in a gravitational field (Galileo's experiments, the hammer and the feather on the Moon, \dots). In other words, \emph{the motion in a gravitational field does not depend on the mass}.
+\end{keyresult}
+
+This is a very peculiar property of gravity: for the electric force, $\vec a=(q/m)\vec E$ depends on the charge-to-mass ratio of the body, so different bodies fall differently in an electric field.
+
+\subsection{Einstein's version of the Equivalence Principle}
+
+Einstein's insight was to take the universality of free fall seriously and to turn it into a principle about \emph{reference frames}. Consider an elevator (a closed box) containing a particle of mass $m$ at a point $P$. We introduce two frames (see \cref{fig:elevator}):
+\begin{itemize}[nosep]
+  \item $R$, a ``static'' frame with coordinates $(x,z)$;
+  \item $R'$, a frame \emph{comoving} with the elevator, with coordinates $(x',z')$.
+\end{itemize}
+
+\begin{figure}[ht]
+\centering
+\begin{tikzpicture}[scale=0.95,>=Stealth]
+  % static frame R
+  \draw[->,thick] (0,0) -- (7,0) node[right] {$x$};
+  \draw[->,thick] (0,0) -- (0,4.4) node[above] {$z$};
+  \node at (7.0,-0.45) {$(R)$ static};
+  % comoving frame R'
+  \draw[->] (1.2,1.0) -- (6.5,1.0) node[right] {$x'$};
+  \draw[->] (1.2,1.0) -- (1.2,4.2) node[above] {$z'$};
+  \node at (6.6,0.65) {$(R')$ comoving};
+  % elevator
+  \draw[very thick,fill=gray!10] (1.7,1.0) rectangle (3.4,3.4);
+  \draw (2.55,3.4) -- (2.55,4.3); % rope
+  \fill (2.55,2.5) circle (2.5pt) node[right=3pt] {$P$} node[above left=1pt] {$m$};
+  \draw[->,thick,red!70!black] (2.55,2.4) -- (2.55,1.7) node[midway,left] {$\vec F_g$};
+  \draw[->,very thick,blue!70!black] (4.0,2.2) -- (4.0,3.4) node[right] {$\vec g$};
+\end{tikzpicture}
+\caption{Einstein's elevator. $R$ is a static frame, $R'$ is the frame comoving with the elevator. Depending on the case, the elevator is at rest in empty space, uniformly accelerated (acceleration $\vec g$ upwards), or at rest in a uniform gravitational field (force $\vec F_g$ downwards on the particle).}
+\label{fig:elevator}
+\end{figure}
+
+We consider the following situations.
+\begin{description}
+  \item[Case 0.] The elevator is in outer space, far from any mass, and no force acts on it. Then the particle simply \emph{floats} inside the elevator.
+  \item[Case 1.] Still in outer space, but now the elevator is accelerated upwards with a constant acceleration $\vec g$ (e.g.\ by a rocket). Then the particle (which feels no force) is approached by the floor of the elevator: for an observer in the elevator, the particle ``falls'' towards the floor with acceleration $-\vec g$.
+  \item[Case 2.] The elevator is at rest, but inside a constant gravitational field $\vec g$ pointing downwards (e.g.\ at rest on the surface of the Earth). Again, the particle approaches the floor with acceleration $-\vec g$.
+\end{description}
+Both $R$ and $R'$ agree on these statements. \textbf{But} the observer in $R'$ \emph{cannot distinguish case 1 from case 2} by any experiment performed inside the elevator. Hence:
+\begin{center}
+\fbox{\textsc{Gravity} $=$ \textsc{Acceleration}}
+\end{center}
+(locally, see below).
+
+\paragraph{Quantitative version of case 1.} Let us neglect special-relativistic effects (so that $t'=t$). In $R$ the elevator floor moves as $z_{\rm floor}(t)=\tfrac12 g t^2$, so that $\ddot z_{\rm floor}=g$. The coordinates of the two frames are related by
+\begin{equation}
+  z' = z-\tfrac12 g t^2,\qquad x'=x,\qquad t'=t .
+\end{equation}
+Differentiating twice with respect to time, $\ddot z'=\ddot z-g$. In $R$, Newton's law reads $F=m\ddot z$. In $R'$,
+\begin{equation}
+  F' \equiv m\ddot z' = m\ddot z - mg \quad\Longrightarrow\quad F' = F - mg .
+\end{equation}
+The acceleration of $R'$ with respect to $R$ manifests itself in $R'$ as an additional force $-mg$, which is \emph{exactly} what a uniform gravitational field would produce. Note that this ``inertial force'' is proportional to the inertial mass, whereas gravity is proportional to the gravitational mass: their indistinguishability is precisely $m_i=m_g$.
+
+\begin{description}
+  \item[Case 3.] The elevator is in the gravitational field of the Earth and we cut the rope, so that it falls freely. Then the particle \emph{floats} with respect to $R'$, exactly as in case 0: the observer in $R'$ cannot tell whether he/she is at rest in outer space or freely falling in a gravitational field. Freely falling frames are locally equivalent to inertial frames: gravity has been ``switched off'' by going to a freely-falling frame.
+\end{description}
+
+\begin{keyresult}[Einstein's Equivalence Principle]
+No physical experiment can distinguish \emph{locally} between a uniform gravitational field acting on a local inertial observer and a uniform acceleration with respect to that local inertial observer.
+
+Here the \emph{local inertial observer} is the one for whom Special Relativity holds (a freely-falling observer).
+\end{keyresult}
+
+\subsection{Why ``locally''?}
+
+Real gravitational fields are not uniform: the gravitational field of the Earth points towards its centre and its strength decreases with the distance. Consider a large freely-falling elevator (or two elevators at different positions, see \cref{fig:locally}). Two particles initially at rest at the two ends of a horizontal elevator both fall towards the centre of the Earth, along \emph{non-parallel} directions: seen from inside the elevator, they slowly approach each other. Similarly, two particles at different heights in a vertical elevator feel slightly different accelerations and drift apart. These \emph{tidal effects} cannot be removed by changing reference frame: they are the genuine signature of a gravitational field, and they will turn out to be the manifestation of space-time \emph{curvature} (\cref{sec:geodesic-deviation}).
+
+\begin{figure}[ht]
+\centering
+\begin{tikzpicture}[scale=0.9,>=Stealth]
+  \draw[thick,fill=brown!15] (-4.5,0) arc (160:20:4.79) ;
+  \node at (0,0.4) {Earth};
+  \coordinate (C) at (0,-1.6);
+  % horizontal elevator (left)
+  \begin{scope}[shift={(-2.6,3.5)},rotate=-15]
+    \draw[thick] (-1.4,-0.35) rectangle (1.4,0.35);
+    \fill (-1.1,0) circle (2pt); \fill (1.1,0) circle (2pt);
+  \end{scope}
+  \draw[->,red!70!black] (-3.65,3.75) -- ($(-3.65,3.75)!0.22!(C)$);
+  \draw[->,red!70!black] (-1.55,3.2) -- ($(-1.55,3.2)!0.22!(C)$);
+  % vertical elevator (right)
+  \begin{scope}[shift={(2.5,4.0)},rotate=25]
+    \draw[thick] (-0.35,-1.3) rectangle (0.35,1.3);
+    \fill (0,1.0) circle (2pt); \fill (0,-1.0) circle (2pt);
+  \end{scope}
+  \draw[->,red!70!black] (2.08,4.9) -- ($(2.08,4.9)!0.12!(C)$);
+  \draw[->,red!70!black] (2.92,3.1) -- ($(2.92,3.1)!0.2!(C)$);
+  \draw[dashed,gray] (-3.65,3.75) -- (C);
+  \draw[dashed,gray] (-1.55,3.2) -- (C);
+\end{tikzpicture}
+\caption{Why the Equivalence Principle only holds locally. In a freely-falling elevator, test particles fall towards the centre of the Earth along converging directions (left) and with height-dependent accelerations (right): these tidal effects cannot be removed by a change of frame.}
+\label{fig:locally}
+\end{figure}
+
+\subsection{First consequence: light bends in a gravitational field}
+
+Consider again the elevator accelerated upwards with acceleration $\vec g$ (case 1), and a laser fixed on the left wall that emits a light pulse horizontally (\cref{fig:lightbend}). In the inertial frame $R$ the light travels in a straight line. During the time the light needs to cross the elevator, however, the elevator has moved upwards: in $R'$ the light enters at the point $P_1$ and hits the opposite wall at a point $P_2$ which is \emph{lower} than $P_1$. Hence, in the accelerated frame, light follows a curved (parabolic) trajectory.
+
+By the Equivalence Principle the same must happen in an elevator at rest in a gravitational field: \textbf{light feels gravity, and light bends}. This is a striking prediction, since photons are massless; it will be computed quantitatively in \cref{sec:light-bending}.
+
+\begin{figure}[ht]
+\centering
+\begin{tikzpicture}[scale=0.95,>=Stealth]
+  \draw[->,thick] (0,0) -- (6.5,0) node[right] {$x$};
+  \draw[->,thick] (0,0) -- (0,4.2) node[above] {$z$};
+  \node at (6.6,-0.4) {$(R)$};
+  \draw[very thick,fill=gray!8] (1.5,0.8) rectangle (4.3,3.6);
+  \draw[fill=black] (1.2,2.85) rectangle (1.5,3.05);
+  \node[left] at (1.15,2.95) {laser};
+  \fill (1.5,2.95) circle (1.8pt) node[above right] {$P_1$};
+  \draw[thick,red!80!black,dashed] (1.5,2.95) .. controls (2.9,2.9) and (3.7,2.6) .. (4.3,2.25);
+  \fill (4.3,2.25) circle (1.8pt) node[right] {$P_2$};
+  \draw[gray,thin] (1.5,2.95) -- (4.3,2.95);
+  \draw[->,very thick,blue!70!black] (5.2,2.0) -- (5.2,3.2) node[right] {$\vec g$};
+  \node at (5.5,1.2) {$(R')$};
+\end{tikzpicture}
+\caption{A light ray emitted horizontally in an elevator accelerated upwards. In the comoving frame $R'$ the ray hits the opposite wall at $P_2$, lower than the emission height $P_1$: light bends. By the EP the same happens in a gravitational field.}
+\label{fig:lightbend}
+\end{figure}
+
+\subsection{Second consequence: the gravitational redshift}\label{sec:redshift-ep}
+
+Consider a tower of height $d$ in a uniform gravitational field $g$. A photon of frequency $f_P$ is emitted by an emitter $P$ at the bottom and detected by a detector $Q$ at the top. Which frequency $f_Q$ does $Q$ measure?
+
+By the EP, we can replace the gravitational field by an elevator accelerated upwards with acceleration $g$, in which $P$ and $Q$ are at rest and separated by the distance $d$ (\cref{fig:redshift}). We work to first order in $gd/c^2\ll 1$.
+\begin{itemize}
+  \item The time of flight of the photon is $\Delta t= d/c$.
+  \item During this time, the velocity of the elevator (hence of the detector $Q$ with respect to the inertial frame in which the emitter was at rest at the moment of emission) increases by
+  \begin{equation}
+    \Delta v = g\,\Delta t = \frac{g d}{c}.
+  \end{equation}
+  \item The detector is therefore moving \emph{away} from the point of emission with velocity $\Delta v$ when it receives the photon, and it observes a Doppler-shifted frequency (non-relativistic Doppler effect, since $\Delta v\ll c$):
+  \begin{equation}
+    \frac{f_Q}{f_P} = 1-\frac{\Delta v}{c} = 1-\frac{g d}{c^2}.
+  \end{equation}
+\end{itemize}
+
+\begin{figure}[ht]
+\centering
+\begin{tikzpicture}[scale=0.9,>=Stealth]
+  \draw[->,thick] (0,0) -- (7,0) node[right] {$x$};
+  \draw[->,thick] (0,0) -- (0,4.6) node[above] {$z$};
+  % at emission
+  \draw[thick] (1.2,0.5) rectangle (2.0,1.3); \node[right] at (2.0,0.9) {$P$};
+  \draw[thick] (1.2,3.0) rectangle (2.0,3.8); \node[right] at (2.0,3.4) {$Q$};
+  \draw[<->] (0.8,0.9) -- (0.8,3.4) node[midway,left] {$d$};
+  \draw[decorate,decoration={snake,amplitude=1.2pt,segment length=5pt},->,red!80!black] (1.6,1.35) -- (1.6,2.2) node[right] {$\gamma$};
+  \node at (1.6,-0.4) {emission ($t$)};
+  % at detection
+  \draw[thick] (4.4,1.0) rectangle (5.2,1.8); \node[right] at (5.2,1.4) {$P$};
+  \draw[thick] (4.4,3.5) rectangle (5.2,4.3); \node[right] at (5.2,3.9) {$Q$};
+  \draw[decorate,decoration={snake,amplitude=1.2pt,segment length=5pt},->,red!80!black] (4.8,2.6) -- (4.8,3.45);
+  \node at (4.8,-0.4) {detection ($t+d/c$)};
+  \draw[->,very thick,blue!70!black] (6.4,1.6) -- (6.4,2.8) node[right] {$\vec g$};
+\end{tikzpicture}
+\caption{Gravitational redshift via the Equivalence Principle: emitter $P$ and detector $Q$, separated by $d$, are accelerated upwards with acceleration $g$. During the photon's time of flight $d/c$ the detector gains a velocity $\Delta v=gd/c$.}
+\label{fig:redshift}
+\end{figure}
+
+\begin{keyresult}[Gravitational redshift]
+By the Equivalence Principle (acceleration $\leftrightarrow$ gravity), in the presence of a uniform gravitational field and in a fixed reference frame, a photon climbing a height $d$ is redshifted:
+\begin{equation}
+  \frac{f_Q}{f_P} = 1-\frac{g d}{c^2} = 1-\frac{\Delta\phi}{c^2},\qquad \Delta\phi=\phi_Q-\phi_P = g d .
+\end{equation}
+\end{keyresult}
+
+\paragraph{Interpretation in terms of clocks.} The number of wave crests is conserved between emission and reception (in a static situation nothing accumulates between $P$ and $Q$). The fact that $Q$ counts fewer crests per unit of its own time than $P$ emits per unit of its own time means that the two clocks do not tick at the same rate: equivalently, \textbf{clocks at lower gravitational potential tick slower}. A clock at the bottom ($P$), seen from the top ($Q$), runs slow by the factor $1-gd/c^2$ (and, conversely, the clock at $Q$ appears to run fast when seen from $P$). Time itself flows differently at different heights: gravity affects the geometry of \emph{space-time}, not just the motion of bodies. This effect has been measured in the Pound--Rebka experiment (1959) and is routinely taken into account by the GPS system.

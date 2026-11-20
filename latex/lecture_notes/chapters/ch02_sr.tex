@@ -1,0 +1,319 @@
+% =====================================================================
+\chapter{Recap of Special Relativity: vectors and tensors}\label{ch:sr}
+% =====================================================================
+
+In this chapter we recall Special Relativity (SR), emphasising the language of vectors and tensors.
+Everything here will later be generalised to curved space-time; it is therefore worth understanding it well in the simpler setting of flat space-time.
+
+\section{Space-time, events and the line element}
+
+In SR space and time are treated jointly as a single entity, \textbf{space-time}.
+
+\paragraph{1. Events.} Events in space-time are labelled by three Cartesian coordinates $\{x^k\}$, $k=1,2,3$, describing Euclidean space, plus a time coordinate $x^0\equiv ct$. Collectively,
+\begin{equation}
+  (x^\mu) = (ct,x^1,x^2,x^3) = (ct,\vec x).
+\end{equation}
+The space-time of SR is called \textbf{Minkowski space-time}.
+
+\paragraph{2. Distances.} Distances in Minkowski space-time are measured by means of the \textbf{line element}
+\begin{equation}
+  \dd s^2 \equiv (\dd x^0)^2-\sum_{i=1}^{3}(\dd x^i)^2 = c^2\dd t^2-\dd\vec x^{\,2} .
+  \label{eq:line-element-mink}
+\end{equation}
+For a massive particle, $\dd s^2=c^2\dd\tau^2$ where $\tau$ is its proper time (see below).
+\begin{remarkbox}[Alternative convention]
+Many textbooks (and part of the former student's notes) use the opposite sign, $\dd s^2=-(\dd x^0)^2+\sum_i(\dd x^i)^2$ (signature $(-,+,+,+)$). Physics does not depend on this choice, but signs in intermediate formulae do. In these notes we always use $(+,-,-,-)$.
+\end{remarkbox}
+
+\paragraph{3. The metric tensor.} We introduce the (Minkowski) \textbf{metric tensor}
+\begin{equation}
+  \eta_{\mu\nu}=\begin{pmatrix} 1&0&0&0\\0&-1&0&0\\0&0&-1&0\\0&0&0&-1\end{pmatrix}
+  \qquad\Longrightarrow\qquad
+  \dd s^2=\sum_{\mu,\nu=0}^{3}\eta_{\mu\nu}\,\dd x^\mu\dd x^\nu .
+\end{equation}
+\textit{Index conventions:} Latin indices $i,j,k,\dots$ take the values $1,2,3$; Greek indices $\mu,\nu,\dots$ take the values $0,1,2,3$.
+
+\paragraph{4. Einstein summation convention.} Any index that appears \emph{both as an upper and as a lower index} in a monomial is summed over:
+\begin{equation}
+  \dd s^2=\eta_{\mu\nu}\dd x^\mu\dd x^\nu\equiv\sum_{\mu,\nu}\eta_{\mu\nu}\dd x^\mu\dd x^\nu .
+\end{equation}
+A summed index is called a \emph{dummy} index: it can be renamed at will ($A_\mu B^\mu=A_\alpha B^\alpha$). An index that is not summed is a \emph{free} index: it must appear in the same position on both sides of an equation.
+
+\section{Lorentz and Poincaré transformations}
+
+\paragraph{5. Lorentz transformations} are the \emph{linear} transformations
+\begin{equation}
+  x^\mu\;\longrightarrow\; x'^\mu = L^\mu{}_\nu\,x^\nu
+\end{equation}
+that leave the line element invariant:
+\begin{equation}
+  \dd s'^2=\eta_{\mu\nu}\dd x'^\mu\dd x'^\nu \overset{!}{=}\eta_{\mu\nu}\dd x^\mu\dd x^\nu=\dd s^2 .
+\end{equation}
+Note that the metric is the \emph{same} matrix $\eta_{\mu\nu}$ in both frames: this is what characterises inertial frames in SR.
+
+\begin{proposition}{Defining property of Lorentz transformations}{lorentz-cond}
+A linear transformation $L$ is a Lorentz transformation if and only if
+\begin{equation}
+  \eta_{\mu\nu}\,L^\mu{}_\alpha\,L^\nu{}_\beta=\eta_{\alpha\beta}
+  \qquad\Longleftrightarrow\qquad L^{T}\eta L=\eta \ \ (\text{matrix form}).
+  \label{eq:lorentz-cond}
+\end{equation}
+\end{proposition}
+\begin{proof}
+Since $\dd x'^\mu=L^\mu{}_\alpha\dd x^\alpha$ (the transformation is linear with constant coefficients),
+\[
+  \dd s'^2=\eta_{\mu\nu}\dd x'^\mu\dd x'^\nu=\eta_{\mu\nu}L^\mu{}_\alpha\dd x^\alpha L^\nu{}_\beta\dd x^\beta
+  =\big(\eta_{\mu\nu}L^\mu{}_\alpha L^\nu{}_\beta\big)\dd x^\alpha\dd x^\beta .
+\]
+On the other hand $\dd s^2=\eta_{\alpha\beta}\dd x^\alpha\dd x^\beta$. Requiring $\dd s'^2=\dd s^2$ for \emph{all} displacements $\dd x^\alpha$, and since both coefficient matrices are symmetric in $(\alpha,\beta)$, the coefficients must coincide (the argument is the same as the one detailed in \cref{prop:metric-transf}), which gives \eqref{eq:lorentz-cond}.
+\end{proof}
+
+\begin{example}{Boost along $x$}{boost}
+With $\beta=v/c$ and $\gamma=(1-\beta^2)^{-1/2}$,
+\[
+L^\mu{}_\nu=\begin{pmatrix}\gamma&-\gamma\beta&0&0\\-\gamma\beta&\gamma&0&0\\0&0&1&0\\0&0&0&1\end{pmatrix},
+\qquad ct'=\gamma(ct-\beta x),\quad x'=\gamma(x-\beta ct).
+\]
+One checks $L^T\eta L=\eta$: e.g.\ the $(0,0)$ component gives $\gamma^2-\gamma^2\beta^2=1$, the $(0,1)$ component $-\gamma^2\beta+\gamma^2\beta=0$, and the $(1,1)$ component $\gamma^2\beta^2-\gamma^2=-1$.
+\end{example}
+
+\begin{remarkbox}[Remarks]
+\begin{enumerate}[nosep]
+  \item Lorentz transformations combined with space-time translations form the \textbf{Poincaré transformations}:
+  $x^\mu\to x'^\mu=L^\mu{}_\nu x^\nu+\xi^\mu$, with constant $\xi^\mu$. They also leave $\dd s^2$ invariant, since $\dd\xi^\mu=0$.
+  \item Any two inertial frames are related through a Poincaré transformation.
+  \item Lorentz (resp.\ Poincaré) transformations form a \emph{group}: the product of two of them is again one of them ($(L_1L_2)^T\eta L_1L_2=L_2^TL_1^T\eta L_1L_2=L_2^T\eta L_2=\eta$), the identity belongs to the set, and every $L$ has an inverse (taking the determinant of \eqref{eq:lorentz-cond}, $(\det L)^2=1$).
+\end{enumerate}
+\end{remarkbox}
+
+\section{Causal structure: the light cone}
+
+\paragraph{6. The interval between two events.} For two events $P$ and $Q$ we define
+\begin{equation}
+  \Delta x^2\equiv\eta_{\mu\nu}(x_P^\mu-x_Q^\mu)(x_P^\nu-x_Q^\nu),
+\end{equation}
+which is Lorentz invariant. We say that $P$ and $Q$ are
+\begin{itemize}[nosep]
+  \item \textbf{time-like} separated if $\Delta x^2>0$;
+  \item \textbf{light-like} (or null) separated if $\Delta x^2=0$;
+  \item \textbf{space-like} separated if $\Delta x^2<0$.
+\end{itemize}
+The set of events light-like separated from $P$ forms the \textbf{light cone} of $P$ (\cref{fig:lightcone}). Events inside the cone can be causally connected with $P$ (a signal travelling at speed $<c$ can link them, and all observers agree on their time ordering). Events outside the cone cannot: their time ordering depends on the observer.
+
+\begin{figure}[ht]
+\centering
+\begin{tikzpicture}[scale=1.0,>=Stealth]
+  \draw[->] (-3,0) -- (3.2,0) node[right] {$x$};
+  \draw[->] (0,-2.6) -- (0,2.9) node[above] {$ct$};
+  \draw[->] (1.2,0.9) -- (-1.6,-1.2) node[below left] {$y$};
+  % cone
+  \fill[yellow!25,opacity=0.8] (0,0) -- (-2,2) arc (180:360:2 and 0.45) -- cycle;
+  \draw[thick] (-2,2) -- (2,-2); \draw[thick] (2,2) -- (-2,-2);
+  \draw[thick] (0,2) ellipse (2 and 0.45);
+  \draw[thick,dashed] (2,-2) arc (0:180:2 and 0.45);
+  \draw[thick] (-2,-2) arc (180:360:2 and 0.45);
+  \fill (0,0) circle (2pt) node[left=4pt] {$P$};
+  \fill[blue] (0.3,1.3) circle (2pt) node[right,blue] {time-like};
+  \fill[red] (2.6,0.6) circle (2pt) node[right,red] {space-like};
+  \fill[green!50!black] (1.2,1.2) circle (2pt) node[above right=-1pt,green!50!black] {light-like};
+  \node at (0,2.75) [right=6pt] {\small future};
+  \node at (0,-2.6) [right=6pt] {\small past};
+\end{tikzpicture}
+\hspace{1cm}
+\begin{tikzpicture}[scale=1.0,>=Stealth]
+  \draw[->] (-1.6,0) -- (2.2,0) node[right] {$x$};
+  \draw[->] (0,-0.3) -- (0,4.4) node[above] {$ct$};
+  \draw[very thick,blue!70!black] (0.2,0) .. controls (0.6,1.2) and (0.1,2.4) .. (0.8,4.1) node[above] {world-line};
+  \foreach \t/\x in {0.6/0.33,1.9/0.36,3.2/0.47}{
+     \draw[gray] (\x-0.5,\t-0.5) -- (\x+0.5,\t+0.5);
+     \draw[gray] (\x+0.5,\t-0.5) -- (\x-0.5,\t+0.5);
+     \fill (\x,\t) circle (1.5pt);}
+\end{tikzpicture}
+\caption{Left: the light cone of an event $P$ separates the events that are time-like (inside), light-like (on the cone) and space-like (outside) separated from $P$. Right: the world-line of a massive particle is everywhere time-like: at each of its points it lies inside the local light cone.}
+\label{fig:lightcone}
+\end{figure}
+
+\section{Curves and tangent vectors}
+
+\paragraph{7. Curves.} A \textbf{parametrised curve} $\mathcal C$ is given by a map $\lambda\mapsto x^\mu(\lambda)$, $\lambda\in I\subseteq\R$. The components of its \textbf{tangent vector} at $\lambda_0$ are
+\begin{equation}
+  V^\mu(\lambda_0)=\left.\frac{\dd x^\mu}{\dd\lambda}\right|_{\lambda=\lambda_0}.
+\end{equation}
+
+\begin{remarkbox}[Reparametrisations]
+A curve $\mathcal C(I)$ can also be parametrised by a different parameter $\sigma\in J\subseteq\R$, via a bijective (smooth, with smooth inverse) map $\psi:I\to J$, $\sigma=\psi(\lambda)$. The new parametrisation $\mathcal C'=\mathcal C\circ\psi^{-1}$ satisfies $\mathcal C'(J)=\mathcal C(I)$: it describes \emph{the same curve} (the same set of points), traversed with a different ``speed''. The tangent vector is rescaled, $\dd x^\mu/\dd\sigma=(\dd\lambda/\dd\sigma)\,\dd x^\mu/\dd\lambda$.
+\end{remarkbox}
+
+A particularly convenient choice for a time-like curve is the \textbf{proper time} $\tau$,
+\begin{equation}
+  c\,\dd\tau=\sqrt{\eta_{\mu\nu}\dd x^\mu\dd x^\nu}.
+\end{equation}
+Why is it a good choice? (i) It is the time measured by an observer in his/her own (instantaneous rest) frame, by a clock carried along the curve; (ii) it is \textbf{Lorentz invariant}, since $\dd s^2$ is. As a consequence, the tangent vector with respect to $\tau$ transforms \emph{linearly} under Lorentz transformations:
+\begin{equation}
+  \frac{\dd}{\dd\tau'}x'^\mu(\tau')=\frac{\dd}{\dd\tau}x'^\mu(\tau)
+  =\frac{\pd x'^\mu}{\pd x^\nu}\frac{\dd x^\nu}{\dd\tau}=L^\mu{}_\nu\frac{\dd x^\nu}{\dd\tau},
+\end{equation}
+where in the first step we used $\tau'=\tau$ and in the second the chain rule.
+
+\section{Lorentz vectors, covectors and tensors}
+
+\paragraph{8. Lorentz vectors} are objects whose components transform, under Lorentz transformations, as
+\begin{equation}
+  V'^\mu=L^\mu{}_\nu V^\nu .
+\end{equation}
+\begin{remarkbox}[Remarks]
+\begin{enumerate}[nosep]
+\item $L^\mu{}_\nu$ can (and should) be thought of as the \emph{Jacobian} of the transformation $x\to x'$: $L^\mu{}_\nu=\pd x'^\mu/\pd x^\nu$. This is what will generalise to arbitrary coordinate transformations.
+\item From now on, the components of vectors carry \emph{upper} indices.
+\end{enumerate}
+\end{remarkbox}
+
+\paragraph{9. Scalar product.} The metric defines a scalar product of two vectors $V,W$ and a (squared) norm:
+\begin{equation}
+  V\cdot W\equiv\eta_{\mu\nu}V^\mu W^\nu,\qquad V^2\equiv\eta_{\mu\nu}V^\mu V^\nu .
+\end{equation}
+Both are \textbf{Lorentz invariant}: $\eta_{\mu\nu}V'^\mu W'^\nu=\eta_{\mu\nu}L^\mu{}_\alpha L^\nu{}_\beta V^\alpha W^\beta=\eta_{\alpha\beta}V^\alpha W^\beta$ by \eqref{eq:lorentz-cond}. Vectors are called time-like, light-like or space-like according to the sign of their norm, as for intervals.
+
+\paragraph{10. Covectors} are objects whose components transform with the \emph{dual} (transposed inverse) representation of the Lorentz group,
+\begin{equation}
+  \Lambda\equiv(L^T)^{-1}.
+\end{equation}
+Since $L^T\eta L=\eta$, we have $L^T\eta=\eta L^{-1}$, i.e.\ $L^T=\eta L^{-1}\eta^{-1}$ and therefore
+\begin{equation}
+  \Lambda=(L^T)^{-1}=\eta L\eta^{-1}.
+\end{equation}
+In index notation we denote the inverse metric by upper indices, $\eta^{\mu\nu}\equiv(\eta^{-1})^{\mu\nu}$ (numerically $\eta^{\mu\nu}=\eta_{\mu\nu}$), so that
+\begin{equation}
+  V'_\mu=\Lambda_\mu{}^\nu V_\nu,\qquad \Lambda_\mu{}^\nu=\eta_{\mu\alpha}L^\alpha{}_\beta\,\eta^{\beta\nu}.
+  \label{eq:covector-lorentz}
+\end{equation}
+Covectors carry \emph{lower} indices. Given a vector $V^\mu$ and the metric we can always form the covector $V_\mu\equiv\eta_{\mu\nu}V^\nu$ (note that numerically $V_\mu\neq V^\mu$ in general: $V_\mu=(V^0,-\vec V)$).
+
+\begin{example}{Lowering an index gives a covector}{lower}
+Show that the object with components $U_\alpha=\eta_{\alpha\beta}V^\beta$, where $V^\beta$ are the components of a vector, is a covector.
+
+\textit{Proof.} We have to see how its components transform:
+\[
+  U'_\alpha=\eta_{\alpha\beta}V'^\beta=\eta_{\alpha\beta}L^\beta{}_\nu V^\nu. \tag{1}
+\]
+Inverting the definition, $V^\nu=\eta^{\nu\delta}U_\delta$ (2). Inserting (2) in (1) and using \eqref{eq:covector-lorentz} (3):
+\[
+U'_\alpha=\eta_{\alpha\beta}L^\beta{}_\nu\eta^{\nu\delta}U_\delta=\Lambda_\alpha{}^\delta U_\delta . \qquad\blacksquare
+\]
+\end{example}
+
+\begin{example}{The gradient is a covector}{gradient}
+Show that $w_\mu=\pd\phi/\pd x^\mu$, where $\phi(x)$ is a scalar function, is a covector.
+
+\textit{Proof.} By the chain rule,
+\[
+  w'_\mu=\frac{\pd\phi}{\pd x'^\mu}=\frac{\pd x^\nu}{\pd x'^\mu}\frac{\pd\phi}{\pd x^\nu}=\frac{\pd x^\nu}{\pd x'^\mu}w_\nu .
+\]
+Since $x'=Lx$, $x=L^{-1}x'$ and $\pd x^\nu/\pd x'^\mu=(L^{-1})^\nu{}_\mu$. From $L^T\eta L=\eta$ we get $L^{-1}=\eta^{-1}L^T\eta$, i.e.\ $(L^{-1})^\nu{}_\mu=\eta^{\nu\alpha}L^\beta{}_\alpha\eta_{\beta\mu}=\Lambda_\mu{}^\nu$. Hence $w'_\mu=\Lambda_\mu{}^\nu w_\nu$. $\blacksquare$
+\end{example}
+
+\begin{remarkbox}[Components versus geometric objects]
+A vector can be written as $V=V^\mu e_{(\mu)}$, where $e_{(\mu)}$ are basis vectors. The \emph{components} $V^\mu$ are coordinate (basis) dependent, but the object $V$ itself is \textbf{not}: vectors exist regardless of the basis. When we change frame, components and basis vectors change in compensating ways.
+\end{remarkbox}
+
+\paragraph{11. Lorentz $(p,q)$ tensors} are objects with components $T^{\alpha_1\dots\alpha_p}{}_{\beta_1\dots\beta_q}$ transforming as
+\begin{equation}
+  T'^{\alpha_1\dots\alpha_p}{}_{\beta_1\dots\beta_q}=
+  L^{\alpha_1}{}_{\mu_1}\cdots L^{\alpha_p}{}_{\mu_p}\,
+  \Lambda_{\beta_1}{}^{\nu_1}\cdots\Lambda_{\beta_q}{}^{\nu_q}\,
+  T^{\mu_1\dots\mu_p}{}_{\nu_1\dots\nu_q},
+\end{equation}
+i.e.\ as the product of $p$ vectors and $q$ covectors. Examples:
+\begin{itemize}[nosep]
+  \item $\eta_{\mu\nu}$ is a $(0,2)$ tensor, $\eta^{\mu\nu}$ a $(2,0)$ tensor, $\delta^\mu{}_\nu$ a $(1,1)$ tensor (they are moreover \emph{invariant}: their components are the same in every inertial frame);
+  \item linear combinations of $(p,q)$ tensors are $(p,q)$ tensors;
+  \item if $V,W$ are vectors and $U$ a covector, $V^\alpha W^\beta U_\gamma$ are the components of a $(2,1)$ tensor.
+\end{itemize}
+The metric allows us to associate covectors and vectors: $V_\mu=\eta_{\mu\nu}V^\nu$, $V^\mu=\eta^{\mu\nu}V_\nu$, with $\eta^{\mu\nu}\eta_{\nu\rho}=\delta^\mu{}_\rho$.
+
+\section{Kinematics of point particles}
+
+\paragraph{World-lines.} The world-lines of \emph{massless} particles are light-like; those of \emph{massive} particles are time-like.
+
+For a massive particle with world-line $x^\mu(\tau)$ we define:
+\begin{itemize}
+  \item the \textbf{4-velocity} $\displaystyle V^\mu\equiv\frac{\dd x^\mu}{\dd\tau}$, a Lorentz vector normalised as
+  \begin{equation}
+    V^\mu V_\mu=\eta_{\mu\nu}V^\mu V^\nu=\eta_{\mu\nu}\frac{\dd x^\mu}{\dd\tau}\frac{\dd x^\nu}{\dd\tau}=\frac{\dd s^2}{\dd\tau^2}=c^2 ;
+  \end{equation}
+  \item the \textbf{4-acceleration} $\displaystyle a^\mu\equiv\frac{\dd V^\mu}{\dd\tau}=\frac{\dd^2x^\mu}{\dd\tau^2}$. For a free particle, $a^\mu=0$.
+\end{itemize}
+
+\begin{proposition}{Properties of the 4-acceleration}{accel}
+$a^\mu V_\mu=0$ and, if $a^\mu\neq0$, $a^\mu a_\mu<0$ (the 4-acceleration is space-like).
+\end{proposition}
+\begin{proof}
+Differentiate the normalisation $\eta_{\mu\nu}V^\mu V^\nu=c^2$ with respect to $\tau$ (the metric is constant):
+$0=\eta_{\mu\nu}(a^\mu V^\nu+V^\mu a^\nu)=2\eta_{\mu\nu}a^\mu V^\nu=2a^\mu V_\mu$.
+In the instantaneous rest frame of the particle $V^\mu=(c,\vec 0)$, so $a^\mu V_\mu=c\,a^0=0$ implies $a^0=0$ there. Hence in that frame $a^\mu=(0,\vec a)$ and $a^\mu a_\mu=-|\vec a|^2<0$. Since $a^\mu a_\mu$ is a Lorentz scalar, this holds in every frame.
+\end{proof}
+
+\subsection{Digression: the action of a free relativistic particle}
+
+The proper time $\tau$ along a world-line is the time read by a clock carried by the particle. In the $(+,-,-,-)$ signature,
+\begin{equation}
+  c^2\dd\tau^2=\eta_{\mu\nu}\dd x^\mu\dd x^\nu .
+\end{equation}
+The simplest Lorentz-invariant action we can build for a free massive particle is proportional to the elapsed proper time:
+\begin{equation}
+  S[x]=-mc^2\int\dd\tau=-mc\int\sqrt{\eta_{\mu\nu}\dd x^\mu\dd x^\nu} .
+\end{equation}
+The action is ``$-mc^2$ times the proper time elapsed''.
+
+\paragraph{Principle of stationary action.} The world-line followed by a free particle \emph{extremises} the proper time, i.e.\ it is such that $\delta S=0$. For time-like world-lines in Minkowski space-time the straight line actually \emph{maximises} $\tau$ (the ``twin paradox'': the inertial twin ages more), so the correct terminology is ``stationary'' rather than ``least'' action.
+
+\paragraph{Parametrisation.} Let us choose a parametrisation $x^\mu=x^\mu(\lambda)$ of the world-line. Then
+\begin{equation}
+  S[x]=\int L_\lambda\,\dd\lambda,\qquad L_\lambda=-mc\left[\eta_{\mu\nu}\frac{\dd x^\mu}{\dd\lambda}\frac{\dd x^\nu}{\dd\lambda}\right]^{1/2}.
+\end{equation}
+Under a change $\lambda\to\tilde\lambda(\lambda)$ the integral does not change, since $L_\lambda\dd\lambda=-mc\sqrt{\eta_{\mu\nu}\dd x^\mu\dd x^\nu}$ does not depend on $\lambda$: the action is \textbf{reparametrisation invariant}. This is a gauge freedom of the world-line description, and it is the reason why the momentum below does not depend on the choice of $\lambda$.
+
+\begin{example}{Choosing $\lambda=t$: the non-relativistic limit}{lambda-t}
+Choose $\lambda=t$, i.e.\ $x^\mu(\lambda)=x^\mu(t)$. Then
+\[
+  \frac{\dd x^\mu}{\dd\lambda}=\frac{\dd x^\mu}{\dd t}\equiv\dot x^\mu=(c,\vec v),\qquad
+  \eta_{\mu\nu}\dot x^\mu\dot x^\nu=c^2-\vec v^{\,2},
+\]
+and
+\[
+  L_t=-mc^2\left[1-\frac{\vec v^{\,2}}{c^2}\right]^{1/2}\simeq -mc^2+\frac12 m\vec v^{\,2}+\dots
+\]
+where we Taylor-expanded for $|\vec v|\ll c$ (non-relativistic limit). The constant $-mc^2$ does not affect the equations of motion, and the rest is the Newtonian kinetic energy: the action reproduces Newtonian mechanics for $v\ll c$.
+
+The canonical momentum and the energy follow by direct differentiation:
+\begin{align}
+  p^i&=\frac{\pd L_t}{\pd v^i}=-mc^2\cdot\frac12\left(1-\frac{v^2}{c^2}\right)^{-1/2}\left(-\frac{2v^i}{c^2}\right)=\gamma m v^i,\\
+  E&=\vec p\cdot\vec v-L_t=\gamma m v^2+\frac{mc^2}{\gamma}=\gamma mc^2\left(\frac{v^2}{c^2}+1-\frac{v^2}{c^2}\right)=\gamma mc^2,
+\end{align}
+with $\gamma\equiv(1-v^2/c^2)^{-1/2}$.
+\end{example}
+
+\paragraph{The energy--momentum 4-vector.} For a general parameter, define $\dot x^\mu\equiv\dd x^\mu/\dd\lambda$. The 4-momentum is (minus) the derivative of the Lagrangian with respect to the ``velocity'':
+\begin{equation}
+  p_\mu=-\frac{\pd L_\lambda}{\pd\dot x^\mu}=mc\frac{\eta_{\mu\nu}\dot x^\nu}{\sqrt{\eta_{\alpha\beta}\dot x^\alpha\dot x^\beta}}=m\,\eta_{\mu\nu}u^\nu=m\,u_\mu,
+\end{equation}
+where we used $\sqrt{\eta_{\alpha\beta}\dot x^\alpha\dot x^\beta}\,\dd\lambda=c\,\dd\tau$, so that $c\,\dot x^\nu/\sqrt{\eta\dot x\dot x}=\dd x^\nu/\dd\tau=u^\nu$, the 4-velocity. (The overall minus sign is a consequence of the signature: with $\lambda=t$ one gets $p_i=-\pd L_t/\pd v^i=-\gamma m v^i$, i.e.\ $p^i=-p_i=+\gamma m v^i$, in agreement with the canonical momentum computed above.) Indeed $\dd t/\dd\tau=\gamma$, so
+\begin{align}
+  u^\mu&=\gamma\,(c,\vec v),\\
+  p^\mu&=m u^\mu=\left(\frac Ec,\gamma m\vec v\right)\equiv\left(\frac Ec,\vec p\right),\qquad
+  p_\mu=\left(\frac Ec,-\vec p\right).
+\end{align}
+The invariant norms are
+\begin{equation}
+  u^\mu u_\mu=\gamma^2(c^2-v^2)=c^2,\qquad
+  p^\mu p_\mu=m^2c^2\ \Longleftrightarrow\ \frac{E^2}{c^2}-|\vec p|^2=m^2c^2\ \Longleftrightarrow\ \boxed{E^2=|\vec p|^2c^2+m^2c^4}.
+\end{equation}
+
+\begin{remarkbox}[Physical meaning]
+\begin{itemize}[nosep]
+  \item The mass $m$ is the ``length'' of the 4-momentum: a Lorentz-invariant number.
+  \item Different observers can disagree on $E$ and $\vec p$ separately, but all agree on $E^2/c^2-\vec p^{\,2}$.
+  \item For $m=0$ (light), the 4-momentum is null: $E=|\vec p|c$.
+\end{itemize}
+An application of these notions to \emph{accelerated observers} can be found in M.~Blau's lecture notes on GR (Section on ``Accelerated observers'').
+\end{remarkbox}

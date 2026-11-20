@@ -1,0 +1,70 @@
+\documentclass[11pt,a4paper]{report}
+\input{../common/preamble}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\nouppercase{\leftmark}}
+\fancyhead[R]{\small General Relativity --- Lecture Notes}
+\fancyfoot[C]{\thepage}
+
+\title{\Huge\bfseries General Relativity\\[0.4em]
+\Large Complete Lecture Notes\\[1.2em]
+\large IMAPP Master (M1) --- Université Clermont Auvergne}
+\author{Based on the lectures of A.~Goudelis (LPCA),\\
+the handwritten notes of Samuel and of a former student,\\
+completed, expanded and typeset}
+\date{Academic year 2026--2027}
+
+\begin{document}
+\maketitle
+\thispagestyle{empty}
+
+\chapter*{Preface}
+\addcontentsline{toc}{chapter}{Preface}
+These notes are a complete and expanded version of the General Relativity course of the IMAPP Master (M1).
+They follow the structure of the lectures as recorded in the handwritten notes of Samuel, and they are completed,
+for the last part of the course (black holes, cosmology and gravitational waves), with the notes of a former student.
+Every derivation that was only sketched (or ``left as an exercise'') in the handwritten notes has been carried out
+step by step, and many additional explanations, remarks and figures have been added.
+
+\paragraph{Conventions.} Throughout these notes we use:
+\begin{itemize}[nosep]
+  \item the metric signature $(+,-,-,-)$, so that $\eta_{\mu\nu}=\mathrm{diag}(1,-1,-1,-1)$ and time-like vectors have positive norm;
+  \item Greek indices $\mu,\nu,\dots\in\{0,1,2,3\}$ for space-time components and Latin indices $i,j,\dots\in\{1,2,3\}$ for spatial ones;
+  \item the Einstein summation convention (an index appearing once up and once down is summed);
+  \item $x^0=ct$; in some chapters we set $c=1$ (this is always stated explicitly);
+  \item the Riemann tensor $\Riem{\rho}{\sigma}{\mu}{\nu}=\pd_\mu\Ga{\rho}{\nu}{\sigma}-\pd_\nu\Ga{\rho}{\mu}{\sigma}
+        +\Ga{\rho}{\mu}{\lambda}\Ga{\lambda}{\nu}{\sigma}-\Ga{\rho}{\nu}{\lambda}\Ga{\lambda}{\mu}{\sigma}$,
+        the Ricci tensor $R_{\mu\nu}=\Riem{\rho}{\mu}{\rho}{\nu}$, and the Ricci scalar $R=g^{\mu\nu}R_{\mu\nu}$;
+  \item with these conventions the Einstein field equations read $R_{\mu\nu}-\tfrac12 g_{\mu\nu}R=\frac{8\pi \GN}{c^4}T_{\mu\nu}$.
+\end{itemize}
+When the former student's notes used the opposite signature $(-,+,+,+)$, all results have been translated to $(+,-,-,-)$.
+
+\paragraph{How to read the boxes.}
+Blue boxes contain definitions, red boxes theorems/propositions, green boxes examples and exercises,
+yellow boxes the key results to remember, and grey boxes remarks.
+
+\tableofcontents
+
+\part{Introductory lectures}
+\input{chapters/ch01_intro}
+\input{chapters/ch02_sr}
+
+\part{Mathematical formalism and the Einstein equations}
+\input{chapters/ch03_manifolds}
+\input{chapters/ch04_metric}
+\input{chapters/ch05_connection}
+\input{chapters/ch06_curvature}
+\input{chapters/ch07_emt}
+\input{chapters/ch08_efe}
+
+\part{Applications}
+\input{chapters/ch09_schwarzschild}
+\input{chapters/ch10_blackholes}
+\input{chapters/ch11_cosmology}
+\input{chapters/ch12_gw}
+
+\appendix
+\input{chapters/appA_summary}
+
+\end{document}
